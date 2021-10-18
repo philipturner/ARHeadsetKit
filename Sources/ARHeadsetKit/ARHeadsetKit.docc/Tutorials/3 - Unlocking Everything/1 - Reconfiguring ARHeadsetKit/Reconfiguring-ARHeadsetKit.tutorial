@@ -1,0 +1,205 @@
+@Tutorial(time: 30, projectFiles: "Reconfiguring-ARHeadsetKit.zip") {
+    @XcodeRequirement(
+            title: "Xcode 13",
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Reconfiguring ARHeadsetKit") {
+        To unlock ARHeadsetKit's full potential, you must configure it as an Xcode framework instead of a Swift package.
+        
+        In the project files, the finished project contains broken file references to ARHeadsetKit. To compile it, follow steps 3 and 5&ndash;8 of this tutorial's first section.
+        
+        Follow the steps to build this project, or download the finished project to explore on your own. 
+    }
+    
+    @Section(title: "Setting Up Git Submodules") {
+        @ContentAndMedia {
+            Instead of using the Swift package manager, you will use Git submodules as a dependency manager. This process can also work on an existing Xcode project instead of creating a new one.
+
+            If you reuse an existing Xcode project, go to Project Settings -> PROJECT -> Package Dependencies and remove ARHeadsetKit. Go to Source Control -> New Git Repositories and ensure your project is under version control. Then, start at step 5 of this section.
+        }
+        
+        @Steps {
+            @Step {
+                Go to File -> New -> Project -> iOS -> Application -> App and click "Next".
+                
+                @Image(source: "3-1-image-1-1.png", alt: "Selecting the iOS \"App\" template.")
+            }
+            
+            @Step {
+                Ensure "SwiftUI" is selected under "Interface". Give your app a name. Click "Next".
+                
+                @Image(source: "3-1-image-1-2.png", alt: "Giving the SwiftUI project a name.")
+            }
+            
+            @Step {
+                Ensure "Create Git repository on my Mac" is checked.
+                
+                @Image(source: "3-1-image-1-3.png", alt: "Ensuring the project will create a Git repository.")
+            }
+            
+            @Step {
+                Go to Project Settings -> TARGETS -> General. Follow [this article](https://github.com/philipturner/ARHeadsetKit/blob/main/docs/property-list-keys.md) to properly configure your project's Info.plist.
+                
+                > Note: This step is only necessary if you are using ARHeadsetKit for an AR experience. You may skip it if you are just using its utility functions
+                
+                @Image(source: "3-1-image-1-4.png", alt: "Configuring property list keys.")
+            }
+            
+            @Step {
+                Right-click on the project folder at the very top of the project navigator. This folder has a blue Xcode logo next to it. Click "Show in Finder".
+                
+                @Image(source: "3-1-image-1-5.png", alt: "Selecting the project folder.")
+            }
+            
+            @Step {
+                A Finder window will pop up. At the window's top, right-click your project's name and navigate to its parent folder in the dropdown.
+                
+                @Image(source: "3-1-image-1-6.png", alt: "Opening the directory dropdown.")
+            }
+            
+            @Step {
+                In the parent directory, locate the folder with your project's name. Right-click it and click "New Terminal at Folder".
+                
+                @Image(source: "3-1-image-1-7.png", alt: "Selecting the project folder in its parent directory.")
+            }
+            
+            @Step {
+                In the terminal window, type "git submodule add https://github.com/philipturner/arheadsetkit" and press enter.
+                
+                @Image(source: "3-1-image-1-8.png", alt: "Typing the command to add a Git submodule.")
+            }
+        }
+    }
+    
+    @Section(title: "Importing the Xcode Framework") {
+        @ContentAndMedia {
+            In order to import Metal utility functions, you must add file references to code in ARHeadsetKit. This workaround is required because Xcode frameworks only export Swift, C, and C++ code, not Metal code.
+        }
+        
+        @Steps {
+            @Step {
+                Within your project's folder in the Finder window, there is another folder named "ARHeadsetKit". Locate the `ARheadsetKit.xcodeproj` file in that folder.
+                
+                @Image(source: "3-1-image-2-1.png", alt: "Selecting ARHeadsetKit's submodule folder.")
+            }
+            
+            @Step {
+                Drag the `ARHeadsetKit.xcodeproj` file from the Finder window to the project navigator in Xcode. Release it right below the top-level project folder.
+                
+                A directory containing ARHeadsetKit's files will appear in the project navigator. Do not modify any of the files, or your app may produce undefined behavior.
+                
+                @Image(source: "3-1-image-2-2.png", alt: "Selecting the ARHeadsetKit.xcodeproj folder in the project navigator.")
+            }
+            
+            @Step {
+                Locate your project's second-level folder, which has your project's name and a regular folder icon. Drag `Metal_Utilities_Combined.metal` from ARHeadsetKit's folder into your second-level folder.
+                
+                @Image(source: "3-1-image-2-3.png", alt: "Dragging Metal_Utilities_Combined into the second-level folder.")
+            }
+            
+            @Step {
+                A window pops up, asking whether to add the file as a reference or by copying. Only check "Create folder references" and "Add to targets: \<Your Project's Name>". Click "Finish".
+                
+                > Warning: Choosing any other options will break your project's live connection to the ARHeadsetKit GitHub repository, making updating it impossible.
+                
+                @Image(source: "3-1-image-2-4.png", alt: "Choosing options for adding files.")
+            }
+            
+            @Step {
+                Repeat the previous two steps with `Launch Screen.storyboard`.
+                
+                @Image(source: "3-1-image-2-5.png", alt: "Selecting the launch screen file.")
+            }
+            
+            @Step {
+                Go to Project Settings -> TARGETS -> General. Scroll down to "Frameworks, Libraries, and Embedded Content" and click the "+" button.
+                
+                @Image(source: "3-1-image-2-6.png", alt: "Locating the \"add\" button.")
+            }
+            
+            @Step {
+                Choose `ARHeadsetKit` from the list of files that pops up. Do not select `ARHeadsetKit_macOS`.
+                
+                @Image(source: "3-1-image-2-7.png", alt: "Selecting the ARHeadsetKit framework.")
+            }
+        }
+    }
+        
+    @Section(title: "Updating ARHeadsetKit") {
+        @ContentAndMedia {
+            To use the latest ARHeadsetKit features and tutorials, you must update it occasionally. Projects configured with an Xcode framework update differently than those using a Swift package. 
+            
+            Follow the steps below exactly as they appear. Otherwise, Xcode may delete the changes you made in the previous section.
+        }
+        
+        @Steps {
+            @Step {
+                In the menu bar, go to Source Control -> Commit. If a file named `<Your Project's Name>-Info.plist` appears, check it to save it along with the other files.
+                
+                @Image(source: "3-1-image-3-1.png", alt: "Selecting Sample-Code-Info.plist.")
+            }
+            
+            @Step {
+                Ensure "Push to remotes" is not checked. Set "Initial commit" as the commit message and click "Commit Files".
+                
+                @Image(source: "3-1-image-3-2.png", alt: "Typing the commit message.")
+            }
+            
+            @Step {
+                Under Source Control, click "Fetch Changes". Then, click "Pull". Press `Cmd + B` to update the documentation.
+                
+                If a window pops up prompting you to "Rebase local changes onto upstream changes", check that option. If prompted to "Stash Changes", check "Apply Stash After Operation".
+                
+                @Image(source: "3-1-image-3-3.png", alt: "Selecting \"Pull\" from the menu bar.")
+            }
+            
+            @Step {
+                Repeat the above three steps periodically to stay up to date with the latest version of ARHeadsetKit.
+            }
+        }
+    }
+    
+    @Section(title: "Testing Utility Functions") {
+        @ContentAndMedia {
+            To test that the Xcode framework is configured correctly, you will use ARHeadsetKit utility functions in both Swift and Metal code.
+        }
+        
+        @Steps {
+            @Step {
+                In the project navigator, select `ContentView.swift`. Import ARHeadsetKit at the top of the file.
+                
+                @Code(name: "ContentView.swift", file: "3-1-creating-code-4-2.swift", previousFile: "3-1-creating-code-4-1.swift")
+            }
+            
+            @Step {
+                Add a function that calls `kelvinToRGB(_:)`. Press `Cmd + B` and ensure there are no build errors.
+                
+                If you encounter build errors, run back through this tutorial and ensure you followed the steps exactly as they appear.
+                
+                @Code(name: "ContentView.swift", file: "3-1-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Right-click `ContentView.swift` in the project navigator. Go to New File -> Metal File -> Next. Name the file "Shaders.metal" and click "Create".
+                
+                @Image(source: "3-1-image-4-1.png", alt: "Creating the Metal file.")
+            }
+            
+            @Step {
+                Right below `#include <metal_stdlib>`, import `ARHeadsetKit/ColorUtilities.h` using angle brackets.
+                
+                @Code(name: "Shaders.metal", file: "3-1-creating-code-4-5.metal", previousFile: "3-1-creating-code-4-4.metal")
+            }
+            
+            @Step {
+                Create a function that calls `convertYCbCr_toRGB(_:_:)` in the `ColorUtilities` namespace. Press `Cmd + B` and ensure there are no build errors.
+                
+                @Code(name: "Shaders.metal", file: "3-1-creating-code-4-6.metal")
+            }
+            
+            @Step {
+                Congratulations! You can now use all of ARHeadsetKit's features to create an epic AR experience!
+            }
+        }
+    }
+}

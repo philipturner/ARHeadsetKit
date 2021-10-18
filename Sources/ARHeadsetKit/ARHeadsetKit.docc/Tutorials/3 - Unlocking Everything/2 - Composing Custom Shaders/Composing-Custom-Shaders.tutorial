@@ -1,0 +1,25 @@
+@Tutorial {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Composing Custom Shaders") {
+        Coming soon!
+    }
+    
+    @Section(title: "Section 0") {
+        @ContentAndMedia {
+            Show the fix for the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet.
+        }
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "Section 1") {
+        @Steps {
+            n/a
+        }
+    }
+}

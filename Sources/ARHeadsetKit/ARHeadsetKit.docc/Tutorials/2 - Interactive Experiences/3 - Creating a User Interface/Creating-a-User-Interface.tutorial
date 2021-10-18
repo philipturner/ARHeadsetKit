@@ -1,0 +1,16 @@
+@Tutorial {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Creating a User Interface") {
+        Coming soon!
+<!--        Working with the Interface Renderer. Include a static interface and one that moves with the user (with limited functionality). Include that you must respond to the user's chosen interface size.-->
+    }
+    
+    @Section(title: "Section 1") {
+        @Steps {
+            n/a
+        }
+    }
+}

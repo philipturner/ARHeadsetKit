@@ -1,0 +1,131 @@
+@Tutorial(time: 15, projectFiles: "Configuring-ARHeadsetKit.zip") {
+    @XcodeRequirement(
+            title: "Xcode 13",
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Configuring ARHeadsetKit") {
+        This tutorial guides you through building an augmented reality app based on ARHeadsetKit.
+        
+        Download the project files to begin building this project, and follow the steps below. Update ARHeadsetKit Swift package in the starter project to the most recent version.
+        
+        @Image(source: "1-1-image-2-1-intro.jpg", alt: "The blue cone appearing in AR.")
+    }
+    
+    @Section(title: "Declare a Custom Renderer") {
+        @ContentAndMedia {
+            Every ARHeadsetKit app starts with a custom renderer. This class communicates with the ``ARHeadsetKit/MainRenderer``, responding to the environment and rendering content. 
+        }
+        
+        @Steps {
+            @Step {
+                In the project files, go to `StartingPoint` and open `Sample Code.xcodeproj`.
+                
+                @Image(source: "1-1-image-1-1.png", alt: "Selecting StartingPoint in the project files.")
+            }
+
+            @Step {
+                Navigate to a file named `Sample_CodeApp.swift` in the project navigator. Right-click on it and select New File -> Swift File -> Next. Name the file `MyRenderer.swift` and click Create.
+                
+                @Image(source: "1-1-image-1-2.png", alt: "Sample_CodeApp.swift being selected in the project navigator.")
+            }
+            
+            @Step {
+                In `MyRenderer.swift`, import ARHeadsetKit and Metal. 
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-2.swift", previousFile: "1-1-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Declare a class called `MyRenderer`, with a stored property that references a `MainRenderer`.
+                
+                > Tip: Use `"unowned let"` instead of `"var"` to store references to parent renderers. Otherwise, the de-initializer will not work properly.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Create an initializer that takes a `MainRenderer` and a `MTLLibrary!`, then initialize the value of `renderer`.
+                
+                Adding the `required` keyword to the initializer allows it to conform to the ``ARHeadsetKit/CustomRenderer`` protocol.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                Create an `updateResources()` method and a `drawGeometry(renderEncoder:)` method, which takes an ``ARHeadsetKit/ARMetalRenderCommandEncoder`` parameter.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Declare `MyRenderer`'s conformance to the `CustomRenderer` protocol.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-6.swift")
+            }
+            
+            @Step {
+                In `updateResources()`, create cone object. Set its position to the origin and scale to 0.2 meters in each dimension.
+                
+                > Tip: Put each parameter onto a separate line to make the initializer concise.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-7.swift")
+            }
+            
+            @Step {
+                Send the cone to the Central Renderer to present it in AR. Call its ``ARHeadsetKit/CentralRenderer/render(object:)`` method.
+                
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-8.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Link to SwiftUI") {
+        @ContentAndMedia {
+            To render AR content, your code must communicate with ARHeadsetKit. You will pass `MyRenderer`'s initializer up through the following hierarchy of objects:
+            
+            - `AppCoordinator`
+              - `MainRenderer`
+                - `MyRenderer`
+        }
+        
+        @Steps {
+            @Step {
+                In the project navigator, select `ContentView.swift`. Import ARHeadsetKit at the top of the file.
+                
+                @Code(name: "ContentView.swift", file: "1-1-creating-code-2-2.swift", previousFile: "1-1-creating-code-2-1.swift")
+            }
+            
+            @Step {
+                Delete `ContentView_Previews`. You will not need this SwiftUI preview because the app's content cannot be simulated in Xcode.
+                
+                @Code(name: "ContentView.swift", file: "1-1-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Create a subclass of `MainRenderer` called `MyApp_MainRenderer`. Override `makeCustomRenderer` with the `MyRenderer`'s initializer. 
+                
+                @Code(name: "ContentView.swift", file: "1-1-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Repeat the previous step with a subclass of `AppCoordinator` called `Coordinator`. Use the `MyApp_MainRenderer`'s initializer.
+                
+                @Code(name: "ContentView.swift", file: "1-1-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Replace the body of `ContentView` with an ``ARHeadsetKit/ARContentView``. Set an instance of `Coordinator` as its environment object.
+                
+                @Code(name: "ContentView.swift", file: "1-1-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Launch the app on your iOS device. Read the in-app tutorial thoroughly, then step back and observe the blue cone. 
+                
+                Congratulations! You made your first experience with ARHeadsetKit!
+                
+                @Image(source: "1-1-image-2-1.jpg", alt: "The blue cone appearing in AR.")
+            }
+        }
+    }
+}

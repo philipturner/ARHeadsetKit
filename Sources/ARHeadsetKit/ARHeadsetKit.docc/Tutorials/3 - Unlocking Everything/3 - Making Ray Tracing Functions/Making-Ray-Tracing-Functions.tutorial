@@ -1,0 +1,15 @@
+@Tutorial {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Making Ray Tracing Functions") {
+        Coming soon!
+    }
+    
+    @Section(title: "Section 1") {
+        @Steps {
+            n/a
+        }
+    }
+}

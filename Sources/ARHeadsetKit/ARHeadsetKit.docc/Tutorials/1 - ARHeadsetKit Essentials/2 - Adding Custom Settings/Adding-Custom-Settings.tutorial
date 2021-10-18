@@ -1,0 +1,163 @@
+@Tutorial(time: 20, projectFiles: "Adding-Custom-Settings.zip") {
+    @XcodeRequirement(
+            title: "Xcode 13",
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Adding Custom Settings") {
+        ARHeadsetKit uses several user-defined settings to drive every experience. These settings are saved to the disk, so they don't reset when the app closes. In this tutorial, you will create a switch that changes an AR object's color to red.
+        
+        Download the project files to begin building this project, and follow the steps below. Update ARHeadsetKit Swift package in the starter project to the most recent version.
+        
+        @Image(source: "1-2-image-2-1-intro.jpg", alt: "The cone appearing red in AR.")
+    }
+    
+    @Section(title: "Create a Custom Settings View") {
+        @ContentAndMedia {
+            A user changes settings in the settings panel. To open the settings panel, launch your app and tap the white gear icon on the top left. 
+            
+            Tapping on the "Customize Appearance" link in the settings panel brings up the appearance settings. In this section, you will add a switch to these settings.
+        }
+        
+        @Steps {
+            @Step {
+                In the project navigator, select `ContentView.swift`.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Add a `renderingRed` property to `Coordinator`. Set its default value to false.
+                
+                The `@Published` attribute allows SwiftUI views to interact with a property.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Create a new view called `SettingsView`, which conforms to the ``ARHeadsetKit/CustomRenderingSettingsView`` protocol. In its initializer, set `coordinator` to the value of `c`.
+                
+                The `coordinator` property allows the view to interact with the app's settings.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Add a switch to `SettingsView`, which changes the coordinator's `renderingRed` property.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                In the body of `ContentView`, swap out ``ARHeadsetKit/EmptySettingsView`` in the angle brackets next to `ARContentView` with `SettingsView`.
+                
+                > Warning: If you forget to replace the empty settings view, the user can't access your settings.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Launch your app and go to the settings panel. Click the "Customize Appearance" link and a switch saying "Turn Objects Red" will appear.
+                
+                @Image(source: "1-2-image-1-1.png", alt: "The custom switch showing in the appearance settings.")
+            }
+        }
+    }
+    
+    @Section(title: "Saving Settings to the Disk") {
+        @ContentAndMedia {
+            You can now modify custom settings in your app from the settings panel. However, when you close out of your app, they will reset. In this section, you will make user preferences persist across app launches.
+        }
+        
+        @Steps {
+            @Step {
+                Override the ``ARHeadsetKit/AppCoordinator/initializeCustomSettings(from:)`` method of `Coordinator`.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-2-1.swift", previousFile: "1-2-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Check whether `renderingRed` already exists in file storage.
+                
+                Code inside this `"if let"` statement will only execute if user settings were previously saved to the disk. During the first app launch, the `renderingRed` will be absent from file storage.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Ensure the value associated with `renderingRed` is a valid boolean. If so, overwrite the default value of `renderingRed`.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Override the ``ARHeadsetKit/AppCoordinator/modifyCustomSettings(customSettings:)`` method. Add a line that transforms the value of `renderingRed` into a string.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                If `renderingRed` does not match what is stored on the disk, update it.
+                
+                @Code(name: "ContentView.swift", file: "1-2-creating-code-2-5.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Binding Settings to Rendering") {
+        @ContentAndMedia {
+            Custom settings don't mean anything unless they affect the AR experience! In this section, you will change how an AR object appears based on the value of a custom setting.
+        }
+        
+        @Steps {
+            @Step {
+                In the project navigator, select `MyRenderer.swift`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-1.swift")
+            }
+            
+            @Step {
+                In `updateResources()`, create a `red` color that is 100% red, 0% green, and 0% blue.
+                
+                Colors in ARHeadsetKit are vectors of floating-point numbers, ranging from 0.0 to 1.0.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-2.swift")
+            }
+            
+            @Step {
+                Create a `skyBlue` color that is 33% red, 75% green, and 100% blue. Shift `simd_float3` in the previous line to align with the new color. 
+                
+                > Tip: Align keywords and symbols to depict that certain statements are related. This makes code easier to read and more expressive.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Fetch the app's coordinator and downcast it from `AppCoordinator` to `Coordinator`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-4.swift")
+            }
+            
+            @Step {
+                Retrieve the value of the `renderingRed` custom setting.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Set the cone's color to red when `renderingRed` is `true`, and sky blue otherwise.
+                
+                > Tip: Initializers for `ARObject` and some other ARHeadsetKit types can be very large. Divide sections of parameters with line breaks, following the convention expressed in `ARObject`'s initializer. This can be found by right-clicking `ARObject` and selecting "Jump to Definition".
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Launch the app and observe the AR object respond to your switch in the settings panel.
+                
+                Congratulations! You made your first form of interaction between the user and an AR object!
+                
+                @Image(source: "1-2-image-2-1.jpg", alt: "The cone appearing red in AR.")
+            }
+        }
+    }
+}

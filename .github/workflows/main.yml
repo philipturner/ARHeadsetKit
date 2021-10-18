@@ -1,0 +1,28 @@
+on:
+  schedule:
+     - cron: "0 12 * * SUN"
+
+# Store traffic data for more than 14 days
+
+jobs:
+  traffic:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: ARHeadsetKit traffic
+      uses: sangonzal/repository-traffic-action@v0.1.4
+      env:
+        TRAFFIC_ACTION_TOKEN: ${{ secrets.TRAFFIC_ACTION_TOKEN }}
+    
+    - name: Store ARHeadsetKit traffic
+      uses: dmnemec/copy_file_to_another_repo_action@v1.1.1
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.TRAFFIC_ACTION_TOKEN }}
+      with:
+        source_file: './traffic/'
+        destination_repo: ${{ secrets.TRAFFIC_DESTINATION }}
+        destination_folder: ${{ secrets.ARHEADSETKIT_TRAFFIC_FOLDER }}
+        user_email: ${{ secrets.EMAIL }}
+        user_name: ${{ secrets.USERNAME }}

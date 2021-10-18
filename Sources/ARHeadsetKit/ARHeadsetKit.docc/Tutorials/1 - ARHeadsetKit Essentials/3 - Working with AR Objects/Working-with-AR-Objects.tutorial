@@ -1,0 +1,16 @@
+@Tutorial {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Working with AR Objects") {
+        Coming soon!
+<!--        A description of how ARHeadsetKit sends requests to the Central Renderer for generic objects. There are other specialized renderers, some of which are internal to ARHeadsetKit. Make a diagram of them.-->
+    }
+    
+    @Section(title: "Section 1") {
+        @Steps {
+            n/a
+        }
+    }
+}

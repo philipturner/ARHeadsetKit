@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DeviceKit",
+        "repositoryURL": "https://github.com/devicekit/DeviceKit",
+        "state": {
+          "branch": "master",
+          "revision": "769a8aefbe99c8e83650b94acf6343f06f6db20b",
+          "version": null
+        }
+      },
+      {
+        "package": "JJLISO8601DateFormatter",
+        "repositoryURL": "https://github.com/michaeleisel/JJLISO8601DateFormatter",
+        "state": {
+          "branch": null,
+          "revision": "99fadf2e6425a0f827b1b485ea60bc2b7ecdd22c",
+          "version": "0.1.4"
+        }
+      },
+      {
+        "package": "ZippyJSON",
+        "repositoryURL": "https://github.com/michaeleisel/ZippyJSON",
+        "state": {
+          "branch": "master",
+          "revision": "71a46d3ed2749a150202346aec83a6cd78340cc5",
+          "version": null
+        }
+      },
+      {
+        "package": "ZippyJSONCFamily",
+        "repositoryURL": "https://github.com/michaeleisel/ZippyJSONCFamily",
+        "state": {
+          "branch": null,
+          "revision": "c55123b23f0faa898b22bf1b967e72a2df51fdb4",
+          "version": "1.2.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

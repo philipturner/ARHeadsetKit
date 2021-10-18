@@ -1,0 +1,42 @@
+@Tutorials(name: "ARHeadsetKit") {
+    @Intro(title: "Welcome to ARHeadsetKit") {
+        ARHeadsetKit brings immersive AR headset experiences to the iPhone. Quickly prototype handheld AR apps that are enhanced by Google Cardboard.
+        
+        @Image(source: "google-cardboard-plus-ar.png", alt: "Google Cardboard plus AR")
+    }
+    
+    @Chapter(name: "Essentials") {
+        Create your first app with ARHeadsetKit, using basic AR objects.
+        
+        @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
+        
+        @TutorialReference(tutorial: "doc:Configuring-ARHeadsetKit")
+        @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        
+        @TutorialReference(tutorial: "doc:Working-with-AR-Objects")
+    }
+    
+    @Chapter(name: "Interactive Experiences") {
+        Bring hand-object interaction into your app and create a holographic interface.
+        
+        @Image(source: "Blank.png", alt: "")
+        
+        @TutorialReference(tutorial: "doc:Selecting-Objects")
+        @TutorialReference(tutorial: "doc:Using-Delegate-Renderers")
+        @TutorialReference(tutorial: "doc:Creating-a-User-Interface")
+    }
+    
+    @Chapter(name: "Unlocking Everything") {
+        Access all of ARHeadsetKit's features to bring any idea into AR.
+        
+        @Image(source: "Blank.png", alt: "")
+        
+        @TutorialReference(tutorial: "doc:Reconfiguring-ARHeadsetKit")
+        @TutorialReference(tutorial: "doc:Composing-Custom-Shaders")
+        @TutorialReference(tutorial: "doc:Making-Ray-Tracing-Functions")
+    }
+    
+    <!-- Use the framework extensions and shader utilities to make an awesome app -->
+    <!-- Include experience with debugging shaders -->
+    <!-- Show what happens without ARHeadsetKit's debugging utilities :( -->
+    <!-- Include use of MTLLayeredBuffer -->
+}
