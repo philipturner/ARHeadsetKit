@@ -102,7 +102,6 @@ extension LensDistortionCorrector: BufferExpandable {
         // not need to render to two multisample layers at once.
         
         if usingVertexAmplification {
-            onlyForMetalAPIValidation { textureDescriptor.storageMode = .private }
             textureDescriptor.arrayLength = 2
             textureDescriptor.textureType = .type2DMultisampleArray
         } else {

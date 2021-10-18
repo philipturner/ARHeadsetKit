@@ -36,7 +36,12 @@ typedef struct {
     half3        textColor;
     half         textShininess;
     half         textOpacity;
-} FragmentUniforms;
+} TextFragmentUniforms;
+
+typedef struct {
+    packed_half3 surfaceColor;
+    half         surfaceShininess;
+} SurfaceFragmentUniforms;
 
 
 
@@ -331,7 +336,7 @@ constant float EDGE_MULTIPLIER = 0.75 / 1.189207155;
 fragment half4 interfaceTextFragmentShader(TextInOut in [[ stage_in ]],
                                            
                                            constant GlobalFragmentUniforms &globalUniforms [[ buffer(0) ]],
-                                           constant FragmentUniforms       &uniforms       [[ buffer(1) ]],
+                                           constant TextFragmentUniforms   &uniforms       [[ buffer(1) ]],
                                            
                                            texture2d<float, access::sample> signedDistanceField [[ texture(0) ]])
 {
@@ -366,8 +371,8 @@ fragment half4 interfaceTextFragmentShader(TextInOut in [[ stage_in ]],
 [[early_fragment_tests]]
 fragment half3 interfaceSurfaceFragmentShader(SurfaceInOut in [[ stage_in ]],
                                               
-                                              constant GlobalFragmentUniforms &globalUniforms [[ buffer(0) ]],
-                                              constant FragmentUniforms       &uniforms       [[ buffer(1) ]])
+                                              constant GlobalFragmentUniforms  &globalUniforms [[ buffer(0) ]],
+                                              constant SurfaceFragmentUniforms &uniforms       [[ buffer(1) ]])
 {
     half normal_lengthSquared       = length_squared(in.normal_notNormalized);
     half eyeDirection_lengthSquared = length_squared(in.eyeDirection_notNormalized);

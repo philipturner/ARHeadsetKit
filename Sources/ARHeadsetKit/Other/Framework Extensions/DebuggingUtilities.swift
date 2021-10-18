@@ -44,12 +44,3 @@ public func debugLabelConditionalReturn<T>(_ closure1: (() -> T), else closure2:
     return closure2()
     #endif
 }
-
-@inlinable @inline(__always)
-public func onlyForMetalAPIValidation(_ closure: (() -> Void)) {
-    #if DEBUG
-    if !_bypassingMetalAPIValidation {
-        closure()
-    }
-    #endif
-}
