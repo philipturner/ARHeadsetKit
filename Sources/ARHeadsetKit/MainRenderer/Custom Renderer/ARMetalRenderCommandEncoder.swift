@@ -10,7 +10,7 @@ import Metal
 /// Provides a subset of the functionality of [`MTLRenderCommandEncoder`](https://developer.apple.com/documentation/metal/mtlrendercommandencoder), to allow use of custom shaders for rendering in ARHeadsetKit.
 public struct ARMetalRenderCommandEncoder {
     @usableFromInline var renderer: MainRenderer
-    @usableFromInline var encoder: MTLRenderCommandEncoder // REMOVE: - just use this to call non-public functions internally
+    @usableFromInline var encoder: MTLRenderCommandEncoder
     @usableFromInline var threadID: Int
     
     #if DEBUG
