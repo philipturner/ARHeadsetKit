@@ -14,12 +14,12 @@ struct HeadsetViewSeparator<Coordinator: AppCoordinator>: View {
     var body: some View {
         if coordinator.renderingSettings.usingHeadsetMode,
            coordinator.renderingSettings.renderingViewSeparator {
-            SeparatorView()
+            SeparatorView(coordinator: coordinator)
         }
     }
     
     private struct SeparatorView: UIViewRepresentable {
-        @EnvironmentObject var coordinator: Coordinator
+        @ObservedObject var coordinator: Coordinator
 
         func makeCoordinator() -> Coordinator { coordinator }
 
