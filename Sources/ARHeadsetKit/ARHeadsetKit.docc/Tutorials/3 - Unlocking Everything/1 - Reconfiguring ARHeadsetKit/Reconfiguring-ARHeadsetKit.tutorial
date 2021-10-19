@@ -6,7 +6,7 @@
     @Intro(title: "Reconfiguring ARHeadsetKit") {
         To unlock ARHeadsetKit's full potential, you must configure it as an Xcode framework instead of a Swift package.
         
-        In the project files, the finished project contains broken file references to ARHeadsetKit. To compile it, follow steps 3 and 5&ndash;8 of this tutorial's first section.
+        In the project files, the finished project contains broken file references to ARHeadsetKit. To compile it, follow steps 3 and 5&ndash;8 of this tutorial's first section, and the last two steps of the second section.
         
         Follow the steps to build this project, or download the finished project to explore on your own. 
     }
@@ -113,6 +113,8 @@
             
             @Step {
                 Go to Project Settings -> TARGETS -> General. Scroll down to "Frameworks, Libraries, and Embedded Content" and click the "+" button.
+                
+                > Note: If you are configuring the finished project from the project files, ARHeadsetKit may already appear here. In that case, delete the reference to it before this step.
                 
                 @Image(source: "3-1-image-2-6.png", alt: "Locating the \"add\" button.")
             }
