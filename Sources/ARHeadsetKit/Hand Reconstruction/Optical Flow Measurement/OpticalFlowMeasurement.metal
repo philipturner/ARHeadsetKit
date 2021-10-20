@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 5/28/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "OpticalFlowMeasurementTypes.metal"
 using namespace metal;
@@ -123,3 +124,4 @@ kernel void poolOpticalFlow8192(device half3 *regionSamples256  [[ buffer(0) ]],
         regionSamples8192[tg_id] = output;
     }
 }
+#endif

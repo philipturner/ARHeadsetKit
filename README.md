@@ -2,7 +2,7 @@
 
 Using a $5 Google Cardboard, the average person can now replicate Microsoft Hololens. Apps built with ARHeadsetKit are immersive AR headset experiences, simultaneously providing handheld AR alternatives. In just 30 lines of code, even someone without a background in Swift can work with AR.
 
-ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [and macOS](docs/articles/mac-compatibility.md) frameworks with high-level [wrappers](docs/extensions-to-apple-frameworks.md) that maximize performance. [MTLLayeredBuffer](articles/layered-buffer.md) lowers the barrier to learning Metal and managing GPGPU workflows. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. To learn more, check out [these articles](docs/article-list.md).
+ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [and macOS](docs/mac-compatibility.md) frameworks with high-level [wrappers](docs/extensions-to-apple-frameworks.md) that maximize performance. [MTLLayeredBuffer](docs/articles/layered-buffer.md) lowers the barrier to learning Metal and managing GPGPU workflows. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. To learn more, check out [these articles](docs/article-list.md).
 
 ## Quick Start
 
@@ -42,7 +42,7 @@ If you are only using ARHeadsetKit for its utility functions (such as [`MTLLayer
 
 ## Choosing a Swift Package vs. an Xcode Framework
 
-You can configure ARHeadsetKit in two ways: as a Swift package or an Xcode framework. A Swift package is easier to set up, and recommended unless you plan to create Metal shaders. An Xcode framework is required for importing ARHeadsetKit's Metal Shading Language [utility functions](docs/metal-utilities.md) into your own shaders. In addition, the Xcode framework lets you use ARHeadsetKit's launch screen without breaking the file's connection to this GitHub repository.
+You can configure ARHeadsetKit in two ways: as a Swift package or an Xcode framework. A Swift package is easier to set up, and recommended unless you plan to create Metal shaders. An Xcode framework is required for importing ARHeadsetKit's Metal Shading Language [utility functions](docs/articles/metal-utility-functions.md) into your own shaders. In addition, the Xcode framework lets you use ARHeadsetKit's launch screen without breaking the file's connection to this GitHub repository.
 
 To set up ARHeadsetKit as a Swift package, go to File -> Add Packages and paste this repository's URL. To set it up as an Xcode framework, follow ARHeadsetKit's tutorials in Xcode and reach the chapter "Unlocking Everything". The first part of that chapter, "Reconfiguring ARHeadsetKit", is a guide to setting up the Xcode framework.
 

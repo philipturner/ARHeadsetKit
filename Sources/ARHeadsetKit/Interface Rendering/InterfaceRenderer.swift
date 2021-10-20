@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/28/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -261,3 +262,4 @@ public final class InterfaceRenderer: DelegateRenderer {
         Self.resetCachedTextData()
     }
 }
+#endif

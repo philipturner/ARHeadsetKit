@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 5/12/21.
 //
 
+#if !os(macOS)
 import simd
 
 final class HandModelFitter: DelegateHandRenderer {
@@ -200,3 +201,4 @@ extension HandModelFitter {
     }
     
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/10/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -287,3 +288,4 @@ extension LensDistortionCorrector {
     }
     
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/10/21.
 //
 
+#if !os(macOS)
 import DeviceKit
 import simd
 
@@ -263,3 +264,4 @@ extension Device: DeviceMeasurementProvider {
     }
     
 }
+#endif

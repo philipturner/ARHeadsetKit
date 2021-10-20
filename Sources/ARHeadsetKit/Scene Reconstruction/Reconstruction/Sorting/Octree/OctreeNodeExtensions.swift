@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import simd
 
 extension OctreeNode {
@@ -164,4 +165,4 @@ extension OctreeNode {
     }
     
 }
-
+#endif

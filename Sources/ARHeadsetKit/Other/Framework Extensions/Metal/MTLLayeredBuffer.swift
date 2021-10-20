@@ -696,7 +696,6 @@ public extension MTLResourceStateCommandEncoder {
         #endif
     }
 }
-//#endif
 
 public extension MTLRasterizationRateMap {
     /// See [`copyParameterData(buffer:offset:)`](https://developer.apple.com/documentation/metal/mtlrasterizationratemap/3153125-copyparameterdata).

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/18/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -163,3 +164,4 @@ extension CentralRenderer {
     }
     
 }
+#endif

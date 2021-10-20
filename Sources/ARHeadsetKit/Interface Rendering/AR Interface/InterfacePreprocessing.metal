@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/2/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -152,3 +153,4 @@ kernel void createInterfaceVRSurfaceMeshes(CREATE_INTERFACE_SURFACE_MESHES_PARAM
     createInterfaceSurfaceMeshesCommon<float3, VRVertexUniforms, 2>(vertexUniforms, cornerNormals, numSurfacesTimes256,
                                                                                vertices, eyeDirections, normals, id);
 }
+#endif

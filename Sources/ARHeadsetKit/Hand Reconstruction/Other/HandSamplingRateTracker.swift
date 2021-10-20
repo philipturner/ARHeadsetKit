@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/26/21.
 //
 
+#if !os(macOS)
 import Foundation
 import simd
 
@@ -62,3 +63,4 @@ struct HandSamplingRateTracker: DelegateHandRenderer {
         }
     }
 }
+#endif

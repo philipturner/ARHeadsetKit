@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -181,3 +182,4 @@ extension SceneCuller: BufferExpandable {
     }
     
 }
+#endif

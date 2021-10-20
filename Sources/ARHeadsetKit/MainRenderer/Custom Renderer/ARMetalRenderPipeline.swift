@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 10/3/21.
 //
 
+#if !os(macOS)
 import Metal
 
 public struct ARMetalRenderPipelineState {
@@ -197,3 +198,4 @@ public extension MTLLibrary {
         return ARMetalFragmentFunction(function)
     }
 }
+#endif

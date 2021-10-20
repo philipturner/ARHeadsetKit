@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/29/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 using namespace metal;
 
@@ -228,4 +229,4 @@ kernel void createTextSignedDistanceField(device   float2  *baseSearchParameters
     float output = fma(copysign(closestDistance, float(distanceSign)), maxDistanceAndHalfInverse[1], 0.5);
     signedDistanceField.write(float4{ output }, id);
 }
-
+#endif

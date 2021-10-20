@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../../Other/Metal Utilities/MemoryUtilities.h"
 using namespace metal;
@@ -352,3 +353,4 @@ kernel void condenseIncludedTriangles(device   bool4       *triangleInclusionMar
     if (marks[2]) { CONDENSE_INCLUDED_TRIANGLES_BLOCK(2); }
     if (marks[3]) { CONDENSE_INCLUDED_TRIANGLES_BLOCK(3); }
 }
+#endif

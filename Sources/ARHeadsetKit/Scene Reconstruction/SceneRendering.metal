@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -180,3 +181,4 @@ fragment half3 sceneVRFragmentShader(VertexInOut in [[ stage_in ]], SCENE_FRAGME
                                      smallTriangleLumaTexture,   largeTriangleLumaTexture,
                                      smallTriangleChromaTexture, largeTriangleChromaTexture);
 }
+#endif

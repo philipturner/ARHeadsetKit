@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/22/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct SettingsIconView<Coordinator: AppCoordinator>: View {
@@ -46,3 +47,4 @@ struct SettingsIconView<Coordinator: AppCoordinator>: View {
         }
     }
 }
+#endif

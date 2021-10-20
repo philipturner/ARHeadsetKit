@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "ARHeadsetKit",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v14),
+        .macOS(.v11)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -16,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+//        .package(name: "ExportDeviceKit", url: "./Packages/ExportDeviceKit", branch: "master"),
         .package(name: "DeviceKit", url: "https://github.com/devicekit/DeviceKit", branch: "master"),
         .package(name: "ZippyJSON", url: "https://github.com/michaeleisel/ZippyJSON", branch: "master"),
     ],
@@ -26,7 +27,11 @@ let package = Package(
         .target(
             name: "ARHeadsetKit",
             dependencies: [
-                "DeviceKit", "ZippyJSON"
+                .product(
+                    name: "DeviceKit",
+                    package: "DeviceKit",
+                    condition: .when(platforms: [.iOS])),
+                "ZippyJSON"
             ],
             exclude: [
                 "Scene Reconstruction/Reconstruction/Mesh Reduction/ReduceSubmeshes.metallib"

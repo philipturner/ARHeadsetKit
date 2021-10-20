@@ -5,7 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
-
+#if !os(macOS)
 import SwiftUI
 
 struct HeadsetViewSeparator<Coordinator: AppCoordinator>: View {
@@ -67,3 +67,4 @@ struct HeadsetViewSeparator<Coordinator: AppCoordinator>: View {
         return view
     }
 }
+#endif

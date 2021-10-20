@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 5/21/21.
 //
 
+#if !os(macOS)
 import simd
 
 extension HandModelFitter {
@@ -219,3 +220,4 @@ extension HandModelFitter.HandBasis {
     }
     
 }
+#endif

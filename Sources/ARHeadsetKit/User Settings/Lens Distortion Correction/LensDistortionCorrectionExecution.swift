@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/10/21.
 //
 
+#if !os(macOS)
 import MetalKit
 
 extension LensDistortionCorrector {
@@ -246,3 +247,4 @@ extension LensDistortionCorrector {
     }
     
 }
+#endif

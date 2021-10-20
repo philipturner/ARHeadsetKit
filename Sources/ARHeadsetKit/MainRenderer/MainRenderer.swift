@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import MetalKit
 import ARKit
 
@@ -323,3 +324,4 @@ public extension DelegateRenderer {
     @inlinable var cameraToRightClipTransform: simd_float4x4 { renderer.cameraMeasurements.cameraToRightClipTransform }
     @inlinable var cameraToHeadsetModeCullTransform: simd_float4x4 { renderer.cameraMeasurements.cameraToHeadsetModeCullTransform }
 }
+#endif

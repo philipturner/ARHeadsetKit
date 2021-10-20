@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/13/21.
 //
 
+#if !os(macOS)
 import ARKit
 
 extension HandRenderer2D {
@@ -54,3 +55,4 @@ extension HandRenderer2D {
     }
     
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 
@@ -242,3 +243,4 @@ extension DelegateSceneRenderer {
     var sceneCuller: SceneCuller { sceneRenderer.sceneCuller }
     var sceneOcclusionTester: SceneOcclusionTester { sceneRenderer.sceneOcclusionTester }
 }
+#endif

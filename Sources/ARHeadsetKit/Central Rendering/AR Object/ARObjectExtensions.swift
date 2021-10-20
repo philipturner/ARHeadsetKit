@@ -7,8 +7,6 @@
 
 import simd
 
-
-
 /**
   ARObjectGroup accelerates culling and finding LOD of ARObjects
   by treating of a group of several close objects as one larger object.

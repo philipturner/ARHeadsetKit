@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 
@@ -50,3 +51,4 @@ extension DelegateUserSettings {
     var cameraMeasurements: CameraMeasurements { userSettings.cameraMeasurements }
     var lensDistortionCorrector: LensDistortionCorrector { userSettings.lensDistortionCorrector }
 }
+#endif

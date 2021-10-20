@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/14/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 
@@ -167,3 +168,4 @@ extension HandRenderer {
     }
     
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/11/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 
@@ -161,3 +162,4 @@ extension CameraMeasurements {
     }
     
 }
+#endif

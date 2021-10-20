@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "ThirdSceneSortTypes.metal"
 using namespace metal;
@@ -499,3 +500,4 @@ kernel void fillMicroSectors(constant ushort *smallSector256GroupOffsets [[ buff
                 73, upperOffsets[3]);
     }
 }
+#endif

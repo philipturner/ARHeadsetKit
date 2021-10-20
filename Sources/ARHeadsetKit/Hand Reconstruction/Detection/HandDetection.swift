@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/15/21.
 //
 
+#if !os(macOS)
 import Metal
 import Vision
 
@@ -214,3 +215,4 @@ extension HandRenderer {
     }
     
 }
+#endif

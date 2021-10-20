@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 using namespace metal;
 
@@ -38,3 +39,4 @@ fragment uint occlusionFragmentShader(VertexInOut in [[ stage_in ]])
 {
     return in.triangleID;
 }
+#endif

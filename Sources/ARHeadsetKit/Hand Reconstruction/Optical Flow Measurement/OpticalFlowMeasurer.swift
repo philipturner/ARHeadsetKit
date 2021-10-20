@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 5/29/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -116,3 +117,4 @@ final class OpticalFlowMeasurer: DelegateRenderer, DelegateHandRenderer {
         }
     }
 }
+#endif

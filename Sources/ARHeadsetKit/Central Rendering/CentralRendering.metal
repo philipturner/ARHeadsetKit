@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/18/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -295,3 +296,4 @@ fragment half3 centralFragmentShader(VertexInOut in [[ stage_in ]],
 
     return selectedUniforms.modelColor * lightContribution;
 }
+#endif

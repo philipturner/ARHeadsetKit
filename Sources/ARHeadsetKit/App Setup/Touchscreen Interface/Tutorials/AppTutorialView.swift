@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/24/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct AppTutorialCheck: Equatable {
@@ -148,3 +149,4 @@ struct AppTutorialView<Coordinator: AppCoordinator>: View {
         }
     }
 }
+#endif
