@@ -11,7 +11,7 @@ import simd
 protocol CentralShapeContainer {
     var centralRenderer: CentralRenderer { get }
     
-    static var shapeType: CentralShapeType { get }
+    static var shapeType: ARShapeType { get }
     var sizeRange: [Int] { get }
     var shapes: [CentralShape] { get }
     
@@ -100,7 +100,7 @@ extension CentralRenderer {
     struct ShapeContainer<Shape: CentralShape>: CentralShapeContainer {
         unowned let centralRenderer: CentralRenderer
         
-        static var shapeType: CentralShapeType { Shape.shapeType }
+        static var shapeType: ARShapeType { Shape.shapeType }
         var sizeRange: [Int]
         var shapes: [CentralShape]
         

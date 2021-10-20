@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralSphere: CentralRoundShape {
-    static var shapeType: CentralShapeType = .sphere
+    static let shapeType: ARShapeType = .sphere
     
     var numIndices: Int
     var normalOffset: Int
@@ -72,7 +72,7 @@ public extension RayTracing.Ray {
     
     /// Intersects a sphere confined to model space.
     @inlinable
-    func getCentralSphereProgress() -> Float? {
+    func getSphereProgress() -> Float? {
         var coefficients = dotAdd(direction, direction,
                                   direction, origin,
                                   origin,    origin, rhs2: -0.25)

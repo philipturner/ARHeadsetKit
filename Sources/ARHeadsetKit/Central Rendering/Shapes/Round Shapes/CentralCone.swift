@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralCone: CentralRoundShape {
-    static var shapeType: CentralShapeType = .cone
+    static let shapeType: ARShapeType = .cone
     
     var numIndices: Int
     var normalOffset: Int
@@ -76,14 +76,14 @@ public extension RayTracing.Ray {
     
     /// Intersects a cone confined to model space.
     @inlinable
-    func getCentralConeProgress() -> Float? {
-        let possibleBaseProgress = getCentralConeBaseProgress()
+    func getConeProgress() -> Float? {
+        let possibleBaseProgress = getConeBaseProgress()
         
         if origin.y <= -0.5, possibleBaseProgress != nil {
             return possibleBaseProgress
         }
         
-        if let middleProgress = getCentralConeMiddleProgress() {
+        if let middleProgress = getConeMiddleProgress() {
             if let baseProgress = possibleBaseProgress {
                 return min(baseProgress, middleProgress)
             } else {
@@ -96,7 +96,7 @@ public extension RayTracing.Ray {
     
     /// Intersects a cone confined to model space, except that its tip may extend above `y = 0.5`.
     @inlinable
-    func getCentralConeMiddleProgress(topY: Float = 0.5) -> Float? {
+    func getConeMiddleProgress(topY: Float = 0.5) -> Float? {
         let theta = atan2(Float(1), 2)
         let angle_multiplier = cos(theta) * cos(theta)
         
@@ -136,7 +136,7 @@ public extension RayTracing.Ray {
     
     /// Intersects the base of a cone confined to model space.
     @inlinable
-    func getCentralConeBaseProgress() -> Float? {
+    func getConeBaseProgress() -> Float? {
         let origin_to_base_distance = -0.5 - origin.y
         let baseProgress = origin_to_base_distance / direction.y
         guard baseProgress > 0 else { return nil }

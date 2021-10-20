@@ -21,7 +21,7 @@ struct CentralVertex {
 }
 #endif
 
-public enum CentralShapeType: Int {
+public enum ARShapeType: Int {
     case cube = 0
     case squarePyramid = 1
     case octahedron = 2
@@ -36,8 +36,8 @@ public enum CentralShapeType: Int {
 }
 
 public extension String {
-    init(_ centralShapeType: CentralShapeType) {
-        switch centralShapeType {
+    init(_ shapeType: ARShapeType) {
+        switch shapeType {
         case .cube:          self = "Cube"
         case .squarePyramid: self = "Square Pyramid"
         case .octahedron:    self = "Octahedron"
@@ -51,7 +51,7 @@ public extension String {
 
 #if !os(macOS)
 protocol CentralShape {
-    static var shapeType: CentralShapeType { get }
+    static var shapeType: ARShapeType { get }
     
     var numIndices: Int { get }
     var normalOffset: Int { get set }

@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralSquarePyramid: CentralPolyhedralShape {
-    static var shapeType: CentralShapeType = .squarePyramid
+    static let shapeType: ARShapeType = .squarePyramid
     
     var numIndices: Int
     var normalOffset: Int
@@ -67,7 +67,7 @@ public extension RayTracing.Ray {
     
     /// Intersects a square pyramid confined to model space.
     @inlinable
-    func getCentralSquarePyramidProgress() -> Float? {
+    func getSquarePyramidProgress() -> Float? {
         if origin.y <= -0.5 {
             assert(direction.y > 0)
             

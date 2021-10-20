@@ -72,7 +72,7 @@ extension ARInterfaceElement: RayTraceable {
             let testRay = RayTracing.Ray(origin: rayOrigin, direction: rayDirection)
             guard testRay.passesInitialBoundingBoxTest() else { return }
             
-            if let testProgress = testRay.getCentralCylinderProgress(), testProgress < finalProgress {
+            if let testProgress = testRay.getCylinderProgress(), testProgress < finalProgress {
                 finalProgress = testProgress
             }
         }
