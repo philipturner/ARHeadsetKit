@@ -101,7 +101,7 @@ import simd
 
 // Half Precision Vectors and Matrices
 
-#if arch(arm64)
+#if arch(arm64) || !os(macOS)
 public typealias simd_half2 = SIMD2<Float16>
 
 public extension simd_half2 {
@@ -652,7 +652,7 @@ public struct simd_packed_float3: Equatable {
     
     
     
-    #if arch(arm64)
+    #if arch(arm64) || !os(macOS)
     @inlinable @inline(__always)
     public init(_ x: Float16, _ y: Float16, _ z: Float16) {
         self.init(Float(x), Float(y), Float(z))
