@@ -256,7 +256,7 @@
 		9819F59A2702681C0065FD84 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9819F59C2702776C0065FD84 /* ARInterfaceElementExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARInterfaceElementExtensions.swift; sourceTree = "<group>"; };
 		9822E4882709111A0029148C /* CustomRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRenderer.swift; sourceTree = "<group>"; };
-		982EF060271C51420050E5D8 /* mac-compabitility.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "mac-compabitility.md"; sourceTree = "<group>"; };
+		982EF060271C51420050E5D8 /* mac-compatibility.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "mac-compatibility.md"; sourceTree = "<group>"; };
 		982EF077271C55680050E5D8 /* central-renderer.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "central-renderer.md"; sourceTree = "<group>"; };
 		982EF078271C557D0050E5D8 /* scene-renderer.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "scene-renderer.md"; sourceTree = "<group>"; };
 		982EF079271C55C40050E5D8 /* hand-renderer.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "hand-renderer.md"; sourceTree = "<group>"; };
@@ -1048,7 +1048,7 @@
 				98FEB4D32714EF910002A1AF /* building-documentation.md */,
 				98EDDDD5270D1904006F9F44 /* extensions-to-apple-frameworks.md */,
 				98FEB4D42714EF9B0002A1AF /* viewing-documentation.md */,
-				982EF060271C51420050E5D8 /* mac-compabitility.md */,
+				982EF060271C51420050E5D8 /* mac-compatibility.md */,
 				982EF07B271C57D10050E5D8 /* article-list.md */,
 			);
 			path = docs;
