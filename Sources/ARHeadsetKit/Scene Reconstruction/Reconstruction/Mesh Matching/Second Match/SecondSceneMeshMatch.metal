@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "SecondSceneMeshMatchTypes.metal"
 #include "../../../../Other/Metal Utilities/MemoryUtilities.h"
@@ -584,3 +585,4 @@ kernel void executeSecondMeshMatch(device   uint4   *newReducedColorBuffer      
         }
     }
 }
+#endif

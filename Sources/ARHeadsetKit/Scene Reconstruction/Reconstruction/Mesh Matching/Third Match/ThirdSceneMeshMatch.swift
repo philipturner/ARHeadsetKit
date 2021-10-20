@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/17/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -103,3 +104,4 @@ extension SceneMeshMatcher {
     }
     
 }
+#endif

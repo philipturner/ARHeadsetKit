@@ -8,11 +8,7 @@
 //
 #include <metal_stdlib>
 
-#if __METAL_MACOS__
-#include <ARHeadsetKit_macOS/MemoryUtilities.h>
-#else
 #include <ARHeadsetKit/MemoryUtilities.h>
-#endif
 using namespace metal;
 ushort BinarySearch::binarySearch(uint element, constant uint *list, ushort listSizeMinus1)
 {
@@ -324,11 +320,7 @@ makeFuncFamily(float)
 //
 #include <metal_stdlib>
 
-#if __METAL_MACOS__
-#include <ARHeadsetKit_macOS/ARObjectUtilities.h>
-#else
 #include <ARHeadsetKit/ARObjectUtilities.h>
-#endif
 using namespace metal;
 inline uchar getCullMask(float4 projectedVertex)
 {
@@ -769,11 +761,7 @@ LOD ARObjectUtilities::Serial::getLOD(float4x4 modelToWorldTransform,
 //
 #include <metal_stdlib>
 
-#if __METAL_MACOS__
-#include <ARHeadsetKit_macOS/ColorUtilities.h>
-#else
 #include <ARHeadsetKit/ColorUtilities.h>
-#endif
 using namespace metal;
 half3 ColorUtilities::convertYCbCr_toRGB(half2 chroma, half luma)
 {

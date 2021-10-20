@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import MetalKit
 import ARKit
 
@@ -209,3 +210,4 @@ extension AppCoordinator: MTKViewDelegate {
     }
     
 }
+#endif

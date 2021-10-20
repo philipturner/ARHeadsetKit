@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/12/21.
 //
 
+#if !os(macOS)
 import Foundation
 
 public protocol ARParagraph {
@@ -158,3 +159,4 @@ public extension ARTraceableParagraphContainer {
         }
     }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/21/21.
 //
 
+#if !os(macOS)
 import Foundation
 import simd
 import ZippyJSON
@@ -141,3 +142,4 @@ extension UserSettings {
     }()
     
 }
+#endif

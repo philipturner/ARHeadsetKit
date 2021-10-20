@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/10/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 import DeviceKit
@@ -181,3 +182,4 @@ final class LensDistortionCorrector: DelegateUserSettings {
         }
     }
 }
+#endif

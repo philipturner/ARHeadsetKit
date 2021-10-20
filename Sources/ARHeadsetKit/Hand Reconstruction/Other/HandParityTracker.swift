@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/25/21.
 //
 
+#if !os(macOS)
 import simd
 
 struct HandParityTracker: DelegateHandRenderer {
@@ -30,3 +31,4 @@ struct HandParityTracker: DelegateHandRenderer {
         sum.y >= sum.x
     }
 }
+#endif

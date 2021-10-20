@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 10/2/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -24,3 +25,4 @@ public protocol CustomRenderer: DelegateRenderer {
      */
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder)
 }
+#endif

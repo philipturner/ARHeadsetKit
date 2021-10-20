@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/12/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 import simd
 
@@ -129,3 +130,4 @@ public extension InterfaceRenderer {
     }
     
 }
+#endif

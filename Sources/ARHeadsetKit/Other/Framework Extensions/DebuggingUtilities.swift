@@ -8,7 +8,6 @@
 import Foundation
 
 @usableFromInline internal let _doingDebugLabels = true
-@usableFromInline internal let _bypassingMetalAPIValidation = false
 
 @inlinable @inline(__always)
 public func debugLabel(_ closure: (() -> Void)) {

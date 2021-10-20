@@ -8,6 +8,7 @@
 import Metal
 import simd
 
+#if !os(macOS)
 protocol SceneTexelManagerSlotLayerName {
     static var name: String { get }
 }
@@ -258,3 +259,4 @@ final class SceneTexelManager: DelegateSceneRenderer {
         transferColorDataToTexturePipelineState = library.makeComputePipeline(Self.self, name: "transferColorDataToTexture")
     }
 }
+#endif

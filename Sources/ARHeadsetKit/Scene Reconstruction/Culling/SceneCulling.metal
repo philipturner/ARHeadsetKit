@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 using namespace metal;
 
@@ -532,3 +533,4 @@ kernel void condenseTrianglesForColorUpdate(CONDENSE_TRIANGLES_PARAMS)
     PREPARE_CONDENSE_TRIANGLES;
     CONDENSE_GEOMETRY_REPEAT(CALL_CONDENSE_TRIANGLES_COMMON);
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -105,3 +106,4 @@ fragment FragmentOut scene2DFragmentShader(VertexInOut in [[ stage_in ]],
     
     return { ColorUtilities::convertYCbCr_toRGB(chroma, luma), FLT_MIN };
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -93,3 +94,4 @@ extension SceneRenderer2D: GeometryRenderer {
         renderEncoder.popOptDebugGroup()
     }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct RenderingSettings {
@@ -100,3 +101,4 @@ struct RenderingSettingsView<CustomSettingsView: CustomRenderingSettingsView>: V
         }
     }
 }
+#endif

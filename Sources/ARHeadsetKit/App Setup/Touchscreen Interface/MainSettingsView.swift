@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct MainSettingsView<CustomSettingsView: CustomRenderingSettingsView>: View {
@@ -74,3 +75,4 @@ struct MainSettingsView<CustomSettingsView: CustomRenderingSettingsView>: View {
                                                 : .easeIn (duration: Self.openAnimationDuration))
     }
 }
+#endif

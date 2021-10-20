@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/22/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "ThirdSceneMeshMatchTypes.metal"
 #include "../../../../Other/Metal Utilities/MemoryUtilities.h"
@@ -464,3 +465,4 @@ kernel void executeThirdMeshMatch(device   uint4   *newReducedColorBuffer       
         }
     }
 }
+#endif

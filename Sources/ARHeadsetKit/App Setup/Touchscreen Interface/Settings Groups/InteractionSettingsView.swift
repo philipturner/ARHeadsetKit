@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct InteractionSettings {
@@ -40,3 +41,4 @@ struct InteractionSettingsView<Coordinator: AppCoordinator>: View {
         .fixedSize(horizontal: false, vertical: true)
     }
 }
+#endif

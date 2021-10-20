@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 10/3/21.
 //
 
+#if !os(macOS)
 import Metal
 
 /// Provides a subset of the functionality of [`MTLRenderCommandEncoder`](https://developer.apple.com/documentation/metal/mtlrendercommandencoder), to allow use of custom shaders for rendering in ARHeadsetKit.
@@ -405,4 +406,4 @@ public extension ARMetalRenderCommandEncoder {
                                       indirectBuffer: indirectBuffer, indirectBufferOffset: indirectBufferOffset)
     }
 }
-
+#endif

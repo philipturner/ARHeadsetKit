@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/11/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 import SwiftUI
@@ -265,3 +266,4 @@ extension MainRenderer {
     }
     
 }
+#endif

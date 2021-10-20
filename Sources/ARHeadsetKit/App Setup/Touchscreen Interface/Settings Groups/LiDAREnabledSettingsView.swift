@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct LiDAREnabledSettings {
@@ -65,3 +66,4 @@ struct LiDAREnabledSettingsView<Coordinator: AppCoordinator>: View {
         .fixedSize(horizontal: false, vertical: true)
     }
 }
+#endif

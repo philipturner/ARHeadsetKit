@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/28/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -389,3 +390,4 @@ fragment half3 interfaceSurfaceFragmentShader(SurfaceInOut in [[ stage_in ]],
 
     return uniforms.surfaceColor * lightContribution;
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/15/21.
 //
 
+#if !os(macOS)
 import ARKit
 
 extension HandRenderer {
@@ -326,3 +327,4 @@ extension HandRenderer {
     }
     
 }
+#endif

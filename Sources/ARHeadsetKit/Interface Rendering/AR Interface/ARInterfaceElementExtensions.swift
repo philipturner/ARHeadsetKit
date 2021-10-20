@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 9/27/21.
 //
 
+#if !os(macOS)
 import simd
 
 extension ARInterfaceElement {
@@ -103,3 +104,4 @@ extension ARInterfaceElement: RayTraceable {
     }
     
 }
+#endif

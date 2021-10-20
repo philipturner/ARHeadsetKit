@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/28/21.
 //
 
+#if !os(macOS)
 import simd
     
 public struct ARInterfaceElement {
@@ -206,3 +207,4 @@ extension InterfaceRenderer {
     }
     
 }
+#endif

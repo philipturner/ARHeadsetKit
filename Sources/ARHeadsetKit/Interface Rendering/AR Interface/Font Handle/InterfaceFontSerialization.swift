@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/29/21.
 //
 
+#if !os(macOS)
 import Foundation
 import ZippyJSON
 
@@ -114,3 +115,4 @@ extension InterfaceRenderer {
     }
     
 }
+#endif

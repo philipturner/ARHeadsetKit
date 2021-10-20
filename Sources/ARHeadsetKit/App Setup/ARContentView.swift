@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 9/25/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 import MetalKit
 
@@ -70,3 +71,4 @@ struct TouchscreenInterfaceView<CustomSettingsView: CustomRenderingSettingsView>
         }
     }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/18/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 using namespace metal;
 
@@ -120,3 +121,4 @@ public:
         return reinterpret_cast<device ushort4*>(bytePointer)[2];
     }
 };
+#endif

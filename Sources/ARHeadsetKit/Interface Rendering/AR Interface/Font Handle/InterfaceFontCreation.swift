@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/29/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 import CoreText
@@ -433,3 +434,4 @@ extension InterfaceRenderer {
     }
     
 }
+#endif

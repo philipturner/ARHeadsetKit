@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/27/21.
 //
 
+#if !os(macOS)
 import Foundation
 import simd
 
@@ -154,3 +155,4 @@ struct Hand {
                  shininess: 8)
     }
 }
+#endif

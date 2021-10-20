@@ -418,7 +418,7 @@ public enum CTFontManager {
         CTFontManagerUnregisterFontDescriptors(fontDescriptors as CFArray, scope, registrationHandler)
     }
     
-    #if os(iOS)
+    #if !os(macOS)
     @inlinable @inline(__always)
     public static func registerFonts(_ fontAssetNames: [String], _ bundle: CFBundle?, _ scope: CTFontManagerScope, _ enabled: Bool,
                                      _ registrationHandler: ((CFArray, Bool) -> Bool)?) {

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 6/24/21.
 //
 
+#if !os(macOS)
 import simd
 
 struct HandColorTracker: DelegateHandRenderer {
@@ -41,3 +42,4 @@ struct HandColorTracker: DelegateHandRenderer {
         }
     }
 }
+#endif

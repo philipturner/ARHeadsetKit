@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/19/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -128,3 +129,4 @@ extension CentralRenderer: GeometryRenderer {
     }
     
 }
+#endif

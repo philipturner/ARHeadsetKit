@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/17/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -188,3 +189,4 @@ public final class CentralRenderer: DelegateRenderer {
         circles = [:]
     }
 }
+#endif

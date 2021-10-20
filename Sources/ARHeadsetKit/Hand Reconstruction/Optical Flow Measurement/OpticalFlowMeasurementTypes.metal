@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 5/28/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 using namespace metal;
 
@@ -232,3 +233,4 @@ private:
         }
     }
 };
+#endif

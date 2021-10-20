@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../../../Other/Metal Utilities/ColorUtilities.h"
 using namespace metal;
@@ -287,3 +288,4 @@ private:
         }
     }
 };
+#endif

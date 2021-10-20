@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "../../../Other/Metal Utilities/MemoryUtilities.h"
 using namespace metal;
@@ -551,3 +552,4 @@ poolTriangleGroupSectorIDsCommon(triangleIndividualSectorIDs,   \
 
 kernel void poolTriangleGroupSectorIDs_8bit (POOL_TRIANGLE_GROUP_SECTOR_IDS_COMMON(uchar))  { CALL_POOL_TRIANGLE_GROUP_SECTOR_IDS_COMMON }
 kernel void poolTriangleGroupSectorIDs_16bit(POOL_TRIANGLE_GROUP_SECTOR_IDS_COMMON(ushort)) { CALL_POOL_TRIANGLE_GROUP_SECTOR_IDS_COMMON }
+#endif

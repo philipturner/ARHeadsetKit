@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 7/28/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -403,3 +404,4 @@ extension InterfaceRenderer: BufferExpandable {
     }
     
 }
+#endif

@@ -10,11 +10,19 @@ import Metal
 
 // High-level wrappers around functions bridging between CoreVideo and Metal
 
+#if !os(macOS)
+/**
+ The namespace containing `CV.MetalTexture`.
+ 
+ [`CVMetalTexture`](https://developer.apple.com/documentation/corevideo/cvmetaltexture-q3g) is bridged differently than other CoreVideo and CoreText types. It is a typealias of [`CVBuffer`](https://developer.apple.com/documentation/corevideo/cvbuffer-nfm), so adding members directly to `CVMetalTexture` would add members to `CVBuffer`. To prevent circumvent this name collision, methods and properties of `CVMetalTexture` are added to a separate type.
+ */
+#else
 /**
  The namespace containing <doc:cv-metaltexture>.
  
  [`CVMetalTexture`](https://developer.apple.com/documentation/corevideo/cvmetaltexture-q3g) is bridged differently than other CoreVideo and CoreText types. It is a typealias of [`CVBuffer`](https://developer.apple.com/documentation/corevideo/cvbuffer-nfm), so adding members directly to `CVMetalTexture` would add members to `CVBuffer`. To prevent circumvent this name collision, methods and properties of `CVMetalTexture` are added to a separate type.
  */
+#endif
 public enum CV {
     /**
      A value-type wrapper around [`CVMetalTexture`](https://developer.apple.com/documentation/corevideo/cvmetaltexture-q3g).

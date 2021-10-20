@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import simd
 
@@ -168,3 +169,4 @@ final class SceneDuplicateRemover: DelegateSceneRenderer {
         condenseIncludedTrianglesPipelineState = library.makeComputePipeline(Self.self, name: "condenseIncludedTriangles")
     }
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/11/21.
 //
 
+#if !os(macOS)
 import ARKit
 import UIKit
 import DeviceKit
@@ -125,3 +126,4 @@ final class CameraMeasurements: DelegateUserSettings {
                                                    simd_double2(-wideCameraOffset.x, wideCameraOffset.y)), wideCameraOffset.z)
     }
 }
+#endif

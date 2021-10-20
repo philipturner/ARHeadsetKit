@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/14/21.
 //
 
+#if !os(macOS)
 import Vision
 
 extension VNPoint {
@@ -130,3 +131,4 @@ func getFlatness(_ points: [simd_float2]) -> Float {
     
     return simd_clamp(1 - lengthRatio, 0, 1)
 }
+#endif

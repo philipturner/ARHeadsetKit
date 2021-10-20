@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/23/21.
 //
 
+#if !os(macOS)
 import SwiftUI
 
 struct HeadsetTutorialView<Coordinator: AppCoordinator>: View {
@@ -53,3 +54,4 @@ struct HeadsetTutorialView<Coordinator: AppCoordinator>: View {
         }
     }
 }
+#endif

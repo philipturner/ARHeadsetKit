@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 8/13/21.
 //
 
+#if !os(macOS)
 import Metal
 import ARKit
 import Vision
@@ -85,4 +86,4 @@ extension HandRenderer2D {
     }
     
 }
-
+#endif

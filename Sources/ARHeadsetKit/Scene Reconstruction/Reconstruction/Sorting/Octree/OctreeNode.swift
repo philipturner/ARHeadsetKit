@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if !os(macOS)
 import simd
 
 struct OctreeNode: Equatable {
@@ -137,3 +138,4 @@ struct OctreeNode: Equatable {
     }
     
 }
+#endif

@@ -5,6 +5,7 @@
 //  Created by Philip Turner on 4/13/21.
 //
 
+#if __METAL_IOS__
 #include <metal_stdlib>
 #include "FourthSceneSortTypes.metal"
 #include "../../../../Other/Metal Utilities/MemoryUtilities.h"
@@ -514,3 +515,4 @@ kernel void fillNanoSectors(constant uint    *smallSectorOffsets2_old          [
                 73, upperOffsets[3]);
     }
 }
+#endif
