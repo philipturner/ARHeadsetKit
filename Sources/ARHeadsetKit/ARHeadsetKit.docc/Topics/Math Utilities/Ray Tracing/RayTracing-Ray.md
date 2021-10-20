@@ -24,16 +24,16 @@ All ray-object intersections occur in a model space spanning one cubic meter. It
 ### Polyhedral Shape Intersections
 
 - ``transformedIntoBoundingBox(_:)``
-- ``getCentralCubeProgress()``
-- ``getCentralSquarePyramidProgress()``
-- ``getCentralOctahedronProgress()``
+- ``getCubeProgress()``
+- ``getSquarePyramidProgress()``
+- ``getOctahedronProgress()``
 
 ### Round Shape Intersections
 
-- ``getCentralSphereProgress()``
-- ``getCentralCylinderProgress()``
-- ``getCentralConeProgress()``
-- ``getCentralConeMiddleProgress(topY:)``
-- ``getCentralConeBaseProgress()``
-- ``getCentralTruncatedConeProgress(topScale:)``
-- ``getCentralTruncatedConeTopProgress(topScale:)``
+- ``getSphereProgress()``
+- ``getCylinderProgress()``
+- ``getConeProgress()``
+- ``getConeMiddleProgress(topY:)``
+- ``getConeBaseProgress()``
+- ``getTruncatedConeProgress(topScale:)``
+- ``getTruncatedConeTopProgress(topScale:)``

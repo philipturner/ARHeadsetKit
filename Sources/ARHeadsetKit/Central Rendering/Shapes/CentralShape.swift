@@ -51,7 +51,7 @@ public extension String {
 
 #if !os(macOS)
 protocol CentralShape {
-    static var shapeType: CentralShapeType { get }
+    static var shapeType: ARShapeType { get }
     
     var numIndices: Int { get }
     var normalOffset: Int { get set }

@@ -219,7 +219,7 @@ extension ARObject: RayTraceable {
             let retrievedTopScale = truncatedConeTopScale
             
             if !retrievedTopScale.isNaN {
-                return ray.getCentralTruncatedConeProgress(topScale: retrievedTopScale)
+                return ray.getTruncatedConeProgress(topScale: retrievedTopScale)
             } else {
                 return ray.getProgress(roundShape: shapeType)
             }

@@ -8,7 +8,7 @@
 import simd
 
 public struct ARObject {
-    public var shapeType: CentralShapeType
+    public var shapeType: ARShapeType
     
     public private(set) var modelToWorldTransform = simd_float4x4(1)
     public private(set) var worldToModelTransform = simd_float4x4(1)
@@ -29,7 +29,7 @@ public struct ARObject {
     @inlinable public var orientation: simd_quatf { _orientation }
     @inlinable public var scale: simd_float3 { _scale }
     
-    public init(shapeType: CentralShapeType,
+    public init(shapeType: ARShapeType,
                 position: simd_float3,
                 orientation: simd_quatf = simd_quatf(angle: 0, axis: [0, 1, 0]),
                 scale: simd_float3,
@@ -68,7 +68,7 @@ public struct ARObject {
         _updateTransforms()
     }
     
-    public init?(roundShapeType: CentralShapeType,
+    public init?(roundShapeType: ARShapeType,
                  bottomPosition: simd_float3,
                  topPosition: simd_float3,
                  diameter: Float,
@@ -102,7 +102,7 @@ public struct ARObject {
                   allowsViewingInside: allowsViewingInside)
     }
     
-    private init(shapeType: CentralShapeType,
+    private init(shapeType: ARShapeType,
                  boundingBox: simd_float2x3,
                  scaleForLOD: simd_float3,
                  

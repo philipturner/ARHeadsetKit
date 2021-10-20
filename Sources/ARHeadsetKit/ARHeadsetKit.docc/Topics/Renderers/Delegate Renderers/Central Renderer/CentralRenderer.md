@@ -22,6 +22,6 @@ See [this article](https://github.com/philipturner/ARHeadsetKit/blob/main/docs/a
 
 ### Other
 
-- ``CentralShapeType``
+- ``ARShapeType``
 - ``ARObject``
 - ``ARObjectGroup``

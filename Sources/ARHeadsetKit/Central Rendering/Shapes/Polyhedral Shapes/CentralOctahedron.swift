@@ -74,7 +74,7 @@ public extension RayTracing.Ray {
     
     /// Intersects an octahedron confined to model space.
     @inlinable
-    func getCentralOctahedronProgress() -> Float? {
+    func getOctahedronProgress() -> Float? {
         func getProgressCommon(intersections: inout simd_float4, minY: Float, maxY: Float) -> Float? {
             let projectionsY = fma(direction.y, intersections, origin.y)
             var invalidMarks = (projectionsY .> maxY) .| (projectionsY .< minY)

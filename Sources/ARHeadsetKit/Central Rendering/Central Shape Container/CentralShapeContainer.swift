@@ -11,7 +11,7 @@ import simd
 protocol CentralShapeContainer {
     var centralRenderer: CentralRenderer { get }
     
-    static var shapeType: CentralShapeType { get }
+    static var shapeType: ARShapeType { get }
     var sizeRange: [Int] { get }
     var shapes: [CentralShape] { get }
     

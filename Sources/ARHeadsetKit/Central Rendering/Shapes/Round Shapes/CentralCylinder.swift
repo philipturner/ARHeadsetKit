@@ -123,22 +123,22 @@ public extension RayTracing.Ray {
         - topScale: Must be between 0 and 1.
      */
     @inlinable
-    func getCentralTruncatedConeProgress(topScale: Float) -> Float? {
+    func getTruncatedConeProgress(topScale: Float) -> Float? {
         assert(topScale <= 1, "Truncated cone top scale must be <= 1")
         
         guard topScale != 1 else {
-            return getCentralCylinderProgress()
+            return getCylinderProgress()
         }
         
         var possibleEndProgress: Float?
         
         if origin.y >= 0.5 {
-            if let topProgress = getCentralTruncatedConeTopProgress(topScale: topScale) {
+            if let topProgress = getTruncatedConeTopProgress(topScale: topScale) {
                 return topProgress
             }
 
         } else if origin.y <= -0.5 {
-            if let baseProgress = getCentralConeBaseProgress() {
+            if let baseProgress = getConeBaseProgress() {
                 return baseProgress
             }
         } else {
@@ -184,7 +184,7 @@ public extension RayTracing.Ray {
         - topScale: Must be between 0 and 1.
      */
     @inlinable
-    func getCentralTruncatedConeTopProgress(topScale: Float) -> Float? {
+    func getTruncatedConeTopProgress(topScale: Float) -> Float? {
         let origin_to_base_distance = 0.5 - origin.y
         let baseProgress = origin_to_base_distance / direction.y
         guard baseProgress > 0 else { return nil }
