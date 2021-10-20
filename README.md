@@ -8,6 +8,8 @@ ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [an
 
 Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14.0. You DO NOT need Google Cardboard. To get started, download [this ZIP file](ARHeadsetKit_Documentation.zip). It contains an Xcode project, with a single Swift file explaining how to compile documentation and use ARHeadsetKit's tutorials. Then, read [this guide](docs/viewing-documentation.md) on how to open the Xcode documentation viewer.
 
+> Note: We are experiencing problems with compiling documentation at the moment. You may have to try various combinations of `Cmd + B`, `Cmd + Ctrl + Cmd + D`, `Cmd + Shift + K`, re-opening the Xcode project, and deleting/re-adding the Swift package dependency to get tutorials to appear in the documentation viewer. We are working as quickly as we can to fix this.
+
 If you are just starting out with this framework, skip the sections below that deal with configuring ARHeadsetKit. Sample code from each Xcode tutorial's "Project files" already has all those settings pre-configured. When first opening sample code from a tutorial, there may be an error with loading Swift packages. If that happens, close out of the project and open it a second time.
 
 ## Tutorial Series
