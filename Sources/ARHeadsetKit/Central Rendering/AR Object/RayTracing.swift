@@ -178,4 +178,34 @@ extension RayTracing.Ray {
         return lower_solution >= 0 ? lower_solution : upper_solution
     }
     
+    @inlinable
+    func getProgress(polyhedralShape shape: ARShapeType) -> Float? {
+        assert(passesInitialBoundingBoxTest())
+        assert(shape.isPolyhedral)
+        
+        if shape == .cube {
+            return getCubeProgress()
+        } else if shape == .squarePyramid {
+            return getSquarePyramidProgress()
+        } else {
+            assert(shape == .octahedron, "Did not update raytracing for new polyhedral shape \(String(shape))")
+            return getOctahedronProgress()
+        }
+    }
+    
+    @inlinable
+    func getProgress(roundShape shape: ARShapeType) -> Float? {
+        assert(passesInitialBoundingBoxTest())
+        assert(!shape.isPolyhedral)
+        
+        if shape == .cylinder {
+            return getCylinderProgress()
+        } else if shape == .sphere {
+            return getSphereProgress()
+        } else {
+            assert(shape == .cone, "Did not update raytracing for new rounding shape \(String(shape))")
+            return getConeProgress()
+        }
+    }
+    
 }

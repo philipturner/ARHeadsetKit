@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralCylinder: CentralRoundShape {
-    static var shapeType: CentralShapeType = .cylinder
+    static let shapeType: ARShapeType = .cylinder
     
     var numIndices: Int
     var normalOffset: Int
@@ -74,7 +74,7 @@ public extension RayTracing.Ray {
     
     /// Intersects a cylinder confined to model space.
     @inlinable
-    func getCentralCylinderProgress() -> Float? {
+    func getCylinderProgress() -> Float? {
         var possibleBaseProgress: Float?
         
         if direction.y != 0 {
@@ -142,9 +142,9 @@ public extension RayTracing.Ray {
                 return baseProgress
             }
         } else {
-            possibleEndProgress = getCentralTruncatedConeTopProgress(topScale: topScale)
+            possibleEndProgress = getTruncatedConeTopProgress(topScale: topScale)
             
-            if let baseProgress = getCentralConeBaseProgress() {
+            if let baseProgress = getConeBaseProgress() {
                 if let topProgress = possibleEndProgress {
                     possibleEndProgress = min(baseProgress, topProgress)
                 } else {
@@ -166,7 +166,7 @@ public extension RayTracing.Ray {
         let adjustedRay = Self(origin:    .init(origin.x,    adjustedOriginY,    origin.z),
                                direction: .init(direction.x, adjustedDirectionY, direction.z))
         
-        if let middleProgress = adjustedRay.getCentralConeMiddleProgress(topY: adjustedTopY) {
+        if let middleProgress = adjustedRay.getConeMiddleProgress(topY: adjustedTopY) {
             if let endProgress = possibleEndProgress {
                 return min(endProgress, middleProgress)
             } else {

@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralSquarePyramid: CentralPolyhedralShape {
-    static var shapeType: CentralShapeType = .squarePyramid
+    static let shapeType: ARShapeType = .squarePyramid
     
     var numIndices: Int
     var normalOffset: Int

@@ -10,7 +10,7 @@ import simd
 
 #if !os(macOS)
 struct CentralCone: CentralRoundShape {
-    static var shapeType: CentralShapeType = .cone
+    static let shapeType: ARShapeType = .cone
     
     var numIndices: Int
     var normalOffset: Int
@@ -77,13 +77,13 @@ public extension RayTracing.Ray {
     /// Intersects a cone confined to model space.
     @inlinable
     func getConeProgress() -> Float? {
-        let possibleBaseProgress = getCentralConeBaseProgress()
+        let possibleBaseProgress = getConeBaseProgress()
         
         if origin.y <= -0.5, possibleBaseProgress != nil {
             return possibleBaseProgress
         }
         
-        if let middleProgress = getCentralConeMiddleProgress() {
+        if let middleProgress = getConeMiddleProgress() {
             if let baseProgress = possibleBaseProgress {
                 return min(baseProgress, middleProgress)
             } else {
