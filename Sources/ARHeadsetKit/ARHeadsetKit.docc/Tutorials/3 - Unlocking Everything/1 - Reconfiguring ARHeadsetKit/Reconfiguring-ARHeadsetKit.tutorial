@@ -64,7 +64,9 @@
             }
             
             @Step {
-                In the terminal window, type "git submodule add https://github.com/philipturner/arheadsetkit" and press enter.
+                Copy the command below and paste it into the terminal window. Press enter.
+                
+                `git submodule add https://github.com/philipturner/ARHeadsetKit`
                 
                 @Image(source: "3-1-image-1-8.png", alt: "Typing the command to add a Git submodule.")
             }
@@ -120,7 +122,7 @@
             }
             
             @Step {
-                Choose `ARHeadsetKit` from the list of files that pops up. Do not select `ARHeadsetKit_macOS`.
+                Choose `ARHeadsetKit` from the list of files that pops up.
                 
                 @Image(source: "3-1-image-2-7.png", alt: "Selecting the ARHeadsetKit framework.")
             }
