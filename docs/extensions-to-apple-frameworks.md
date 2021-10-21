@@ -3,10 +3,10 @@
 ARHeadsetKit includes enhancements to Metal, simd, Core Text, and Core Video that improve usability and make optimization easier.
 
 Metal:
+- [`MTLLayeredBuffer`](/articles/layered-buffer.md), which conserves memory by combining several small buffers into one contiguous allocation
 - Array and integer literal initializers for `MTLSize`, `MTLOrigin`, and `MTLCoordinate2D`
 - Debug labels for Metal resources that disappear in a release build to maximize performance
 - Command buffers that automatically log detailed errors when using a debug build. Some of the error data can only be accessed when shader validation is enabled.
-- [`MTLLayeredBuffer`](/articles/layered-buffer.md), which conserves memory by combining several small buffers into one contiguous allocation
 
 simd:
 - Optimized utility functions for working with affine transforms (much better than the Objective-C math utilities Apple ships with their Metal sample code)
