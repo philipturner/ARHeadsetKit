@@ -1,6 +1,6 @@
-# Building ARHeadsetKit Documentation for the Documentation Viewer
+# Accessing ARHeadsetKit Documentation and Tutorials
 
-Follow the steps below to create a template project for accessing tutorials.
+Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentation viewer.
 
 ### Creating the Xcode project
 
@@ -18,7 +18,7 @@ Follow the steps below to create a template project for accessing tutorials.
 
 ### Building documentation
 
-0. Press "Ctrl + Cmd + Shift + D". The developer documentation window will pop up.
+0. Press "Ctrl + Cmd + Shift + D". The documentation viewer will pop up.
 0. In the navigator on the left, there is a section titled "Workspace Documentation". "ARHeadsetKit_Documentation" will appear underneath it, with a blue Xcode logo next to it.
 0. Unravel the contents of "ARHeadsetKit_Documentation" and click "Welcome to ARHeadsetKit".
 0. Go to Chapter 1: Essentials. Click on "Configuring ARHeadsetKit".
