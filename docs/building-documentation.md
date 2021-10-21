@@ -35,6 +35,13 @@ Periodically, do the following to make sure ARHeadsetKit and the tutorials are u
 1. Once the package has finished updating, press `Ctrl + Cmd + Shift + D`.
 1. If you are working on a project that uses ARHeadsetKit, go to that one and repeat steps 1&ndash;2.
 
-## See Also
+### Going further
 
-To learn more about what ARHeadsetKit's documentation has to offer, read [this article](viewing-documentation.md).
+To view documentation for a specific symbol while working on source code:
+1. Right-click on any ARHeadsetKit type or function in your Swift source code.
+1. Click "Quick Help".
+1. In the popup, click "Open in Developer Documentation".
+
+Xcode's documentation viewer only supports Swift code, not ARHeadsetKit's Metal utility functions. Metal code will only show documentation in the "Quick Help" panel.
+
+> Note: The "Open in Developer Documentation" link may not appear for Swift types and functions when another Xcode project was opened recently. If that happens, restart Xcode and open just the project you intend to work on. After that, you may open others.
