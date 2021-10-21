@@ -26,7 +26,7 @@ Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentati
 
 When first opening sample code from a tutorial, there may be an error with loading Swift packages. If that happens, close out of the project and open it a second time.
 
-### Updating documentation
+## Updating documentation
 
 Periodically, do the following to make sure ARHeadsetKit and the tutorials are up to date:
 
@@ -35,7 +35,7 @@ Periodically, do the following to make sure ARHeadsetKit and the tutorials are u
 1. Once the package has finished updating, press `Ctrl + Cmd + Shift + D`.
 1. If you are working on a project that uses ARHeadsetKit, go to that one and repeat steps 1&ndash;2.
 
-### Going further
+## Going further
 
 To view documentation for a specific symbol while working on source code:
 1. Right-click on any ARHeadsetKit type or function in your Swift source code.
