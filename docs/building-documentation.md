@@ -1,13 +1,40 @@
 # Building ARHeadsetKit Documentation for the Documentation Viewer
 
-Documentation automatically appears in the documentation viewer if ARHeadsetKit is configured as an Xcode framework and you pressed `Cmd + B` at least once. When using a Swift package, you must press `Ctrl + Cmd + Shift + D` to build documentation. Additionally, you must repeat this command every time you update ARHeadsetKit to a new version to access the most recent documentation and tutorials.
+Follow the steps below to create a template project for accessing tutorials.
 
-If ARHeadsetKit is configured as a Swift package, follow this procedure so that you don't have to press `Ctrl + Cmd + Shift + D`:
-- Go to Build Settings
-- In the search bar, type "build documentation"
-- Set `Build Documentation during 'Build'` to `YES`
-- Switch between "PROJECT" and "TARGETS" on the panel on the left and ensure that in both tabs, `Build documentation during 'build'` is set to `Yes`.
+### Creating the Xcode project
 
-This setting means that every time you build or run your project, the documentation viewer refreshes ARHeadsetKit documentation. When ARHeadsetKit updates on GitHub, go to `Package Dependencies` -> `ARHeasetKit` -> `Update Package`. Press `Cmd + B` and new documentation will appear.
+0. In Xcode, go to File -> New -> Project.
+0. Ensure you are under the "iOS" template section.
+0. The "App" template is selected by default. Leave this template selected.
+0. Click "Next". Enter "ARHeadsetKit Documentation" as the product's name.
+0. Under "Team", select your account instead of "None". Click "Next" and save the project.
 
-After building documentation successfully, read [this article](viewing-documentation.md) on how to view it.
+### Adding the Swift package
+
+0. In the menu bar, go to File -> Add Packages. A window for searching Swift packages will pop up.
+0. In the search bar on the top right, paste this link: https://github.com/philipturner/ARHeadsetKit
+0. Click "Add Package" on the bottom right. Click "Add Package" again in the window that pops up.
+
+### Building documentation
+
+0. Press "Ctrl + Cmd + Shift + D". The developer documentation window will pop up.
+0. In the navigator on the left, there is a section titled "Workspace Documentation". "ARHeadsetKit_Documentation" will appear underneath it, with a blue Xcode logo next to it.
+0. Unravel the contents of "ARHeadsetKit_Documentation" and click "Welcome to ARHeadsetKit".
+0. Go to Chapter 1: Essentials. Click on "Configuring ARHeadsetKit".
+0. A tutorial will pop up. Download the "project files", which contain sample code. After practicing how to update documentation, proceed with the tutorial.
+
+When first opening sample code from a tutorial, there may be an error with loading Swift packages. If that happens, close out of the project and open it a second time.
+
+### Updating documentation
+
+Periodically, do the following to make sure ARHeadsetKit and the tutorials are up to date:
+
+0. In the bottom left of the Xcode window, right-click "ARHeadsetKit" under "Package Dependencies".
+0. Click "Update Package". In the top of the Xcode window, you will see that the package is updating.
+0. Once the package has finished updating, press "Ctrl + Cmd + Shift + D".
+0. If you are working on a project that uses ARHeadsetKit, go to that one and repeat steps 1&ndash;2.
+
+## See also
+
+To learn more about what ARHeadsetKit's documentation has to offer, read [Viewing Documentation](viewing-documentation.md).

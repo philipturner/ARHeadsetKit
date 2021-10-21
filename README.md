@@ -6,13 +6,13 @@ ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [an
 
 ## Quick Start
 
-Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14.0. You DO NOT need Google Cardboard. To get started, download [this ZIP file](ARHeadsetKit_Documentation.zip). It contains an Xcode project, with a single Swift file explaining how to compile documentation and use ARHeadsetKit's tutorials. Then, read [this guide](docs/viewing-documentation.md) on how to open the Xcode documentation viewer.
+Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14.0. You DO NOT need Google Cardboard. To get started, follow [this article] on how to download the documentation and run the tutorials.
 
-If you are just starting out with this framework, skip the sections below that deal with configuring ARHeadsetKit. Sample code from each Xcode tutorial's "Project files" already has all those settings pre-configured. When first opening sample code from a tutorial, there may be an error with loading Swift packages. If that happens, close out of the project and open it a second time.
+If you are just starting out, ignore the sections below that deal with configuring ARHeadsetKit. Sample code from each Xcode tutorial's "project files" already has those settings configured. 
 
 ## Tutorial Series
 
-There will be at least 12 tutorials for learning ARHeadsetKit, but not all are complete yet. Here is each tutorial's current status:
+There will be at least 12 tutorials for learning ARHeadsetKit, but only a few are finished. Here is each tutorial's current status:
 
 - [ ] Ch. 1 - ARHeadsetKit Essentials
   - [x] Tutorial 1 - Configuring ARHeadsetKit (complete)
@@ -28,7 +28,7 @@ There will be at least 12 tutorials for learning ARHeadsetKit, but not all are c
   - [ ] Tutorial 9 - Making Ray Tracing Functions
 - [ ] Ch. 4 - Name not decided
 
-This repo will remain in the "beta" phase until every tutorial is finished. To be alerted when new tutorials are added, "watch" this GitHub repository and check it periodically. Also, please leave a star if you enjoyed this repo's tutorials or [article series](docs/article-list.md) :-)
+This repo will remain in the "beta" phase until every tutorial is finished. To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy this repo's tutorials or [article series](docs/article-list.md) :-)
 
 ## How to Configure ARHeadsetKit from Scratch
 
@@ -42,6 +42,4 @@ If you are only using ARHeadsetKit for its utility functions (such as [`MTLLayer
 
 You can configure ARHeadsetKit in two ways: as a Swift package or an Xcode framework. A Swift package is easier to set up, and recommended unless you plan to create Metal shaders. An Xcode framework is required for importing ARHeadsetKit's Metal Shading Language [utility functions](docs/articles/metal-utility-functions.md) into your own shaders. In addition, the Xcode framework lets you use ARHeadsetKit's launch screen without breaking the file's connection to this GitHub repository.
 
-To set up ARHeadsetKit as a Swift package, go to File -> Add Packages and paste this repository's URL. To set it up as an Xcode framework, follow ARHeadsetKit's tutorials in Xcode and reach the chapter "Unlocking Everything". The first part of that chapter, "Reconfiguring ARHeadsetKit", is a guide to setting up the Xcode framework.
-
-Xcode's documentation viewer is required for navigating ARHeadsetKit's documentation. Although only Apple's frameworks appear in the documentation viewer by default, ARHeadsetKit is configured to appear there as well. If you configure ARHeadsetKit as a Swift package, you must press `Ctrl + Cmd + Shift + D` after the package has loaded and every time ARHeadsetKit updates, to build documentation. To make documentation build by itself, read [this guide](docs/building-documentation.md).
+To set up ARHeadsetKit as a Swift package, go to File -> Add Packages and paste this repository's URL. To set it up as an Xcode framework, follow ARHeadsetKit's tutorials in Xcode and reach the chapter "Unlocking Everything". The first part of that chapter, "Reconfiguring ARHeadsetKit", shows how to set up the Xcode framework.
