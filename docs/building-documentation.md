@@ -1,5 +1,7 @@
 # Building ARHeadsetKit Documentation for the Documentation Viewer
 
+## This shortcut appears to be broken at the moment. Do not use `Cmd + B` to build documentation.
+
 Documentation automatically appears in the documentation viewer if ARHeadsetKit is configured as an Xcode framework and you pressed `Cmd + B` at least once. When using a Swift package, you must press `Ctrl + Cmd + Shift + D` to build documentation. Additionally, you must repeat this command every time you update ARHeadsetKit to a new version to access the most recent documentation and tutorials.
 
 If ARHeadsetKit is configured as a Swift package, follow this procedure so that you don't have to press `Ctrl + Cmd + Shift + D`:
