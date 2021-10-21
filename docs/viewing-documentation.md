@@ -1,6 +1,6 @@
 ## Viewing Documentation
 
-To view ARHeadstKit's tutorials and an organized listing of functions, check out [this article](building-documentation.md).
+To view ARHeadstKit's tutorials and an organized listing of functions, check out [how to build documentation](building-documentation.md).
 
 To view documentation for a specific symbol while working on source code:
 1. Right-click on any ARHeadsetKit type or function in your Swift source code.

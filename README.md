@@ -6,7 +6,7 @@ ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [an
 
 ## Quick Start
 
-Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14.0. You DO NOT need Google Cardboard. To get started, follow [this article](docs/building-documentation.md) on how to run ARHeadsetKit's tutorials in Xcode.
+Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14.0. You DO NOT need Google Cardboard. To get started, follow [this guide](docs/building-documentation.md) on how to run ARHeadsetKit's tutorials in Xcode.
 
 If you are just starting out, ignore the sections below that deal with configuring ARHeadsetKit. Sample code from each tutorial's project files already has those settings configured. 
 
