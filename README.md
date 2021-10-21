@@ -31,11 +31,9 @@ This repo will remain in the "beta" phase until every tutorial is finished. To l
 
 ## How to Configure ARHeadsetKit from Scratch
 
-In Xcode, go to File -> Project. In the template window that pops up, choose "App" under the "Application" section of iOS templates. This template is already selected by default. Do not use Xcode's AR template, because that creates a Storyboard. Xcode Storyboards (except for launch screens) have been made obsolete by [SwiftUI](https://developer.apple.com/xcode/swiftui) and will break ARHeadsetKit. Select "SwiftUI" instead of "Storyboard" under the interface options. Give your project a name, then click "Next" and finally "Create".
+Follow the "Creating an Xcode project" section of the [quick start](docs/building-documentation.md) guide. Name your project something other than "ARHeadsetKit Documentation". In the project navigator on the left of the Xcode window, click the folder at the very top with your project's name. The project settings will open, with a sidebar stating `PROJECT` and `TARGETS`. Click your project's name under `TARGETS`. In the tab bar at the top, ensure that "General" is selected.
 
-In the project navigator on the left of the editor, click the project folder at the very top, which has a blue Xcode logo next to it. You will open a list of various settings about your project. A section to the right of project navigator says `PROJECT` and `TARGETS`, with both words containing your project's name under them. Click your project's name under `TARGETS`. In a tab bar at the top, "General" will be highlighted and appear next to "Signing &amp; Capabilities". 
-
-If you are only using ARHeadsetKit for its utility functions (such as [`MTLLayeredBuffer`](docs/articles/layered-buffer.md)), you do not need to modify the project's Info.plist. If your app provides an AR experience supported by ARHeadsetKit, follow [this guide](docs/property-list-keys.md) to configure your app's Info.plist correctly. Otherwise, your app will crash on launch.
+If your app provides an AR experience supported by ARHeadsetKit, follow [this guide](docs/property-list-keys.md) to configure your app's Info.plist correctly. Otherwise, your app will crash on launch. You do not need to perform this step if you will only use ARHeadsetKit for its utility functions (such as [`MTLLayeredBuffer`](docs/articles/layered-buffer.md)).
 
 ## Choosing a Swift Package vs. an Xcode Framework
 
