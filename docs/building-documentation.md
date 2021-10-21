@@ -22,7 +22,7 @@ Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentati
 1. In the navigator on the left, there is a section titled "Workspace Documentation". "ARHeadsetKit Documentation" will appear underneath it, with a blue Xcode logo next to it.
 1. Unravel the contents of "ARHeadsetKit Documentation" and click "Welcome to ARHeadsetKit".
 1. Go to Chapter 1: Essentials. Click on "Configuring ARHeadsetKit".
-1. A tutorial will pop up. Download the "project files", which contain sample code. After practicing how to update documentation (shown below), proceed with the tutorial.
+1. A tutorial will pop up. Download the project files, which contain sample code. After practicing how to update documentation (shown below), proceed with the tutorial.
 
 When first opening sample code from a tutorial, there may be an error with loading Swift packages. If that happens, close out of the project and open it a second time.
 
