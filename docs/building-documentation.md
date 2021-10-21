@@ -2,7 +2,7 @@
 
 Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentation viewer.
 
-### Creating the Xcode project
+### Creating an Xcode project
 
 1. In Xcode, go to File -> New -> Project.
 1. Ensure you are under the "iOS" template section.
