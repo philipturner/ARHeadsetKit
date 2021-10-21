@@ -27,7 +27,7 @@ Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to A
   - [ ] Tutorial 8 - Composing Custom Shaders
   - [ ] Tutorial 9 - Making Ray Tracing Functions
 
-This repository will remain in the "beta" phase until every tutorial is finished. To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy this ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
+ARHeadsetKit will remain in the beta phase until every tutorial is finished. To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy this ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
 
 ## How to Configure ARHeadsetKit from Scratch
 
