@@ -9,7 +9,7 @@ Metal:
 - Command buffers that automatically log detailed errors when using a debug build. Some of the error data can only be accessed when shader validation is enabled.
 
 simd:
-- Optimized utility functions for working with affine transforms (much better than the Objective-C math utilities Apple ships with their Metal sample code)
+- Optimized utility functions for working with affine transforms (much more refined than the Objective-C math utilities Apple ships with their Metal sample code)
 - Half-precision vector and matrix types for writing to GPU data structures on the CPU
 - Packed 3-wide vectors such as `simd_packed_float3`
 - Conversion between single and half-precision vectors/matrices, but not arithmetic operations on them
