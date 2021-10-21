@@ -343,7 +343,6 @@
 		98EDDDD4270D18FB006F9F44 /* property-list-keys.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "property-list-keys.md"; sourceTree = "<group>"; };
 		98EDDDD5270D1904006F9F44 /* extensions-to-apple-frameworks.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "extensions-to-apple-frameworks.md"; sourceTree = "<group>"; };
 		98FEB4D32714EF910002A1AF /* building-documentation.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "building-documentation.md"; sourceTree = "<group>"; };
-		98FEB4D42714EF9B0002A1AF /* viewing-documentation.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "viewing-documentation.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1047,7 +1046,6 @@
 				98EDDDD4270D18FB006F9F44 /* property-list-keys.md */,
 				98FEB4D32714EF910002A1AF /* building-documentation.md */,
 				98EDDDD5270D1904006F9F44 /* extensions-to-apple-frameworks.md */,
-				98FEB4D42714EF9B0002A1AF /* viewing-documentation.md */,
 				982EF060271C51420050E5D8 /* mac-compatibility.md */,
 				982EF07B271C57D10050E5D8 /* article-list.md */,
 			);
