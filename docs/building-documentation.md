@@ -28,7 +28,7 @@ When first opening sample code from a tutorial, there may be an error with loadi
 
 ## Updating documentation
 
-Periodically, do the following to make sure ARHeadsetKit and the tutorials are up to date:
+Periodically, do the following to make sure ARHeadsetKit and its tutorials are up to date:
 
 1. In the bottom left of the Xcode window, right-click "ARHeadsetKit" under "Package Dependencies".
 1. Click "Update Package". In the top of the Xcode window, you will see tasks related to package loading in progress.
