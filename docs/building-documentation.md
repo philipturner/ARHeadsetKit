@@ -8,7 +8,7 @@ Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentati
 1. Ensure you are under the "iOS" template section.
 1. The "App" template is selected by default. Leave this template selected.
 1. Click "Next". Enter "ARHeadsetKit Documentation" as the product's name.
-1. Under "Team", select your account instead of "None". Click "Next" and save the project.
+1. Under "Team", select your Apple account. You must be enrolled in the free Apple Developer Program. Click "Next" and save the project.
 
 ### Adding the Swift package
 
@@ -18,7 +18,9 @@ Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentati
 
 ### Building documentation
 
-1. Press "Ctrl + Cmd + Shift + D". The documentation viewer will pop up.
+1. Ensure your iOS device is connected to your Mac. At the top of the Xcode window, select it as the run destination. 
+1. Press `Cmd + B`. No errors should appear in Xcode.
+1. Press `Ctrl + Cmd + Shift + D`. The documentation viewer will pop up.
 1. In the navigator on the left, there is a section titled "Workspace Documentation". "ARHeadsetKit Documentation" will appear underneath it, with a blue Xcode logo next to it.
 1. Unravel the contents of "ARHeadsetKit Documentation" and click "Welcome to ARHeadsetKit".
 1. Go to Chapter 1: Essentials. Click on "Configuring ARHeadsetKit".
