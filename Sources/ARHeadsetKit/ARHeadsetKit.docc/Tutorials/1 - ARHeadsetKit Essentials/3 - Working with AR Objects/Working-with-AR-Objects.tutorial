@@ -4,11 +4,41 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Working with AR Objects") {
-        Coming soon!
-<!--        A description of how ARHeadsetKit sends requests to the Central Renderer for generic objects. There are other specialized renderers, some of which are internal to ARHeadsetKit. Make a diagram of them.-->
+        Learn how to utilize ARHeadsetKit's renderer hierarchy and draw shapes that respond to the world around them.
     }
     
-    @Section(title: "Section 1") {
+    @Section(title: "Utilizing the Central Renderer") {
+        @ContentAndMedia {
+            ARHeadsetKit renders an AR experience through a hierarchy of renderers. At the top level, the ``ARHeadsetKit/MainRenderer`` receives data about your surroundings from ARKit. It calls several delegate renderers, which perform tasks such as hand tracking and drawing objects. By conforming to the ``ARHeadsetKit/DelegateRenderer`` protocol, these renderers can communicate with each other.
+            
+            Every delegate renderer automatically gains access to several properties. For example, your `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property, which all delegate renderers can use. In this tutorial, you will learn how to use the ``ARHeadsetKit/CentralRenderer``.
+            
+            @Image(source: "1-3-image-0-1.png", alt: "Diagram of renderers calling each other.")
+        }
+        
+        @ContentAndMedia {
+            The Central Renderer receives requests from other renderers to render AR objects. Then, it performs culling and decides their level of detail. Finally, it commands the GPU to render the objects.
+
+            In this section, you will learn about the types of shapes the Central Renderer can draw.
+
+        }
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "New Ways to Render Objects") {
+        @ContentAndMedia {
+            An ``ARHeadsetKit/ARObjectGroup`` is a highly optimized way to render AR objects. It performs culling on several objects at once, taking less time than culling each object separately.
+            
+            However, if objects in a group are too far apart, the app may attempt to render them when it does not need to. This puts needless strain on the GPU, harming performance. If you cannot guarantee that your objects will be similar in size and location, render each one separately.
+            
+            Sometimes, you might store your AR objects in an array. To make rendering easier in this scenario, the Central Renderer has a ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. Do not copy objects into an array just to call this function, as the process of copying AR objects is expensive. 
+            
+            In this section, you will experience two new ways of rendering AR objects.
+        }
+        
         @Steps {
             n/a
         }
