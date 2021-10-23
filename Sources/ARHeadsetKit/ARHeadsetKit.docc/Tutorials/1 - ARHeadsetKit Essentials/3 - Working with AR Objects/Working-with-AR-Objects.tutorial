@@ -8,6 +8,8 @@
         Learn how to utilize ARHeadsetKit's renderer hierarchy and draw shapes that respond to the world around them.
         
         Download the project files to begin building this project, and follow the steps below.
+        
+        @Image(source: "1-3-image-1-1-intro.jpg", alt: "Different types of shapes rendering.")
     }
     
     @Section(title: "Utilizing the Central Renderer") {
@@ -25,14 +27,6 @@
             To begin, you'll learn about the types of shapes the `CentralRenderer` can draw.
 
         }
-        
-<!--   Remind again - how to type long ARObject initializer to make code legible     -->
-<!--   Iterate over each ARShapeType with a for...in loop   -->
-<!--   In the loop, offset the shape's position by a certain amount   -->
-        
-<!--   In the last step, instruct to position device so that at least one meter of empty space exists directly to the right. Then, launch the app.     -->
-
-<!--   Ensure step 4 works when the viewer is compact! -->
         
         @Steps {
             @Step {
@@ -74,7 +68,9 @@
             }
             
             @Step {
-                n/a
+                Position your device so that its right side faces an open room. Then, launch the app.
+                
+                @Image(source: "1-3-image-1-1.jpg", alt: "Different types of shapes rendering.")
             }
         }
     }
@@ -84,7 +80,7 @@
             Up to this point, all AR objects have been separated from each other. Using scaling, rotation, and translation, you can combine them into compound objects.
         }
         
-<!--    Start with an arrow    -->
+<!--    Create an arrow, then a wheel of four arrows    -->
         
         @Steps {
             n/a
@@ -98,6 +94,9 @@
             Almost every frame (1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, increment an integer every time your custom renderer executes ``ARHeadsetKit/CustomRenderer/updateResources()``.
         }
         
+<!--    Animate the wheel or arrows    -->
+<!--    Make its color change over time   -->
+        
         @Steps {
             n/a
         }
@@ -109,6 +108,8 @@
             
             Read the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
         }
+        
+<!--    Make the wheel of arrows stay in the center of vision.    -->
         
         @Steps {
             n/a
