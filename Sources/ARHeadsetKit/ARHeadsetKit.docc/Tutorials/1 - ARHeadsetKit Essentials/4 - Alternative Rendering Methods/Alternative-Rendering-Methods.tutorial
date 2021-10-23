@@ -6,12 +6,14 @@
     @Intro(title: "Alternative Rendering Methods") {
         Explore new workflows for rendering AR objects and speeding up your code.
         
-        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the Central Renderer provides some alternatives to the ``ARHeadsetKit/CentralRenderer/render(object:)`` function.
+        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.
+        
+        Download the project files to begin building this project, and follow the steps below.
     }
     
     @Section(title: "Passing an Array of Objects") {
         @ContentAndMedia {
-            Instead of creating new objects every frame, you may render from existing objects in a persistent array. To render an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. This eliminates expensive function calls and copying operations.
+            Instead of creating new objects every frame, you might render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``. Doing this eliminates expensive function calls and copying operations.
         }
         
 <!--    For the render(objects:) function, have statically stored objects.    -->
@@ -24,7 +26,7 @@
     
     @Section(title: "Controlling the Level of Detail") {
         @ContentAndMedia {
-            Round objects create the illusion of roundness by referring to a mesh with numerous small triangles. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling the ``ARHeadsetKit/CentralRenderer/render(object:desiredLOD:)`` function, you override this behavior with a fixed level of detail (LOD).
+            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(object:desiredLOD:)``, you override this behavior with a fixed level of detail (LOD).
         }
         
         @Steps {
@@ -36,7 +38,7 @@
     
     @Section(title: "Optimizing with ARObjectGroup") {
         @ContentAndMedia {
-            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks an entire group of objects at once, treating them like a single object.
+            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
         }
         
         @Steps {

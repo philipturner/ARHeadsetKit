@@ -5,21 +5,23 @@
     
     @Intro(title: "Working with AR Objects") {
         Learn how to utilize ARHeadsetKit's renderer hierarchy and draw shapes that respond to the world around them.
+        
+        Download the project files to begin building this project, and follow the steps below.
     }
     
     @Section(title: "Utilizing the Central Renderer") {
         @ContentAndMedia {
             ARHeadsetKit renders an AR experience through a hierarchy of renderers. At the top level, the ``ARHeadsetKit/MainRenderer`` receives data about your surroundings from ARKit. It calls several delegate renderers, which perform tasks such as hand tracking and drawing objects. By conforming to the ``ARHeadsetKit/DelegateRenderer`` protocol, these renderers can communicate with each other.
             
-            Every delegate renderer automatically gains access to several properties. For example, your `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property, which all delegate renderers can use. In this tutorial, you will learn how to use the ``ARHeadsetKit/CentralRenderer``.
+            Every delegate renderer automatically gains access to several properties. For example, the `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property. Now, you will learn how to use the ``ARHeadsetKit/CentralRenderer``.
             
             @Image(source: "1-3-image-0-1.png", alt: "Diagram of renderers calling each other.")
         }
         
         @ContentAndMedia {
-            The Central Renderer receives requests to render AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
+            The `CentralRenderer` receives requests to render AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
 
-            To begin, you will learn about the types of shapes the Central Renderer can draw.
+            To begin, you'll learn about the types of shapes the `CentralRenderer` can draw.
 
         }
         
@@ -46,9 +48,9 @@
     
     @Section(title: "Opting out of Rendering") {
         @ContentAndMedia {
-            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering only happen when absolutely necessary.
+            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering occur only when absolutely necessary.
            
-           When the touchscreen settings panel is open, the Main Renderer does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
+           When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
         }
         
         @Steps {
@@ -58,9 +60,9 @@
     
     @Section(title: "Animating Objects") {
         @ContentAndMedia {
-            AR becomes more engaging when objects move around and respond to their environment. Using animation, you can easily incorporate motion into your app.
+            When AR objects move around and respond to their environment, they become more engaging. Using animation, you can easily incorporate motion into your app.
             
-            Almost every frame (approximately 1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, you will increment an integer every time `MyRenderer` executes its ``ARHeadsetKit/CustomRenderer/updateResources()`` method.
+            Almost every frame (1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, increment an integer every time your custom renderer executes ``ARHeadsetKit/CustomRenderer/updateResources()``.
         }
         
         @Steps {
@@ -70,9 +72,9 @@
     
     @Section(title: "Moving with the Camera") {
         @ContentAndMedia {
-            The Main Renderer provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
+            The `MainRenderer` provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
             
-            Read the camera's direction from a transform matrix, and use it to position an AR object that the user can always see. 
+            Read the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
         }
         
         @Steps {

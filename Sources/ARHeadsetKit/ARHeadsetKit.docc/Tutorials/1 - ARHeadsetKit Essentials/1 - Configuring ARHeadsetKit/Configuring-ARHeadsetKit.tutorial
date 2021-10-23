@@ -4,9 +4,9 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Configuring ARHeadsetKit") {
-        This tutorial guides you through building an augmented reality app based on ARHeadsetKit.
+        Walk through how to build an augmented reality app based on ARHeadsetKit.
         
-        Download the project files to begin building this project, and follow the steps below. Update ARHeadsetKit Swift package in the starter project to the most recent version.
+        Download the project files to begin building this project, and follow the steps below.
         
         @Image(source: "1-1-image-2-1-intro.jpg", alt: "The blue cone appearing in AR.")
     }
@@ -81,7 +81,7 @@
     
     @Section(title: "Link to SwiftUI") {
         @ContentAndMedia {
-            To render AR content, your code must communicate with ARHeadsetKit. You will pass `MyRenderer`'s initializer up through the following hierarchy of objects:
+            To draw AR content, your code must communicate with ARHeadsetKit. You'll pass the initializer of `MyRenderer` up through the following hierarchy of objects:
             
             - `AppCoordinator`
               - `MainRenderer`
@@ -96,7 +96,7 @@
             }
             
             @Step {
-                Delete `ContentView_Previews`. You will not need this SwiftUI preview because the app's content cannot be simulated in Xcode.
+                Delete `ContentView_Previews`. You do not need this SwiftUI preview because the app's content cannot be simulated in Xcode.
                 
                 @Code(name: "ContentView.swift", file: "1-1-creating-code-2-3.swift")
             }
@@ -120,7 +120,7 @@
             }
             
             @Step {
-                Launch the app on your iOS device. Read the in-app tutorial thoroughly, then step back and observe the blue cone. 
+                Launch the app on your iPhone or iPad. Read the in-app tutorial thoroughly, then step back and observe the blue cone. 
                 
                 Congratulations! You made your first experience with ARHeadsetKit!
                 

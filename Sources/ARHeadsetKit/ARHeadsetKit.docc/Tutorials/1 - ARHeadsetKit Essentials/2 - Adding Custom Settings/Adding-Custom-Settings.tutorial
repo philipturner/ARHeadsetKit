@@ -4,9 +4,9 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Adding Custom Settings") {
-        ARHeadsetKit uses several user-defined settings to drive every experience. These settings are saved to the disk, so they don't reset when the app closes. In this tutorial, you will create a switch that changes an AR object's color to red.
+        ARHeadsetKit provides several user-defined settings to drive every experience. These settings save to the disk, so they don't reset when the app closes. In this tutorial, you'll create a switch that changes an AR object's color to red.
         
-        Download the project files to begin building this project, and follow the steps below. Update ARHeadsetKit Swift package in the starter project to the most recent version.
+        Download the project files to begin building this project, and follow the steps below.
         
         @Image(source: "1-2-image-2-1-intro.jpg", alt: "The cone appearing red in AR.")
     }
@@ -15,7 +15,7 @@
         @ContentAndMedia {
             A user changes settings in the settings panel. To open the settings panel, launch your app and tap the white gear icon on the top left. 
             
-            Tapping on the "Customize Appearance" link in the settings panel brings up the appearance settings. In this section, you will add a switch to these settings.
+            Tapping on the "Customize Appearance" link in the settings panel brings up the appearance settings. In this section, you'll add a switch to these settings.
         }
         
         @Steps {
@@ -65,7 +65,7 @@
     
     @Section(title: "Saving Settings to the Disk") {
         @ContentAndMedia {
-            You can now modify custom settings in your app from the settings panel. However, when you close out of your app, they will reset. In this section, you will make user preferences persist across app launches.
+            You can now modify custom settings in your app from the settings panel. However, when you close out of your app, they will reset. In this section, you'll make user preferences persist across app launches.
         }
         
         @Steps {
@@ -105,7 +105,7 @@
     
     @Section(title: "Binding Settings to Rendering") {
         @ContentAndMedia {
-            Custom settings don't mean anything unless they affect the AR experience! To fix that, you will change how an AR object appears based on the value of a custom setting.
+            Custom settings are not useful unless they affect the AR experience! Change how an AR object appears based on the value of a custom setting.
         }
         
         @Steps {
@@ -118,7 +118,7 @@
             @Step {
                 In `updateResources()`, create a `red` color that is 100% red, 0% green, and 0% blue.
                 
-                Colors in ARHeadsetKit are vectors of floating-point numbers, ranging from 0.0 to 1.0.
+                In ARHeadsetKit, colors are vectors of floating-point numbers ranging from 0.0 to 1.0.
                 
                 @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-2.swift")
             }
@@ -146,13 +146,13 @@
             @Step {
                 Set the cone's color to red when `renderingRed` is `true`, and sky blue otherwise.
                 
-                > Tip: Initializers for `ARObject` and some other ARHeadsetKit types can be very large. Divide sections of parameters with line breaks, following the convention expressed in `ARObject`'s initializer. This can be found by right-clicking `ARObject` and selecting "Jump to Definition".
+                > Tip: Initializers for an `ARObject` can become very large. Right-click `ARObject` and select "Jump to Definition". Study its initializers and follow their convention for separating sections of parameters.
                 
                 @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-6.swift")
             }
             
             @Step {
-                Launch the app and observe the AR object respond to your switch in the settings panel.
+                Launch the app and observe the AR object responding to your switch in the settings panel.
                 
                 Congratulations! You made your first form of interaction between the user and an AR object!
                 

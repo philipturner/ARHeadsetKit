@@ -13,7 +13,7 @@ Follow the steps below to view ARHeadsetKit's tutorials in the Xcode documentati
 
 If this is your first time using Xcode, perform the following steps to ensure the project can compile:
 
-1. Connect your iOS device to your Mac.
+1. Connect your iPhone or iPad to your Mac.
 1. At the top of the Xcode window, a simulator will be selected as the run destination. Change that to your device.
 1. Press `Cmd + B`. No errors should appear in Xcode.
 

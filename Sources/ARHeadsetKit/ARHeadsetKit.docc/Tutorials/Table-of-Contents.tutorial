@@ -17,7 +17,7 @@
     }
     
     @Chapter(name: "Interactive Experiences") {
-        Bring hand-object interaction into your app and create a holographic interface.
+        Bring hand-object interaction into your app and create holographic interfaces.
         
         @Image(source: "Blank.png", alt: "")
         

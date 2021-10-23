@@ -13,7 +13,7 @@
     
     @Section(title: "Setting Up Git Submodules") {
         @ContentAndMedia {
-            Instead of using the Swift package manager, you will use Git submodules as a dependency manager. This process can also work on an existing Xcode project instead of creating a new one.
+            Instead of using the Swift package manager, you'll use Git submodules as a dependency manager. This process can also work on an existing Xcode project instead of creating a new one.
 
             If you reuse an existing Xcode project, go to Project Settings -> PROJECT -> Package Dependencies and remove ARHeadsetKit. Go to Source Control -> New Git Repositories and ensure your project is under version control. Then, start at step 5 of this section.
         }
@@ -165,7 +165,7 @@
     
     @Section(title: "Testing Utility Functions") {
         @ContentAndMedia {
-            To test that the Xcode framework is configured correctly, you will use ARHeadsetKit utility functions in both Swift and Metal code.
+            To test that the Xcode framework is configured correctly, use ARHeadsetKit utility functions in both Swift and Metal code.
         }
         
         @Steps {
