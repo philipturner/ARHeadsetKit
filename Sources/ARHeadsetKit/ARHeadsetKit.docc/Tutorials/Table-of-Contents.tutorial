@@ -19,7 +19,7 @@
     @Chapter(name: "Interactive Experiences") {
         Bring hand-object interaction into your app and create holographic interfaces.
         
-        @Image(source: "Blank.png", alt: "")
+        @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Selecting-Objects")
         @TutorialReference(tutorial: "doc:Using-Delegate-Renderers")
@@ -29,7 +29,7 @@
     @Chapter(name: "Unlocking Everything") {
         Access all of ARHeadsetKit's features to bring any idea into AR.
         
-        @Image(source: "Blank.png", alt: "")
+        @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Reconfiguring-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Composing-Custom-Shaders")
