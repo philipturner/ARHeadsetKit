@@ -3,7 +3,7 @@
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
-    @Intro(title: "Alternative Rendering Methods") {
+    @Intro(title: "Alternative Rendering Modes") {
         Explore new workflows for rendering AR objects and speeding up your code. Coming soon!
         
 <!--        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.-->

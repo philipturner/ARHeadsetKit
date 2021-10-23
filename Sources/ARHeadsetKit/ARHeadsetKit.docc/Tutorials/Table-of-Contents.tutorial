@@ -15,7 +15,7 @@
         @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        
         @TutorialReference(tutorial: "doc:Working-with-AR-Objects")
-        @TutorialReference(tutorial: "doc:Alternative-Rendering-Methods")
+        @TutorialReference(tutorial: "doc:Alternative-Rendering-Modes")
     }
     
     @Chapter(name: "Interactive Experiences") {
