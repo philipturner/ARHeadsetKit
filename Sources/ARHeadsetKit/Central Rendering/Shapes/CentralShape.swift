@@ -21,7 +21,7 @@ struct CentralVertex {
 }
 #endif
 
-public enum ARShapeType: Int {
+public enum ARShapeType: Int, CaseIterable {
     case cube = 0
     case squarePyramid = 1
     case octahedron = 2

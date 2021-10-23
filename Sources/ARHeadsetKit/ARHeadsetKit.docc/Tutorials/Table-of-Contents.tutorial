@@ -8,18 +8,20 @@
     @Chapter(name: "Essentials") {
         Create your first app with ARHeadsetKit, using basic AR objects.
         
+<!--    After finishing tutorial 4, replace this with a wider picture that shows the heck ton of objects causing lag.    -->
+        
         @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
         
         @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        
         @TutorialReference(tutorial: "doc:Working-with-AR-Objects")
-        @TutorialReference(tutorial: "doc:Alternative-Rendering-Methods")
+        @TutorialReference(tutorial: "doc:Alternative-Rendering-Modes")
     }
     
     @Chapter(name: "Interactive Experiences") {
         Bring hand-object interaction into your app and create holographic interfaces.
         
-        @Image(source: "Blank.png", alt: "")
+        @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Selecting-Objects")
         @TutorialReference(tutorial: "doc:Using-Delegate-Renderers")
@@ -29,15 +31,16 @@
     @Chapter(name: "Unlocking Everything") {
         Access all of ARHeadsetKit's features to bring any idea into AR.
         
-        @Image(source: "Blank.png", alt: "")
+        @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Reconfiguring-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Composing-Custom-Shaders")
         @TutorialReference(tutorial: "doc:Making-Ray-Tracing-Functions")
     }
     
-    <!-- Use the framework extensions and shader utilities to make an awesome app -->
-    <!-- Include experience with debugging shaders -->
-    <!-- Show what happens without ARHeadsetKit's debugging utilities :( -->
-    <!-- Include use of MTLLayeredBuffer -->
+    <!-- Potential fourth chapter (several months ahead): -->
+    <!-- Only if Apple fixes Metal frame capture, which is 100% broken in Xcode 13.0 (previously just 90% broken). -->
+    
+    <!-- Incorporate more framework extensions and shader utilities -->
+    <!-- Include experience with debugging shaders - show what happens without ARHeadsetKit's debugging utilities :( -->
 }

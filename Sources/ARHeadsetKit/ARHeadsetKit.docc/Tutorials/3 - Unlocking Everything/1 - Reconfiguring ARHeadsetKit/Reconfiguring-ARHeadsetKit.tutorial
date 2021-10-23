@@ -11,7 +11,7 @@
         Follow the steps to build this project, or download the finished project to explore on your own. 
     }
     
-    @Section(title: "Setting Up Git Submodules") {
+    @Section(title: "Set Up Git Submodules") {
         @ContentAndMedia {
             Instead of using the Swift package manager, you'll use Git submodules as a dependency manager. This process can also work on an existing Xcode project instead of creating a new one.
 
@@ -73,7 +73,7 @@
         }
     }
     
-    @Section(title: "Importing the Xcode Framework") {
+    @Section(title: "Import the Xcode Framework") {
         @ContentAndMedia {
             In order to import Metal utility functions, you must add file references to code in ARHeadsetKit. This workaround is required because Xcode frameworks only export Swift, C, and C++ code, not Metal code.
         }
@@ -129,7 +129,7 @@
         }
     }
         
-    @Section(title: "Updating ARHeadsetKit") {
+    @Section(title: "Update ARHeadsetKit") {
         @ContentAndMedia {
             To use the latest ARHeadsetKit features and tutorials, you must update it occasionally. Projects configured with an Xcode framework update differently than those using a Swift package. 
             
@@ -163,7 +163,7 @@
         }
     }
     
-    @Section(title: "Testing Utility Functions") {
+    @Section(title: "Test Utility Functions") {
         @ContentAndMedia {
             To test that the Xcode framework is configured correctly, use ARHeadsetKit utility functions in both Swift and Metal code.
         }

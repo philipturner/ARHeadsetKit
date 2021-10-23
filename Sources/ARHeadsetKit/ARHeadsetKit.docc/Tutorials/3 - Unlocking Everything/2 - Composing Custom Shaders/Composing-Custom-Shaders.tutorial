@@ -5,21 +5,20 @@
     
     @Intro(title: "Composing Custom Shaders") {
         Coming soon!
+        
+<!--   Learn how to create vertex shaders rendering in ARHeadsetKit.   -->
+<!--   Introduce MTLLayeredBuffer here.   -->
     }
     
     @Section(title: "Section 0") {
         @ContentAndMedia {
-            Show the fix for the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet.
+            There is the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet. You will fix it by modifying the corrupted file in Xcode.
         }
         
         @Steps {
-            n/a
+            
         }
     }
-    
-    @Section(title: "Section 1") {
-        @Steps {
-            n/a
-        }
-    }
+        
+<!--   Make the ripple effect idea with complex shaders here, instead of branching into a fourth chapter. Add an extra section for fragment/compute shaders, right after this. The ray tracing section will let people control the ripple with their hand.     -->
 }

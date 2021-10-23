@@ -1,0 +1,274 @@
+@Tutorial(time: 45, projectFiles: "Working-with-AR-Objects.zip") {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Working with AR Objects") {
+        Learn how to utilize ARHeadsetKit's renderer hierarchy and draw shapes that respond to the world around them.
+        
+        Download the project files to begin building this project, and follow the steps below.
+        
+        @Image(source: "1-3-image-1-1-intro.jpg", alt: "Different types of shapes rendering.")
+    }
+    
+    @Section(title: "Use the Central Renderer") {
+        @ContentAndMedia {
+            ARHeadsetKit renders an AR experience through a hierarchy of renderers. At the top level, the ``ARHeadsetKit/MainRenderer`` receives data about your surroundings from ARKit. It calls several delegate renderers, which perform tasks such as hand tracking and drawing objects. By conforming to the ``ARHeadsetKit/DelegateRenderer`` protocol, these renderers can communicate with each other.
+            
+            Every delegate renderer automatically gains access to several properties. For example, the `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property. Now, you will learn how to utilize the ``ARHeadsetKit/CentralRenderer``.
+            
+            @Image(source: "1-3-image-0-1.png", alt: "Diagram of renderers calling each other.")
+        }
+        
+        @ContentAndMedia {
+            The `CentralRenderer` receives requests to draw AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
+
+            To begin, you'll learn about the types of shapes the `CentralRenderer` can draw.
+
+        }
+        
+        @Steps {
+            @Step {
+                In the project navigator, select `MyRenderer.swift`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Loop over every case in the ``ARHeadsetKit/ARShapeType`` enumeration. Place the rendering code inside the new loop.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Shrink each object from 0.2 to 0.1 meters in each dimension.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Set `allowsViewingInside` to `true` in the initializer. When the your device goes inside an object, you will see a dark ambient color.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Declare a 3D position vector outside the loop. Set it to the origin.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                In the ``ARHeadsetKit/ARObject`` initializer, replace `.cone` with `shapeType` and `[0.0, 0.0, 0.0]` with the position.
+                
+                Now, a new type of object will appear in each loop iteration.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Add 0.15 meters of spacing between each object in the X direction.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-6.swift")
+            }
+            
+            @Step {
+                Position your device so that its right side faces an open room. Then, run the app.
+                
+                @Image(source: "1-3-image-1-1.jpg", alt: "Different types of shapes rendering.")
+            }
+        }
+    }
+    
+    @Section(title: "Fuse AR Objects") {
+        @ContentAndMedia {
+            Up to this point, all AR objects have been separated from each other. With scaling, rotation, and translation, they can combine into compound objects.
+            
+            You'll create an arrow by fusing a cylinder and a cone, while learning a new initializer for round objects.
+        }
+        
+        @Steps {
+            @Step {
+                Delete the rendering code from the previous section.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-1.swift", previousFile: "1-3-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Determine the color of AR objects.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                State the start and end of the arrow. It points from the origin to 0.2 meters along the Y axis.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Find the difference between the end and the start. Then, pass it into the `normalize(_:)` function and assign it to `arrowDirection`.
+                
+                Normalizing a vector extends its length to one meter. This makes the vector's size easy to change.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Calculate where the arrow's tip starts. Multiply its direction by 0.1 meters, then subtract from its end.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Using a new ``ARHeadsetKit/ARObject`` initializer, create a cone with a diameter of 0.07 meters. Set the bottom to `tipStart` and the top to `arrowEnd`.
+                
+                This initializer may return `nil` when the bottom and top are the same. Always account for this situation, unless you can guarantee it won't happen.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Render the rest of the arrow using a cylinder object. Define its endpoints as `arrowStart` and `tipStart`, then set its diameter to 0.05 meters.
+                
+                > Tip: When a control flow element spans several lines, place the opening brace on a new line. In this step, the extra space visually separates the object initializer from the call to ``ARHeadsetKit/CentralRenderer/render(object:)``.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Launch the app. You will see an upward-facing arrow.
+                
+                @Image(source: "1-3-image-2-1.jpg", alt: "A red arrow pointing upward.")
+            }
+        }
+    }
+    
+    @Section(title: "Animate Objects") {
+        @ContentAndMedia {
+            When AR objects move around and respond to their environment, they become more engaging. Using animation, you can incorporate motion into your app.
+            
+            Almost every frame (1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate the red arrow, increment an integer every time your custom renderer executes ``ARHeadsetKit/CustomRenderer/updateResources()``.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new property on `MyRenderer` called `numFrames`. This is an integer that represents how many frames have passed since the app started.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-1.swift", previousFile: "1-3-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Increment `numFrames` each time `updateResources()` is called.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-2.swift")
+            }
+            
+            @Step {
+                Before using the counter, you need to rewrite the rendering code. Refactor it into a nested function.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Remove the `arrowStart` and `arrowEnd` constants. These will be calculated inside the function.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-4.swift")
+            }
+            
+            @Step {
+                Add a position vector called `center` to the function's parameter list. Then, add a quaternion called `orientation`.
+                
+                Quaternions are convenient way to represent rotations. In the next step, `orientation` will act on a vector to change its direction.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Use the quaternion's `act(_:)` method to transform the positive Y axis. Replace `arrowDirection` with the resulting vector.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Find the arrow's endpoints by scaling its direction, then adding to `center`. Multiply by -0.05 meters to generate `arrowStart`, and +0.15 meters for `arrowEnd`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-7.swift")
+            }
+            
+            @Step {
+                Jump to right after the function's closing brace. Convert `numFrames` to a floating-point number that represents time in seconds. Declare an `angleDegrees` variable that reaches 360 when two seconds have passed.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-8.swift")
+            }
+            
+            @Step {
+                Convert the angle to radians. Pass it into the `simd_quatf(angle:axis:)` initializer, generating the orientation quaternion. Use the positive Z axis as the `axis` parameter. 
+                
+                > Note: ARHeadsetKit uses a right-handed coordinate system. This means the X and Y axes appear like in a 2D graph, but the Z axis points toward you.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-9.swift")
+            }
+            
+            @Step {
+                That was a lot of steps! Now, you can draw the arrow. Run the app and verify that the arrow rotates counterclockwise.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-10.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Move with the Camera") {
+        @ContentAndMedia {
+            The `MainRenderer` provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
+            
+            Extract the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
+        }
+        
+        @Steps {
+            @Step {
+                Rename `orientation` to `timeRotation`. Then, create a quaternion called `cameraRotation` from `cameraToWorldTransform`.
+                
+                > Note: ARKit operates in landscape mode, while ARHeadsetKit runs in portrait mode. As a result, the camera direction is off by 90 degrees. Passing the Y axis into the camera's rotation makes it point to the right.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-1.swift", previousFile: "1-3-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                Set `orientation` to a combination of the camera's rotation and the rotation due to time. Place `cameraRotation` on the left side of the multiplication operator.
+                
+                To combine rotations, multiply them from right to left. Otherwise, the result is undefined.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Pass `-zAxis` into the `act(_:)` method of `cameraRotation`. This outputs a vector pointing from your device's camera to the scene in front of you. Name the vector `cameraDirection`.
+                
+                In ARHeadsetKit's right-handed coordinate system, the negative Z axis points away from you.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                The arrow will be placed at a fixed position relative to your head. Retrieve the ``ARHeadsetKit/DelegateRenderer/interfaceCenter`` property and assign it to `headPosition`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Set the arrow's center to a position 0.6 meters away from your head. Then, pass it into the `drawArrow(center:orientation:)` function.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Launch the app. The arrow will stay in the center of your screen no matter where you move your device.
+                
+                Try this fun game: swap the multiplication order of `cameraRotation` and `timeRotation`. After launching the app, rotate your device 90 degrees to the left. Try making the arrow stop rotating!
+                
+                @Image(source: "1-3-image-4-1.jpg", alt: "The red arrow rotating at the screen's center.")
+            }
+        }
+    }
+}
