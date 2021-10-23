@@ -22,11 +22,10 @@ class MyRenderer: CustomRenderer {
                                   position: position,
                                   scale: [0.1, 0.1, 0.1],
                                   
-                                  color: renderingRed ? red : skyBlue)
+                                  color: renderingRed ? red : skyBlue,
+                                  allowsViewingInside: true)
             
             centralRenderer.render(object: object)
-            
-            position.x += 0.15
         }
     }
     

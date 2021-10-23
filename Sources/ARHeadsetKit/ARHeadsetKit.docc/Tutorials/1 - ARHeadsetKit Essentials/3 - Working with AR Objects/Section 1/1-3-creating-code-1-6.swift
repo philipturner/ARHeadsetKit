@@ -18,14 +18,16 @@ class MyRenderer: CustomRenderer {
         var position: simd_float3 = [0.0, 0.0, 0.0]
         
         for shapeType in ARShapeType.allCases {
-            let object = ARObject(shapeType: .cone,
-                                  position: [0.0, 0.0, 0.0],
+            let object = ARObject(shapeType: shapeType,
+                                  position: position,
                                   scale: [0.1, 0.1, 0.1],
                                   
                                   color: renderingRed ? red : skyBlue,
                                   allowsViewingInside: true)
             
             centralRenderer.render(object: object)
+            
+            position.x += 0.15
         }
     }
     

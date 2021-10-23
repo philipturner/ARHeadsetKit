@@ -15,14 +15,13 @@ class MyRenderer: CustomRenderer {
         let coordinator = renderer.coordinator as! Coordinator
         let renderingRed = coordinator.renderingRed
         
-        var position: simd_float3 = [0.0, 0.0, 0.0]
-        
         for shapeType in ARShapeType.allCases {
             let object = ARObject(shapeType: .cone,
                                   position: [0.0, 0.0, 0.0],
                                   scale: [0.1, 0.1, 0.1],
                                   
-                                  color: renderingRed ? red : skyBlue)
+                                  color: renderingRed ? red : skyBlue,
+                                  allowsViewingInside: true)
             
             centralRenderer.render(object: object)
         }

@@ -22,7 +22,8 @@
 <!--            Instead of creating new objects every frame, you might render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``. Doing this eliminates expensive function calls and copying operations.-->
 <!--        }-->
         
-<!--   For the render(objects:) function, have statically stored objects.    -->
+<!--   For the render(objects:) function, have statically stored objects.   -->
+<!--   Create the objects in MyRenderer's initializer   -->
 <!--   Make a whole bunch of AR objects with different colors and shapes, which looks cool  -->
 <!---->
 <!--   In the last step, state: "notice anything different? The app is lagging!"   -->

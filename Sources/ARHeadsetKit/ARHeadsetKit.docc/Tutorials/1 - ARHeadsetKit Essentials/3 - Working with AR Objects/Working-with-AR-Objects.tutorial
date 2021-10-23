@@ -1,10 +1,9 @@
-@Tutorial(time: 45) {
+@Tutorial(time: 45, projectFiles: "Working-with-AR-Objects.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Working with AR Objects") {
-        Coming soon!
         Learn how to utilize ARHeadsetKit's renderer hierarchy and draw shapes that respond to the world around them.
         
         Download the project files to begin building this project, and follow the steps below.
@@ -12,17 +11,17 @@
         @Image(source: "1-3-image-1-1-intro.jpg", alt: "Different types of shapes rendering.")
     }
     
-    @Section(title: "Utilize the Central Renderer") {
+    @Section(title: "Use the Central Renderer") {
         @ContentAndMedia {
             ARHeadsetKit renders an AR experience through a hierarchy of renderers. At the top level, the ``ARHeadsetKit/MainRenderer`` receives data about your surroundings from ARKit. It calls several delegate renderers, which perform tasks such as hand tracking and drawing objects. By conforming to the ``ARHeadsetKit/DelegateRenderer`` protocol, these renderers can communicate with each other.
             
-            Every delegate renderer automatically gains access to several properties. For example, the `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property. Now, you will learn how to use the ``ARHeadsetKit/CentralRenderer``.
+            Every delegate renderer automatically gains access to several properties. For example, the `MyRenderer` class conforms to ``ARHeadsetKit/CustomRenderer``, which in turn conforms to `DelegateRenderer`. In previous tutorials, it rendered 3D objects using the ``ARHeadsetKit/DelegateRenderer/centralRenderer`` property. Now, you will learn how to utilize the ``ARHeadsetKit/CentralRenderer``.
             
             @Image(source: "1-3-image-0-1.png", alt: "Diagram of renderers calling each other.")
         }
         
         @ContentAndMedia {
-            The `CentralRenderer` receives requests to render AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
+            The `CentralRenderer` receives requests to draw AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
 
             To begin, you'll learn about the types of shapes the `CentralRenderer` can draw.
 
@@ -42,29 +41,35 @@
             }
             
             @Step {
-                Shrink the rendered objects from 0.2 to 0.1 meters in each dimension.
+                Shrink each object from 0.2 to 0.1 meters in each dimension.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-2.swift")
             }
             
             @Step {
-                Declare a 3D position vector outside the loop. Set it to the origin.
+                Set `allowsViewingInside` to `true` in the initializer. When the your device goes inside an object, you will see a dark ambient color.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-3.swift")
             }
             
             @Step {
-                In the ``ARHeadsetKit/ARObject`` initializer, replace `.cone` with `shapeType` and `[0.0, 0.0, 0.0]` with the position.
-                
-                Now, a new type of object will appear in each iteration.
+                Declare a 3D position vector outside the loop. Set it to the origin.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-4.swift")
             }
             
             @Step {
-                Add 0.15 meters of spacing between each object in the X direction.
+                In the ``ARHeadsetKit/ARObject`` initializer, replace `.cone` with `shapeType` and `[0.0, 0.0, 0.0]` with the position.
+                
+                Now, a new type of object will appear in each loop iteration.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Add 0.15 meters of spacing between each object in the X direction.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-6.swift")
             }
             
             @Step {
@@ -217,7 +222,7 @@
         @ContentAndMedia {
             The `MainRenderer` provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
             
-            Read the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
+            Extract the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
         }
         
         @Steps {
