@@ -63,7 +63,7 @@
         }
     }
     
-    @Section(title: "Saving Settings to the Disk") {
+    @Section(title: "Save Settings to the Disk") {
         @ContentAndMedia {
             You can now modify custom settings in your app from the settings panel. However, when you close out of your app, they will reset. In this section, you'll make user preferences persist across app launches.
         }
@@ -103,7 +103,7 @@
         }
     }
     
-    @Section(title: "Binding Settings to Rendering") {
+    @Section(title: "Bind Settings to Rendering") {
         @ContentAndMedia {
             Custom settings are not useful unless they affect the AR experience! Change how an AR object appears based on the value of a custom setting.
         }
