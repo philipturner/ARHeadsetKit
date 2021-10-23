@@ -1,9 +1,9 @@
-@Tutorial(time: 15, projectFiles: "Configuring-ARHeadsetKit.zip") {
+@Tutorial(time: 15, projectFiles: "Setting-Up-ARHeadsetKit.zip") {
     @XcodeRequirement(
             title: "Xcode 13",
             destination: "https://developer.apple.com/download/")
     
-    @Intro(title: "Configuring ARHeadsetKit") {
+    @Intro(title: "Setting Up ARHeadsetKit") {
         Walk through how to build an augmented reality app based on ARHeadsetKit.
         
         Download the project files to begin building this project, and follow the steps below.
