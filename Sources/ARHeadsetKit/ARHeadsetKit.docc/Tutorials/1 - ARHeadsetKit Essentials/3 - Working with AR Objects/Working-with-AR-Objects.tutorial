@@ -1,4 +1,4 @@
-@Tutorial(time: 45) {
+@Tutorial(time: 40) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -38,27 +38,6 @@
         }
         
 <!--    Start with an arrow    -->
-        
-        @Steps {
-            n/a
-        }
-    }
-    
-    @Section(title: "Alternative Methods of Rendering") {
-        @ContentAndMedia {
-            The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the Central Renderer provides some alternatives to the ``ARHeadsetKit/CentralRenderer/render(object:)`` function.
-            
-            Instead of creating new objects every frame, you may render from existing objects in a persistent array. To render an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. This eliminates expensive function calls and copying operations.
-            
-            Round objects create the illusion of roundness by referring to a mesh with numerous small triangles. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling the ``ARHeadsetKit/CentralRenderer/render(object:desiredLOD:)`` function, you override this behavior with a fixed level of detail (LOD).
-            
-            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks an entire group of objects at once, treating them like a single object.
-            
-            In this section, you will experiment with the rendering techniques discussed above.
-        }
-        
-<!--    For the render(objects:) function, have statically stored objects.    -->
-<!--    Also add a level of detail function, give a walkthrough of what that looks like, discourage using it   -->
         
         @Steps {
             n/a
