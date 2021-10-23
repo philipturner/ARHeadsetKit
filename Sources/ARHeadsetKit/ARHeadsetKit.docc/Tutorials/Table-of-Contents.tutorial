@@ -36,8 +36,9 @@
         @TutorialReference(tutorial: "doc:Making-Ray-Tracing-Functions")
     }
     
-    <!-- Use the framework extensions and shader utilities to make an awesome app -->
-    <!-- Include experience with debugging shaders -->
-    <!-- Show what happens without ARHeadsetKit's debugging utilities :( -->
-    <!-- Include use of MTLLayeredBuffer -->
+    <!-- Potential fourth chapter (several months ahead): -->
+    <!-- Only if Apple fixes Metal frame capture, which is 100% broken in Xcode 13.0 (previously just 90% broken). -->
+    
+    <!-- Incorporate more framework extensions and shader utilities -->
+    <!-- Include experience with debugging shaders - show what happens without ARHeadsetKit's debugging utilities :( -->
 }

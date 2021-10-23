@@ -6,9 +6,9 @@
 <!--        Conform straight to the `DelegateRenderer` protocol. Or pass properties down from a parent renderer, with a custom protocol. Show an example of both.-->
     }
     
-    @Section(title: "Section 1") {
+    @Section(title: "n/a") {
         @Steps {
-            n/a
+             
         }
     }
 }

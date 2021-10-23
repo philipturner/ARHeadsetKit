@@ -206,7 +206,7 @@
             }
             
             @Step {
-                Finally, draw the rotating arrow! Run the app and observe the arrow's counterclockwise rotation.
+                That was a lot of steps! Now, you can draw the arrow. Run the app and verify that the arrow rotates counterclockwise.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-10.swift")
             }
@@ -217,20 +217,20 @@
         @ContentAndMedia {
             The `MainRenderer` provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
             
-            Read the device's position from a transform matrix, and use it to place an `ARObject` the user can always see. 
+            Read the camera's direction from a transform matrix, and use it to place an `ARObject` the user can always see. 
         }
         
         @Steps {
             @Step {
-                Rename `orientation` to `timeRotation`. Then, create a `cameraRotation` quaternion from `cameraToWorldTransform`.
+                Rename `orientation` to `timeRotation`. Then, create a quaternion called `cameraRotation` from `cameraToWorldTransform`.
                 
                 > Note: ARKit operates in landscape mode, while ARHeadsetKit runs in portrait mode. As a result, the camera direction is off by 90 degrees. Passing the Y axis into the camera's rotation makes it point to the right.
                 
-                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-1.swift")
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-1.swift", previousFile: "1-3-creating-code-3-10.swift")
             }
             
             @Step {
-                Set `orientation` to the combination of the camera's rotation and the rotation due to time. Place `cameraRotation` on the left side of the multiplication operator.
+                Set `orientation` to a combination of the camera's rotation and the rotation due to time. Place `cameraRotation` on the left side of the multiplication operator.
                 
                 To combine rotations, multiply them from right to left. Otherwise, the result is undefined.
                 
@@ -238,7 +238,7 @@
             }
             
             @Step {
-                Pass the `-zAxis` into the `act(_:)` method of `cameraRotation`. This outputs a vector pointing from your device's camera to the scene in front of you. Name the vector `cameraDirection`.
+                Pass `-zAxis` into the `act(_:)` method of `cameraRotation`. This outputs a vector pointing from your device's camera to the scene in front of you. Name the vector `cameraDirection`.
                 
                 In ARHeadsetKit's right-handed coordinate system, the negative Z axis points away from you.
                 
@@ -246,7 +246,7 @@
             }
             
             @Step {
-                The arrow will be placed at a fixed position relative to your head. Retrieve the ``ARHeadstKit/DelegateRenderer/interfaceCenter`` property and assign it to `headPosition`.
+                The arrow will be placed at a fixed position relative to your head. Retrieve the ``ARHeadsetKit/DelegateRenderer/interfaceCenter`` property and assign it to `headPosition`.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-4-4.swift")
             }
@@ -258,7 +258,7 @@
             }
             
             @Step {
-                Launch the app. The arrow will stay in the center of your screen no matter where you move your phone.
+                Launch the app. The arrow will stay in the center of your screen no matter where you move your device.
                 
                 Try this fun game: swap the multiplication order of `cameraRotation` and `timeRotation`. After launching the app, rotate your device 90 degrees to the left. Try making the arrow stop rotating!
                 

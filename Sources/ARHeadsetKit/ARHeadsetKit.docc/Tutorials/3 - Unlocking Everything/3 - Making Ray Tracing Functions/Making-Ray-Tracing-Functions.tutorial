@@ -7,9 +7,9 @@
         Coming soon!
     }
     
-    @Section(title: "Section 1") {
+    @Section(title: "n/a") {
         @Steps {
-            n/a
+            
         }
     }
 }
