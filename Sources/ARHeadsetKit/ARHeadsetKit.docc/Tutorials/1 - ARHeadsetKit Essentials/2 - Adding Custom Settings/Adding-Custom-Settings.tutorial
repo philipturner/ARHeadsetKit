@@ -152,7 +152,7 @@
             }
             
             @Step {
-                Launch the app and observe the AR object responding to your switch in the settings panel.
+                Run the app and observe the AR object responding to your switch in the settings panel.
                 
                 Congratulations! You made your first form of interaction between the user and an AR object!
                 
