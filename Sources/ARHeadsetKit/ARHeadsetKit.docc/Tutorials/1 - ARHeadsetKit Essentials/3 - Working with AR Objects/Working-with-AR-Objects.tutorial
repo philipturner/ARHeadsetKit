@@ -1,4 +1,4 @@
-@Tutorial {
+@Tutorial(time: 45) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -23,12 +23,28 @@
 
         }
         
+<!--   Remind again - how to type long ARObject initializer to make code legible     -->
+<!--   Iterate over each ARShapeType with a for...in loop   -->
+<!--   In the loop, offset the shape's position by a certain amount   -->
+        
         @Steps {
             n/a
         }
     }
     
-    @Section(title: "New Ways to Render Objects") {
+    @Section(title: "Adjusting AR Objects") {
+        @ContentAndMedia {
+            Up to this point, all AR objects have been separated from each other. Using scaling, rotation, and translation, you can combine them into compound objects.
+        }
+        
+<!--    Start with an arrow    -->
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "New Ways to Render") {
         @ContentAndMedia {
             An ``ARHeadsetKit/ARObjectGroup`` is a highly optimized way to render AR objects. It performs culling on several objects at once, taking less time than culling each object separately.
             
@@ -37,6 +53,40 @@
             Sometimes, you might store your AR objects in an array. To make rendering easier in this scenario, the Central Renderer has a ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. Do not copy objects into an array just to call this function, as the process of copying AR objects is expensive. 
             
             In this section, you will experience two new ways of rendering AR objects.
+        }
+        
+<!--    For the render(objects:) function, have statically stored objects.    -->
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "Opting out of Rendering") {
+        @ContentAndMedia {
+            ARHeadsetKit saves energy by skipping tasks related to rendering when the settings panel is open. To help `MyRenderer` conserve energy, the `DelegateRenderer` protocol gives it the ``DelegateRenderer/shouldRenderToDisplay`` property.
+        }
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "Animating Objects") {
+        @ContentAndMedia {
+            AR is boring when everything sits still! In this section, you will program AR objects to move over time, creating the foundations of an interactive experience.
+            
+            Almost every frame (approximately 1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, you will increment a counter every time the ``CustomRenderer/updateResources()`` method of `MyRenderer` is called.
+        }
+        
+        @Steps {
+            n/a
+        }
+    }
+    
+    @Section(title: "Moving with the Camera") {
+        @ContentAndMedia {
+            Sometimes, you might want an object to always be visible to the user, regardless of what direction they face.
         }
         
         @Steps {
