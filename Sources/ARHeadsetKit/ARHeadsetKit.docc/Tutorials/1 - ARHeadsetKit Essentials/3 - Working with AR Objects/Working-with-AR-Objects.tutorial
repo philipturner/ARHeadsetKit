@@ -1,4 +1,4 @@
-@Tutorial(time: 30) {
+@Tutorial(time: 45) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -79,7 +79,7 @@
         @ContentAndMedia {
             Up to this point, all AR objects have been separated from each other. With scaling, rotation, and translation, they can combine into compound objects.
             
-            You'll create an arrow by fusing a cylinder and a cone, while learning a new initializer for AR objects.
+            You'll create an arrow by fusing a cylinder and a cone, while learning a new initializer for round objects.
         }
         
         @Steps {
@@ -141,9 +141,9 @@
     
     @Section(title: "Animate Objects") {
         @ContentAndMedia {
-            When AR objects move around and respond to their environment, they become more engaging. Using animation, you can easily incorporate motion into your app.
+            When AR objects move around and respond to their environment, they become more engaging. Using animation, you can incorporate motion into your app.
             
-            Almost every frame (1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, increment an integer every time your custom renderer executes ``ARHeadsetKit/CustomRenderer/updateResources()``.
+            Almost every frame (1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate the red arrow, increment an integer every time your custom renderer executes ``ARHeadsetKit/CustomRenderer/updateResources()``.
         }
         
 <!--    Rotate the arrow sideways   -->
