@@ -10,12 +10,6 @@
         Download the project files to begin building this project, and follow the steps below.
     }
     
-    @Section(title: "Section 1") {
-        @Steps {
-            n/a
-        }
-    }
-    
     @Section(title: "Utilizing the Central Renderer") {
         @ContentAndMedia {
             ARHeadsetKit renders an AR experience through a hierarchy of renderers. At the top level, the ``ARHeadsetKit/MainRenderer`` receives data about your surroundings from ARKit. It calls several delegate renderers, which perform tasks such as hand tracking and drawing objects. By conforming to the ``ARHeadsetKit/DelegateRenderer`` protocol, these renderers can communicate with each other.
@@ -36,8 +30,52 @@
 <!--   Iterate over each ARShapeType with a for...in loop   -->
 <!--   In the loop, offset the shape's position by a certain amount   -->
         
+<!--   In the last step, instruct to position device so that at least one meter of empty space exists directly to the right. Then, launch the app.     -->
+
+<!--   Ensure step 4 works when the viewer is compact! -->
+        
         @Steps {
-            n/a
+            @Step {
+                In the project navigator, select `MyRenderer.swift`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-2-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Loop over every case in the ``ARHeadsetKit/ARShapeType`` enumeration. Place the rendering code inside the new loop.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Shrink the rendered objects from 0.2 to 0.1 meters in each dimension.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Declare a 3D position vector outside the loop. Set it to the origin.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                In the ``ARHeadsetKit/ARObject`` initializer, replace `.cone` with `shapeType` and `[0.0, 0.0, 0.0]` with the position.
+                
+                Now, a new type of object will appear in each iteration.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                Add 0.15 meters of spacing between each object in the X direction.
+                
+                @Code(name: "MyRenderer.swift", file: "1-3-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                n/a
+            }
         }
     }
     
