@@ -22,7 +22,7 @@ class MyRenderer: CustomRenderer {
         let arrowStart: simd_float3 = [0.0, 0.0, 0.0]
         let arrowEnd:   simd_float3 = [0.0, 0.2, 0.0]
         
-        func drawArrow(arrowStart: simd_float3, arrowEnd: simd_float3) {
+        func drawArrow() {
             let arrowDirection = normalize(arrowEnd - arrowStart)
             let tipStart = arrowEnd - 0.1 * arrowDirection
             

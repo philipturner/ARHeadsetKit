@@ -19,7 +19,7 @@ class MyRenderer: CustomRenderer {
         let renderingRed = coordinator.renderingRed
         let color = renderingRed ? red : skyBlue
         
-        func drawArrow(arrowStart: simd_float3, arrowEnd: simd_float3) {
+        func drawArrow() {
             let arrowDirection = normalize(arrowEnd - arrowStart)
             let tipStart = arrowEnd - 0.1 * arrowDirection
             
