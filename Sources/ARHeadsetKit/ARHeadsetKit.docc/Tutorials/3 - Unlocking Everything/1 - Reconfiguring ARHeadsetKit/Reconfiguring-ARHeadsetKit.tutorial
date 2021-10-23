@@ -1,4 +1,4 @@
-@Tutorial(time: 30, projectFiles: "Reconfiguring-ARHeadsetKit.zip") {
+@Tutorial(time: 25, projectFiles: "Reconfiguring-ARHeadsetKit.zip") {
     @XcodeRequirement(
             title: "Xcode 13",
             destination: "https://developer.apple.com/download/")

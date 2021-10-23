@@ -17,9 +17,9 @@
         }
         
         @ContentAndMedia {
-            The Central Renderer receives requests from other renderers to render AR objects. Then, it performs culling and decides their level of detail. Finally, it commands the GPU to render the objects.
+            The Central Renderer receives requests to render AR objects from other renderers. It culls invisible objects and removes details the user won't notice. Then, it commands the GPU to render the objects.
 
-            In this section, you will learn about the types of shapes the Central Renderer can draw.
+            To begin, you will learn about the types of shapes the Central Renderer can draw.
 
         }
         
@@ -32,7 +32,7 @@
         }
     }
     
-    @Section(title: "Adjusting AR Objects") {
+    @Section(title: "Fusing AR Objects") {
         @ContentAndMedia {
             Up to this point, all AR objects have been separated from each other. Using scaling, rotation, and translation, you can combine them into compound objects.
         }
@@ -44,18 +44,21 @@
         }
     }
     
-    @Section(title: "New Ways to Render") {
+    @Section(title: "Alternative Methods of Rendering") {
         @ContentAndMedia {
-            An ``ARHeadsetKit/ARObjectGroup`` is a highly optimized way to render AR objects. It performs culling on several objects at once, taking less time than culling each object separately.
+            The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the Central Renderer provides some alternatives to the ``ARHeadsetKit/CentralRenderer/render(object:)`` function.
             
-            However, if objects in a group are too far apart, the app may attempt to render them when it does not need to. This puts needless strain on the GPU, harming performance. If you cannot guarantee that your objects will be similar in size and location, render each one separately.
+            Instead of creating new objects every frame, you may render from existing objects in a persistent array. To render an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. This eliminates expensive function calls and copying operations.
             
-            Sometimes, you might store your AR objects in an array. To make rendering easier in this scenario, the Central Renderer has a ``ARHeadsetKit/CentralRenderer/render(objects:)`` function. Do not copy objects into an array just to call this function, as the process of copying AR objects is expensive. 
+            Round objects create the illusion of roundness by referring to a mesh with numerous small triangles. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling the ``ARHeadsetKit/CentralRenderer/render(object:desiredLOD:)`` function, you override this behavior with a fixed level of detail (LOD).
             
-            In this section, you will experience two new ways of rendering AR objects.
+            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks an entire group of objects at once, treating them like a single object.
+            
+            In this section, you will experiment with the rendering techniques discussed above.
         }
         
 <!--    For the render(objects:) function, have statically stored objects.    -->
+<!--    Also add a level of detail function, give a walkthrough of what that looks like, discourage using it   -->
         
         @Steps {
             n/a
@@ -64,7 +67,9 @@
     
     @Section(title: "Opting out of Rendering") {
         @ContentAndMedia {
-            ARHeadsetKit saves energy by skipping tasks related to rendering when the settings panel is open. To help `MyRenderer` conserve energy, the `DelegateRenderer` protocol gives it the ``DelegateRenderer/shouldRenderToDisplay`` property.
+            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering only happen when absolutely necessary.
+           
+           When the touchscreen settings panel is open, the Main Renderer does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
         }
         
         @Steps {
@@ -74,9 +79,9 @@
     
     @Section(title: "Animating Objects") {
         @ContentAndMedia {
-            AR is boring when everything sits still! In this section, you will program AR objects to move over time, creating the foundations of an interactive experience.
+            AR becomes more engaging when objects move around and respond to their environment. Using animation, you can easily incorporate motion into your app.
             
-            Almost every frame (approximately 1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, you will increment a counter every time the ``CustomRenderer/updateResources()`` method of `MyRenderer` is called.
+            Almost every frame (approximately 1/60 of a second), the `MainRenderer` updates its delegate renderers' resources. To animate AR objects, you will increment an integer every time `MyRenderer` executes its ``ARHeadsetKit/CustomRenderer/updateResources()`` method.
         }
         
         @Steps {
@@ -86,7 +91,9 @@
     
     @Section(title: "Moving with the Camera") {
         @ContentAndMedia {
-            Sometimes, you might want an object to always be visible to the user, regardless of what direction they face.
+            The Main Renderer provides delegate renderers with several pieces of information about the surrounding world. Transform matrices such as ``ARHeadsetKit/DelegateRenderer/cameraToWorldTransform`` tell where the iPhone or iPad is located in the real world.
+            
+            Read the camera's direction from a transform matrix, and use it to position an AR object that the user can always see. 
         }
         
         @Steps {

@@ -105,7 +105,7 @@
     
     @Section(title: "Binding Settings to Rendering") {
         @ContentAndMedia {
-            Custom settings don't mean anything unless they affect the AR experience! In this section, you will change how an AR object appears based on the value of a custom setting.
+            Custom settings don't mean anything unless they affect the AR experience! To fix that, you will change how an AR object appears based on the value of a custom setting.
         }
         
         @Steps {
