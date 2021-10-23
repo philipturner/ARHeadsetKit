@@ -1,4 +1,4 @@
-@Tutorial(time: 40) {
+@Tutorial(time: 30) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -40,18 +40,6 @@
         }
         
 <!--    Start with an arrow    -->
-        
-        @Steps {
-            n/a
-        }
-    }
-    
-    @Section(title: "Opting out of Rendering") {
-        @ContentAndMedia {
-            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering occur only when absolutely necessary.
-           
-           When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
-        }
         
         @Steps {
             n/a
