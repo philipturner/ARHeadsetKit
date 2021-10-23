@@ -1,0 +1,67 @@
+@Tutorial(time: 20) {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "Alternative Rendering Methods") {
+        Coming soon!
+<!--        Explore new workflows for rendering AR objects and speeding up your code.-->
+<!--        -->
+<!--        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.-->
+<!--        -->
+<!--        Download the project files to begin building this project, and follow the steps below.-->
+    }
+    
+    @Section(title: "Section 1") {
+        @Steps {
+            n/a
+        }
+    }
+    
+<!--    @Section(title: "Passing an Array of Objects") {-->
+<!--        @ContentAndMedia {-->
+<!--            Instead of creating new objects every frame, you might render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``. Doing this eliminates expensive function calls and copying operations.-->
+<!--        }-->
+<!--        -->
+<!--<!--    For the render(objects:) function, have statically stored objects.    -->-->
+<!--<!--    Also add a level of detail function, give a walkthrough of what that looks like, discourage using it   -->-->
+<!--        -->
+<!--        @Steps {-->
+<!--            n/a-->
+<!--        }-->
+<!--    }-->
+<!--    -->
+<!--    @Section(title: "Controlling the Level of Detail") {-->
+<!--        @ContentAndMedia {-->
+<!--            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(object:desiredLOD:)``, you override this behavior with a fixed level of detail (LOD).-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            n/a-->
+<!--        }-->
+<!--        -->
+<!--<!--    This can be really interactive because a small LOD makes an AR object look wierd.    -->-->
+<!--    }-->
+<!--    -->
+<!--    @Section(title: "Optimizing with ARObjectGroup") {-->
+<!--        @ContentAndMedia {-->
+<!--            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            n/a-->
+<!--        }-->
+<!--    }-->
+<!--    -->
+<!--    @Section(title: "Opting out of Rendering") {-->
+<!--        @ContentAndMedia {-->
+<!--            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering occur only when absolutely necessary.-->
+<!--           -->
+<!--           When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            n/a-->
+<!--        }-->
+<!--    }-->
+}

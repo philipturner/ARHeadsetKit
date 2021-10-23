@@ -10,13 +10,14 @@
         
         @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
         
-        @TutorialReference(tutorial: "doc:Configuring-ARHeadsetKit")
+        @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        
         @TutorialReference(tutorial: "doc:Working-with-AR-Objects")
+        @TutorialReference(tutorial: "doc:Alternative-Rendering-Methods")
     }
     
     @Chapter(name: "Interactive Experiences") {
-        Bring hand-object interaction into your app and create a holographic interface.
+        Bring hand-object interaction into your app and create holographic interfaces.
         
         @Image(source: "Blank.png", alt: "")
         
