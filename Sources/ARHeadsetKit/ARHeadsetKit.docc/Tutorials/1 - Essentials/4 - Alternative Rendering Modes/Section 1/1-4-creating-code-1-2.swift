@@ -5,8 +5,6 @@ class MyRenderer: CustomRenderer {
     unowned let renderer: MainRenderer
     var numFrames: Int = 0
     
-    var objects: [ARObject] = []
-    
     required init(renderer: MainRenderer, library: MTLLibrary!) {
         self.renderer = renderer
     }
@@ -23,6 +21,10 @@ class MyRenderer: CustomRenderer {
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
+        
+    }
+    
+    func generateObjects() {
         
     }
 }

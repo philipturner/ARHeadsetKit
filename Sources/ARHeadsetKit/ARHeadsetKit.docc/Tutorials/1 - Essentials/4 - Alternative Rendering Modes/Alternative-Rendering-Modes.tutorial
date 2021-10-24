@@ -15,26 +15,32 @@
     
     @Section(title: "Create Persistent Objects") {
         @ContentAndMedia {
-            When rendering several objects, generating them every frame can consume a massive amount of energy. To mitigate this problem, initialize a list of objects only one time.
+            When rendering several objects, generating them every frame can cause a performance bottleneck. To mitigate this problem, initialize a list of objects only one time.
         }
         
         @Steps {
             @Step {
-                In the project navigator, select `MyRenderer.swift`.
+                In the project navigator, select `MyRenderer.swift`. Create a new instance method called `generateObjects()`.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-1.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-2.swift", previousFile: "1-4-creating-code-1-1.swift")
             }
             
             @Step {
-                Add an list of AR objects to `MyRenderer`. Name it `objects` and initialize it to an empty array.
-                
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-2.swift")
-            }
-            
-            @Step {
-                In the initializer, declare a nested function called `createShape()`. It takes an ``ARHeadsetKit/ARShapeType`` and three vectors&mdash;`position`, `scale`, and `upDirection`, returning an `ARObject`.
+                Call `generateObjects` from within the initializer of `MyRenderer`.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Add a property called `objects`. Set its initial value to an empty array of AR objects.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                In `generateObjects()`, declare a nested function called `createShape()`. It takes an ``ARHeadsetKit/ARShapeType`` and three vectors&mdash;`position`, `scale`, and `upDirection`, returning an `ARObject`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-5.swift")
             }
             
             @Step {
@@ -42,13 +48,13 @@
                 
                 > Warning: Always normalize vectors before using them to create quaternions. If their length is not one, the resulting rotation will be undefined.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-4.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-6.swift")
             }
             
             @Step {
                 Return an `ARObject` initialized with `orientation` and the nested function's parameters.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-5.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-7.swift")
             }
             
             @Step {
@@ -56,7 +62,7 @@
                 
                 > Tip: Separate large blocks of code with comments or empty lines. Comments divide the rendered objects into related groups, making them easier to read.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-6.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-8.swift")
             }
             
             @Step {
@@ -64,19 +70,19 @@
                 
                 From this step onward, use keyboard shortcuts to copy the rendering code.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-7.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-9.swift")
             }
             
             @Step {
                 Create a new section of objects, starting with a comment describing that their color will never change. Use the vectors defined in the code listing, or experiment with your own.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-8.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-10.swift")
             }
             
             @Step {
                 Add one more section, with objects that have animated colors.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-9.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-11.swift")
             }
         }
     }
@@ -88,7 +94,7 @@
         
         @Steps {
             @Step {
-                Scroll down to `updateResources()`. Turn the `red` and `skyBlue` colors into half-precision numbers.
+                Scroll up to `updateResources()`. Turn the `red` and `skyBlue` colors into half-precision numbers.
                 
                 Half precision is very compact type of floating-point number. It consumes 50% less memory than single precision and is used widely in modern GPU programming.
                 
@@ -140,7 +146,7 @@
             }
             
             @Step {
-                Outside of the function, convert `numFrames` to time in seconds. Declare an `angleDegrees` variable that reaches 360 when four seconds have passed.
+                Outside of the nested function, convert `numFrames` to time in seconds. Declare an `angleDegrees` variable that reaches 360 when four seconds have passed.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-9.swift")
             }
@@ -152,7 +158,7 @@
             }
             
             @Step {
-                Call the new `render(objects:)` function of ``ARHeadsetKit/CentralRenderer``.
+                Call the new `render(objects:)` method of ``ARHeadsetKit/CentralRenderer``.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-11.swift")
             }
@@ -167,7 +173,7 @@
     
     @Section(title: "Control the Level of Detail") {
         @ContentAndMedia {
-            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(objects:desiredLOD:)``, you override this behavior with a fixed level of detail (LOD).
+            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(objects:desiredLOD:)``, you can override this behavior with a fixed level of detail (LOD).
         }
         
         @Steps {

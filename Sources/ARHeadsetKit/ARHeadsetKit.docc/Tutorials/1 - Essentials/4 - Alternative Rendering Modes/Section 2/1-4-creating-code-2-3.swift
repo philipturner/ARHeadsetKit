@@ -4,12 +4,33 @@ import Metal
 class MyRenderer: CustomRenderer {
     unowned let renderer: MainRenderer
     var numFrames: Int = 0
-    
     var objects: [ARObject] = []
     
     required init(renderer: MainRenderer, library: MTLLibrary!) {
         self.renderer = renderer
         
+        generateObjects()
+    }
+    
+    func updateResources() {
+        numFrames += 1
+        
+        let red:     simd_half3 = [1.00, 0.00, 0.00]
+        let skyBlue: simd_half3 = [0.33, 0.75, 1.00]
+        
+        let coordinator = renderer.coordinator as! Coordinator
+        let renderingRed = coordinator.renderingRed
+        let userSelectedColor = renderingRed ? red : skyBlue
+        
+        objects[0].color = userSelectedColor
+        objects[1].color = userSelectedColor
+    }
+    
+    func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
+        
+    }
+    
+    func generateObjects() {
         func createShape(shapeType: ARShapeType,
                          position: simd_float3,
                          scale: simd_float3,
@@ -72,23 +93,5 @@ class MyRenderer: CustomRenderer {
             scale:       [ 0.06,  0.06,  0.06],
             upDirection: [-5.00,  1.00,  5.00])
         )
-    }
-    
-    func updateResources() {
-        numFrames += 1
-        
-        let red:     simd_half3 = [1.00, 0.00, 0.00]
-        let skyBlue: simd_half3 = [0.33, 0.75, 1.00]
-        
-        let coordinator = renderer.coordinator as! Coordinator
-        let renderingRed = coordinator.renderingRed
-        let userSelectedColor = renderingRed ? red : skyBlue
-        
-        objects[0].color = userSelectedColor
-        objects[1].color = userSelectedColor
-    }
-    
-    func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
-        
     }
 }

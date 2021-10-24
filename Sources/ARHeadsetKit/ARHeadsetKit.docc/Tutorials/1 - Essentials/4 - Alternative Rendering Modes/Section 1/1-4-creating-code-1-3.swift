@@ -5,18 +5,10 @@ class MyRenderer: CustomRenderer {
     unowned let renderer: MainRenderer
     var numFrames: Int = 0
     
-    var objects: [ARObject] = []
-    
     required init(renderer: MainRenderer, library: MTLLibrary!) {
         self.renderer = renderer
         
-        func createShape(shapeType: ARShapeType,
-                         position: simd_float3,
-                         scale: simd_float3,
-                         upDirection: simd_float3) -> ARObject
-        {
-            
-        }
+        generateObjects()
     }
     
     func updateResources() {
@@ -31,6 +23,10 @@ class MyRenderer: CustomRenderer {
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
+        
+    }
+    
+    func generateObjects() {
         
     }
 }

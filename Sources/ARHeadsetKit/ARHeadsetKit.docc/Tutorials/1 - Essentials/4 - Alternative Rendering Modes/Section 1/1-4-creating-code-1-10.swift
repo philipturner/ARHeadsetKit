@@ -15,23 +15,12 @@ class MyRenderer: CustomRenderer {
     func updateResources() {
         numFrames += 1
         
-        let red:     simd_half3 = [1.00, 0.00, 0.00]
-        let skyBlue: simd_half3 = [0.33, 0.75, 1.00]
+        let red:     simd_float3 = [1.00, 0.00, 0.00]
+        let skyBlue: simd_float3 = [0.33, 0.75, 1.00]
         
         let coordinator = renderer.coordinator as! Coordinator
         let renderingRed = coordinator.renderingRed
-        let userSelectedColor = renderingRed ? red : skyBlue
-        
-        objects[0].color = userSelectedColor
-        objects[1].color = userSelectedColor
-        objects[2].color = [0.70, 0.60, 0.05]
-        objects[3].color = [0.20, 0.85, 0.30]
-        
-        func HSL_toRGB(hue: Float, saturation: Float = 1.00,
-                       lightness: Float = 0.50) -> simd_half3
-        {
-            
-        }
+        let color = renderingRed ? red : skyBlue
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
@@ -84,22 +73,6 @@ class MyRenderer: CustomRenderer {
             position:    [-0.04, 0.00, -0.16],
             scale:       [ 0.03, 0.10,  0.03],
             upDirection: [ 3.00, 2.00,  2.00])
-        )
-        
-        // Animated color
-        
-        objects.append(createShape(
-            shapeType: .cube,
-            position:    [0.00,  0.08, -0.14],
-            scale:       [0.06,  0.10,  0.06],
-            upDirection: [1.00, -1.00,  1.00])
-        )
-        
-        objects.append(createShape(
-            shapeType: .octahedron,
-            position:    [ 0.00, -0.06, -0.14],
-            scale:       [ 0.06,  0.06,  0.06],
-            upDirection: [-5.00,  1.00,  5.00])
         )
     }
 }

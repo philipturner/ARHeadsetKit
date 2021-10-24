@@ -15,50 +15,12 @@ class MyRenderer: CustomRenderer {
     func updateResources() {
         numFrames += 1
         
-        let red:     simd_half3 = [1.00, 0.00, 0.00]
-        let skyBlue: simd_half3 = [0.33, 0.75, 1.00]
+        let red:     simd_float3 = [1.00, 0.00, 0.00]
+        let skyBlue: simd_float3 = [0.33, 0.75, 1.00]
         
         let coordinator = renderer.coordinator as! Coordinator
         let renderingRed = coordinator.renderingRed
-        let userSelectedColor = renderingRed ? red : skyBlue
-        
-        objects[0].color = userSelectedColor
-        objects[1].color = userSelectedColor
-        objects[2].color = [0.70, 0.60, 0.05]
-        objects[3].color = [0.20, 0.85, 0.30]
-        
-        func HSL_toRGB(hue: Float, saturation: Float = 1.00,
-                       lightness: Float = 0.50) -> simd_half3
-        {
-            var majorColor = (lightness * 2 - 1).magnitude
-            majorColor = (1 - majorColor) * saturation
-            
-            // Distance from the nearest primary color
-            var primaryDistance = positiveRemainder(hue / 60, 2)
-            primaryDistance = 1 - (primaryDistance - 1).magnitude
-            let minorColor = majorColor * primaryDistance
-            
-            // Every 60 degrees, change how colors are selected
-            let clampedHue = positiveRemainder(hue, 360)
-            let hueRangeID = Int(clampedHue / 60)
-            
-            let majorIndices = simd_long8(0, 1, 1, 2, 2, 0, 0, 0)
-            let minorIndices = simd_long8(1, 0, 2, 1, 0, 2, 2, 2)
-            
-            var output = simd_float3.zero
-            output[majorIndices[hueRangeID]] = majorColor
-            output[minorIndices[hueRangeID]] = minorColor
-            
-            // Adjust output so it falls between 0% and 100%
-            output += lightness - majorColor / 2
-            return simd_half3(output)
-            
-            // To learn more about this conversion formula, check out
-            // https://www.rapidtables.com/convert/color/hsl-to-rgb.html
-        }
-        
-        let numSeconds = Float(numFrames) / 60
-        let angleDegrees = 360 * (numSeconds / 4)
+        let color = renderingRed ? red : skyBlue
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {

@@ -4,26 +4,12 @@ import Metal
 class MyRenderer: CustomRenderer {
     unowned let renderer: MainRenderer
     var numFrames: Int = 0
-    
     var objects: [ARObject] = []
     
     required init(renderer: MainRenderer, library: MTLLibrary!) {
         self.renderer = renderer
         
-        func createShape(shapeType: ARShapeType,
-                         position: simd_float3,
-                         scale: simd_float3,
-                         upDirection: simd_float3) -> ARObject
-        {
-            let yAxis: simd_float3 = [0.0, 1.0, 0.0]
-            let orientation = simd_quatf(from: yAxis,
-                                         to: normalize(upDirection))
-            
-            return ARObject(shapeType: shapeType,
-                            position: position,
-                            orientation: orientation,
-                            scale: scale)
-        }
+        generateObjects()
     }
     
     func updateResources() {
@@ -39,5 +25,15 @@ class MyRenderer: CustomRenderer {
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
         
+    }
+    
+    func generateObjects() {
+        func createShape(shapeType: ARShapeType,
+                         position: simd_float3,
+                         scale: simd_float3,
+                         upDirection: simd_float3) -> ARObject
+        {
+            
+        }
     }
 }
