@@ -50,4 +50,6 @@
 <!--  It will be wierd using ray tracing to interact with that, but I'll do it anyway!  -->
 
 <!--   This is distinct from chapter 3's GPGPU project because it delves more into compute shaders and performance problems.   -->
+
+<!--   Then make multiple Hololens cubes and put the side-by-side comparison of ARHeadsetKit to the Hololens promotional material in my Youtube video!   -->
 }
