@@ -6,6 +6,8 @@
     @Intro(title: "Creating a User Interface") {
         Coming soon!
 <!--        Working with the Interface Renderer. Include a static interface and one that moves with the user (with limited functionality). Include that you must respond to the user's chosen interface size.-->
+        
+<!--    Ultimate goal: ray tracing an interface    -->
     }
     
     @Section(title: "n/a") {

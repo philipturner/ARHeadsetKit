@@ -262,15 +262,26 @@
             When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their contentis presented.
         }
         
-<!--   Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode console.   -->
-<!--   Explicitly state that it's a guard statement.   -->
-
-<!--   State that you should still update counters, so place the statement after that - do so in a warning.   -->
-
-<!--   Show an image of the console   -->
-        
         @Steps {
-            n/a
+            @Step {
+                Scroll to the top of `updateResources()`. Add a `guard` statement that returns early if no content will render to the display.
+                
+                > Warning: Increment all counters before returning. Otherwise, time-dependent operations may produce unexpected behavior.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-5-1.swift", previousFile: "1-4-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                When content will not render to the screen, log that the settings panel is open.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Press `Cmd + Shift + C` to activate the console. Then, launch the app and open the settings panel. Your message will flood the console area.
+                
+                @Image(source: "1-4-image-5-1.png", alt: "\"Settings panel activated!\" filling up the console.")
+            }
         }
     }
 }
