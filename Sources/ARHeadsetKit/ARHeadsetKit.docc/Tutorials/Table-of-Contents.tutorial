@@ -10,11 +10,6 @@
         
         @Image(source: "1-4-image-2-1-preview.jpg", alt: "Differently colored shapes in front of a chair.")
         
-<!--    Go back through and add assessments to some of the shorter tutorials. Make them closer in duration to tutorial #3.    -->
-<!--    At a minimum, review any warnings.   -->
-
-<!--    Add to assessment: Around how many objects should you have close together before using an ARObjectGroup? 2 -- 8 -- 30 -- 150 -- justification: Not quite! Re-read the introduction to section 4. || or: Correct! You should wait until the group can encapsulate dozens of objects.   -->
-        
         @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        
         @TutorialReference(tutorial: "doc:Working-with-AR-Objects")

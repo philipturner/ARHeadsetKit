@@ -284,4 +284,90 @@
             }
         }
     }
+    
+    @Assessments {
+        @MultipleChoice {
+            What should you do to vectors before passing them into a `simd_quatf` initializer?
+            
+            @Choice(isCorrect: false) {
+                Refrain from modifying them.
+                
+                @Justification(reaction: "Try again!") {
+                    If a vector's length isn't one, the quaternion will be undefined.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Ensure their length is 0.5.
+                
+                @Justification(reaction: "Almost there!") {
+                    Normalized vectors have a different length than 0.5.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                Normalize them.
+                
+                @Justification(reaction: "That's right!") {
+                    Pass vectors into the `normalize(_:)` function to ensure their length is one.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            Around how many objects should be close together before you combine them into an ``ARHeadsetKit/ARObjectGroup``?
+            
+            @Choice(isCorrect: false) {
+                2
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                8
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                30
+                
+                @Justification(reaction: "Correct!") {
+                    You should wait until the group can encapsulate dozens of objects.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                150
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            When should you return if ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` is true?
+            
+            @Choice(isCorrect: false) {
+                Immediately
+                
+                @Justification(reaction: "Try again!") {
+                    Time-dependent operations will act like time has stopped.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                After incrementing any counters
+                
+                @Justification(reaction: "That's right!") {
+                    Time-dependent operations still need to experience the flow of time.
+                }
+            }
+        }
+    }
 }
