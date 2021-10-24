@@ -44,7 +44,7 @@ class MyRenderer: CustomRenderer {
         
         objects.append(createShape(
             shapeType: .sphere,
-            position:    [0.08, 0.00, -0.14],
+            position:    [0.07, 0.00, -0.14],
             scale:       [0.06, 0.06,  0.06],
             upDirection: [0.00, 1.00,  0.00])
         )
@@ -52,7 +52,7 @@ class MyRenderer: CustomRenderer {
         objects.append(createShape(
             shapeType: .cone,
             position:    [-0.04, 0.00, -0.16],
-            scale:       [ 0.02, 0.10,  0.02],
+            scale:       [ 0.03, 0.10,  0.03],
             upDirection: [ 3.00, 2.00,  2.00])
         )
         
