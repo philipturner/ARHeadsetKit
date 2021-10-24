@@ -8,7 +8,8 @@ Miscellaneous math functions used within ARHeadsetKit.
 
 - ``roundUpToPowerOf2(_:)``
 - ``kelvinToRGB(_:)``
-- ``simd_slerp(from:to:t:)``
+- ``simd_slerp(from:to:t:)-44knj``
+- ``simd_slerp(from:to:t:)-21yxa``
 
 ### Angle Conversion
 

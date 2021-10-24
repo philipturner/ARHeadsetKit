@@ -44,13 +44,23 @@ public func kelvinToRGB(_ temperature: Double) -> simd_float3 {
 @inlinable public func degreesToRadians<T: BinaryFloatingPoint>(_ x: T) -> T { x * (.pi / 180) }
 @inlinable public func radiansToDegrees<T: BinaryFloatingPoint>(_ x: T) -> T { x * (180 / .pi) }
 
-/// Equivalent to [`simd_slerp(_:_:_:)`](https://developer.apple.com/documentation/accelerate/2883426-simd_slerp), but operates on direction vectors.
+/// Equivalent to single-precision [`simd_slerp(_:_:_:)`](https://developer.apple.com/documentation/accelerate/2867359-simd_slerp), but operates on direction vectors.
 @inlinable
 public func simd_slerp(from start: simd_float3, to end: simd_float3, t: Float) -> simd_float3 {
     var rotation = simd_quatf(from: start, to: end)
     let rotationAngle = t * rotation.angle
     
     rotation = simd_quatf(angle: rotationAngle, axis: rotation.axis)
+    return rotation.act(start)
+}
+
+/// Equivalent to double-precision [`simd_slerp(_:_:_:)`](https://developer.apple.com/documentation/accelerate/2883426-simd_slerp), but operates on direction vectors.
+@inlinable
+public func simd_slerp(from start: simd_double3, to end: simd_double3, t: Double) -> simd_double3 {
+    var rotation = simd_quatd(from: start, to: end)
+    let rotationAngle = t * rotation.angle
+    
+    rotation = simd_quatd(angle: rotationAngle, axis: rotation.axis)
     return rotation.act(start)
 }
 
