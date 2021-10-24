@@ -8,9 +8,12 @@
     @Chapter(name: "Essentials") {
         Create your first app with ARHeadsetKit, using basic AR objects.
         
-<!--    After finishing tutorial 4, replace this with a wider picture that shows the cool objects. Rearrange them for the landscape mode photo and make the animated color static.    -->
+<!--    After finishing tutorial 4, replace this with a wider picture that shows the cool objects. Rearrange them for the landscape mode photo and make the animated color static. Make the color the same as the tutorial 4 intro picture/section 2 picture   -->
         
         @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
+        
+<!--    Go back through and add assessments to some of the shorter tutorials. Make them closer in duration to tutorial #3.    -->
+<!--    At a minimum, review any warnings.   -->
         
         @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        

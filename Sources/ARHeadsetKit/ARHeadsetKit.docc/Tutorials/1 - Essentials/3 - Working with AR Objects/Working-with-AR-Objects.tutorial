@@ -153,7 +153,7 @@
         
         @Steps {
             @Step {
-                Create a new property on `MyRenderer` called `numFrames`. This is an integer that represents how many frames have passed since the app started.
+                Create a new property of `MyRenderer` called `numFrames`. This is an integer that represents how many frames have passed since the app started.
                 
                 @Code(name: "MyRenderer.swift", file: "1-3-creating-code-3-1.swift", previousFile: "1-3-creating-code-2-7.swift")
             }
