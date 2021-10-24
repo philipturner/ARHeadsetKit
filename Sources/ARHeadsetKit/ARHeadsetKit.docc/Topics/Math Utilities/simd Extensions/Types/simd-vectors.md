@@ -2,7 +2,7 @@
 
 ## Topics
 
-### Half-Precision
+### Half Precision
 
 - ``simd_half2``
 - ``simd_half3``
@@ -12,7 +12,7 @@
 - ``simd_packed_half3``
 - ``simd_packed_half4``
 
-### Single-Precision
+### Single Precision
 
 - ``simd_packed_float3``
 

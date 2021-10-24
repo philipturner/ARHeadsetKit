@@ -1,71 +1,373 @@
-@Tutorial(time: 25) {
+@Tutorial(time: 35, projectFiles: "Alternative-Rendering-Modes.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Alternative Rendering Modes") {
-        Explore new workflows for rendering AR objects and speeding up your code. Coming soon!
+        Explore new workflows for rendering AR objects and speeding up your code.
         
-<!--        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.-->
+        The process of optimizing AR objects for rendering takes a massive amount of time. When preparing numerous objects one-by-one, the frame rate may drop. To solve this problem, you will explore alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.
         
-<!--        Download the project files to begin building this project, and follow the steps below.-->
+        Download the project files to begin building this project, and follow the steps below.
+        
+        @Image(source: "1-4-image-2-1-intro.jpg", alt: "Differently colored shapes in front of a chair.")
     }
     
-    @Section(title: "n/a") {
+    @Section(title: "Create Persistent Objects") {
+        @ContentAndMedia {
+            When rendering several objects, generating them every frame can cause a performance bottleneck. To mitigate this problem, initialize a list of objects only one time.
+        }
+        
         @Steps {
+            @Step {
+                In the project navigator, select `MyRenderer.swift`. Create a new instance method called `generateObjects()`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-2.swift", previousFile: "1-4-creating-code-1-1.swift")
+            }
             
+            @Step {
+                Call `generateObjects` from within the initializer of `MyRenderer`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Add a property called `objects`. Set its initial value to an empty array of AR objects.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                In `generateObjects()`, declare a nested function called `createShape()`. It takes an ``ARHeadsetKit/ARShapeType`` and three vectors&mdash;`position`, `scale`, and `upDirection`, returning an `ARObject`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Calculate the rotation going from the positive Y axis to `upDirection`. Normalize `upDirection` before passing it into the quaternion initializer.
+                
+                > Warning: Always normalize vectors before using them to create quaternions. If their length is not one, the resulting rotation will be undefined.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-6.swift")
+            }
+            
+            @Step {
+                Return an `ARObject` initialized with `orientation` and the nested function's parameters.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-7.swift")
+            }
+            
+            @Step {
+                Add a square pyramid to the object list. Copy the function parameters exactly as they appear in the code listing. Then, type a comment saying the object's color can be changed in the settings panel.
+                
+                > Tip: Separate large blocks of code with comments or empty lines. Comments divide the rendered objects into related groups, making them easier to read.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-8.swift")
+            }
+            
+            @Step {
+                Append a cylinder object, with different `position`, `scale`, and `upDirection` vectors than the pyramid.
+                
+                From this step onward, use keyboard shortcuts to copy the rendering code.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-9.swift")
+            }
+            
+            @Step {
+                Create a new section of objects, starting with a comment describing that their color will never change. Use the vectors defined in the code listing, or experiment with your own.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-10.swift")
+            }
+            
+            @Step {
+                Add one more section, with objects that have animated colors.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-11.swift")
+            }
         }
     }
     
-<!--    @Section(title: "Pass an Array of Objects") {-->
-<!--        @ContentAndMedia {-->
-<!--            Instead of creating new objects every frame, you might render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``. Doing this eliminates expensive function calls and copying operations.-->
-<!--        }-->
+    @Section(title: "Render an Array of Objects") {
+        @ContentAndMedia {
+            Instead of creating new objects every frame, you will sometimes render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``.
+        }
         
-<!--   For the render(objects:) function, have statically stored objects.   -->
-<!--   Create the objects in MyRenderer's initializer   -->
-<!--   Make a whole bunch of AR objects with different colors and shapes, which looks cool  -->
-<!---->
-<!--   In the last step, state: "notice anything different? The app is lagging!"   -->
-        
-<!--        @Steps {-->
-<!--            n/a-->
-<!--        }-->
-<!--    }-->
+        @Steps {
+            @Step {
+                Scroll up to `updateResources()`. Turn the `red` and `skyBlue` colors into half-precision numbers.
+                
+                Half precision is very compact type of floating-point number. It consumes 50% less memory than single precision and is used widely in modern GPU programming.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-1.swift", previousFile: "1-4-creating-code-1-9.swift")
+            }
+            
+            @Step {
+                Rename `color` to `userSelectedColor`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Set the first two objects' colors to `userSelectedColor`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Set the next two objects' colors to gold (70% red, 60% green, 5% blue) and light green (20% red, 85% green, 30% blue).
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                To make colors animate over time, you must work with the hue-saturation-lightness (HSL) color space. Declare a function that converts HSL to red-green-blue. Set `saturation` to 100% by default, and `lightness` to 50%.
+                
+                Hue represents degrees on a color wheel that loops around a rainbow. Zero degrees is red, 120 degrees is green, and 240 degrees is blue.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Copy and paste the new lines from the code listing, which calculate the major and minor colors.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Determine whether the major and minor colors are red, green, or blue.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Normalize the output and convert it to half precision.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-8.swift")
+            }
+            
+            @Step {
+                Outside of the nested function, convert `numFrames` to time in seconds. Declare an `angleDegrees` variable that reaches 360 when four seconds have passed.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-9.swift")
+            }
+            
+            @Step {
+                Assign the last two objects' colors so that `hue` animates over time. For the object at index 4, decrease `saturation` to 50%.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-10.swift")
+            }
+            
+            @Step {
+                Call the new `render(objects:)` method of ``ARHeadsetKit/CentralRenderer``.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-11.swift")
+            }
+            
+            @Step {
+                Launch the app. Watch the cuboid and octahedron's colors fluctuate over time.
+                
+                @Image(source: "1-4-image-2-1.jpg", alt: "Differently colored shapes rendering.")
+            }
+        }
+    }
     
-<!--    @Section(title: "Control the Level of Detail") {-->
-<!--        @ContentAndMedia {-->
-<!--            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(objects:desiredLOD:)``, you override this behavior with a fixed level of detail (LOD).-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            n/a-->
-<!--        }-->
+    @Section(title: "Control the Level of Detail") {
+        @ContentAndMedia {
+            Round objects create the illusion of smoothness by referencing a high-resolution triangle mesh. To reduce the cost of rendering, they use as few triangles as possible without sacrificing visual quality. By calling ``ARHeadsetKit/CentralRenderer/render(objects:desiredLOD:)``, you can override this behavior with a fixed level of detail (LOD).
+        }
         
-<!--    Use the array from the previous section, referencing the problem of the app being laggy.    -->
+        @Steps {
+            @Step {
+                Swap out `render(objects:)` with `render(objects:desiredLOD:)`. Set the level of detail to 10.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-3-1.swift", previousFile: "1-4-creating-code-2-11.swift")
+            }
+            
+            @Step {
+                That's it for this section! Run the app and notice that round shapes now look jagged. What happens when you decrease the LOD to 3?
+                
+                @Image(source: "1-4-image-3-1.jpg", alt: "Round shapes appearing jagged, next to the polyhedral shapes.")
+            }
+        }
+    }
+    
+    @Section(title: "Accelerate Code with ARObjectGroup") {
+        @ContentAndMedia {
+            Sometimes, a group of similarly-sized objects consistently appear close to each other. This means they return the same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
+            
+            Unless an ARObjectGroup contains dozens of objects, creating it costs more time than is saved during culling. To gain experience with this concept, you will create groups of just two objects.
+        }
         
-<!--    This can be really interactive because a small LOD makes an AR object look wierd.    -->
-<!--    }-->
+        @Steps {
+            @Step {
+                Remove `render(objects:desiredLOD:)` and replace it with three empty lines. These lines will separate your new code from the rest.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-1.swift", previousFile: "1-4-creating-code-3-1.swift")
+            }
+            
+            @Step {
+                Create a new `ARObjectGroup` with an empty array of AR objects.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Search for the cylinder object using the `first(where:)` method of `Array`. Add it to the object group.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Include the octahedron as well. Don't forget to add an exclamation mark to unwrap the optional!
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Create another group with the cube and the cone.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Pass both object groups to ``ARHeadsetKit/CentralRenderer/render(objectGroup:desiredLOD:)``, letting `desiredLOD` take its default value.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Process the remaining AR objects using a `for-in` loop.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-7.swift")
+            }
+            
+            @Step {
+                Search for the object that matches each iteration's `shapeType`, then render it.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                Run the app and experiment with not calling `render()` on an object group. Verify that objects in the removed group do not appear.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-9.swift")
+            }
+        }
+    }
     
-<!--    @Section(title: "Optimize Further with ARObjectGroup") {-->
-<!--        @ContentAndMedia {-->
-<!--            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            n/a-->
-<!--        }-->
-<!--    }-->
+    @Section(title: "Opt out of Rendering") {
+        @ContentAndMedia {
+            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks like rendering only occur when absolutely necessary.
+           
+            When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their contentis presented.
+        }
+        
+        @Steps {
+            @Step {
+                Scroll to the top of `updateResources()`. Add a `guard` statement that returns early if no content will render to the display.
+                
+                > Warning: Increment all counters before returning. Otherwise, time-dependent operations may produce unexpected behavior.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-5-1.swift", previousFile: "1-4-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                When content will not render to the screen, log that the settings panel is open.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Press `Cmd + Shift + C` to activate the console. Then, launch the app and open the settings panel. Your message will flood the console area.
+                
+                @Image(source: "1-4-image-5-1.png", alt: "\"Settings panel activated!\" filling up the console.")
+            }
+        }
+    }
     
-<!--    @Section(title: "Opt out of Rendering") {-->
-<!--        @ContentAndMedia {-->
-<!--            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering occur only when absolutely necessary.-->
-<!--           -->
-<!--           When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            n/a-->
-<!--        }-->
-<!--    }-->
+    @Assessments {
+        @MultipleChoice {
+            What should you do to vectors before passing them into a `simd_quatf` initializer?
+            
+            @Choice(isCorrect: false) {
+                Refrain from modifying them.
+                
+                @Justification(reaction: "Try again!") {
+                    If a vector's length isn't one, the quaternion will be undefined.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Ensure their length is 0.5.
+                
+                @Justification(reaction: "Almost there!") {
+                    Normalized vectors have a different length than 0.5.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                Normalize them.
+                
+                @Justification(reaction: "That's right!") {
+                    Pass vectors into the `normalize(_:)` function to ensure their length is one.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            Around how many objects should be close together before you combine them into an ``ARHeadsetKit/ARObjectGroup``?
+            
+            @Choice(isCorrect: false) {
+                2
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                8
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                30
+                
+                @Justification(reaction: "Correct!") {
+                    You should wait until the group can encapsulate dozens of objects.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                150
+                
+                @Justification(reaction: "Not quite!") {
+                    Re-read the introduction to section 4.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            When should you return if ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` is true?
+            
+            @Choice(isCorrect: false) {
+                Immediately
+                
+                @Justification(reaction: "Try again!") {
+                    Time-dependent operations will act like time has stopped.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                After incrementing any counters
+                
+                @Justification(reaction: "That's right!") {
+                    Time-dependent operations still need to experience the flow of time.
+                }
+            }
+        }
+    }
 }

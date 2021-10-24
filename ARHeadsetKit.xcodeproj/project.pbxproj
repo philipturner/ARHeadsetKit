@@ -321,6 +321,7 @@
 		9878B6DC26FFD56300D99F14 /* CentralOctahedron.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralOctahedron.swift; sourceTree = "<group>"; };
 		9878B6DD26FFD56300D99F14 /* CentralShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralShape.swift; sourceTree = "<group>"; };
 		9878B6E526FFD56B00D99F14 /* CentralRendering.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CentralRendering.metal; sourceTree = "<group>"; };
+		9888BE742725D39600E213CF /* google-cardboard-plus-ar.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "google-cardboard-plus-ar.webp"; sourceTree = "<group>"; };
 		98AACFF926FD54270011546A /* ARHeadsetKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ARHeadsetKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98AAD00526FD55900011546A /* ARHeadsetKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHeadsetKit.swift; sourceTree = "<group>"; };
 		98AAD00926FD55A40011546A /* ARHeadsetKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHeadsetKitTests.swift; sourceTree = "<group>"; };
@@ -1055,6 +1056,7 @@
 		98EDDDD0270D189B006F9F44 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9888BE742725D39600E213CF /* google-cardboard-plus-ar.webp */,
 				98EDDDD1270D18A8006F9F44 /* metal-memory-allocation.svg */,
 			);
 			path = images;

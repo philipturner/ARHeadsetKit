@@ -8,9 +8,7 @@
     @Chapter(name: "Essentials") {
         Create your first app with ARHeadsetKit, using basic AR objects.
         
-<!--    After finishing tutorial 4, replace this with a wider picture that shows the heck ton of objects causing lag.    -->
-        
-        @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
+        @Image(source: "1-4-image-2-1-preview.jpg", alt: "Differently colored shapes in front of a chair.")
         
         @TutorialReference(tutorial: "doc:Setting-Up-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Adding-Custom-Settings")        

@@ -17,6 +17,10 @@ import simd
 public struct ARObjectGroup {
     public let objects: [ARObject]
     
+    public init(objects: [ARObject]) {
+        self.objects = objects
+    }
+    
     @inlinable
     public var boundingBox: simd_float2x3 {
         let worldLimits = simd_float2x3(.init(repeating:  .greatestFiniteMagnitude),
