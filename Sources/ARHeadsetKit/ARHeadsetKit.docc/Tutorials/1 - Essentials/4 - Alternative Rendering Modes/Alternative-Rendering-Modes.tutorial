@@ -270,7 +270,7 @@
             }
             
             @Step {
-                When content will not render to the screen, log that the settings panel is open.
+                When content does not render to the screen, log that the settings panel is open.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-5-2.swift")
             }
