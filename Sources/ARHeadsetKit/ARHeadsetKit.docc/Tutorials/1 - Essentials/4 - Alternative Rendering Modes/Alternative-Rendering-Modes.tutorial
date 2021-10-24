@@ -193,32 +193,79 @@
     
     @Section(title: "Accelerate Code with ARObjectGroup") {
         @ContentAndMedia {
-            Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
+            Sometimes, a group of similarly-sized objects consistently appear close to each other. This means they return the same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
             
-            Search for close pairs of objects, and turn them into AR object groups.
+            Unless an ARObjectGroup contains dozens of objects, creating it costs more time than is saved during culling. To gain experience with this concept, you will create groups of just two objects.
         }
         
-<!--    Start with removing the render function    -->
-        
-<!--    Use high-level methods on Swift Array to extract objects   -->
-    
-<!--   Group the cylinder and octahedron into one ARObjectGroup. Group the cube and cone into another. Leave the last two out because they are not close enough.    -->
-        
-<!--    Don't show an image for this    -->
-        
         @Steps {
-            n/a
+            @Step {
+                Remove `render(objects:desiredLOD:)` and replace it with three empty lines. These lines will separate your new code from the rest.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-1.swift", previousFile: "1-4-creating-code-3-1.swift")
+            }
+            
+            @Step {
+                Create a new `ARObjectGroup` with an empty array of AR objects.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Search for the cylinder object using the `first(where:)` method of `Array`. Add it to the object group.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Include the octahedron as well. Don't forget to add an exclamation mark to unwrap the optional!
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Create another group with the cube and the cone.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Pass both object groups to ``ARHeadsetKit/CentralRenderer/render(objectGroup:desiredLOD:)``, letting `desiredLOD` take its default value.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Process the remaining AR objects using a `for-in` loop.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-7.swift")
+            }
+            
+            @Step {
+                Search for the object that matches each iteration's `shapeType`, then render it.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                Run the app and experiment with not calling `render()` on an object group. Verify that objects in the removed group do not appear.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-9.swift")
+            }
         }
     }
     
     @Section(title: "Opt out of Rendering") {
         @ContentAndMedia {
-            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks such as rendering occur only when absolutely necessary.
+            Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks like rendering only occur when absolutely necessary.
            
-            When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
+            When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their contentis presented.
         }
         
-<!--    Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode console.   -->
+<!--   Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode console.   -->
+<!--   Explicitly state that it's a guard statement.   -->
+
+<!--   State that you should still update counters, so place the statement after that - do so in a warning.   -->
 
 <!--   Show an image of the console   -->
         
