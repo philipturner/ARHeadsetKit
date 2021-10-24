@@ -12,7 +12,8 @@
 <!--  If I didn't delay fragment shader until here, people would lose interest early   -->
 <!--  Also, that chapter is already packed with the Metal bug fix and MTLLayeredBuffer   -->
 
-<!--  Use compute shaders, showing/explaining how MTLLayeredBuffer makes GPGPU so much easier   -->
+
+<!--  Make a lag problem that compute shaders solve, while showing/explaining how MTLLayeredBuffer makes GPGPU so much easier   -->
 <!--  Say that the reason GPGPU is time-intensive is because of debugging   -->
 <!--  Give good advice for debuggability, experience with shader validation, intentionally causing and catching an error   -->
     
