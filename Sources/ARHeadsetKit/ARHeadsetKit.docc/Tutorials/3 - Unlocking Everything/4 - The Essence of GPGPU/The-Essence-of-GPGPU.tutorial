@@ -8,7 +8,7 @@
 <!--  Paint GPGPU as something epic (which it is), not something people should fear or be reluctant about  -->
     }
     
-<!--  Start with the fragment shader, using the `constant` address space to create a multi-point color gradient   -->
+<!--  Start with the fragment shader, converting HSV to RGB   -->
 <!--  If I didn't delay fragment shader until here, people would lose interest early   -->
 <!--  Also, that chapter is already packed with the Metal bug fix and MTLLayeredBuffer   -->
 

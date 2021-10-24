@@ -6,9 +6,10 @@
     @Intro(title: "Selecting Objects") {
         Coming soon!
 <!--    Start over from scratch this chapter, tell that this is the case.    -->
-        
-<!--        Get the interaction ray. Use Ray Tracing functions on AR Objects.-->
     }
+    
+<!--   Get the interaction ray. Use Ray Tracing functions on AR Objects.   -->
+<!--   Add interaction with touchscreen for selecting objects   -->
     
     @Section(title: "n/a") {
         @Steps {

@@ -10,6 +10,8 @@
 <!--   Introduce MTLLayeredBuffer here.   -->
     }
     
+<!--    Use transform so it doesn’t have to be at center    -->
+    
     @Section(title: "Section 0") {
         @ContentAndMedia {
             There is the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet. You will fix it by modifying the corrupted file in Xcode.

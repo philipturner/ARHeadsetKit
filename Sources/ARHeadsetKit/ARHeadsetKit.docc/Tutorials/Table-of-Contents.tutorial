@@ -8,7 +8,7 @@
     @Chapter(name: "Essentials") {
         Create your first app with ARHeadsetKit, using basic AR objects.
         
-<!--    After finishing tutorial 4, replace this with a wider picture that shows the heck ton of objects causing lag.    -->
+<!--    After finishing tutorial 4, replace this with a wider picture that shows the cool objects. Rearrange them for the landscape mode photo and make the animated color static.    -->
         
         @Image(source: "1-1-image-2-1-preview.jpg", alt: "The blue cone appearing in AR.")
         

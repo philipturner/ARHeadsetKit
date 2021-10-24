@@ -39,7 +39,7 @@ public func kelvinToRGB(_ temperature: Double) -> simd_float3 {
     return clamp(output, min: 0, max: 1)
 }
 
-// Angle utilities
+// MARK: - Angle utilities
 
 @inlinable public func degreesToRadians<T: BinaryFloatingPoint>(_ x: T) -> T { x * (.pi / 180) }
 @inlinable public func radiansToDegrees<T: BinaryFloatingPoint>(_ x: T) -> T { x * (180 / .pi) }
@@ -52,6 +52,60 @@ public func simd_slerp(from start: simd_float3, to end: simd_float3, t: Float) -
     
     rotation = simd_quatf(angle: rotationAngle, axis: rotation.axis)
     return rotation.act(start)
+}
+
+/// A modified `fmod(_:)` operation that always returns a positive number.
+@inlinable @inline(__always)
+public func positiveRemainder(_ a: Float, _ b: Float) -> Float {
+    var remainder = fmod(a, b)
+    
+    if remainder < 0 {
+        remainder += b
+    }
+    
+    return remainder
+}
+
+/// A modified `fmod(_:)` operation that always returns a positive number.
+@inlinable @inline(__always)
+public func positiveRemainder(_ a: simd_float2, _ b: simd_float2) -> simd_float2 {
+    var remainders = fmod(a, b)
+    let mask = remainders .< 0
+    
+    if any(mask) {
+        let adjustedRemainders = remainders + b
+        remainders.replace(with: adjustedRemainders, where: mask)
+    }
+    
+    return remainders
+}
+
+/// A modified `fmod(_:)` operation that always returns a positive number.
+@inlinable @inline(__always)
+public func positiveRemainder(_ a: simd_float3, _ b: simd_float3) -> simd_float3 {
+    var remainders = fmod(a, b)
+    let mask = remainders .< 0
+    
+    if any(mask) {
+        let adjustedRemainders = remainders + b
+        remainders.replace(with: adjustedRemainders, where: mask)
+    }
+    
+    return remainders
+}
+
+/// A modified `fmod(_:)` operation that always returns a positive number.
+@inlinable @inline(__always)
+public func positiveRemainder(_ a: simd_float4, _ b: simd_float4) -> simd_float4 {
+    var remainders = fmod(a, b)
+    let mask = remainders .< 0
+    
+    if any(mask) {
+        let adjustedRemainders = remainders + b
+        remainders.replace(with: adjustedRemainders, where: mask)
+    }
+    
+    return remainders
 }
 
 /// A modified `fmod(_:)` operation that always returns a positive number.
@@ -82,6 +136,55 @@ public func positiveRemainder(_ a: simd_double2, _ b: simd_double2) -> simd_doub
 
 /// Calculate an angle's cosine using its sine, eliminating a costly call to `cos(_:)`.
 @inlinable @inline(__always)
+public func getCos(sinval: Float, angle: Float) -> Float {
+    let angleMod = positiveRemainder(angle, 2 * .pi)
+    var cosval = sqrt(fma(-sinval, sinval, 1))
+    
+    if angleMod > 0.5 * .pi, angleMod < 1.5 * .pi {
+        cosval = -cosval
+    }
+    
+    return cosval
+}
+
+/// Calculate an angle's cosine using its sine, eliminating a costly call to `cos(_:)`.
+@inlinable @inline(__always)
+public func getCos(sinval: simd_float2, angle: simd_float2) -> simd_float2 {
+    let angleMod = positiveRemainder(angle, .init(repeating: 2 * .pi))
+    let cosval = sqrt(fma(-sinval, sinval, .init(repeating: 1)))
+    
+    let mask1 = angleMod .> 0.5 * .pi
+    let mask2 = angleMod .< 1.5 * .pi
+    
+    return cosval.replacing(with: -cosval, where: mask1 .& mask2)
+}
+
+/// Calculate an angle's cosine using its sine, eliminating a costly call to `cos(_:)`.
+@inlinable @inline(__always)
+public func getCos(sinval: simd_float3, angle: simd_float3) -> simd_float3 {
+    let angleMod = positiveRemainder(angle, .init(repeating: 2 * .pi))
+    let cosval = sqrt(fma(-sinval, sinval, .init(repeating: 1)))
+    
+    let mask1 = angleMod .> 0.5 * .pi
+    let mask2 = angleMod .< 1.5 * .pi
+    
+    return cosval.replacing(with: -cosval, where: mask1 .& mask2)
+}
+
+/// Calculate an angle's cosine using its sine, eliminating a costly call to `cos(_:)`.
+@inlinable @inline(__always)
+public func getCos(sinval: simd_float4, angle: simd_float4) -> simd_float4 {
+    let angleMod = positiveRemainder(angle, .init(repeating: 2 * .pi))
+    let cosval = sqrt(fma(-sinval, sinval, .init(repeating: 1)))
+    
+    let mask1 = angleMod .> 0.5 * .pi
+    let mask2 = angleMod .< 1.5 * .pi
+    
+    return cosval.replacing(with: -cosval, where: mask1 .& mask2)
+}
+
+/// Calculate an angle's cosine using its sine, eliminating a costly call to `cos(_:)`.
+@inlinable @inline(__always)
 public func getCos(sinval: Double, angle: Double) -> Double {
     let angleMod = positiveRemainder(angle, 2 * .pi)
     var cosval = sqrt(fma(-sinval, sinval, 1))
@@ -105,7 +208,7 @@ public func getCos(sinval: simd_double2, angle: simd_double2) -> simd_double2 {
     return cosval.replacing(with: -cosval, where: mask1 .& mask2)
 }
 
-// Accelerated dot products
+// MARK: - Accelerated dot products
 
 /// Perform multiple dot products at once to maximize performance, with an optional zero-cost add.
 @inlinable @inline(__always)
@@ -217,7 +320,7 @@ public func dotAdd(_ lhs0: simd_float3, _ mid0: simd_float3, rhs0: Float = 0,
                .init(mid0.x, mid1.x, mid2.x, mid3.x), out)
 }
 
-// Transformation matrix creation
+// MARK: - Transformation matrix creation
 
 @inlinable @inline(__always)
 public func matrix3x3_scale(sx: Float, sy: Float, sz: Float) -> simd_float3x3 {
