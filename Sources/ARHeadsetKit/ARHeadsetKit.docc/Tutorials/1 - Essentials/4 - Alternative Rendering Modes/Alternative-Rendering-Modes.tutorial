@@ -9,6 +9,8 @@
         The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.
         
         Download the project files to begin building this project, and follow the steps below.
+        
+        @Image(source: "1-4-image-2-1-intro.jpg", alt: "Differently colored shapes in front of a chair.")
     }
     
     @Section(title: "Create Persistent Objects") {
@@ -156,7 +158,9 @@
             }
             
             @Step {
-                Launch the app. Watch the cuboid and octahedron's colors fluctuate over time. 
+                Launch the app. Watch the cuboid and octahedron's colors fluctuate over time.
+                
+                @Image(source: "1-4-image-2-1.jpg", alt: "Differently colored shapes rendering.")
             }
         }
     }
@@ -178,7 +182,7 @@
 <!--    -->
     }
     
-    @Section(title: "Optimize with ARObjectGroup") {
+    @Section(title: "Accelerate Code with ARObjectGroup") {
         @ContentAndMedia {
             Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
         }
