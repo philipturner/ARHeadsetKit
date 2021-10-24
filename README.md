@@ -1,6 +1,6 @@
 # ARHeadsetKit (Beta)
 
-![Google Cardboard plus AR](docs/images/google-cardboard-plus-ar.png)
+![Google Cardboard plus AR](docs/images/google-cardboard-plus-ar.webp)
 
 Using a $5 Google Cardboard, the average person can now replicate Microsoft Hololens. Apps built with ARHeadsetKit are immersive AR headset experiences, simultaneously providing handheld AR alternatives. In just 30 lines of code, even someone without a background in Swift can work with AR.
 
