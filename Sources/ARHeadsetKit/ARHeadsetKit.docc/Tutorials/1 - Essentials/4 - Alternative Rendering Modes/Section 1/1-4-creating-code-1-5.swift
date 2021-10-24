@@ -16,7 +16,8 @@ class MyRenderer: CustomRenderer {
                          upDirection: simd_float3) -> ARObject
         {
             let yAxis: simd_float3 = [0.0, 1.0, 0.0]
-            let orientation = simd_quatf(from: yAxis, to: normalize(upDirection))
+            let orientation = simd_quatf(from: yAxis,
+                                         to: normalize(upDirection))
             
             return ARObject(shapeType: shapeType,
                             position: position,

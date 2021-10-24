@@ -13,6 +13,7 @@
 <!--  Also, that chapter is already packed with the Metal bug fix and MTLLayeredBuffer   -->
 
 <!--  In tutorial 4 sample code, there was no accounting for floating-point rounding error making the integer 6. Fix that in the shader by clamping it.   -->
+<!--   Define an array in the `constant` address space instead of as a `constexpr`. This prevents the array from cluttering the function.   -->
 <!--   Give experiene with importing other files in metal.   -->
     
 <!--  Make a lag problem that compute shaders solve, while showing/explaining how MTLLayeredBuffer makes GPGPU so much easier   -->

@@ -9,6 +9,8 @@
 <!--    Configure a new project from scratch to give them experience, tell them to do that instead of saying "download sample code" in tutorial. Instead, use the SwiftUI statement of "follow along or explore on your own". Still include a configured starter project in sample code. Have them check whether their configured app runs properly.    -->
     }
     
+<!--  Guide through new setup, letting them copy and paste to SwiftUI views, removing custom setting, declaring `MyRenderer`'s conformance in another file, possibly renaming `MyRenderer`.   -->
+    
 <!--   Get the interaction ray. Use Ray Tracing functions on AR Objects.   -->
 <!--   Add interaction with touchscreen for selecting objects   -->
     

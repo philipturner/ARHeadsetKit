@@ -3,6 +3,10 @@
     
     @Intro(title: "Using Delegate Renderers") {
         Coming soon!
+<!--    Will at least refactor `CustomRenderer` conformance in previous tutorial   -->
+        
+<!--    Letting source code become a mess up to this point to show how much better delegate renderers are.    -->
+        
 <!--        Conform straight to the `DelegateRenderer` protocol. Or pass properties down from a parent renderer, with a custom protocol. Show an example of both.-->
     }
     

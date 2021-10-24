@@ -6,7 +6,7 @@
     @Intro(title: "Alternative Rendering Modes") {
         Explore new workflows for rendering AR objects and speeding up your code.
         
-        The process of optimizing AR objects for rendering takes a non-negligible amount of time. When preparing numerous objects one-by-one, you may encounter performance bottlenecks. To solve this problem, the ``ARHeadsetKit/CentralRenderer`` provides some alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.
+        The process of optimizing AR objects for rendering takes a massive amount of time. When preparing numerous objects one-by-one, the framerate may drop. To solve this problem, you will explore alternatives to ``ARHeadsetKit/CentralRenderer/render(object:)``.
         
         Download the project files to begin building this project, and follow the steps below.
         
@@ -15,14 +15,14 @@
     
     @Section(title: "Create Persistent Objects") {
         @ContentAndMedia {
-            Summary - n/a
+            When rendering several objects, generating them every frame can consume a massive amount of energy. To mitigate this problem, initialize a list of objects only one time.
         }
         
         @Steps {
             @Step {
-                Delete rendering code from the previous tutorial.
+                In the project navigator, select `MyRenderer.swift`.
                 
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-1.swift", previousFile: "1-3-creating-code-4-5.swift")
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-1.swift")
             }
             
             @Step {
@@ -32,15 +32,15 @@
             }
             
             @Step {
-                In the initializer, declare a nested function called `createShape()`. It takes an `ARShapeType` and three vectors&mdash;`position`, `scale`, and `upDirection`. The return value is an `ARObject`.
+                In the initializer, declare a nested function called `createShape()`. It takes an ``ARHeadsetKit/ARShapeType`` and three vectors&mdash;`position`, `scale`, and `upDirection`, returning an `ARObject`.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-3.swift")
             }
             
             @Step {
-                Find a rotation going from the Y axis to `upDirection`. Normalize `upDirection` before passing it into the function.
+                Calculate the rotation going from the positive Y axis to `upDirection`. Normalize `upDirection` before passing it into the quaternion initializer.
                 
-                > Warning: Always normalize vectors before using them to calculate quaternions. If their length is not one, the rotation will be undefined.
+                > Warning: Always normalize vectors before using them to create quaternions. If their length is not one, the resulting rotation will be undefined.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-4.swift")
             }
@@ -52,7 +52,7 @@
             }
             
             @Step {
-                Add a square pyramid to the object list. Copy the function parameters exactly as they appear in the code listing. Then, write a comment saying the object's color can be changed in the settings panel.
+                Add a square pyramid to the object list. Copy the function parameters exactly as they appear in the code listing. Then, type a comment saying the object's color can be changed in the settings panel.
                 
                 > Tip: Separate large blocks of code with comments or empty lines. Comments divide the rendered objects into related groups, making them easier to read.
                 
@@ -60,7 +60,7 @@
             }
             
             @Step {
-                Append another object, by copying the code added in this step's code listing. Take note of the new shape type, and try making sense of the `position`, `scale`, and `upDirection` vectors.
+                Append a cylinder object, with different `position`, `scale`, and `upDirection` vectors than the pyramid.
                 
                 From this step onward, use keyboard shortcuts to copy the rendering code.
                 
@@ -68,29 +68,29 @@
             }
             
             @Step {
-                Create a new section of objects, starting with a comment describing that their color can't change. Use the vectors definte in the code listing, or experiment with your own.
+                Create a new section of objects, starting with a comment describing that their color will never change. Use the vectors defined in the code listing, or experiment with your own.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-8.swift")
             }
             
             @Step {
-                Define a final section, with objects that have animated colors.
+                Add one more section, with objects that have animated colors.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-9.swift")
             }
         }
     }
     
-    @Section(title: "Pass an Array of Objects") {
+    @Section(title: "Render an Array of Objects") {
         @ContentAndMedia {
             Instead of creating new objects every frame, you will sometimes render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``.
         }
         
         @Steps {
             @Step {
-                In `updateResources()`, turn `red` and `skyBlue` into half-precision vectors.
+                Scroll down to `updateResources()`. Turn the `red` and `skyBlue` colors into half-precision numbers.
                 
-                Half-precision is very compact type of floating-point number. It consumes 50% less memory than single-precision and is used widely in modern GPU programming.
+                Half precision is very compact type of floating-point number. It consumes 50% less memory than single precision and is used widely in modern GPU programming.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-1.swift", previousFile: "1-4-creating-code-1-9.swift")
             }
@@ -114,7 +114,7 @@
             }
             
             @Step {
-                To make colors animate over time, you need to work with the hue-saturation-lightness (HSL) color space. Declare a function that converts HSL to red-green-blue. Set saturation to 100% by default, and lightness to 50%.
+                To make colors animate over time, you must work with the hue-saturation-lightness (HSL) color space. Declare a function that converts HSL to red-green-blue. Set `saturation` to 100% by default, and `lightness` to 50%.
                 
                 Hue represents degrees on a color wheel that loops around a rainbow. Zero degrees is red, 120 degrees is green, and 240 degrees is blue.
                 
@@ -134,7 +134,7 @@
             }
             
             @Step {
-                Normalize the output and convert it to half-precision.
+                Normalize the output and convert it to half precision.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-8.swift")
             }

@@ -16,7 +16,8 @@ class MyRenderer: CustomRenderer {
                          upDirection: simd_float3) -> ARObject
         {
             let yAxis: simd_float3 = [0.0, 1.0, 0.0]
-            let orientation = simd_quatf(from: yAxis, to: normalize(upDirection))
+            let orientation = simd_quatf(from: yAxis,
+                                         to: normalize(upDirection))
             
             return ARObject(shapeType: shapeType,
                             position: position,
@@ -94,7 +95,7 @@ class MyRenderer: CustomRenderer {
             var majorColor = (lightness * 2 - 1).magnitude
             majorColor = (1 - majorColor) * saturation
             
-            // Distance from nearest primary color
+            // Distance from the nearest primary color
             var primaryDistance = positiveRemainder(hue / 60, 2)
             primaryDistance = 1 - (primaryDistance - 1).magnitude
             let minorColor = majorColor * primaryDistance
