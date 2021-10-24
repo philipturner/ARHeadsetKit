@@ -358,7 +358,7 @@ public func matrix4x4_translation(tx: Float, ty: Float, tz: Float) -> simd_float
         .init(1, 0, 0, 0),
         .init(0, 1, 0, 0),
         .init(0, 0, 1, 0),
-        .init(tx, ty, tx, 1)
+        .init(tx, ty, tz, 1)
     )
 }
 

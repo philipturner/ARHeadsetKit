@@ -8,6 +8,8 @@
         
 <!--   Learn how to create vertex shaders rendering in ARHeadsetKit.   -->
 <!--   Introduce MTLLayeredBuffer here.   -->
+
+<!--   State that Metal Shading Language is a variation of C++. If you have used that before, this will be familiar.   -->
     }
     
 <!--    Use transform so it doesn’t have to be at center    -->

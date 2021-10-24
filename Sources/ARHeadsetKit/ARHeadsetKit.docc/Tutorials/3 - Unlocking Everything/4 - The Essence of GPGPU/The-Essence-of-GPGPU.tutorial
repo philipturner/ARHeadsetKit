@@ -8,11 +8,13 @@
 <!--  Paint GPGPU as something epic (which it is), not something people should fear or be reluctant about  -->
     }
     
-<!--  Start with the fragment shader, converting HSV to RGB   -->
+<!--  Start with the fragment shader, converting HSL to RGB - remind that HSL was used in tutorial 4   -->
 <!--  If I didn't delay fragment shader until here, people would lose interest early   -->
 <!--  Also, that chapter is already packed with the Metal bug fix and MTLLayeredBuffer   -->
 
-
+<!--  In tutorial 4 sample code, there was no accounting for floating-point rounding error making the integer 6. Fix that in the shader by clamping it.   -->
+<!--   Give experiene with importing other files in metal.   -->
+    
 <!--  Make a lag problem that compute shaders solve, while showing/explaining how MTLLayeredBuffer makes GPGPU so much easier   -->
 <!--  Say that the reason GPGPU is time-intensive is because of debugging   -->
 <!--  Give good advice for debuggability, experience with shader validation, intentionally causing and catching an error   -->

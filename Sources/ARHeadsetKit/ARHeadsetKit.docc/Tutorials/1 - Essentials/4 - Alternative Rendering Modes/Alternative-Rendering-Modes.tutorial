@@ -30,7 +30,7 @@
             }
             
             @Step {
-                In the initializer, declare a nested function called `createShape(...)`. It takes an `ARShapeType` and three vectors&mdash;`position`, `scale`, and `upDirection`. The return value is an `ARObject`.
+                In the initializer, declare a nested function called `createShape()`. It takes an `ARShapeType` and three vectors&mdash;`position`, `scale`, and `upDirection`. The return value is an `ARObject`.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-3.swift")
             }
@@ -78,34 +78,86 @@
             }
         }
     }
-
-<!--   Next section starts with delete the previous tutorial's code   -->
-<!--   The next section colors and renders them   -->
-<!--   The next section introduces simd_half3   -->
-<!--   Next section uses user-selected color for first two, yellow for third, green for fourth, and changing color for last 2   -->
-<!--   3 steps for HSV part: declare function and 2 halves, last 2 say to just copy -->
-    
-    
-<!--  make it like but not actually a story - some goal causes a heck ton of shapes, have to resolve a performance problem (NVM)  -->
-<!--  use the special ARHeadsetKit array initializers for creating the static objects. Some will have changing color - a concept introduced here and reused in the Essence of GPGPU tutorial to space out content properly  -->
-
-<!--   For the step about colors, tell to copy and paste the code on the right. In that step's comment, say: to learn more about HSV colors, check out https://www.rapidtables.com/convert/color/hsv-to-rgb.html -->
     
     @Section(title: "Pass an Array of Objects") {
         @ContentAndMedia {
-            Instead of creating new objects every frame, you might render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``. Doing this eliminates expensive function calls and copying operations.
+            Instead of creating new objects every frame, you will sometimes render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``.
         }
         
-<!--   For the render(objects:) function, have statically stored objects.   -->
-<!--   Create the objects in MyRenderer's initializer   -->
-<!--   Make a whole bunch of AR objects with different colors and shapes, which looks cool  -->
-
-<!--   Some objects will change red with option, none blue - color changes during updateResources() - NVM   -->
-
-<!--   In the last step, DON'T state: "notice anything strange? The app is lagging!"              -->
-        
         @Steps {
-            n/a
+            @Step {
+                In `updateResources()`, turn `red` and `skyBlue` into half-precision vectors.
+                
+                Half-precision is very compact type of floating-point number. It consumes 50% less memory than single-precision and is used widely in modern GPU programming.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-1.swift", previousFile: "1-4-creating-code-1-9.swift")
+            }
+            
+            @Step {
+                Rename `color` to `userSelectedColor`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Set the first two objects' colors to `userSelectedColor`.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Set the next two objects' colors to gold (70% red, 60% green, 5% blue) and light green (20% red, 85% green, 30% blue).
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                To make colors animate over time, you need to work with the hue-saturation-lightness (HSL) color space. Declare a function that converts HSL to red-green-blue. Set saturation to 100% by default, and lightness to 50%.
+                
+                Hue represents degrees on a color wheel that loops around a rainbow. Zero degrees is red, 120 degrees is green, and 240 degrees is blue.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Copy and paste the new lines from the code listing, which calculate the major and minor colors.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Determine whether the major and minor colors are red, green, or blue.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Normalize the output and convert it to half-precision.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-8.swift")
+            }
+            
+            @Step {
+                Outside of the function, convert `numFrames` to time in seconds. Declare an `angleDegrees` variable that reaches 360 when four seconds have passed.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-9.swift")
+            }
+            
+            @Step {
+                Assign the last two objects' colors so that `hue` animates over time. For the object at index 4, decrease `saturation` to 50%.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-10.swift")
+            }
+            
+            @Step {
+                Call the new `render(objects:)` function of ``ARHeadsetKit/CentralRenderer``.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-2-11.swift")
+            }
+            
+            @Step {
+                Launch the app. Watch the cuboid and octahedron's colors fluctuate over time. 
+            }
         }
     }
     
@@ -118,15 +170,20 @@
             n/a
         }
         
-<!--    Use the array from the previous section, referencing the problem of the app being laggy.    -->
+<!--    Use the array from the previous section.    -->
 <!--        -->
 <!--    This can be really interactive because a small LOD makes an AR object look wierd.    -->
+
+<!--    At the end, say to launch the app. Do the cylinder and sphere look round anymore?   -->
+<!--    -->
     }
     
-    @Section(title: "Optimize Further with ARObjectGroup") {
+    @Section(title: "Optimize with ARObjectGroup") {
         @ContentAndMedia {
             Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
         }
+        
+<!--   Group the cylinder and octahedron into one ARObjectGroup. Group the cube and cone into another. Leave the last two out because they are not close enough.    -->
         
         @Steps {
             n/a
@@ -139,6 +196,8 @@
            
             When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
         }
+        
+<!--    Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode debug console.   -->
         
         @Steps {
             n/a
