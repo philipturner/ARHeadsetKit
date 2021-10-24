@@ -18,11 +18,11 @@ If you are just starting out, ignore the sections below that deal with configuri
 
 Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). There will be at least 11 tutorials, but only a few are finished so far. The status of each one is listed below:
 
-- [ ] Ch. 1 - Essentials
-  - [x] Tutorial 1 - Setting Up ARHeadsetKit (complete)
-  - [x] Tutorial 2 - Adding Custom Settings (complete)
-  - [x] Tutorial 3 - Working with AR Objects (complete)
-  - [ ] Tutorial 4 - Alternative Rendering Modes (in progress)
+- [x] Ch. 1 - Essentials (complete)
+  - [x] Tutorial 1 - Setting Up ARHeadsetKit
+  - [x] Tutorial 2 - Adding Custom Settings
+  - [x] Tutorial 3 - Working with AR Objects
+  - [x] Tutorial 4 - Alternative Rendering Modes
 - [ ] Ch. 2 - Interactive Experiences
   - [ ] Tutorial 5 - Selecting Objects
   - [ ] Tutorial 6 - Using Delegate Renderers
