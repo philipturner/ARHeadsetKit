@@ -66,7 +66,7 @@
             }
             
             @Step {
-                Append a cylinder object, with different `position`, `scale`, and `upDirection` vectors than the pyramid.
+                Append a cylinder object with different `position`, `scale`, and `upDirection` vectors than the pyramid.
                 
                 From this step onward, use keyboard shortcuts to copy the rendering code.
                 
@@ -74,7 +74,7 @@
             }
             
             @Step {
-                Create a new section of objects, starting with a comment describing that their color will never change. Use the vectors defined in the code listing, or experiment with your own.
+                Create a new section of objects, starting with a comment stating that their color will never change. Use the vectors defined in the code listing, or experiment with your own.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-1-10.swift")
             }
@@ -89,7 +89,7 @@
     
     @Section(title: "Render an Array of Objects") {
         @ContentAndMedia {
-            Instead of creating new objects every frame, you will sometimes render from a persistent array. To draw an entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``.
+            Instead of creating new objects every frame, you can render from the persistent array you just created. To draw the entire list of objects at once, pass it into ``ARHeadsetKit/CentralRenderer/render(objects:)``.
         }
         
         @Steps {
