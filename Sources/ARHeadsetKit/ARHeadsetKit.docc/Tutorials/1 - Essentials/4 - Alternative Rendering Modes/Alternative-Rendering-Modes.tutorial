@@ -224,7 +224,7 @@
             }
             
             @Step {
-                Create another group with the cube and the cone.
+                Create another group with the cuboid and the cone.
                 
                 @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-5.swift")
             }
