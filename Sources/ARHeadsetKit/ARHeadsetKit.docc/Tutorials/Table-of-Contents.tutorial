@@ -35,7 +35,8 @@
         
         @TutorialReference(tutorial: "doc:Reconfiguring-ARHeadsetKit")
         @TutorialReference(tutorial: "doc:Composing-Custom-Shaders")
-        @TutorialReference(tutorial: "doc:Making-Ray-Tracing-Functions")
+        @TutorialReference(tutorial: "doc:Ray-Tracing-Functions")
+        @TutorialReference(tutorial: "doc:The-Essence-of-GPGPU")
     }
     
     <!-- Potential fourth chapter (several months ahead): -->

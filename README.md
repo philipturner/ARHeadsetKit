@@ -12,7 +12,7 @@ If you are just starting out, ignore the sections below that deal with configuri
 
 ## Tutorial Series
 
-Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). There will be at least 10 tutorials, but only a few are finished so far. The status of each one is listed below:
+Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). There will be at least 11 tutorials, but only a few are finished so far. The status of each one is listed below:
 
 - [ ] Ch. 1 - Essentials
   - [x] Tutorial 1 - Setting Up ARHeadsetKit (complete)
@@ -26,7 +26,8 @@ Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to A
 - [ ] Ch. 3 - Unlocking Everything
   - [x] Tutorial 8 - Reconfiguring ARHeadsetKit (complete)
   - [ ] Tutorial 9 - Composing Custom Shaders
-  - [ ] Tutorial 10 - Making Ray Tracing Functions
+  - [ ] Tutorial 10 - Ray Tracing Functions
+  - [ ] Tutorial 11 - The Essence of GPGPU
 
 ARHeadsetKit will remain in the beta phase until every tutorial is finished. To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy this ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
 

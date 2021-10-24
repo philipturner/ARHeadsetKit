@@ -19,6 +19,6 @@
             
         }
     }
-        
-<!--   Make the ripple effect idea with complex shaders here, instead of branching into a fourth chapter. Add an extra section for fragment/compute shaders, right after this. The ray tracing section will let people control the ripple with their hand.     -->
+    
+<!--   Make the ripple effect idea with complex shaders here, instead of branching into a fourth chapter. The ray tracing section will let people control the ripple with their hand. Then, the tutorial for fragment/compute shaders will complete it.    -->
 }

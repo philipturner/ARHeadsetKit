@@ -1,0 +1,23 @@
+@Tutorial {
+    @XcodeRequirement(
+            title: "Xcode 13", 
+            destination: "https://developer.apple.com/download/")
+    
+    @Intro(title: "The Essence of GPGPU") {
+        Coming soon!
+    }
+    
+<!--  Start with the fragment shader, using the `constant` address space to create a multi-point color gradient   -->
+<!--  If I didn't delay fragment shader until here, people would lose interest early   -->
+<!--  Also, that chapter is already packed with the Metal bug fix and MTLLayeredBuffer   -->
+
+<!--  Use compute shaders, showing/explaining how MTLLayeredBuffer makes GPGPU so much easier   -->
+<!--  Say that the reason GPGPU is time-intensive is because of debugging   -->
+<!--  Give good advice for debuggability, experience with shader validation, intentionally causing and catching an error   -->
+    
+    @Section(title: "n/a") {
+        @Steps {
+            
+        }
+    }
+}
