@@ -3,7 +3,7 @@
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
-    @Intro(title: "Making Ray Tracing Functions") {
+    @Intro(title: "Ray Tracing Functions") {
         Coming soon!
     }
     
