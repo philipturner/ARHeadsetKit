@@ -249,8 +249,6 @@
             
             @Step {
                 Run the app and experiment with not calling `render()` on an object group. Verify that objects in the removed group do not appear.
-                
-                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-4-9.swift")
             }
         }
     }
