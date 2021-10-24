@@ -257,7 +257,7 @@
         @ContentAndMedia {
             Augmented reality apps use a considerable amount of processing power, so energy-intensive tasks like rendering only occur when absolutely necessary.
            
-            When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their contentis presented.
+            When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content is presented.
         }
         
         @Steps {
