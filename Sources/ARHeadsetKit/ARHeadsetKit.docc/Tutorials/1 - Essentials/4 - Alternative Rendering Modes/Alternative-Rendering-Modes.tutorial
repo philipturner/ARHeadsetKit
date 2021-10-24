@@ -177,23 +177,34 @@
         }
         
         @Steps {
-            n/a
+            @Step {
+                Swap out `render(objects:)` with `render(objects:desiredLOD:)`. Set the level of detail to 10.
+                
+                @Code(name: "MyRenderer.swift", file: "1-4-creating-code-3-1.swift", previousFile: "1-4-creating-code-2-11.swift")
+            }
+            
+            @Step {
+                That's it for this section! Run the app and notice that round shapes now look jagged. What happens when you decrease the LOD to 3?
+                
+                @Image(source: "1-4-image-3-1.jpg", alt: "Round shapes appearing jagged, next to the polyhedral shapes.")
+            }
         }
-        
-<!--    Use the array from the previous section.    -->
-<!--        -->
-<!--    This can be really interactive because a small LOD makes an AR object look wierd.    -->
-
-<!--    At the end, say to launch the app. Do the cylinder and sphere look round anymore?   -->
-<!--    -->
     }
     
     @Section(title: "Accelerate Code with ARObjectGroup") {
         @ContentAndMedia {
             Sometimes, a group of similarly-sized objects will consistently appear close to each other. As a result, they will return same result during culling and LOD selection. To speed up those two tasks, an ``ARHeadsetKit/ARObjectGroup`` checks multiple objects at once, treating them as a single object.
+            
+            Search for close pairs of objects, and turn them into AR object groups.
         }
         
+<!--    Start with removing the render function    -->
+        
+<!--    Use high-level methods on Swift Array to extract objects   -->
+    
 <!--   Group the cylinder and octahedron into one ARObjectGroup. Group the cube and cone into another. Leave the last two out because they are not close enough.    -->
+        
+<!--    Don't show an image for this    -->
         
         @Steps {
             n/a
@@ -207,7 +218,9 @@
             When the touchscreen settings panel is open, the `MainRenderer` does not draw to the screen. Delegate renderers use the ``ARHeadsetKit/DelegateRenderer/shouldRenderToDisplay`` property to detect whether their content will be presented on-screen.
         }
         
-<!--    Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode debug console.   -->
+<!--    Activate a guard statement when not rendering. Call print(...) every frame to show whether it is rendering in the Xcode console.   -->
+
+<!--   Show an image of the console   -->
         
         @Steps {
             n/a
