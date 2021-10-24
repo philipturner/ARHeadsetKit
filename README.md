@@ -18,7 +18,7 @@ Learning ARHeadsetKit requires following tutorials hosted in Xcode, similar to A
   - [x] Tutorial 1 - Setting Up ARHeadsetKit (complete)
   - [x] Tutorial 2 - Adding Custom Settings (complete)
   - [x] Tutorial 3 - Working with AR Objects (complete)
-  - [ ] Tutorial 4 - Alternative Rendering Methods (in progress)
+  - [ ] Tutorial 4 - Alternative Rendering Modes (in progress)
 - [ ] Ch. 2 - Interactive Experiences
   - [ ] Tutorial 5 - Selecting Objects
   - [ ] Tutorial 6 - Using Delegate Renderers
