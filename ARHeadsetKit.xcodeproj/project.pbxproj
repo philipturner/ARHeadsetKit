@@ -689,7 +689,7 @@
 			path = "App Setup";
 			sourceTree = "<group>";
 		};
-		9878B66E26FF51A700D99F14 /* MainRenderer */ = {
+		9878B66E26FF51A700D99F14 /* Main Renderer */ = {
 			isa = PBXGroup;
 			children = (
 				9878B66F26FF521000D99F14 /* MainRenderer.swift */,
@@ -697,7 +697,7 @@
 				9819F5792700FED00065FD84 /* MainRenderingExecution.swift */,
 				98EDDD91270A069A006F9F44 /* Custom Renderer */,
 			);
-			path = MainRenderer;
+			path = "Main Renderer";
 			sourceTree = "<group>";
 		};
 		9878B67126FF53C300D99F14 /* User Settings */ = {
@@ -950,7 +950,7 @@
 				98AAD00526FD55900011546A /* ARHeadsetKit.swift */,
 				9878B66D26FF519200D99F14 /* App Setup */,
 				98328C58271379D000715368 /* ARHeadsetKit.docc */,
-				9878B66E26FF51A700D99F14 /* MainRenderer */,
+				9878B66E26FF51A700D99F14 /* Main Renderer */,
 				9878B67126FF53C300D99F14 /* User Settings */,
 				9878B67226FF53D200D99F14 /* Scene Reconstruction */,
 				9878B67326FF53DE00D99F14 /* Hand Reconstruction */,
