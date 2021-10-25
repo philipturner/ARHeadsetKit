@@ -285,6 +285,7 @@ public extension DelegateRenderer {
     @inlinable var interfaceScale: Float { renderer.interfaceScale }
     @inlinable var interfaceScaleChanged: Bool { renderer.interfaceScaleChanged }
     @inlinable var interfaceCenter: simd_float3 { renderer.cameraMeasurements.interfaceCenter }
+    @inlinable var interactionRay: RayTracing.Ray? { renderer.interactionRay }
     
     @inlinable var leftEyePosition: simd_float3 { renderer.cameraMeasurements.leftEyePosition }
     @inlinable var rightEyePosition: simd_float3 { renderer.cameraMeasurements.rightEyePosition }

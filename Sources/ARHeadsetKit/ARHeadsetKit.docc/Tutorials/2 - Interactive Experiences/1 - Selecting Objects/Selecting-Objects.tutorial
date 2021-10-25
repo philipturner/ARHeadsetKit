@@ -5,18 +5,57 @@
     
     @Intro(title: "Selecting Objects") {
         Coming soon!
-<!--    Start over from scratch this chapter, tell that this is the case.    -->
-<!--    Configure a new project from scratch to give them experience, tell them to do that instead of saying "download sample code" in tutorial. Instead, use the SwiftUI statement of "follow along or explore on your own". Still include a configured starter project in sample code. Have them check whether their configured app runs properly.    -->
+        
+        Follow the steps to build this project, or download the finished project to explore on your own. 
     }
     
-<!--  Guide through new setup, letting them copy and paste to SwiftUI views, removing custom setting, declaring `MyRenderer`'s conformance in another file, possibly renaming `MyRenderer`.   -->
-    
-<!--   Get the interaction ray. Use Ray Tracing functions on AR Objects.   -->
-<!--   Add interaction with touchscreen for selecting objects   -->
-    
-    @Section(title: "n/a") {
+    @Section(title: "Configuring ARHeadsetKit from Scratch") {
+        To start making your own projects with ARHeadsetKit, become familiar with how to set it up yourself.
+        
+        Follow the instructions the [GitHub overview](https://github.com/philipturner/ARHeadsetKit/blob/main/README.md#how-to-configure-arheadsetkit-from-scratch), starting with "How to Configure ARHeadsetKit from Scratch". In the section after that, choose the Swift package option.
+        
         @Steps {
+            @Step {
+                Go through the very first tutorial (Setting Up ARHeadsetKit) again with your new project. Replace every instance of the word `MyRenderer` with `GameRenderer`.
+                
+                @Image(source: "2-1-image-1-1.png", alt: "The project navigator with \"GameRenderer\" instead of \"MyRenderer\".")
+            }
             
+            @Step {
+                Launch your app and ensure it does not crash.
+                
+                @Image(source: "1-1-image-2-1.jpg", alt: "The blue cone appearing in AR.")
+            }
+            
+            @Step {
+                Create a new folder called "Game". Drag `GameRenderer.swift` into it.
+                
+                @Image(source: "2-1-image-1-2.png", alt: "GameRenderer.swift appearing under the \"Game\" folder.")
+            }
+            
+            @Step {
+                Replace the contents of `GameRenderer.swift` with the code listing shown next to this step.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Add a new Swift file named `GameRendererExtensions.swift`.
+                
+                @Image(source: "2-1-image-1-3.png", alt: "GameRendererExtensions.swift being highlighted in the project navigator.")
+            }
+            
+            @Step {
+                Erase `import Foundation`. Add the code shown in the code listing.
+                
+                Separating the conformance of `GameRenderer` to ``ARHeadsetKit/CustomRenderer`` into another file helps organize your code, preventing any one file from becoming too large.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-1-3.swift", previousFile: "2-1-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Launch the app again to double-check that there are no compiler errors or crashes.
+            }
         }
     }
 }

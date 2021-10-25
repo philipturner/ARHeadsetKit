@@ -36,20 +36,6 @@
         @TutorialReference(tutorial: "doc:Ray-Tracing-Functions")
         @TutorialReference(tutorial: "doc:The-Essence-of-GPGPU")
         
-<!--    Encourage use of Google Cardboard at the very end to experience the final product in its full glory.    -->
+<!--    Encourage use of Google Cardboard at the very end to experience the final product.    -->
     }
-    
-    <!-- Fourth chapter (several weeks ahead): -->
-    <!-- Only if Apple fixes Metal frame capture, which is 100% broken in Xcode 13.0 (previously just 90% broken). - NVM -->
-    <!-- Just split into separate command buffers and use gpuStartTime and gpuEndTime. Besides, it's easier to not introduce them to Metal Frame Capture given how hectic it probably will be even if it's working again.   -->
-    
-    <!-- Incorporate more framework extensions and shader utilities -->
-    <!-- Include experience with debugging shaders - show what happens without ARHeadsetKit's debugging utilities :( -->
-    
-<!--  Chapter 4 will walk through accomplishing the disintegrating cube animation that got me so hyped up about Microsoft Hololens! I don't even know if I can do it yet, but I'll find a way! For this reason, it will be called "Truly Replicating Hololens".  -->
-<!--  It will be wierd using ray tracing to interact with that, but I'll do it anyway!  -->
-
-<!--   This is distinct from chapter 3's GPGPU project because it delves more into compute shaders and performance problems.   -->
-
-<!--   Then make multiple Hololens cubes and put the side-by-side comparison of ARHeadsetKit to the Hololens promotional material in my Youtube video!   -->
 }
