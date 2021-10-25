@@ -14,9 +14,11 @@
     
 <!--    Use transform so it doesn’t have to be at center    -->
     
-    @Section(title: "Section 0") {
+    @Section(title: "Fix Xcode Bug") {
         @ContentAndMedia {
             There is the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet. You will fix it by modifying the corrupted file in Xcode.
+            
+            Apple, if you're reading this, you know what to do :)       
         }
         
         @Steps {
