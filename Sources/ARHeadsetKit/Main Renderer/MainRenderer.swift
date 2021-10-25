@@ -281,11 +281,16 @@ public extension DelegateRenderer {
     @inlinable var usingHeadsetMode: Bool { renderer.usingHeadsetMode }
     @inlinable var usingFlyingMode: Bool { renderer.usingFlyingMode }
     
+    @inlinable var interfaceDepth: Float { type(of: renderer).interfaceDepth }
     /// The user-defined relative size of interface elements.
     @inlinable var interfaceScale: Float { renderer.interfaceScale }
     @inlinable var interfaceScaleChanged: Bool { renderer.interfaceScaleChanged }
     @inlinable var interfaceCenter: simd_float3 { renderer.cameraMeasurements.interfaceCenter }
+    
     @inlinable var interactionRay: RayTracing.Ray? { renderer.interactionRay }
+    @inlinable var touchingScreen: Bool { renderer.touchingScreen }
+    @inlinable var longPressingScreen: Bool { renderer.longPressingScreen }
+    @inlinable var shortTappingScreen: Bool { renderer.shortTappingScreen }
     
     @inlinable var leftEyePosition: simd_float3 { renderer.cameraMeasurements.leftEyePosition }
     @inlinable var rightEyePosition: simd_float3 { renderer.cameraMeasurements.rightEyePosition }

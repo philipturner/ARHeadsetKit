@@ -64,7 +64,7 @@
 <!--  Image: hand in front of cube when it is highlighted in a light color   -->
 
     @Section(title: "First Ray Tracing") {
-        In 3D computer games, ray tracing projects a 2D mouse pointer onto a 3D scene. ARHeadsetKit uses ray tracing the same way, but with the center of your hand.
+        In computer games, ray tracing projects a 2D mouse pointer onto a 3D scene. ARHeadsetKit uses ray tracing the same way, but with the center of your hand.
         
         @Steps {
             @Step {
@@ -74,9 +74,9 @@
             }
             
             @Step {
-                Add a new AR objects centered at the origin, measuring 0.2 meters in each dimension. Use `var` instead of `let` because it will be modified later.
+                Add a new AR object centered at the origin, measuring 0.2 meters in each dimension. Use `var` instead of `let` because it will be modified later.
                 
-                > Note: This step introduces new ways to declare single-precision vectors. The position is set to `[0.0, 0.0, 0.0]` and the scale is set to `[0.2, 0.2, 0.2]`. 
+                > Note: This step introduces new ways to declare single-precision vectors. They are equivalent to setting positon to `[0.0, 0.0, 0.0]` and scale to `[0.2, 0.2, 0.2]`. 
                 
                 @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-2.swift")
             }
@@ -115,7 +115,11 @@
             
             @Step {
                 Try out the app and move your hand in front of the blue cube. It will change color when it detects your hand.
+                
+                @Image(source: "2-1-image-2-1.jpg", alt: "The user's hand highlighting the cube.")
             }
         }
     }
+    
+<!--  Go back to GameRenderer.swift and add a stored property for cube position  -->
 }
