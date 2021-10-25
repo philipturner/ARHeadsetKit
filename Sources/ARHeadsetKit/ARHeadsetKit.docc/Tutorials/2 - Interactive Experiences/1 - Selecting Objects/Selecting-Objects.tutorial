@@ -9,8 +9,8 @@
         Follow the steps to build this project, or download the finished project to explore on your own. 
     }
     
-    @Section(title: "Configuring ARHeadsetKit from Scratch") {
-        To start making your own projects with ARHeadsetKit, become familiar with how to set it up yourself.
+    @Section(title: "Set up ARHeadsetKit from Scratch") {
+        To start making your own projects with ARHeadsetKit, become familiar with how to configure a project entirely by yourself.
         
         Follow the instructions the [GitHub overview](https://github.com/philipturner/ARHeadsetKit/blob/main/README.md#how-to-configure-arheadsetkit-from-scratch), starting with "How to Configure ARHeadsetKit from Scratch". In the section after that, choose the Swift package option.
         
@@ -55,6 +55,66 @@
             
             @Step {
                 Launch the app again to double-check that there are no compiler errors or crashes.
+            }
+        }
+    }
+    
+<!--  Say making use of more convenient initializers in step 2  -->
+
+<!--  Image: hand in front of cube when it is highlighted in a light color   -->
+
+    @Section(title: "First Ray Tracing") {
+        In 3D computer games, ray tracing projects a 2D mouse pointer onto a 3D scene. ARHeadsetKit uses ray tracing the same way, but with the center of your hand.
+        
+        @Steps {
+            @Step {
+                In `updateResources()`, add two new colors: medium blue (20% red, 50% green, 70% blue) and light blue (60% red, 80% green, 100% blue).
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-1.swift", previousFile: "2-1-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Add a new AR objects centered at the origin, measuring 0.2 meters in each dimension. Use `var` instead of `let` because it will be modified later.
+                
+                > Note: This step introduces new ways to declare single-precision vectors. The position is set to `[0.0, 0.0, 0.0]` and the scale is set to `[0.2, 0.2, 0.2]`. 
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Set the object's color to `mediumBlue`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Retrieve `interactionRay` in an `if let` statement. This is a ray pointing from your head to your hand.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Determine whether `interactionRay` intersects the AR object.
+                
+                Several ARHeadsetKit types can be tested for intersection. In another tutorial, you will delve deeper into this topic and create custom ray tracing functions.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                If the user's hand is positioned in front of the object, highlight it. Convert `lightBlue` to a half-precision vector and set it as the object's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Finally, render the object.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Try out the app and move your hand in front of the blue cube. It will change color when it detects your hand.
             }
         }
     }
