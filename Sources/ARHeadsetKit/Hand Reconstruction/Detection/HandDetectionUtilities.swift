@@ -69,7 +69,7 @@ func getFlatness(_ points: [simd_float2]) -> Float {
     
     let center = points.reduce(.zero, +) / Float(points.count)
     
-    var maxIndex = -1
+    var maxIndex = 0
     var maxDistance_squared = Float(0)
     
     for i in 0..<points.count {
@@ -83,7 +83,7 @@ func getFlatness(_ points: [simd_float2]) -> Float {
     
     var firstDelta = points[maxIndex] - center
     
-    var secondMaxIndex = -1
+    var secondMaxIndex = 0
     var secondMaxDistance_squared = Float(0)
     
     for i in 0..<points.count where i != maxIndex {
