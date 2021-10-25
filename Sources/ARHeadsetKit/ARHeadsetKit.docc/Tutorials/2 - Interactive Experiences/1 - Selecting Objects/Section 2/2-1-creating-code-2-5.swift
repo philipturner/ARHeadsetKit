@@ -12,7 +12,7 @@ extension GameRenderer: CustomRenderer {
                               
                               color: mediumBlue)
         
-        if let interactionRay = interactionRay,
+        if let interactionRay = renderer.interactionRay,
            object.trace(ray: interactionRay) != nil {
             
         }

@@ -59,11 +59,7 @@
         }
     }
     
-<!--  Say making use of more convenient initializers in step 2  -->
-
-<!--  Image: hand in front of cube when it is highlighted in a light color   -->
-
-    @Section(title: "First Ray Tracing") {
+    @Section(title: "Introduction to Ray Tracing") {
         In computer games, ray tracing projects a 2D mouse pointer onto a 3D scene. ARHeadsetKit uses ray tracing the same way, but with the center of your hand.
         
         @Steps {
@@ -94,7 +90,7 @@
             }
             
             @Step {
-                Determine whether `interactionRay` intersects the AR object.
+                Determine whether Main Renderer's `interactionRay` intersects the AR object.
                 
                 Several ARHeadsetKit types can be tested for intersection. In another tutorial, you will delve deeper into this topic and create custom ray tracing functions.
                 
@@ -121,5 +117,103 @@
         }
     }
     
-<!--  Go back to GameRenderer.swift and add a stored property for cube position  -->
+    @Section(title: "Interact through Touch") {
+        ARHeadsetKit's hand tracking algorithm lacks the ability to recognize hand gestures. Instead of grabbing or pushing an object, the user touches their device's screen to initiate an interaction.
+        
+        @Steps {
+            @Step {
+                In `GameRenderer.swift`, add a stored position vector called `cubePosition`. Set it to the origin.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-3-1.swift", previousFile: "2-1-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Go back to `GameRendererExtensions.swift`. Refactor the cube's initialization into a nested function.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-2.swift", previousFile: "2-1-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Change the object's position to `cubePosition`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Replace `mediumBlue` with the `color` parameter passed into the function.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-4.swift")
+            }
+            
+            @Step {
+                Call `makeCube(color:)` to initialize the object.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Jump to the code that executes when the hand intersects the cube. Delete the statement that changes the cube's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Add an `if-else` statement that tests whether the user's hand is currently touching the screen.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-7.swift")
+            }
+            
+            @Step {
+                Push the cube backward when the user interacts with it.
+                
+                Notice that the change in Z is only two millimeters? Take a guess at why that is.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-8.swift")
+            }
+            
+            @Step {
+                Since the cube's position has changed, you need to re-initialize it.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-9.swift")
+            }
+            
+            @Step {
+                In the `else` block, only change the object's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                Run the app. When you simultaneously place your hand in front of the cube and long-press your device's touchscreen, the cube moves backward.
+            }
+        }
+    }
+    
+    @Section(title: "Different Types of Touches") {
+        Remember that the object only shifts backward by two millimeters? That adjustment occurs every single frame&mdash;60 times per second. So, the object travels with a speed of 0.12 meters per second.
+        
+        You will now create an interaction that happens only once, instead of repeating every frame.
+        
+        @Steps {
+            @Step {
+                Swap out `touchingScreen` for `shortTappingScreen`. Now, shift occurs exactly when the user starts touching the screen.
+                
+                > Tip: You can also access the `longPressingScreen` property. Use this instead of `touchingScreen && !shortTappingScreen`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-4-1.swift", previousFile: "2-1-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                Increase the shift to 0.1 meters. Otherwise, it would be too small to notice.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Perform the same long-press interaction you executed in the last section. The cube jumps backward when you start touching the screen, then freezes.
+                
+                Experiment with changing the sign of the shift. Does the cube behave differently?
+            }
+        }
+    }
 }
