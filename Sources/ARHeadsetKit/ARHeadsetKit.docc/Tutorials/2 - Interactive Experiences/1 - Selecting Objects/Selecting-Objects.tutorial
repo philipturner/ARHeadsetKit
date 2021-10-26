@@ -1,4 +1,4 @@
-@Tutorial(time: 60) {
+@Tutorial(time: 50, projectFiles: "Selecting-Objects.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
