@@ -282,14 +282,29 @@
             }
             
             @Step {
-                #10
+                Call `drawArrow(ray:progress:)` on the `interactionRay` and `progress`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-10.swift")
             }
             
             @Step {
-                Launch the app. Notice a 
+                Launch the app. Notice a gray blob obscuring your vision? That's supposed to be an arrow!
+                
+                In the next section, you will learn how to view the ray from a better angle.
+                
+                @Image(source: "2-1-image-5-1.jpg", alt: "The arrow obscuring vision of the cube.")
             }
         }
     }
+    
+    
+<!--  Describe how awesome flying is in the introduction, not the last step (including the statement about LiDAR)  -->
+    
      
 <!--  Say to enable interaction during flying, during app initialization   -->
+
+<!--   Last step:   -->
+
+<!--  Instruct to read the in-app tutorial for how to fly.  -->
+<!--  But give instructions on how to fly to the right position anyway: first double-tap. Then, long-press for about one second.  -->
 }
