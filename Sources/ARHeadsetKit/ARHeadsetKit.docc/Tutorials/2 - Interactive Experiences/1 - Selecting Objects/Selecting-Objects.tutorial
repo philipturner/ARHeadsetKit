@@ -1,22 +1,340 @@
-@Tutorial {
+@Tutorial(time: 50, projectFiles: "Selecting-Objects.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Selecting Objects") {
-        Coming soon!
-<!--    Start over from scratch this chapter, tell that this is the case.    -->
-<!--    Configure a new project from scratch to give them experience, tell them to do that instead of saying "download sample code" in tutorial. Instead, use the SwiftUI statement of "follow along or explore on your own". Still include a configured starter project in sample code. Have them check whether their configured app runs properly.    -->
+        Control AR objects by combining hand tracking with touchscreen interaction.
+        
+        Follow the steps to build this project, or download the finished project to explore on your own.
+        
+        @Image(source: "2-1-image-6-2-intro.jpg", alt: "Viewing an interaction ray from the side.")
     }
     
-<!--  Guide through new setup, letting them copy and paste to SwiftUI views, removing custom setting, declaring `MyRenderer`'s conformance in another file, possibly renaming `MyRenderer`.   -->
-    
-<!--   Get the interaction ray. Use Ray Tracing functions on AR Objects.   -->
-<!--   Add interaction with touchscreen for selecting objects   -->
-    
-    @Section(title: "n/a") {
+    @Section(title: "Set up ARHeadsetKit from Scratch") {
+        To start making your own projects with ARHeadsetKit, become familiar with how to configure a project entirely by yourself.
+        
+        Follow the instructions the [GitHub overview](https://github.com/philipturner/ARHeadsetKit/blob/main/README.md#how-to-configure-arheadsetkit-from-scratch), starting with "How to Configure ARHeadsetKit from Scratch". In the section after that, choose the Swift package option.
+        
         @Steps {
+            @Step {
+                Go through the very first tutorial (Setting Up ARHeadsetKit) again with your new project. Replace every instance of the word `MyRenderer` with `GameRenderer`.
+                
+                @Image(source: "2-1-image-1-1.png", alt: "The project navigator with \"GameRenderer\" instead of \"MyRenderer\".")
+            }
             
+            @Step {
+                Launch your app and ensure it does not crash.
+                
+                @Image(source: "1-1-image-2-1.jpg", alt: "The blue cone appearing in AR.")
+            }
+            
+            @Step {
+                Right-click `ContentView.swift` and select "New Group". Name the folder "Game" and add `GameRenderer.swift` to it.
+                
+                @Image(source: "2-1-image-1-2.png", alt: "GameRenderer.swift appearing under the \"Game\" folder.")
+            }
+            
+            @Step {
+                Replace the contents of `GameRenderer.swift` with the code listing shown next to this step.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Add a new Swift file named `GameRendererExtensions.swift`.
+                
+                @Image(source: "2-1-image-1-3.png", alt: "GameRendererExtensions.swift being highlighted in the project navigator.")
+            }
+            
+            @Step {
+                Erase `import Foundation`. Add the code shown in the code listing.
+                
+                Separating `GameRenderer`'s conformance to ``ARHeadsetKit/CustomRenderer`` into another file helps organize your code, preventing any one file from becoming too large.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-1-3.swift", previousFile: "2-1-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Launch the app again to double-check that there are no compilation errors or crashes.
+            }
+        }
+    }
+    
+    @Section(title: "Introduction to Ray Tracing") {
+        In computer games, ray tracing projects a 2D mouse pointer onto a 3D scene. ARHeadsetKit uses ray tracing the same way, but with the center of your hand.
+        
+        @Steps {
+            @Step {
+                In `updateResources()`, add two new colors: medium blue (20% red, 50% green, 70% blue) and light blue (60% red, 80% green, 100% blue).
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-1.swift", previousFile: "2-1-creating-code-1-3.swift")
+            }
+            
+            @Step {
+                Add a new AR object centered at the origin, measuring 0.2 meters in each dimension. Use `var` instead of `let` because it will be modified later.
+                
+                > Note: This step introduces new ways to declare single-precision vectors. They are equivalent to setting positon to `[0.0, 0.0, 0.0]` and scale to `[0.2, 0.2, 0.2]`. 
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Set the object's color to `mediumBlue`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Retrieve `interactionRay` in an `if let` statement. This is a ray pointing from your head to your hand.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Determine whether Main Renderer's `interactionRay` intersects the AR object.
+                
+                Several ARHeadsetKit types can be tested for intersection. In another tutorial, you will delve deeper into this topic and create custom ray tracing functions.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                If the user's hand is positioned in front of the object, highlight it. Convert `lightBlue` to half precision and set it as the object's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                Finally, render the object.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Try out the app and move your hand in front of the blue cube. It will change color when it detects your hand.
+                
+                @Image(source: "2-1-image-2-1.jpg", alt: "The user's hand highlighting the cube.")
+            }
+        }
+    }
+    
+    @Section(title: "Interact through Touch") {
+        ARHeadsetKit's hand tracking algorithm lacks the ability to recognize hand gestures. Instead of grabbing or pushing an object, the user touches their device's screen to initiate an interaction.
+        
+        @Steps {
+            @Step {
+                In `GameRenderer.swift`, add a stored position vector called `cubePosition`. Set it to the origin.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-3-1.swift", previousFile: "2-1-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                Go back to `GameRendererExtensions.swift`. Refactor the cube's initialization into a nested function.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-2.swift", previousFile: "2-1-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Change the object's position to `cubePosition`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Replace `mediumBlue` with the `color` parameter passed into the function.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-4.swift")
+            }
+            
+            @Step {
+                Call `makeCube(color:)` to initialize the object.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Jump to the code that executes when the hand intersects the cube. Delete the statement that changes the cube's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Add an `if-else` statement that tests whether the user's hand is currently touching the screen.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-7.swift")
+            }
+            
+            @Step {
+                Push the cube backward when the user interacts with it.
+                
+                Notice that the change in Z is only two millimeters? Take a guess at why that is.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-8.swift")
+            }
+            
+            @Step {
+                Since the cube's position has changed, you need to re-initialize it.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-9.swift")
+            }
+            
+            @Step {
+                In the `else` block, only change the object's color.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                Run the app. When you simultaneously place your hand in front of the cube and long-press your device's touchscreen, the cube moves backward.
+            }
+        }
+    }
+    
+    @Section(title: "Different Types of Touches") {
+        Remember that the cube only shifts backward by two millimeters? That adjustment occurs every single frame&mdash;60 times per second. So, it travels with a speed of 0.12 meters per second.
+        
+        You will now create an interaction that happens only once, instead of repeating every frame.
+        
+        @Steps {
+            @Step {
+                Swap out `touchingScreen` with `shortTappingScreen`. Now, the shift occurs exactly when the user starts touching the screen.
+                
+                > Tip: You can also access the `longPressingScreen` property. Use this instead of `(touchingScreen && !shortTappingScreen)`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-4-1.swift", previousFile: "2-1-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                Increase the shift to 0.1 meters. Otherwise, it would be too small to notice.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Perform the same long-press interaction you executed in the last section. The cube jumps backward when you start touching the screen, then freezes.
+                
+                Experiment with changing the sign of the shift. Does the cube behave differently?
+            }
+        }
+    }
+    
+    @Section(title: "Visualize the Ray") {
+        In tutorial 3 (Working with AR Objects), you created a reusable function for drawing arrows. In this section, you will tailor that function for drawing rays.
+        
+        @Steps {
+            @Step {
+                Go to `GameRenderer.swift`. Copy and paste `drawArrow(center:orientation:)` from tutorial 3 into an instance method.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-1.swift", previousFile: "2-1-creating-code-3-1.swift")
+            }
+            
+            @Step {
+                Set `color` to a single-precision light-gray color (80% red, 80% green, 80% blue).
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Replace both of the function's parameters with a ``ARHeadsetKit/RayTracing/Ray`` and a `Float` named `progress`.
+                
+                The `progress` parameter tells how far to extend the ray.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-3.swift")
+            }
+            
+            @Step {
+                Remove the lines that declare `yAxis`, `arrowDirection`, `arrowStart`, and `arrowEnd`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-4.swift")
+            }
+            
+            @Step {
+                Set `arrowStart` to the ray's origin. This is the point where the ray beams away from.
+                
+                In this case, the ray's origin is your head.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-5.swift")
+            }
+            
+            @Step {
+                Project the ray's tip to the location specified by `progress`. Then, assign it to `arrowEnd`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-6.swift")
+            }
+            
+            @Step {
+                After ensuring the length of `ray.direction` is one, assign it to `arrowDirection`.
+                
+                > Warning: Do not forget to normalize the ray's direction. The Main Renderer's `interactionRay` is normalized, but other rays might not be.  
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-7.swift")
+            }
+            
+            @Step {
+                Prevent the `line` from rendering when the ray is less than 0.1 meters long. Otherwise, you might see some very funny-looking arrows.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Go back to `GameRendererExtensions.swift`. Change the check for a ray-object intersection so that it stores the progress.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-5-9.swift", previousFile: "2-1-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Call `drawArrow(ray:progress:)` on the interaction ray and the progress.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-5-10.swift")
+            }
+            
+            @Step {
+                Launch the app. Notice a gray blob obscuring your vision? That's supposed to be an arrow!
+                
+                In the next section, you will learn how to view the ray from a better angle.
+                
+                @Image(source: "2-1-image-5-1.jpg", alt: "The arrow obscuring vision of the cube.")
+            }
+        }
+    }
+    
+    @Section(title: "I Can Fly") {
+        To view the ray, you need to get a jetpack and take off...
+        
+        No, seriously, you can fly with ARHeadsetKit!
+        
+        @Steps {
+            @Step {
+                In `GameRenderer.swift`, go to the initializer of `GameRenderer`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Set Main Renderer's `canInteractWhileFlying` property to `true`. By default, ARHeadsetKit sets the interaction ray to `nil` when you are flying.
+                
+                > Tip: The user might unintentionally interact with objects while flying forward. Disable any destructive actions when `renderer.usingFlyingMode` is true.
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-6-1.swift")
+            }
+            
+            @Step {
+                Go to the in-app settings panel. Activate flying mode and read the tutorial on it.
+                
+                @Image(source: "2-1-image-6-1.png", alt: "Flying mode selected in the settings panel.")
+            }
+            
+            @Step {
+                Close the settings panel. Double-tap the screen to switch your flight direction to backward. Then, press and hold for one second.
+            }
+            
+            @Step {
+                Rotate your device so you can see the cube. Place your hand in front it, and you will see the interaction ray.
+                
+                If you have a LiDAR-enabled iPhone, scan your room and they fly around it. For a truly immersive experience, activate headset mode and put on a Google Cardboard!
+                
+                @Image(source: "2-1-image-6-2.jpg", alt: "Viewing an interaction ray from the side.")
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
 <p align="center">
   <img src="docs/images/google-cardboard-plus-ar.webp" alt="Google Cardboard plus AR" width="80%">
 </p>
-  
+
 Using a $5 Google Cardboard, the average person can now replicate Microsoft Hololens. Apps built with ARHeadsetKit are immersive AR headset experiences, simultaneously providing handheld AR alternatives. In just 30 lines of code, even someone without a background in Swift can work with AR.
 
 ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [and macOS](docs/mac-compatibility.md) frameworks with high-level [wrappers](docs/extensions-to-apple-frameworks.md) that maximize performance. [MTLLayeredBuffer](docs/articles/layered-buffer.md) lowers the barrier to learning Metal and managing GPGPU workflows. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. To learn more, check out [these articles](docs/article-list.md).
@@ -24,8 +24,8 @@ Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to A
   - [x] Tutorial 3 - Working with AR Objects
   - [x] Tutorial 4 - Alternative Rendering Modes
 - [ ] Ch. 2 - Interactive Experiences
-  - [ ] Tutorial 5 - Selecting Objects (in progress)
-  - [ ] Tutorial 6 - Using Delegate Renderers
+  - [x] Tutorial 5 - Selecting Objects (complete)
+  - [ ] Tutorial 6 - Using Delegate Renderers (in progress)
   - [ ] Tutorial 7 - Creating a User Interface
 - [ ] Ch. 3 - Unlocking Everything
   - [x] Tutorial 8 - Reconfiguring ARHeadsetKit (complete)
@@ -37,7 +37,7 @@ ARHeadsetKit will remain in the beta phase until every tutorial is finished. To 
 
 ## How to Configure ARHeadsetKit from Scratch
 
-Follow the "Creating an Xcode project" section of the [quick start](docs/building-documentation.md) guide. Name your project something other than "ARHeadsetKit Documentation". In the project navigator on the left of the Xcode window, click the folder at the very top with your project's name. The project settings will open, with a sidebar stating `PROJECT` and `TARGETS`. Click your project's name under `TARGETS`. In the tab bar at the top, ensure that "General" is selected.
+Follow the "Creating an Xcode project" section of the [quick start](docs/building-documentation.md) guide, but name your project something other than "ARHeadsetKit Documentation". In the project navigator on the left of the Xcode window, click the folder at the very top with your project's name. The project settings will open, with a sidebar stating `PROJECT` and `TARGETS`. Click your project's name under `TARGETS`. In the tab bar at the top, ensure that "General" is selected.
 
 If your app provides an AR experience supported by ARHeadsetKit, follow [this guide](docs/property-list-keys.md) to configure your app's Info.plist correctly. Otherwise, your app will crash on launch. You do not need to perform this step if you will only use ARHeadsetKit for its utility functions (such as [`MTLLayeredBuffer`](docs/articles/layered-buffer.md)).
 
