@@ -1,4 +1,4 @@
-@Tutorial(time: 50) {
+@Tutorial(time: 60) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -228,7 +228,7 @@
             }
             
             @Step {
-                Add a single-precision `color` variable initialized to light gray (80% red, 80% green, 80% blue).
+                Set `color` to a single-precision light-gray color (80% red, 80% green, 80% blue).
                 
                 @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-2.swift")
             }
@@ -248,7 +248,7 @@
             }
             
             @Step {
-                Set the arrow's start to the ray's origin. This is the point where the ray beams away from.
+                Set `arrowStart` to the ray's origin. This is the point where the ray beams away from.
                 
                 In this case, the ray's origin is your head.
                 
@@ -264,27 +264,27 @@
             @Step {
                 After ensuring the length of `ray.direction` is one, assign it to `arrowDirection`.
                 
-                > Warning: Do not forget to normalize the ray's direction. It will be normalized in this tutorial, but it might not be in the future.  
+                > Warning: Do not forget to normalize the ray's direction. The Main Renderer's `interactionRay` is normalized, but other rays might not be.  
                 
                 @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-7.swift")
             }
             
             @Step {
-                Prevent the `line` from rendering if the arrow is less than 0.1 meters long. Otherwise, you might get some very funny-looking arrows!
+                Prevent the `line` from rendering when the ray is less than 0.1 meters long. Otherwise, you might see some very funny-looking arrows.
                 
                 @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-8.swift")
             }
             
             @Step {
-                Go back to `GameRendererExtensions.swift`. Change the check for a ray-object intersection so that is stores the progress.
+                Go back to `GameRendererExtensions.swift`. Change the check for a ray-object intersection so that it stores the progress.
                 
                 @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-5-9.swift", previousFile: "2-1-creating-code-4-2.swift")
             }
             
             @Step {
-                Call `drawArrow(ray:progress:)` on the `interactionRay` and `progress`.
+                Call `drawArrow(ray:progress:)` on the interaction ray and the progress.
                 
-                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-10.swift")
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-5-10.swift")
             }
             
             @Step {
@@ -297,14 +297,43 @@
         }
     }
     
-    
-<!--  Describe how awesome flying is in the introduction, not the last step (including the statement about LiDAR)  -->
-    
-     
-<!--  Say to enable interaction during flying, during app initialization   -->
-
-<!--   Last step:   -->
-
-<!--  Instruct to read the in-app tutorial for how to fly.  -->
-<!--  But give instructions on how to fly to the right position anyway: first double-tap. Then, long-press for about one second.  -->
+    @Section(title: "I Can Fly") {
+        To view the ray, you need to get a jetpack and take off...
+        
+        No, seriously, you can fly with ARHeadsetKit!
+        
+        @Steps {
+            @Step {
+                In `GameRenderer.swift`, go to the initializer of `GameRenderer`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Set Main Renderer's `canInteractWhileFlying` property to `true`. By default, ARHeadsetKit sets the interaction ray to `nil` when you are flying.
+                
+                > Tip: When flying, the user might unintentionally interact with objects while attempting to fly forward. Disable any destructive actions when `renderer.usingFlyingMode` is true.
+                
+                @Code(name: "GameRenderer.swift", file: "2-1-creating-code-6-1.swift")
+            }
+            
+            @Step {
+                Go to the in-app settings panel. Activate flying mode and read the tutorial on it.
+                
+                @Image(source: "2-1-image-6-1.png", alt: "Flying mode selected in the settings panel.")
+            }
+            
+            @Step {
+                Close the settings panel. Double-tap the screen to switch your flying direction to backward. Then, press and hold for one second.
+            }
+            
+            @Step {
+                Rotate your device so you can see the cube. Place your hand in front of the cube. When it is highlighted, you will see the interaction ray.
+                
+                If you have a LiDAR-enabled iPhone, scan your room and they fly around it. For a truly immersive experience, activate headset mode and put on a Google Cardboard!
+                
+                @Image(source: "2-1-image-6-2.jpg", alt: "Viewing a ray from the side.")
+            }
+        }
+    }
 }
