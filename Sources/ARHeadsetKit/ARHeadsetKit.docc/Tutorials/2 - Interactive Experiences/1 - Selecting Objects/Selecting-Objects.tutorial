@@ -4,9 +4,11 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Selecting Objects") {
-        Coming soon!
+        Control AR objects by combining hand tracking with touchscreen interaction.
         
-        Follow the steps to build this project, or download the finished project to explore on your own. 
+        Follow the steps to build this project, or download the finished project to explore on your own.
+        
+        @Image(source: "2-1-image-6-2-intro.jpg", alt: "Viewing an interaction ray from the side.")
     }
     
     @Section(title: "Set up ARHeadsetKit from Scratch") {
@@ -28,7 +30,7 @@
             }
             
             @Step {
-                Create a new folder called "Game". Drag `GameRenderer.swift` into it.
+                Right-click `ContentView.swift` and select "New Group". Name the folder "Game" and add `GameRenderer.swift` to it.
                 
                 @Image(source: "2-1-image-1-2.png", alt: "GameRenderer.swift appearing under the \"Game\" folder.")
             }
@@ -48,7 +50,7 @@
             @Step {
                 Erase `import Foundation`. Add the code shown in the code listing.
                 
-                Separating the conformance of `GameRenderer` to ``ARHeadsetKit/CustomRenderer`` into another file helps organize your code, preventing any one file from becoming too large.
+                Separating `GameRenderer`'s conformance to ``ARHeadsetKit/CustomRenderer`` into another file helps organize your code, preventing any one file from becoming too large.
                 
                 @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-1-3.swift", previousFile: "2-1-creating-code-1-2.swift")
             }
@@ -190,13 +192,13 @@
     }
     
     @Section(title: "Different Types of Touches") {
-        Remember that the object only shifts backward by two millimeters? That adjustment occurs every single frame&mdash;60 times per second. So, the object travels with a speed of 0.12 meters per second.
+        Remember that the cube only shifts backward by two millimeters? That adjustment occurs every single frame&mdash;60 times per second. So, it travels with a speed of 0.12 meters per second.
         
         You will now create an interaction that happens only once, instead of repeating every frame.
         
         @Steps {
             @Step {
-                Swap out `touchingScreen` with `shortTappingScreen`. Now, shift occurs exactly when the user starts touching the screen.
+                Swap out `touchingScreen` with `shortTappingScreen`. Now, the shift occurs exactly when the user starts touching the screen.
                 
                 > Tip: You can also access the `longPressingScreen` property. Use this instead of `(touchingScreen && !shortTappingScreen)`.
                 
@@ -222,7 +224,7 @@
         
         @Steps {
             @Step {
-                Go to `GameRenderer.swift`. Copy and paste `drawArrow(center:orientation:)` from tutorial 3.
+                Go to `GameRenderer.swift`. Copy and paste `drawArrow(center:orientation:)` from tutorial 3 into an instance method.
                 
                 @Code(name: "GameRenderer.swift", file: "2-1-creating-code-5-1.swift", previousFile: "2-1-creating-code-3-1.swift")
             }
@@ -312,8 +314,7 @@
             @Step {
                 Set Main Renderer's `canInteractWhileFlying` property to `true`. By default, ARHeadsetKit sets the interaction ray to `nil` when you are flying.
                 
-                > Tip: When flying, the user might unintentionally interact with objects while attempting to fly forward. Disable any destructive actions when `renderer.usingFlyingMode` is true.
-                
+                > Tip: The user might unintentionally interact with objects while flying forward. Disable any destructive actions when `renderer.usingFlyingMode` is true.
                 @Code(name: "GameRenderer.swift", file: "2-1-creating-code-6-1.swift")
             }
             
@@ -324,15 +325,15 @@
             }
             
             @Step {
-                Close the settings panel. Double-tap the screen to switch your flying direction to backward. Then, press and hold for one second.
+                Close the settings panel. Double-tap the screen to switch your flight direction to backward. Then, press and hold for one second.
             }
             
             @Step {
-                Rotate your device so you can see the cube. Place your hand in front of the cube. When it is highlighted, you will see the interaction ray.
+                Rotate your device so you can see the cube. Place your hand in front it, and you will see the interaction ray.
                 
                 If you have a LiDAR-enabled iPhone, scan your room and they fly around it. For a truly immersive experience, activate headset mode and put on a Google Cardboard!
                 
-                @Image(source: "2-1-image-6-2.jpg", alt: "Viewing a ray from the side.")
+                @Image(source: "2-1-image-6-2.jpg", alt: "Viewing an interaction ray from the side.")
             }
         }
     }
