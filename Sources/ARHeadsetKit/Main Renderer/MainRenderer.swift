@@ -56,6 +56,11 @@ open class MainRenderer {
      */
     @inlinable @inline(__always)
     public var shortTappingScreen: Bool { touchingScreen && !longPressingScreen }
+    
+    /**
+     Set this to true to allow interacting with AR objects while flying. The default value is false.
+     */
+    public var canInteractWhileFlying = false
      
     var timeSinceLastTouch: Int = 200_000_000
     var timeSinceCurrentTouch: Int = 100_000_000

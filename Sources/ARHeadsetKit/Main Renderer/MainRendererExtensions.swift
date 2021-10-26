@@ -260,7 +260,7 @@ extension MainRenderer {
             interactionRay = .init(origin: rayOrigin, direction: rayDirection)
         }
         
-        if usingFlyingMode {
+        if usingFlyingMode, !canInteractWhileFlying {
             interactionRay = nil
         }
     }
