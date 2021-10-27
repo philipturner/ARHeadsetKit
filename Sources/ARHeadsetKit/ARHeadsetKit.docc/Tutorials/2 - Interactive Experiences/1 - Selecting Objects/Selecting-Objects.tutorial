@@ -222,7 +222,7 @@
     }
     
     @Section(title: "Visualize the Ray") {
-        In tutorial 3 (Working with AR Objects), you created a reusable function for drawing arrows. In this section, you will tailor that function for drawing rays.
+        In tutorial 3 (Working with AR Objects), you created a reusable function for drawing arrows. In this section, you will tailor that function for rendering rays.
         
         @Steps {
             @Step {
@@ -333,7 +333,7 @@
             @Step {
                 Rotate your device so you can see the cube. Place your hand in front it, and you will see the interaction ray.
                 
-                If you have a LiDAR-enabled iPhone, scan your room and they fly around it. For a truly immersive experience, activate headset mode and put on a Google Cardboard!
+                If you have a LiDAR-enabled device, scan your room and they fly around it. For a truly immersive experience, activate headset mode and put on a Google Cardboard!
                 
                 @Image(source: "2-1-image-6-2.jpg", alt: "Viewing an interaction ray from the side.")
             }
