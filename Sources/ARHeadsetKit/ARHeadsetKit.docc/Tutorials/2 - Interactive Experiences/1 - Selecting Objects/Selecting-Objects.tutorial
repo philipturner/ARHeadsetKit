@@ -18,7 +18,9 @@
         
         @Steps {
             @Step {
-                Go through the very first tutorial (Setting Up ARHeadsetKit) again with your new project. Replace every instance of the word `MyRenderer` with `GameRenderer`.
+                Go through the very first tutorial (Setting Up ARHeadsetKit), using the project you just configured instead of the sample code. 
+                
+                However, replace every instance of the word `MyRenderer` with `GameRenderer`.
                 
                 @Image(source: "2-1-image-1-1.png", alt: "The project navigator with \"GameRenderer\" instead of \"MyRenderer\".")
             }
@@ -30,7 +32,7 @@
             }
             
             @Step {
-                Right-click `ContentView.swift` and select "New Group". Name the folder "Game" and add `GameRenderer.swift` to it.
+                Right-click `ContentView.swift` and select "New Group". Name the folder "Game" and move `GameRenderer.swift` into it.
                 
                 @Image(source: "2-1-image-1-2.png", alt: "GameRenderer.swift appearing under the \"Game\" folder.")
             }
@@ -214,7 +216,7 @@
             @Step {
                 Perform the same long-press interaction you executed in the last section. The cube jumps backward when you start touching the screen, then freezes.
                 
-                Experiment with changing the sign of the shift. Does the cube behave differently?
+                > Experiment: Change the sign of the shift. Does the cube behave differently?
             }
         }
     }
