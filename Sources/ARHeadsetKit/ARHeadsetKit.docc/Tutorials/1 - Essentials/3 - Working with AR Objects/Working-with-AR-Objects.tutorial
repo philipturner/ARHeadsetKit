@@ -265,7 +265,7 @@
             @Step {
                 Launch the app. The arrow will stay in the center of your screen no matter where you move your device.
                 
-                Try this fun game: swap the multiplication order of `cameraRotation` and `timeRotation`. After launching the app, rotate your device 90 degrees to the left. Try making the arrow stop rotating!
+               > Experiment: Try this fun game: swap the multiplication order of `cameraRotation` and `timeRotation`. After launching the app, rotate your device 90 degrees to the left. Try making the arrow stop rotating!
                 
                 @Image(source: "1-3-image-4-1.jpg", alt: "The red arrow rotating at the screen's center.")
             }
