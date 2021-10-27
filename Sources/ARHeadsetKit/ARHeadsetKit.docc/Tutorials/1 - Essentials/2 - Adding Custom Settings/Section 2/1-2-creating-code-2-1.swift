@@ -7,7 +7,6 @@ struct ContentView: View {
         
         ARContentView<SettingsView>()
             .environmentObject(Coordinator(appDescription: description))
-        
     }
 }
 
