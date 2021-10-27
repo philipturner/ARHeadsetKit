@@ -248,7 +248,7 @@
             }
             
             @Step {
-                Run the app and experiment with not calling `render()` on an object group. Verify that objects in the removed group do not appear.
+                Run the app and comment out the call to `render()` on an object group. Verify that objects in the removed group do not appear.
             }
         }
     }

@@ -6,8 +6,7 @@ struct ContentView: View {
         let description = Coordinator.AppDescription(name: "My App")
         
         ARContentView<SettingsView>()
-            .environmentObject(Coordinator(appDescription: description))
-        
+            .environmentObject(Coordinator(appDescription: description))   
     }
 }
 
