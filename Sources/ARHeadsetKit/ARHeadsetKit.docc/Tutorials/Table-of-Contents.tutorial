@@ -22,6 +22,7 @@
         @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Selecting-Objects")
+        @TutorialReference(tutorial: "doc:Physics-Based-Interaction")
         @TutorialReference(tutorial: "doc:Using-Delegate-Renderers")
         @TutorialReference(tutorial: "doc:Creating-a-User-Interface")
     }
