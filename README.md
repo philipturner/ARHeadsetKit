@@ -25,13 +25,14 @@ Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to A
   - [x] Tutorial 4 - Alternative Rendering Modes
 - [ ] Ch. 2 - Interactive Experiences
   - [x] Tutorial 5 - Selecting Objects (complete)
-  - [ ] Tutorial 6 - Using Delegate Renderers (in progress)
-  - [ ] Tutorial 7 - Creating a User Interface
+  - [ ] Tutorial 6 - Physics-Based Interaction (in progress)
+  - [ ] Tutorial 7 - Using Delegate Renderers (in progress)
+  - [ ] Tutorial 8 - Creating a User Interface
 - [ ] Ch. 3 - Unlocking Everything
-  - [x] Tutorial 8 - Reconfiguring ARHeadsetKit (complete)
-  - [ ] Tutorial 9 - Composing Custom Shaders
-  - [ ] Tutorial 10 - Ray Tracing Functions
-  - [ ] Tutorial 11 - The Essence of GPGPU
+  - [x] Tutorial 9 - Reconfiguring ARHeadsetKit (complete)
+  - [ ] Tutorial 10 - Composing Custom Shaders
+  - [ ] Tutorial 11 - Ray Tracing Functions
+  - [ ] Tutorial 12 - The Essence of GPGPU
 
 ARHeadsetKit will remain in the beta phase until every tutorial is finished. To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
 
