@@ -16,7 +16,7 @@ If you are just starting out, ignore the sections below that deal with configuri
 
 ## Tutorial Series
 
-Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). There will be at least 11 tutorials, but only a few are finished so far. The status of each one is listed below:
+Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). There will be at least 12 tutorials, but not all are finished yet. The status of each one is listed below:
 
 - [x] Ch. 1 - Essentials (complete)
   - [x] Tutorial 1 - Setting Up ARHeadsetKit
