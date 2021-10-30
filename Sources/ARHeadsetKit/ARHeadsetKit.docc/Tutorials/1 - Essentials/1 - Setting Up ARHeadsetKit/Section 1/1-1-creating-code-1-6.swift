@@ -9,7 +9,9 @@ class MyRenderer: CustomRenderer {
     }
     
     func updateResources() {
-        
+        let object = ARObject(shapeType: .cone,
+                              position: [0.0, 0.0, 0.0],
+                              scale: [0.2, 0.2, 0.2])
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {

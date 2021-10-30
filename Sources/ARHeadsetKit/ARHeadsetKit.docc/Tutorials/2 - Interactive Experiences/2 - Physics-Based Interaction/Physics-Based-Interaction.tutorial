@@ -6,14 +6,69 @@
     @Intro(title: "Physics-Based Interaction") {
         Add realistic physics to collisions between your hand and AR objects.
         
-        In tutorial 3 (Working with AR Objects), you animated an AR object to add motion to your app. Now, you will build on that concept, adding physics that accounts for momentum, rotation, and gravity.
+        In tutorial 3 (Working with AR Objects), you animated an object to add motion to an app. You will now build on that concept, adding physics that accounts for momentum, rotation, and gravity.
+        
+<!--   Don't worry about adding a lot of screenshot pictures in this tutorial - just essential stuff like the first rotation and the last step with it falling from gravity     -->
         
         Download the project files to begin building this project, and follow the steps below.
     }
     
-    @Section(title: "n/a") {
+    @Section(title: "Refactor Rendering Code") {
+        @ContentAndMedia {
+            The physics used in this tutorial is significantly more complex than previous sample projects. To shorten `GameRendererExtensions.swift`, separate the code for managing the cube into another file.
+        }
+        
+<!--    Will `interactionRay` to `ray` in `updateResources()` to make code shorter   - will do so secretly in __Section 2__ because just deleted everything inside updateResources() to start out. -->
+<!--   Replace `cubePosition` in GameRenderer.swift __after__ creating cube struct. -->
+        
         @Steps {
+             @Step {
+                 Create a new file in the "Game" folder, called `Cube.swift`.
+                 
+                 @Image(source: "2-2-image-1-1.png", alt: "The blue cone appearing in AR.")
+             }
              
+             @Step {
+                 Replace the Foundation import with ARHeadsetKit. Declare a `Cube` struct with the properties from the code listing.
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-1.swift", previousFile: "creating-code-template.swift")
+             }
+             
+             @Step {
+                 Add a private method called `getObject()`, which generates an AR object.
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-2.swift")
+             }
+             
+             @Step {
+                 Declare an initializer that sets `location`, `orientation`, and `sideLength`, then creates `object` by calling `getObject()`. 
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-3.swift")
+             }
+             
+             @Step {
+                 Add a method for intersecting the cube with a ray.
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-4.swift")
+             }
+             
+             
+             
+             @Step {
+                 In `GameRendererExtensions.swift`, delete all the code inside `updateResources()`.
+                 
+                 @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-10.swift", previousFile: "2-1-creating-code-5-10.swift")
+             }
+             
+<!--    Step for intersection testing         -->
+<!--    Reserve render(...) for the last declared method --- will rearrange declarations when refactoring in Section 2, showing how messy it has become.   -->
+<!--    Step for changing GameRenderer's properties   -->
+             
+<!--       In this section, add the code for highlighting and tracing the cube. End with an image, even though you already did that in the previous tutorial. This will help them realize that this is almost identical to what they were doing, but refactored.      -->
         }
     }
+    
+<!--  In second section, add the fundamental physics. This is new to the reader, so go slow and make it short. It will include `update()`, changing the behavior of rendering and ray tracing (every location that checks for velocity), and adding a little rotation. Also the warning about quaternions with zero angle --- give an "Experiment" aside to let angle be zero and not correct the axis.   -->
+
+<!--  In the third section, add code for the surface normal. Say this is crucial for calculating collisions in physics. In that section, tell them to refactor non-rendering methods into extensions before repeating. Say this helps organize code.   -->
 }

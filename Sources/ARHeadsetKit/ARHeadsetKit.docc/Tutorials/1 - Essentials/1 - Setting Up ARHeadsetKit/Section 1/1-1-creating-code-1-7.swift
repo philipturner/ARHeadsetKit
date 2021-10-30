@@ -12,6 +12,8 @@ class MyRenderer: CustomRenderer {
         let object = ARObject(shapeType: .cone,
                               position: [0.0, 0.0, 0.0],
                               scale: [0.2, 0.2, 0.2])
+        
+        centralRenderer.render(object: object)
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
