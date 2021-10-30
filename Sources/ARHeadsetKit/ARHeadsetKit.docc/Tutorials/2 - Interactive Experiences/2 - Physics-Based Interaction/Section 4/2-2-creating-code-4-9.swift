@@ -53,6 +53,16 @@ extension Cube {
         
         let impulse = 2 * impactSpeed / inverseEffectiveMass
         velocity = impulse / cubeMass * normal
+        
+        // Lowercase omega (ω) is the symbol
+        // for angular velocity in physics.
+        //
+        // It is a vector, but it represents
+        // rotation like a quaternion does.
+        //
+        var ω = impulse * normal
+        ω = cross(cubeCenterOffset, ω)
+        ω *= -cubeInverseI
     }
     
     func findNormal(location: simd_float3) -> simd_float3 {

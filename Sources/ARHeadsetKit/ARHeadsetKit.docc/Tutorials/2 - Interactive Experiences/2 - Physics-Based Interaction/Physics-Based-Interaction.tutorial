@@ -8,8 +8,6 @@
         
         In tutorial 3 (Working with AR Objects), you animated an object to add motion to an app. You will now build on that concept, adding physics that accounts for momentum, rotation, and gravity.
         
-<!--   Don't worry about adding a lot of screenshot pictures in this tutorial - just essential stuff like the first rotation and the last step with it falling from gravity     -->
-        
         Download the project files to begin building this project, and follow the steps below.
     }
     
@@ -205,12 +203,12 @@
         }
     }
     
-    @Section(title: "Detecting the Surface Normal") {
-        All 3D object collisions require calculating a _surface normal_. This is a vector that points at a right angle to the object's surface.
-        
-        You don't need to understand how this section's code works, but follow along for the major tips and warnings.
-        
-<!--    Say the above message again for section 4    -->
+    @Section(title: "Detect the Surface Normal") {
+        @ContentAndMedia {
+            All 3D object collisions require calculating a _surface normal_. This is a vector that points at a right angle to the object's surface.
+            
+            You don't need to understand how this section's code works, but follow along to complete the tutorial.
+        }
         
         @Steps {
             @Step {
@@ -279,14 +277,97 @@
                 @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-12.swift", previousFile: "2-2-creating-code-3-7.swift")
             }
             
-<!--   Add an image at the end here and set the velocity to zero to frame the shot   -->
+            @Step {
+                Try out the app and notice the cylinder that appears when you touch the cube. That cylinder points in the same direction as the surface normal.
+                
+                @Image(source: "2-2-image-3-1.jpg", alt: "The surface normal object protruding from the cube.")
+            }
         }
     }
     
-<!--  Section 4: Collision --- Add the reference to the external source when beginning the bulk of the collide(...) function  -->
+    @Section(title: "Object Collision") {
+        @ContentAndMedia {
+            Finally, you have reached the most important piece of this tutorial - realistic object collision. 
+            
+            We went through the trouble of decoding several physics formulas, so that all you have to do is copy the code.
+            
+            Again, you don't need to understand this, but follow along to finish the tutorial.
+        }
+        
+        @Steps {
+            @Step {
+                Remove the assignments to the cube's `velocity` and `angularVelocity`.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-1.swift", previousFile: "2-2-creating-code-3-12.swift")
+            }
+            
+            @Step {
+                Before finding the surface normal, define the cube's mass, the colliding sphere's mass, and the sphere's radius.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Calculate the component of the sphere's velocity that is parallel to the surface normal.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Find the inverse moments of inertia of the cube and the sphere.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Locate each object's center of mass, relative to the impact point.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Start computing the inverse reduced mass of the two objects.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Finish computing the inverse reduced mass.
+                
+                > Tip: Separate ambiguous names such as "getComponent" and "sum" into a `do` statement.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-7.swift")
+            }
+            
+            @Step {
+                Find the impulse exchanged between the sphere and the cube. Use it to calculate the cube's velocity.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                Compute the angular velocity vector. Since it is not a quaternion, you can't assign it to `angularVelocity` yet.
+                
+                > Tip: You can use non-standard characters like "ω" as Swift variable names. Even emojis are valid!
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                Convert ω into a quaternion and initialize `angularVelocity` with it.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-10.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Punt the Cube") {
+        Make the cube experience gravity and launch it with your hand.
+    }
+    
 <!--  Section 5: Gravity and conclusion --- in this section, increase speed from 0.2 to 7 m/s -->
 
-<!--  WHEN IMPLEMENTING GRAVITY: STOP RENDERING CUBE IF IT HAS FALLEN TOO LOW (200 meters)  -->
+<!--  WHEN IMPLEMENTING GRAVITY: STOP RENDERING CUBE IF IT HAS FALLEN TOO LOW (200 meters) - Say: If an object falls ridiculously far, avoid rendering it to conserve energy. -->
 
 <!--  (Section 5) When taking screenshot of cube being punted, rig it in source code instead of actually catching it in motion. Leave the normal cylinder rendered - it might even be useful in the next tutorial.  -->
 
