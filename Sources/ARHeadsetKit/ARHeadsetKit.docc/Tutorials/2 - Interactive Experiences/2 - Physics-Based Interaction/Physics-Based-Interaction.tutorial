@@ -4,7 +4,11 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Physics-Based Interaction") {
-        Coming soon!
+        Add realistic physics to collisions between your hand and AR objects.
+        
+        In tutorial 3 (Working with AR Objects), you animated an AR object to add motion to your app. Now, you will build on that concept, adding physics that accounts for momentum, rotation, and gravity.
+        
+        Download the project files to begin building this project, and follow the steps below.
     }
     
     @Section(title: "n/a") {
