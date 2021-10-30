@@ -29,46 +29,84 @@
              }
              
              @Step {
-                 Replace the Foundation import with ARHeadsetKit. Declare a `Cube` struct with the properties from the code listing.
+                 Replace the Foundation import with ARHeadsetKit. Declare a `Cube` struct with the properties in the code listing.
                  
                  @Code(name: "Cube.swift", file: "2-2-creating-code-1-1.swift", previousFile: "creating-code-template.swift")
              }
              
              @Step {
-                 Add a private method called `getObject()`, which generates an AR object.
+                 Add a method called `getObject()`, which generates an AR object representing the cube.
                  
                  @Code(name: "Cube.swift", file: "2-2-creating-code-1-2.swift")
              }
              
              @Step {
-                 Declare an initializer that sets `location`, `orientation`, and `sideLength`, then creates `object` by calling `getObject()`. 
+                 Declare an initializer that sets `location`, `orientation`, and `sideLength`, initializing `object` by calling `getObject()`. 
                  
                  @Code(name: "Cube.swift", file: "2-2-creating-code-1-3.swift")
              }
              
              @Step {
-                 Add a method for intersecting the cube with a ray.
+                 Above `object`, add a boolean property named `isHighlighted`. Set its default value to `false`.
                  
                  @Code(name: "Cube.swift", file: "2-2-creating-code-1-4.swift")
              }
              
+             @Step {
+                 In `getObject()`, change the cube's color based on whether it is highlighted.
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-5.swift")
+             }
              
+             @Step {
+                 Create a method for rendering the cube, which takes a ``ARHeadsetKit/CentralRenderer`` parameter.
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-6.swift")
+             }
+             
+             @Step {
+                 After the closing brace of `Cube`, make an extension to it. Add a method for intersecting the cube with a ray.
+                 
+                 > Tip: If a type has numerous methods, separate groups of related methods into extensions. 
+                 
+                 @Code(name: "Cube.swift", file: "2-2-creating-code-1-7.swift")
+             }
+             
+             @Step {
+                 Go to `GameRenderer.swift`. Replace `cubePosition` with a `Cube` initialized as shown in the code listing.
+                 
+                 Study how the cube's orientation is created. Take a guess at how the cube will look in AR.
+                 
+                 @Code(name: "GameRenderer.swift", file: "2-2-creating-code-1-8.swift", previousFile: "2-1-creating-code-6-1.swift")
+             }
              
              @Step {
                  In `GameRendererExtensions.swift`, delete all the code inside `updateResources()`.
                  
-                 @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-10.swift", previousFile: "2-1-creating-code-5-10.swift")
+                 @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-9.swift", previousFile: "2-1-creating-code-5-10.swift")
              }
              
-<!--    Step for intersection testing         -->
-<!--    Reserve render(...) for the last declared method --- will rearrange declarations when refactoring in Section 2, showing how messy it has become.   -->
-<!--    Step for changing GameRenderer's properties   -->
+             @Step {
+                 Determine whether to highlight the cube by tracing the interaction ray.
+                 
+                 @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-10.swift")
+             }
              
-<!--       In this section, add the code for highlighting and tracing the cube. End with an image, even though you already did that in the previous tutorial. This will help them realize that this is almost identical to what they were doing, but refactored.      -->
+             @Step {
+                 Re-initialize the cube's object with the correct color. Then, render it.
+                 
+                 @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-11.swift")
+             }
+             
+             @Step {
+                 Run the app. Ensure it responds to your hand as it did in the last tutorial.
+             }
         }
     }
     
 <!--  In second section, add the fundamental physics. This is new to the reader, so go slow and make it short. It will include `update()`, changing the behavior of rendering and ray tracing (every location that checks for velocity), and adding a little rotation. Also the warning about quaternions with zero angle --- give an "Experiment" aside to let angle be zero and not correct the axis.   -->
+
+<!--  Second section - state which extension each method is in.   -->
 
 <!--  In the third section, add code for the surface normal. Say this is crucial for calculating collisions in physics. In that section, tell them to refactor non-rendering methods into extensions before repeating. Say this helps organize code.   -->
 }

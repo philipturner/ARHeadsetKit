@@ -19,14 +19,20 @@ struct Cube {
         object = getObject()
     }
     
-    private func getObject() -> ARObject {
-        .init(shapeType: .cube,
-              position: location,
-              orientation: orientation,
-              scale: .init(repeating: sideLength))
-    }
-    
-    func trace(ray: RayTracing.Ray) -> Float? {
-        object.trace(ray: ray)
+    func getObject() -> ARObject {
+        var color: simd_float3
+        
+        if isHighlighted {
+            color = [0.6, 0.8, 1.0]
+        } else {
+            color = [0.2, 0.5, 0.7]
+        }
+        
+        return ARObject(shapeType: .cube,
+                        position: location,
+                        orientation: orientation,
+                        scale: .init(repeating: sideLength),
+                        
+                        color: color)
     }
 }

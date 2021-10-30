@@ -7,7 +7,7 @@ struct Cube {
     
     var object: ARObject!
     
-    private func getObject() -> ARObject {
+    func getObject() -> ARObject {
         .init(shapeType: .cube,
               position: location,
               orientation: orientation,

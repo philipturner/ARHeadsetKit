@@ -5,6 +5,7 @@ struct Cube {
     var orientation: simd_quatf
     var sideLength: Float
     
+    var isHighlighted = false
     var object: ARObject!
     
     init(location: simd_float3,
@@ -18,14 +19,10 @@ struct Cube {
         object = getObject()
     }
     
-    private func getObject() -> ARObject {
+    func getObject() -> ARObject {
         .init(shapeType: .cube,
               position: location,
               orientation: orientation,
               scale: .init(repeating: sideLength))
-    }
-    
-    func trace(ray: RayTracing.Ray) -> Float? {
-        object.trace(ray: ray)
     }
 }

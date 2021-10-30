@@ -9,6 +9,10 @@ extension GameRenderer: CustomRenderer {
         } else {
             cube.isHighlighted = false
         }
+        
+        cube.object = cube.getObject()
+        
+        cube.render(centralRenderer: centralRenderer)
     }
     
     func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
