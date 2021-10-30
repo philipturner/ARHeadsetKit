@@ -10,6 +10,7 @@ struct Cube {
     
     var isHighlighted = false
     var object: ARObject!
+    var normalObject: ARObject!
     
     init(location: simd_float3,
          orientation: simd_quatf,
@@ -37,6 +38,16 @@ struct Cube {
                         scale: .init(repeating: sideLength),
                         
                         color: color)
+    }
+    
+    func getNormalObject(location: simd_float3,
+                         normal: simd_float3) -> ARObject {
+        .init(shapeType: .cylinder,
+              position: location,
+              orientation: simd_quatf(from: [0, 1, 0], to: normal),
+              scale: [sideLength / 4, sideLength, sideLength / 4],
+              
+              color: .init(repeating: 0.8))
     }
     
     func render(centralRenderer: CentralRenderer) {

@@ -204,12 +204,86 @@
             }
         }
     }
-
-<!--  In the third section, add code for the surface normal. Say this is crucial for calculating collisions in physics.   -->
-
-
-
-<!--  Section 4: Collision   -->
+    
+    @Section(title: "Detecting the Surface Normal") {
+        All 3D object collisions require calculating a _surface normal_. This is a vector that points at a right angle to the object's surface.
+        
+        You don't need to understand how this section's code works, but follow along for the major tips and warnings.
+        
+<!--    Say the above message again for section 4    -->
+        
+        @Steps {
+            @Step {
+                Create a new file called `CubeExtensions.swift`. Import ARHeadsetKit and declare an extension to `Cube`.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-1.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                Remove the `collide(location:direction:speed:)` method from `Cube.swift` and paste it into the new file.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-2.swift")
+            }
+            
+            @Step {
+                Declare a method that finds the surface normal at any impact location.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Convert the impact location from world space to model space.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-4.swift")
+            }
+            
+            @Step {
+                Find out whether the surface normal points in the X, Y, or Z direction in model space.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Assert that the impact location is actually on the surface.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Generate the surface normal. Then, convert it from model space to world space.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-7.swift")
+            }
+            
+            @Step {
+                Go to `Cube.swift`. Add an optional `ARObject` property called `normalObject`.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-3-9.swift", previousFile: "2-2-creating-code-3-8.swift")
+            }
+            
+            @Step {
+                Directly below `getObject()`, create a method that returns an AR object representing the normal vector.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                In `render(centralRenderer:)`, render the normal object if it exists.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-3-11.swift")
+            }
+            
+            @Step {
+                Navigate back to `collide(location:direction:speed:)`. Initialize `normalObject` using the surface normal at the impact location.
+                
+                @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-3-12.swift", previousFile: "2-2-creating-code-3-7.swift")
+            }
+            
+<!--   Add an image at the end here and set the velocity to zero to frame the shot   -->
+        }
+    }
+    
+<!--  Section 4: Collision --- Add the reference to the external source when beginning the bulk of the collide(...) function  -->
 <!--  Section 5: Gravity and conclusion --- in this section, increase speed from 0.2 to 7 m/s -->
 
 <!--  WHEN IMPLEMENTING GRAVITY: STOP RENDERING CUBE IF IT HAS FALLEN TOO LOW (200 meters)  -->
@@ -217,4 +291,5 @@
 <!--  (Section 5) When taking screenshot of cube being punted, rig it in source code instead of actually catching it in motion. Leave the normal cylinder rendered - it might even be useful in the next tutorial.  -->
 
 <!--   Add to assessment: Which law of motion was covered in section 2?   -->
+<!--   Add to assessment: warning about quaternions  (Replace it with a default value.) (Leave it as is.) (Set it to the angle. --- lol - that's not even a valid operation!) -->
 }

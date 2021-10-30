@@ -1,8 +1,14 @@
-//
-//  File.swift
-//  
-//
-//  Created by Philip Turner on 10/30/21.
-//
+import ARHeadsetKit
 
-import Foundation
+extension Cube {
+    
+    mutating func collide(location impactLocation: simd_float3,
+                          direction: simd_float3, speed: Float)
+    {
+        assert(length(direction) > 0 && speed >= 0)
+        
+        velocity = speed * normalize(direction)
+        angularVelocity = simd_quatf(angle: 2, axis: [0, 1, 0])
+    }
+    
+}

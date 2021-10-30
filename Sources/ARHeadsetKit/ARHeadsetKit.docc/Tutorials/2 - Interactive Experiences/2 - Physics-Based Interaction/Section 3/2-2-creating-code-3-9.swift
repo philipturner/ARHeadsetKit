@@ -10,6 +10,7 @@ struct Cube {
     
     var isHighlighted = false
     var object: ARObject!
+    var normalObject: ARObject!
     
     init(location: simd_float3,
          orientation: simd_quatf,

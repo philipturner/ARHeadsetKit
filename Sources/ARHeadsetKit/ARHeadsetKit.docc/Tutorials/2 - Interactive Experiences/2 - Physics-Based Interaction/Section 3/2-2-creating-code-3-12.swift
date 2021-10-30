@@ -9,6 +9,10 @@ extension Cube {
         
         velocity = speed * normalize(direction)
         angularVelocity = simd_quatf(angle: 2, axis: [0, 1, 0])
+        
+        // Surface normal at impact location
+        let normal = findNormal(location: impactLocation)
+        normalObject = getNormalObject(location: impactLocation, normal: normal)
     }
     
     func findNormal(location: simd_float3) -> simd_float3 {
