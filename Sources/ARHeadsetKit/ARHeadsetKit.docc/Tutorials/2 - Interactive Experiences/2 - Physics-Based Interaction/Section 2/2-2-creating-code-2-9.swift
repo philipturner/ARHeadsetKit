@@ -54,4 +54,32 @@ extension Cube {
         return object.trace(ray: ray)
     }
     
+    mutating func collide(location impactLocation: simd_float3,
+                          direction: simd_float3, speed: Float)
+    {
+        assert(length(direction) > 0 && speed >= 0)
+        
+        velocity = speed * normalize(direction)
+        angularVelocity = simd_quatf(angle: 2, axis: [0, 1, 0])
+    }
+    
+    mutating func update() {
+        defer {
+            object = getObject()
+        }
+        
+        guard let velocity = velocity,
+              let angularVelocity = angularVelocity else {
+            return
+        }
+        
+        location += velocity / 60
+        
+        let angle = angularVelocity.angle / 60
+        let axis  = angle == 0 ? [0, 1, 0] : angularVelocity.axis
+        
+        let rotation = simd_quatf(angle: angle, axis: axis)
+        orientation = rotation * orientation
+    }
+    
 }

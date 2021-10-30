@@ -18,9 +18,6 @@
             The physics used in this tutorial is significantly more complex than previous sample projects. To shorten `GameRendererExtensions.swift`, separate the code for managing the cube into another file.
         }
         
-<!--    Will `interactionRay` to `ray` in `updateResources()` to make code shorter   - will do so secretly in __Section 2__ because just deleted everything inside updateResources() to start out. -->
-<!--   Replace `cubePosition` in GameRenderer.swift __after__ creating cube struct. -->
-        
         @Steps {
              @Step {
                  Create a new file in the "Game" folder, called `Cube.swift`.
@@ -81,7 +78,7 @@
              }
              
              @Step {
-                 In `GameRendererExtensions.swift`, delete all the code inside `updateResources()`.
+                 In `GameRendererExtensions.swift`, delete all of the code inside `updateResources()`.
                  
                  @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-1-9.swift", previousFile: "2-1-creating-code-5-10.swift")
              }
@@ -103,10 +100,121 @@
              }
         }
     }
-    
-<!--  In second section, add the fundamental physics. This is new to the reader, so go slow and make it short. It will include `update()`, changing the behavior of rendering and ray tracing (every location that checks for velocity), and adding a little rotation. Also the warning about quaternions with zero angle --- give an "Experiment" aside to let angle be zero and not correct the axis.   -->
 
-<!--  Second section - state which extension each method is in.   -->
+    @Section(title: "Implement Basic Physics") {
+        @ContentAndMedia {
+            Before diving into the complexity of 3D object collisions, you will begin with something much simpler. After giving the cube a velocity, you can test that it obeys Newton's first law of motion:
+            
+            - An object in motion moves in a straight line, unless influenced by an external force.
+            
+            Gravity counts as an "external force", but you haven't added it to your app yet. Therefore, the cube should travel in a straight line.
+        }
+        
+        @Steps {
+            @Step {
+                Add two optional properties to `Cube`: `velocity` (a vector) and `angularVelocity` (a quaternion).
+                
+                Velocity is speed combined with direction. Angular velocity is similar&mdash;both rotation speed and rotation axis.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-1.swift", previousFile: "2-2-creating-code-1-7.swift")
+            }
+            
+            @Step {
+                Once the cube acquires a velocity, the user can't interact with it. In `trace(ray:)`, return `nil` if either velocity is initialized.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Create a `collide(location:direction:speed:)` method. Internally, the method addresses `location` as `impactLocation`. Assert that the direction and speed are valid.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Set `velocity` to the product of `speed` and normalized `direction`. Initialize `angularVelocity` so that the cube rotates 2.0 radians per second.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Declare a method called `update()`. Add a `defer` block that re-initializes the AR object.
+                
+                Code in a `defer` block will execute after every possible exit point from a function.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                If the cube doesn't have a velocity yet, return early.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                The velocity vector shows how much a cube moves in one second. However, `update()` is called 60 times a second. Change `location` by 1/60 of `velocity`.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                Extract the angle and axis from the angular velocity quaternion. Divide the angle by 60.
+                
+                > Warning: If a quaternion's angle is zero, its axis will be undefined. Set the axis to a pre-defined value whenever the angle is zero.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-8.swift")
+            }
+            
+            @Step {
+                Make a new quaternion with the adjusted angle, then concatenate it to `orientation`.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-2-9.swift")
+            }
+            
+            @Step {
+                Navigate to the `updateResources()` method of `GameRenderer`. When ray tracing the cube, give the progress a name.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-2-10.swift", previousFile: "2-2-creating-code-1-11.swift")
+            }
+            
+            @Step {
+                Check whether the user just started touching the screen. As in the previous tutorial, the cube only responds to tap gestures.
+                
+                > Note: You do not need to tap _directly on_ any AR object to make it respond. This is a very common misconception. Tapping anywhere on the screen will produce the same result.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-2-11.swift")
+            }
+            
+            @Step {
+                Collide the cube with a virtual sphere traveling at 0.2 meters per second.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-2-12.swift")
+            }
+            
+            @Step {
+                Replace the assignment to the cube's `object` with a call to `update()`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-2-creating-code-2-13.swift")
+            }
+            
+            @Step {
+                Launch the app and interact with the cube. It will slowly fly off while rotating.
+                
+                @Image(source: "2-2-image-2-1.jpg", alt: "The cube rotating as it moves with a constant velocity.")
+            }
+        }
+    }
 
-<!--  In the third section, add code for the surface normal. Say this is crucial for calculating collisions in physics. In that section, tell them to refactor non-rendering methods into extensions before repeating. Say this helps organize code.   -->
+<!--  In the third section, add code for the surface normal. Say this is crucial for calculating collisions in physics.   -->
+
+
+
+<!--  Section 4: Collision   -->
+<!--  Section 5: Gravity and conclusion --- in this section, increase speed from 0.2 to 7 m/s -->
+
+<!--  WHEN IMPLEMENTING GRAVITY: STOP RENDERING CUBE IF IT HAS FALLEN TOO LOW (200 meters)  -->
+
+<!--  (Section 5) When taking screenshot of cube being punted, rig it in source code instead of actually catching it in motion. Leave the normal cylinder rendered - it might even be useful in the next tutorial.  -->
+
+<!--   Add to assessment: Which law of motion was covered in section 2?   -->
 }
