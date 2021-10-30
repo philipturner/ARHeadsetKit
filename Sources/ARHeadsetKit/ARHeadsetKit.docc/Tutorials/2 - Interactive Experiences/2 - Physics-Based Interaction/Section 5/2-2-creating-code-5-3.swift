@@ -1,8 +1,30 @@
-//
-//  File.swift
-//  
-//
-//  Created by Philip Turner on 10/30/21.
-//
+import ARHeadsetKit
 
-import Foundation
+extension GameRenderer: CustomRenderer {
+    
+    func updateResources() {
+        if let ray = renderer.interactionRay,
+           let progress = cube.trace(ray: ray) {
+            cube.isHighlighted = true
+            
+            if renderer.shortTappingScreen {
+                let impactLocation = ray.project(progress: progress)
+                
+                // Speed is in meters per second
+                cube.collide(location: impactLocation,
+                             direction: ray.direction, speed: 7)
+            }
+        } else {
+            cube.isHighlighted = false
+        }
+        
+        cube.update()
+        
+        cube.render(centralRenderer: centralRenderer)
+    }
+    
+    func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
+        
+    }
+    
+}

@@ -362,7 +362,35 @@
     }
     
     @Section(title: "Punt the Cube") {
-        Make the cube experience gravity and launch it with your hand.
+        @ContentAndMedia {
+            Make the cube experience gravity and launch it with your hand.
+        }
+        
+        @Steps {
+            @Step {
+                Go to `Cube.swift`. In `update()`, change velocity by applying gravitational acceleration.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-5-1.swift", previousFile: "2-2-creating-code-3-11.swift")
+            }
+            
+            @Step {
+                Scroll up to `render(centralRenderer:)`. If the cube falls ridiculously far, avoid rendering it to conserve energy.
+                
+                @Code(name: "Cube.swift", file: "2-2-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                In `GameExtensions.swift`, change the impact speed from 0.2 to 7 meters per second.
+                
+                @Code(name: "GameExtensions.swift", file: "2-2-creating-code-5-2.swift", previousFile: "2-2-creating-code-2-13.swift")
+            }
+            
+            @Step {
+                Launch the app and then launch the cube. Aim for its edges and see how fast you can make it spin!
+                
+                @Image(source: "2-2-image-5-1.jpg", alt: "The cube being yeeted.")
+            }
+        }
     }
     
 <!--  Section 5: Gravity and conclusion --- in this section, increase speed from 0.2 to 7 m/s -->
