@@ -8,7 +8,7 @@
         
 <!--    Sort Cube and CubeExtensions into their own folder within Game    -->
 
-<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but inconspicuous in source code   -->
+<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but it is inconspicuous in source code   -->
     }
     
     @Section(title: "n/a") {

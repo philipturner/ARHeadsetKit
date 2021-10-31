@@ -9,6 +9,8 @@
         In tutorial 3 (Working with AR Objects), you animated an object to add motion to an app. You will now build on that concept, adding physics that accounts for momentum, rotation, and gravity.
         
         Download the project files to begin building this project, and follow the steps below.
+        
+        @Image(source: "2-2-image-3-1-intro.jpg", alt: "A cube reacting to the user's hand colliding with it.")
     }
     
     @Section(title: "Refactor Rendering Code") {
@@ -207,7 +209,7 @@
         @ContentAndMedia {
             All 3D object collisions require calculating a _surface normal_. This is a vector that points at a right angle to the object's surface.
             
-            You don't need to understand how this section's code works, but follow along to complete the tutorial.
+            You don't need to understand how all of this section's code works, but follow along to complete the tutorial.
         }
         
         @Steps {
@@ -266,7 +268,7 @@
             }
             
             @Step {
-                In `render(centralRenderer:)`, render the normal object if it exists.
+                In `render(centralRenderer:)`, draw the normal object if it exists.
                 
                 @Code(name: "Cube.swift", file: "2-2-creating-code-3-11.swift")
             }
@@ -287,22 +289,22 @@
     
     @Section(title: "Object Collision") {
         @ContentAndMedia {
-            Finally, you have reached the most important piece of this tutorial - realistic object collision. 
+            You have reached the most important part of this tutorial - realistic object collision. 
             
-            We went through the trouble of decoding several physics formulas, so that all you have to do is copy the code.
+            We went through the trouble of decoding several physics formulas, so that all you need to do is copy some code.
             
-            Again, you don't need to understand this, but follow along to finish the tutorial.
+            Again, you don't need to understand the code, but follow along to finish the tutorial.
         }
         
         @Steps {
             @Step {
-                Remove the assignments to the cube's `velocity` and `angularVelocity`.
+                Remove the assignments to the cube's `velocity` and `angularVelocity` at the start of the collision method.
                 
                 @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-1.swift", previousFile: "2-2-creating-code-3-12.swift")
             }
             
             @Step {
-                Before finding the surface normal, define the cube's mass, the colliding sphere's mass, and the sphere's radius.
+                Before finding the surface normal, define the cube and colliding sphere's masses, and the sphere's radius.
                 
                 @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-2.swift")
             }
@@ -314,7 +316,7 @@
             }
             
             @Step {
-                Find the inverse moments of inertia of the cube and the sphere.
+                Find the inverse moments of inertia for the cube and the sphere.
                 
                 @Code(name: "CubeExtensions.swift", file: "2-2-creating-code-4-4.swift")
             }
@@ -363,12 +365,12 @@
     
     @Section(title: "Punt the Cube") {
         @ContentAndMedia {
-            Make the cube experience gravity and launch it with your hand.
+            Make the cube experience gravity and send it on a trajectory.
         }
         
         @Steps {
             @Step {
-                Go to `Cube.swift`. In `update()`, change velocity by applying gravitational acceleration.
+                Go to `Cube.swift`. In `update()`, change `velocity` by applying gravitational acceleration.
                 
                 @Code(name: "Cube.swift", file: "2-2-creating-code-5-1.swift", previousFile: "2-2-creating-code-3-11.swift")
             }
@@ -382,7 +384,7 @@
             @Step {
                 In `GameExtensions.swift`, change the impact speed from 0.2 to 7 meters per second.
                 
-                @Code(name: "GameExtensions.swift", file: "2-2-creating-code-5-2.swift", previousFile: "2-2-creating-code-2-13.swift")
+                @Code(name: "GameExtensions.swift", file: "2-2-creating-code-5-3.swift", previousFile: "2-2-creating-code-2-13.swift")
             }
             
             @Step {
@@ -393,12 +395,61 @@
         }
     }
     
-<!--  Section 5: Gravity and conclusion --- in this section, increase speed from 0.2 to 7 m/s -->
-
-<!--  WHEN IMPLEMENTING GRAVITY: STOP RENDERING CUBE IF IT HAS FALLEN TOO LOW (200 meters) - Say: If an object falls ridiculously far, avoid rendering it to conserve energy. -->
-
-<!--  (Section 5) When taking screenshot of cube being punted, rig it in source code instead of actually catching it in motion. Leave the normal cylinder rendered - it might even be useful in the next tutorial.  -->
-
-<!--   Add to assessment: Which law of motion was covered in section 2?   -->
-<!--   Add to assessment: warning about quaternions  (Replace it with a default value.) (Leave it as is.) (Set it to the angle. --- lol - that's not even a valid operation!) -->
+    @Assessments {
+        @MultipleChoice {
+            Which law of motion was covered in section 2?
+            
+            @Choice(isCorrect: true) {
+                Newton's first law
+                
+                @Justification(reaction: "That's right!") {
+                    You were testing an object that moved with a constant velocity.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Newton's second law
+                
+                @Justification(reaction: "Try again!") {
+                    Re-read the introduction to section 2.
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Newton's third law
+                
+                @Justification(reaction: "Try again!") {
+                    Re-read the introduction to section 2.
+                }
+            }
+        }
+        
+        @MultipleChoice {
+            How do you redefine a quaternion's axis when its angle is zero?
+            
+            @Choice(isCorrect: false) {
+                Set it to the angle.
+                
+                @Justification(reaction: "lol") {
+                    That's not even a valid operation!
+                }
+            }
+            
+            @Choice(isCorrect: false) {
+                Leave it as is.
+                
+                @Justification(reaction: "Not quite!") {
+                    The axis might contain invalid numbers, causing unfortunate surprises in your code.
+                }
+            }
+            
+            @Choice(isCorrect: true) {
+                Replace it with a default value.
+                
+                @Justification(reaction: "Correct!") {
+                    In section 3, you gave the axis a pre-defined value of [0, 1, 0].
+                }
+            }
+        }
+    }
 }
