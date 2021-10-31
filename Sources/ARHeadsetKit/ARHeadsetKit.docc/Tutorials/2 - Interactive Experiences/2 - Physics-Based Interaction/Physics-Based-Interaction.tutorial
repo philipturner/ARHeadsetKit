@@ -1,4 +1,4 @@
-@Tutorial {
+@Tutorial(time: 40, projectFiles: "Physics-Based-Interaction.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -96,7 +96,7 @@
              }
              
              @Step {
-                 Run the app. Ensure it responds to your hand as it did in the last tutorial.
+                 Run the app. Ensure it highlights as it did in the last tutorial.
              }
         }
     }
@@ -126,7 +126,7 @@
             }
             
             @Step {
-                Create a `collide(location:direction:speed:)` method. Internally, the method addresses `location` as `impactLocation`. Assert that the direction and speed are valid.
+                Create a `collide(location:direction:speed:)` method. Internally, the method addresses `location` as `impactLocation`. Ensure that the direction and speed are valid.
                 
                 @Code(name: "Cube.swift", file: "2-2-creating-code-2-3.swift")
             }
