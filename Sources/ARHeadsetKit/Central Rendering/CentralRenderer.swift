@@ -19,12 +19,17 @@ public final class CentralRenderer: DelegateRenderer {
     var didSetRenderPipeline: simd_ulong2 = .zero
     public var currentlyCulling: simd_ulong2 = .zero
     
-    @usableFromInline var cullTransform = simd_float4x4(1)
-    @usableFromInline var lodTransform = simd_float4x4(1)
-    @usableFromInline var lodTransformInverse = simd_float4x4(1)
+    // Use when determining whether to present an object
+    public internal(set) var cullTransform = simd_float4x4(1)
+    // Use when finding LOD in left-eye or monocular view
+    public internal(set) var lodTransform = simd_float4x4(1)
+    // Use when finding LOD in left-eye or monocular view
+    public internal(set) var lodTransformInverse = simd_float4x4(1)
     
-    @usableFromInline var lodTransform2 = simd_float4x4(1)
-    @usableFromInline var lodTransformInverse2 = simd_float4x4(1)
+    // Use when finding LOD in right-eye view
+    public internal(set) var lodTransform2 = simd_float4x4(1)
+    // use when finding LOD in right-eye view
+    public internal(set) var lodTransformInverse2 = simd_float4x4(1)
     
     private var circles: [UInt16 : [simd_float2]] = [:]
     func circle(numSegments: UInt16) -> [simd_float2] {
