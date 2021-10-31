@@ -267,10 +267,11 @@ public extension CentralRenderer {
     
 }
 
-extension ARObject {
+public extension ARObject {
     
     typealias LODReturn = CentralRenderer.LODReturn
     
+    /// This method is only exposed to mirror the `ARObjectUtilities` namespace in the Metal utilities.
     func lod(lodTransform        worldToCameraTransform: simd_float4x4,
              lodTransformInverse cameraToWorldTransform: simd_float4x4) -> LODReturn {
         if cameraIsInside(cameraToWorldTransform) {
@@ -282,6 +283,7 @@ extension ARObject {
         return getLODReturn(distancesSquared: distancesSquared)
     }
     
+    /// This method is only exposed to mirror the `ARObjectUtilities` namespace in the Metal utilities.
     func lod(lodTransform1        worldToCameraTransform1: simd_float4x4,
              lodTransform2        worldToCameraTransform2: simd_float4x4,
              lodTransformInverse1 cameraToWorldTransform1: simd_float4x4,

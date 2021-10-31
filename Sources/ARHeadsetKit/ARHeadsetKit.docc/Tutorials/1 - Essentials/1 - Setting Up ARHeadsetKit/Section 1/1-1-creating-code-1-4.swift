@@ -7,4 +7,12 @@ class MyRenderer {
     required init(renderer: MainRenderer, library: MTLLibrary!) {
         self.renderer = renderer
     }
+    
+    func updateResources() {
+        
+    }
+    
+    func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
+        
+    }
 }

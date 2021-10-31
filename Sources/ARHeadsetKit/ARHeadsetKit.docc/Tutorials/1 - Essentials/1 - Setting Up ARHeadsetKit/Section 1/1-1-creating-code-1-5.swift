@@ -1,7 +1,7 @@
 import ARHeadsetKit
 import Metal
 
-class MyRenderer {
+class MyRenderer: CustomRenderer {
     unowned let renderer: MainRenderer
     
     required init(renderer: MainRenderer, library: MTLLibrary!) {

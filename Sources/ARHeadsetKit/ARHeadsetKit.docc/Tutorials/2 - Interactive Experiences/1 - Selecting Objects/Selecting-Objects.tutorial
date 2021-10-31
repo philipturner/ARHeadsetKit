@@ -54,7 +54,7 @@
                 
                 Separating `GameRenderer`'s conformance to ``ARHeadsetKit/CustomRenderer`` into another file helps organize your code, preventing any one file from becoming too large.
                 
-                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-1-3.swift", previousFile: "2-1-creating-code-1-2.swift")
+                @Code(name: "GameRendererExtensions.swift", file: "2-1-creating-code-1-2.swift", previousFile: "creating-code-template.swift")
             }
             
             @Step {

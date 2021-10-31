@@ -32,7 +32,7 @@
             @Step {
                 In `MyRenderer.swift`, import ARHeadsetKit and Metal. 
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-2.swift", previousFile: "1-1-creating-code-1-1.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-1.swift", previousFile: "creating-code-template.swift")
             }
             
             @Step {
@@ -40,7 +40,7 @@
                 
                 > Tip: Add the `unowned` modifier to stored references to parent renderers. Otherwise, you will create strong reference cycles and prevent deinitialization.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-3.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-2.swift")
             }
             
             @Step {
@@ -48,19 +48,19 @@
                 
                 Adding the `required` keyword to the initializer allows `MyRenderer` to conform to ``ARHeadsetKit/CustomRenderer``.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-4.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-3.swift")
             }
             
             @Step {
                 Create method called `updateResources()`. Then, add `drawGeometry(renderEncoder:)`, which takes an ``ARHeadsetKit/ARMetalRenderCommandEncoder`` parameter.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-5.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-4.swift")
             }
             
             @Step {
                 Declare that `MyRenderer` conforms to the `CustomRenderer` protocol.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-6.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-5.swift")
             }
             
             @Step {
@@ -68,13 +68,13 @@
                 
                 > Tip: Put each parameter onto a separate line to make the initializer easy to read.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-7.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-6.swift")
             }
             
             @Step {
                 Send the cone to ``ARHeadsetKit/DelegateRenderer/centralRenderer`` to present it in AR, by calling ``ARHeadsetKit/CentralRenderer/render(object:)``.
                 
-                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-8.swift")
+                @Code(name: "MyRenderer.swift", file: "1-1-creating-code-1-7.swift")
             }
         }
     }

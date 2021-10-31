@@ -52,14 +52,12 @@ extension MTLSamplePosition: ExpressibleByArrayLiteral {
     }
 }
 
-#if !os(macOS) // TODO: When macOS 12.0 is released, remove this directive
 extension MTLPackedFloat3 {
     @inlinable @inline(__always) @available(iOS 15.0, macOS 12.0, *)
     public init(_ vector: simd_packed_float3) {
         self = MTLPackedFloat3Make(vector.x, vector.y, vector.z)
     }
 }
-#endif
 
 
 

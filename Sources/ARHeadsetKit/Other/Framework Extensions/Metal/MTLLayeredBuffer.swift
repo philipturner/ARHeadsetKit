@@ -633,10 +633,8 @@ extension MTLAccelerationStructureCommandEncoder {
         let internalOffset = buffer.offset(for: layer) + offset
         
         if let sizeDataType = sizeDataType, #available(iOS 15.0, macOS 12.0, *) {
-            #if !os(macOS) // TODO: When macOS 12.0 is released, remove this directive
             writeCompactedSize(accelerationStructure: accelerationStructure,
                                buffer: buffer.buffer, offset: internalOffset, sizeDataType: sizeDataType)
-            #endif
         } else {
             writeCompactedSize(accelerationStructure: accelerationStructure,
                                buffer: buffer.buffer, offset: internalOffset)

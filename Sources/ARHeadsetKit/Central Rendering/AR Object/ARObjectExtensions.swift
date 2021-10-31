@@ -205,6 +205,17 @@ extension ARObject {
     
 }
 
+#if !os(macOS)
+extension CentralRenderer {
+    
+    /// This method is only exposed to mirror the `ARObjectUtilities` namespace in the Metal utilities.
+    public func shouldPresent(object: ARObject) -> Bool {
+        object.shouldPresent(cullTransform: cullTransform)
+    }
+    
+}
+#endif
+
 extension ARObject: RayTraceable {
     
     public func trace(ray worldSpaceRay: RayTracing.Ray) -> Float? {
