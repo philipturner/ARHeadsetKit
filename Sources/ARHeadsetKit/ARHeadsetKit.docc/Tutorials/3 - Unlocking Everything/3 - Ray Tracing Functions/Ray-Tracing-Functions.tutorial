@@ -1,6 +1,6 @@
 @Tutorial {
     @XcodeRequirement(
-            title: "Xcode 13", 
+            title: "Xcode 13.1", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Ray Tracing Functions") {

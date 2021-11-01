@@ -12,7 +12,7 @@ Ensure you are in Project Settings -> TARGETS -> General. Configure the followin
 
 Navigate to "Info" in the tab bar, which is to the right of "Resource Tags". Ensure the following keys are present in the property list and match the values described below:
 - `Privacy - Camera Usage Description` - Can be any string. You can (but don't have to) use the string in the example below.
-- `CADisableMinimumFrameDurationOnPhone` - This key does not appear automatically in Xcode 13.0. It minimizes the chance of frame rate drops on the iPhone 13 Pro/Pro Max. Change its type from `String` to `Boolean`, and set its value to `1` or `YES`.
+- `CADisableMinimumFrameDurationOnPhone` - This key does not appear automatically in Xcode 13.1. It minimizes the chance of frame rate drops on the iPhone 13 Pro/Pro Max. Change its type from `String` to `Boolean`, and set its value to `1` or `YES`.
 - `Supported interface orientations` - Must include `Item 0: Portrait (bottom home button)` and nothing else.
 - `Requires Full Screen` - Set to `YES`. The app assumes it is using full screen, and may produce undefined behavior otherwise.
 - `Application Scene Manifest` - Set `Enable Multiple Windows` to `NO`.
