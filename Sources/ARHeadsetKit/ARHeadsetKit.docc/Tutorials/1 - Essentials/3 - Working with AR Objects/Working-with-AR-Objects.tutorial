@@ -1,6 +1,6 @@
 @Tutorial(time: 45, projectFiles: "Working-with-AR-Objects.zip") {
     @XcodeRequirement(
-            title: "Xcode 13", 
+            title: "Xcode 13.1", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Working with AR Objects") {

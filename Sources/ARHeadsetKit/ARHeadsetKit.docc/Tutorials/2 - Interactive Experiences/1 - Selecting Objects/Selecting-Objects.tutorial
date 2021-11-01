@@ -1,6 +1,6 @@
 @Tutorial(time: 50, projectFiles: "Selecting-Objects.zip") {
     @XcodeRequirement(
-            title: "Xcode 13", 
+            title: "Xcode 13.1", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Selecting Objects") {
