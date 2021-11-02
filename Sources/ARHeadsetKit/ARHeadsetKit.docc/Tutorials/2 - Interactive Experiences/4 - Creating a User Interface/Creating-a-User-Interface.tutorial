@@ -5,6 +5,11 @@
     
     @Intro(title: "Creating a User Interface") {
         Coming soon!
+        
+<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but it is inconspicuous in source code   -->
+
+        
+<!--    Make a reset button using the interface, and a button to reset cubes' position when blocked out by 3D scene   -->
     }
     
     @Section(title: "n/a") {

@@ -4,16 +4,129 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Using Delegate Renderers") {
-        Coming soon!
+        Dividing your code into a renderer hierarchy helps you manage massive projects. Learn how to create a complex game while following ARHeadsetKit's design patterns.
         
-<!--    Sort Cube and CubeExtensions into their own folder within Game    -->
-
-<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but it is inconspicuous in source code   -->
+        Download the project files to begin building this project, and follow the steps below.
     }
     
-    @Section(title: "n/a") {
+    @Section(title: "Renderer Hierarchy") {
+        @ContentAndMedia {
+            ARHeadsetKit uses several thousand lines of code to bring AR experiences to life. To manage all of this complexity, it divides its code among a hierarchy of objects. Source code files' names and locations reflect this hierarchy's structure.
+            
+            To observe this design pattern, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and unravel the "Scene Reconstruction" directory. The following hierarchy appears:
+
+            - SceneRenderer
+                - Culling
+                    - SceneCuller
+                - Occlusion Testing
+                    - SceneOcclusionTester
+                - Reconstruction
+                    - SceneMeshReducer
+                    - SceneSorter
+                    - SceneDuplicateRemover
+                    - SceneMeshMatcher
+                    - SceneTexelRasterizer
+                    - SceneTexelManager
+
+            `SceneRenderer` is the most complex delegate to the Main Renderer&mdash;it took two months to create (bookmark [this web page](https://github.com/philipturner/scene-color-reconstruction) to learn more). Its own delegates conform to a `DelegateSceneRenderer` protocol, which lets the Scene Renderer expose several properties to them. This mirrors the Main Renderer's behavior with the ``ARHeadsetKit/DelegateRenderer`` protocol.
+
+            Examine the source code for a few minutes and search for other patterns. Every delegate holds an unowned reference to its parent (the object that creates and stores it). This prevents strong reference cycles, which cause memory leaks in Swift.
+
+            Folders are named after a specific object, whose code they contain. Files in the same directory level have similar names, separated only by a unique suffix. You have already used this convention, by placing two files starting with "GameRenderer" in a "Game" folder.
+        }
+        
+        @ContentAndMedia {
+            In this section, you will set up an object hierarchy, encapsulating the code for rendering cubes into a delegate to `GameRenderer`.
+        }
+        
         @Steps {
+             @Step {
+                 Place `Cube.swift` and `CubeExtensions.swift` into a new folder named "Cube".
+                 
+                 @Image(source: "2-3-image-1-1.png", alt: "Source code files related to Cube being located in the \"Cube\" folder.")
+             }
              
+             @Step {
+                 Go to `Cube.swift`. In the extension to `Cube`, declare conformance to `RayTraceable`.
+                 
+                 @Code(name: "Cube.swift", file: "2-3-creating-code-1-1.swift", previousFile: "2-2-creating-code-5-2.swift")
+             }
+             
+             @Step {
+                 Open `CubeExtensions.swift`. In the collision method, remove the assignment to `normalObject`.
+                 
+                 @Code(name: "CubeExtensions.swift", file: "2-3-creating-code-1-3.swift", previousFile: "2-3-creating-code-1-2.swift")
+             }
+             
+             @Step {
+                 Go to `GameRenderer.swift`. Define the `DelegateGameRenderer` protocol, which requires that an object holds a reference to a `GameRenderer.`
+                 
+                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-1-4.swift", previousFile: "2-2-creating-code-1-8.swift")
+             }
+             
+             @Step {
+                 In an extension to `DelegateGameRenderer`, pass down the parent object's `renderer` and `centralRenderer` properties.
+                 
+                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-1-5.swift")
+             }
+             
+             @Step {
+                 Create a "Cube Renderer" folder under "Game". Add two Swift files named `CubeRenderer` and `CubeRendererExtensions`.
+                 
+                 @Image(source: "2-3-image-1-2.png", alt: "New files in the \"Cube Renderer\" folder.")
+             }
+             
+             @Step {
+                 In `CubeRenderer.swift`, replace the Foundation import with ARHeadsetKit. Declare a `CubeRenderer` class that conforms to `DelegateGameRenderer`.
+                 
+                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-1-6.swift", previousFile: "creating-code-template.swift")
+             }
+             
+             @Step {
+                 Add an unowned immutable reference to a `GameRenderer` and an optional cube.
+                 
+                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-1-7.swift")
+             }
+             
+             @Step {
+                 Declare the initializer required by the `DelegateGameRenderer` protocol. Initialize `gameRenderer` with the parameter passed in.
+                 
+                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-1-8.swift")
+             }
+             
+             @Step {
+                 Switch to `CubeRendererExtensions.swift`. Import ARHeadsetKit and declare an extension to `CubeRenderer`.
+                 
+                 @Code(name: "CubeRendererExtensions.swift", file: "2-3-creating-code-1-9.swift", previousFile: "creating-code-template.swift")
+             }
+             
+             @Step {
+                 Copy and paste the `updateResources()` method from `GameRenderer`.
+                 
+                 @Code(name: "CubeRendererExtensions.swift", file: "2-3-creating-code-1-10.swift")
+             }
+<!--     Ensure this doesn't get messed up in the code listing        -->
+             @Step {
+                 Open `GameRenderer.swift`. Remove the `cube` property and add an optional `CubeRenderer` instead.
+                 
+                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-1-11.swift", previousFile: "2-3-creating-code-1-5.swift")
+             }
+             
+             @Step {
+                 In the initializer, set the value of `cubeRenderer`.
+                 
+                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-1-12.swift")
+             }
+             
+             @Step {
+                 Navigate to the Game Renderer's `updateResources()` method. Replace its contents with a call to `updateResources()` on the new delegate.
+                 
+                 @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-1-12.swift", previousFile: "2-2-creating-code-5-3.swift")
+             }
+             
+             @Step {
+                 Build the app and ensure no errors pop up.
+             }
         }
     }
 }
