@@ -210,7 +210,31 @@
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-12.swift")
             }
             
-<!--      Make observing the console output a post-last step.      -->
+            @Step {
+                Use a `repeat-while` statement similar to the previous one, but each vector component can be from -1 to 1. In addition, the `while` block ensures the length is not more than one.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-13.swift")
+            }
+            
+            @Step {
+                After ensuring the length of `upDirection` is not zero, normalize it.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-14.swift")
+            }
+            
+            @Step {
+                Finally, initialize a cube using `location` and `upDirection`, then append it to `cubes`.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-15.swift")
+            }
+            
+            @Step {
+                Position your phone at least 0.5 meters away from the closest wall. Then, run the app. Have fun knocking out the massive field of cubes!
+                
+                In the console, study the logged statements starting with "Cube 0". As more cubes were added, the volume became crowded. Cubes had to go through more attempts to find a suitable location.
+                
+                @Image(source: "2-3-image-2-1.png", alt: "Number of attempts to find a location increasing from 1 to 5 to 7.")
+            }
         }
     }
 }
