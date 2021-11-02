@@ -64,6 +64,13 @@ public extension CentralRenderer {
         }
     }
     
+    /**
+     Summary
+     
+     - Parameters:
+        - desiredLOD: The target LOD. This may not be granted, but will be rounded to something close.
+        - userDistanceEstiate: The approximate distance of the between the user and the object's closest point to the user. This determines whether the object should opt in to `allowsViewingInside`.
+     */
     func render(object: ARObject, desiredLOD: Int, userDistanceEstimate: Float) {
         if object.shouldPresent(cullTransform: cullTransform) {
             shapeContainers[object.shapeType.rawValue].appendAlias(of: object, desiredLOD: desiredLOD,
@@ -73,14 +80,20 @@ public extension CentralRenderer {
     
     
     
-    @inlinable
     func render(objects: [ARObject]) {
-        objects.forEach(render(object:))
+        objects.forEach { object in
+            if object.shouldPresent(cullTransform: cullTransform) {
+                shapeContainers[object.shapeType.rawValue].appendAlias(of: object)
+            }
+        }
     }
     
-    @inlinable
     func render(objects: [ARObject], desiredLOD: Int) {
-        objects.forEach{ render(object: $0, desiredLOD: desiredLOD) }
+        objects.forEach { object in
+            if object.shouldPresent(cullTransform: cullTransform) {
+                shapeContainers[object.shapeType.rawValue].appendAlias(of: object, desiredLOD: desiredLOD)
+            }
+        }
     }
     
     func render(objectGroup: ARObjectGroup, desiredLOD inputLOD: Int? = nil) {

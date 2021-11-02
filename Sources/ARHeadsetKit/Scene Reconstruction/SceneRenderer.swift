@@ -214,7 +214,6 @@ final class SceneRenderer: DelegateRenderer {
 
 protocol DelegateSceneRenderer {
     var sceneRenderer: SceneRenderer { get }
-    
     init(sceneRenderer: SceneRenderer, library: MTLLibrary)
 }
 
