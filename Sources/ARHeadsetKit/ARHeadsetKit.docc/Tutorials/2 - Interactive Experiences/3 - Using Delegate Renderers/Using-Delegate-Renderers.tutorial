@@ -17,7 +17,7 @@
         @ContentAndMedia {
             ARHeadsetKit uses several thousand lines of code to bring AR experiences to life. To manage all of this complexity, it divides its code among a hierarchy of objects. Source code files' names and locations reflect this hierarchy's structure.
             
-            To observe this design pattern in action, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and unravel the "Scene Reconstruction" directory. The following hierarchy appears:
+            To observe this design pattern in action, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and navigate to "Sources" -> "ARHeadsetKit" -> "Scene Reconstruction". The following hierarchy appears:
 
             - SceneRenderer
                 - Culling
