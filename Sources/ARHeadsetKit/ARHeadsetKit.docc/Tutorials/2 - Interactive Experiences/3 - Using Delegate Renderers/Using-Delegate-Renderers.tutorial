@@ -302,15 +302,99 @@
             
             @Step {
                 In `CubePicker.swift`, replace the Foundation import with ARHeadsetKit. Declare a class named `CubePicker`.
+                
+                @Code(name: "CubePicker.swift", file: "2-3-creating-code-4-1.swift", previousFile: "creating-code-template.swift")
             }
             
             @Step {
-                Conform `CubePicker` to the `DelegateGameRenderer` protocol.
+                Conform `CubePicker` to the `DelegateGameRenderer` protocol. Add an optional integer property called `cubeIndex`.
+                
+                @Code(name: "CubePicker.swift", file: "2-3-creating-code-4-2.swift")
+            }
+            
+            @Step {
+                Declare a `getClosestCubeIndex()` method, which returns the array index of the closest cube that isn't knocked out.
+                
+                @Code(name: "CubePicker.swift", file: "2-3-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                After searching through all the cubes, return the closest index, which may be `nil`.
+                
+                @Code(name: "CubePicker.swift", file: "2-3-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Switch over to `CubePickerExtensions.swift`. After importing ARHeadsetKit, declare an extension to `CubePicker`, which contains an `updateResources()` method.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-4-5.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                If the selected cube's index does not exist, attempt to initialize it.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Jump to `GameRenderer.swift`. Below `cubeRenderer`, give `GameRenderer` a `cubePicker` property.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-4-7.swift", previousFile: "2-3-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                In the initializer, set the value of `cubePicker`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                In the extension to `DelegateGameRenderer`, give both delegates easy access to each other.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                Locate the Game Renderer's `updateResources()` method. At the top, update the Cube Picker's resources.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-4-10.swift", previousFile: "2-3-creating-code-3-6.swift")
+            }
+            
+            @Step {
+                Erase the assignment of the first cube's color to red. Instead, redden the cube specified by `cubeIndex`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-4-11.swift")
+            }
+            
+            @Step {
+                After updating the Cube Renderer's resources, undo the assignment to `isRed`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-4-12.swift")
+            }
+            
+            @Step {
+                If the selected cube was just punted, invalidate the cube index.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-4-13.swift")
+            }
+            
+            @Step {
+                Try the game now. Once you knock out a cube, a new one becomes inavailable for interaction.
+            }
+        }
+    }
+    
+    @Section(title: "The Help Arrow") {
+        @ContentAndMedia {
+            When the player moves their phone away from the cubes, they might have trouble looking back. As a finishing touch, you will create an arrow that helps a player in that situation.
+        }
+        
+        @Steps {
+            @Step {
+                
             }
         }
     }
 
-<!--  In this section, add both delegates as properties in the DelegateGameRenderer protocol extension, even though only one is needed. This is for convention. -->
-
-
+<!--  For the last section, to the drawArrow(to:) function last to show how messy code would be otherwise.   -->
 }
