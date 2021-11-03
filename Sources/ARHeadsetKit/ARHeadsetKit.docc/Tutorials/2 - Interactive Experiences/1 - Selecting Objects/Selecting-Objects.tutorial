@@ -18,7 +18,7 @@
         
         @Steps {
             @Step {
-                Go through the very first tutorial (Setting Up ARHeadsetKit), using the project you just configured instead of the sample code. 
+                Go through the very first tutorial (Setting Up ARHeadsetKit), using the project you just configured instead of the sample code.
                 
                 However, replace every instance of the word `MyRenderer` with `GameRenderer`.
                 
@@ -27,6 +27,8 @@
             
             @Step {
                 Launch your app and ensure it does not crash.
+                
+                > Warning: Do not skip the above instructions to configure ARHeadsetKit manually. Although the task may seem difficult, you will troubleshoot issues that you would otherwise face later on.
                 
                 @Image(source: "1-1-image-2-1.jpg", alt: "The blue cone appearing in AR.")
             }

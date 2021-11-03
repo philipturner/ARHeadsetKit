@@ -19,9 +19,7 @@
     @Chapter(name: "Interactive Experiences") {
         Bring hand-object interaction into your app and create holographic interfaces.
         
-<!--    Show an image of a reaction message popping up, along with a reconstructed hand, and a cube flying in the air among a field of others.     -->
-        
-        @Image(source: "blank.png", alt: "")
+        @Image(source: "2-3-image-3-1-preview.jpg", alt: "A red cube appearing in the middle of blue cubes.")
         
         @TutorialReference(tutorial: "doc:Selecting-Objects")
         @TutorialReference(tutorial: "doc:Physics-Based-Interaction")
