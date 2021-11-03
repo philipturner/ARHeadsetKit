@@ -1,12 +1,10 @@
-@Tutorial(time: 45, projectFiles: "Using-Delegate-Renderers.zip") {
+@Tutorial(time: 40, projectFiles: "Using-Delegate-Renderers.zip") {
     @XcodeRequirement(
             title: "Xcode 13.1", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Using Delegate Renderers") {
         Dividing your code into a renderer hierarchy helps you manage massive projects. Learn how to create a complex game while following ARHeadsetKit's design patterns.
-        
-<!--    Go back through and ensure all of the code listings have the correct file names.    -->
         
         Download the project files to begin building this project, and follow the steps below.
         
@@ -397,7 +395,7 @@
             @Step {
                 If the selected cube is outside of the user's frame of view, draw an arrow to it.
                 
-                The `shouldPresent(object:)` method determines whether an object should be culled during rendering.
+                The `shouldPresent(object:)` method determines whether an object should be culled during rendering. Only objects the user cannot see are culled.
                 
                 @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-2.swift")
             }
