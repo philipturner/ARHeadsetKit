@@ -1,4 +1,4 @@
-@Tutorial {
+@Tutorial(time: 45, projectFiles: "Using-Delegate-Renderers.zip") {
     @XcodeRequirement(
             title: "Xcode 13.1", 
             destination: "https://developer.apple.com/download/")
@@ -17,7 +17,7 @@
         @ContentAndMedia {
             ARHeadsetKit uses several thousand lines of code to bring AR experiences to life. To manage all of this complexity, it divides its code among a hierarchy of objects. Source code files' names and locations reflect this hierarchy's structure.
             
-            To observe this design pattern, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and unravel the "Scene Reconstruction" directory. The following hierarchy appears:
+            To observe this design pattern in action, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and unravel the "Scene Reconstruction" directory. The following hierarchy appears:
 
             - SceneRenderer
                 - Culling
@@ -32,7 +32,7 @@
                     - SceneTexelRasterizer
                     - SceneTexelManager
 
-            `SceneRenderer` is the most complex delegate to the Main Renderer&mdash;it took two months to create (bookmark [this web page](https://github.com/philipturner/scene-color-reconstruction) to learn more). Its own delegates conform to a `DelegateSceneRenderer` protocol, which lets the Scene Renderer expose several properties to them. This mirrors the Main Renderer's behavior with the ``ARHeadsetKit/DelegateRenderer`` protocol.
+            `SceneRenderer` is the most complex delegate to the Main Renderer&mdash;it took two months to create (bookmark [this web page](https://github.com/philipturner/scene-color-reconstruction) to learn more). Its own delegates conform to the `DelegateSceneRenderer` protocol, which lets the Scene Renderer expose several properties to them. This mirrors the Main Renderer's behavior with the ``ARHeadsetKit/DelegateRenderer`` protocol.
 
             Examine the source code for a few minutes and search for other patterns. Every delegate holds an unowned reference to its parent (the object that creates and stores it). This prevents strong reference cycles, which cause memory leaks in Swift.
 
@@ -40,7 +40,7 @@
         }
         
         @ContentAndMedia {
-            In this section, you'll set up an object hierarchy, encapsulating the code for rendering cubes into a delegate to `GameRenderer`.
+            In this section, you'll begin setting up an object hierarchy. You will encapsulate the code for rendering cubes into `CubeRenderer`, a delegate to `GameRenderer`.
         }
         
         @Steps {
@@ -63,7 +63,7 @@
              }
              
              @Step {
-                 Go to `GameRenderer.swift`. Define the `DelegateGameRenderer` protocol, which requires that an object holds a reference to a `GameRenderer.`
+                 Go to the bottom of `GameRenderer.swift`. Define the `DelegateGameRenderer` protocol, which requires that an object holds a reference to the Game Renderer.
                  
                  @Code(name: "GameRenderer.swift", file: "2-3-creating-code-1-4.swift", previousFile: "2-2-creating-code-1-8.swift")
              }
@@ -75,7 +75,7 @@
              }
              
              @Step {
-                 Create a "Cube Renderer" folder under "Game". Add two Swift files named `CubeRenderer` and `CubeRendererExtensions`.
+                 Create a "Cube Renderer" folder under "Game". Add two Swift files, named `CubeRenderer` and `CubeRendererExtensions`.
                  
                  @Image(source: "2-3-image-1-2.png", alt: "New files in the \"Cube Renderer\" folder.")
              }
@@ -123,7 +123,7 @@
              }
              
              @Step {
-                 Navigate to the Game Renderer's `updateResources()` method. Replace its contents with a call to `updateResources()` on the new delegate.
+                 Navigate to the Game Renderer's `updateResources()` method. Replace its contents with a call to the same method on the new delegate.
                  
                  @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-1-13.swift", previousFile: "2-2-creating-code-5-3.swift")
              }
@@ -136,9 +136,7 @@
     
     @Section(title: "Randomly Generate Objects") {
         @ContentAndMedia {
-            An engaging game requires some kind of goal. You will create multiple cubes at random positions around the user's room, which be knocked out to complete the game.
-            
-            Modify 
+            Any engaging game requires some kind of goal. You will create multiple cubes at random positions around the user's room, which be knocked out to complete the game.
         }
         
         @Steps {
@@ -175,7 +173,7 @@
             @Step {
                 In `CubeRenderer.swift`, go to the required initializer. Seed the random number generator, then add a loop that iterates 10 times
                 
-                By default, random numbers generated by `drand48()` always appear in the exact same sequence. To make them vary between app launches, seed the generator with a unique number, such as the time.
+                By default, random numbers generated by `drand48()` always appear in the exact same sequence. To make them vary between app launches, seed the generator with a unique number, in this case the time.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-7.swift", previousFile: "2-3-creating-code-2-1.swift")
             }
@@ -187,9 +185,9 @@
             }
             
             @Step {
-                Declare a vector called `location`. Log to the console that the app is searching for a new cube's location.
+                Declare a vector called `location`. Log that the app is searching for a new cube's location.
                 
-                Each cube be placedfar away from every other cube's center. That way, they don't overlap and make gameplay difficult.
+                Each cube be placed far away from every other cube's center. That way, they don't overlap and make gameplay difficult.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-9.swift")
             }
@@ -201,7 +199,7 @@
             }
             
             @Step {
-                In the `repeat` block, generate a random position in the following bounds: ±0.3 meters for X and Y, -0.6 to 0 for Z.
+                In the `repeat` block, generate a random position within the following bounds: ±0.3 meters for X and Y, -0.6 to 0 for Z.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-11.swift")
             }
@@ -215,19 +213,19 @@
             }
             
             @Step {
-                Use a `repeat-while` statement similar to the previous one, but each vector component can be from -1 to 1. In addition, the `while` block ensures the length is not more than one.
+                Use a `repeat-while` statement similar to the previous one, but each vector component can be from -1 to 1. In addition, the `while` block ensures the up direction's length is not more than one.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-13.swift")
             }
             
             @Step {
-                After ensuring the length of `upDirection` is not zero, normalize it.
+                After ensuring the length of `upDirection` is not zero either, normalize it.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-14.swift")
             }
             
             @Step {
-                Finally, initialize a cube using `location` and `upDirection`, then append it to `cubes`.
+                Finally, initialize a cube using `location` and `upDirection`. Append it to `cubes`.
                 
                 @Code(name: "CubeRenderer.swift", file: "2-3-creating-code-2-15.swift")
             }
@@ -235,7 +233,7 @@
             @Step {
                 Position your phone at least 0.5 meters away from the closest wall. Then, run the app. Have fun knocking out the massive field of cubes!
                 
-                In the console, study the logged statements starting with "Cube 0". As more cubes were added, the volume became crowded. Cubes had to go through more attempts to find a suitable location.
+                In the console, study the logged statements starting with "Cube 0". As more cubes were added, the volume became crowded. The app had to make more attempts to find a suitable location.
                 
                 @Image(source: "2-3-image-2-1.png", alt: "Number of attempts to find a location increasing from 1 to 5 to 7.")
             }
@@ -261,7 +259,7 @@
             }
             
             @Step {
-                Navigate to the Cube Renderer's `updateResources()` method. When checking for a short tap to impact a cube, also ensure it is red.
+                Navigate to the Cube Renderer's `updateResources()` method. While waiting for a short tap to impact a cube, also ensure it is red.
                 
                 @Code(name: "CubeRendererExtensions.swift", file: "2-3-creating-code-3-4.swift", previousFile: "2-3-creating-code-2-6.swift")
             }
@@ -279,7 +277,7 @@
             }
             
             @Step {
-                Run the app and try interacting with all of the cubes. Only the red one responds, leaving nothing to do once it is knocked out.
+                Run the app and try interacting with all of the cubes. Only the red one responds, leaving you with nothing to do once it is knocked out.
                 
                 @Image(source: "2-3-image-3-1.jpg", alt: "The red cube appearing in the middle of the blue cubes.")
             }
@@ -290,12 +288,12 @@
         @ContentAndMedia {
             To solve the problem you just experienced, every time the player knocks out a cube, a new one must turn red. 
             
-            To manage all of this complex logic, you need another delegate to `GameRenderer.`
+            To manage all of this complex logic, you need another delegate to `GameRenderer`.
         }
         
         @Steps {
             @Step {
-                Create a "Cube Picker" folder under "Game". Add two Swift files named `CubePicker` and `CubePickerExtensions`.
+                Create a "Cube Picker" folder under "Game". Add two Swift files, named `CubePicker` and `CubePickerExtensions`.
                 
                 @Image(source: "2-3-image-4-1.png", alt: "New files in the \"Cube Picker\" folder.")
             }
@@ -337,7 +335,7 @@
             }
             
             @Step {
-                Jump to `GameRenderer.swift`. Below `cubeRenderer`, give `GameRenderer` a `cubePicker` property.
+                Jump to `GameRenderer.swift`. Below `cubeRenderer`, give the Game Renderer a `cubePicker` property.
                 
                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-4-7.swift", previousFile: "2-3-creating-code-3-5.swift")
             }
@@ -349,7 +347,7 @@
             }
             
             @Step {
-                In the extension to `DelegateGameRenderer`, give both delegates easy access to each other.
+                Scroll down to the end of the file. In the extension to `DelegateGameRenderer`, give both delegates easy access to each other.
                 
                 @Code(name: "GameRenderer.swift", file: "2-3-creating-code-4-9.swift")
             }
@@ -367,7 +365,7 @@
             }
             
             @Step {
-                After updating the Cube Renderer's resources, undo the assignment to `isRed`.
+                After updating the Cube Renderer's resources, reverse the assignment to `isRed`.
                 
                 @Code(name: "GameRendererExtensions.swift", file: "2-3-creating-code-4-12.swift")
             }
@@ -386,18 +384,71 @@
     
     @Section(title: "The Help Arrow") {
         @ContentAndMedia {
-            When the player moves their phone away from the cubes, they might have trouble looking back. As a finishing touch, you will create an arrow that helps a player in that situation.
+            When a player moves their device away from the cubes, they might have trouble looking back. As a finishing touch, you will create an arrow that helps someone in that situation.
         }
         
         @Steps {
             @Step {
+                In `CubePickerExtensions.swift`, add an `if let` statement that checks whether `cubeIndex` exists.
                 
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-1.swift", previousFile: "2-3-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                If the selected cube is outside of the user's frame of view, draw an arrow to it.
+                
+                The `shouldPresent(object:)` method determines whether an object should be culled during rendering.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Whoa, there! You just used `drawArrow(to:)` before it was declared. Fix that now.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-3.swift")
+            }
+            
+            @Step {
+                Transform the point (0, 0, -0.3) from camera space to world space.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-4.swift")
+            }
+            
+            @Step {
+                Find the direction vector between the arrow's origin and the selected cube's center. Then, normalize it.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-5.swift")
+            }
+            
+            @Step {
+                Transform `origin` and `direction` into a ray, then call `drawArrow(ray:progress:)` on the Game Renderer.
+                
+                @Code(name: "CubePickerExtensions.swift", file: "2-3-creating-code-5-6.swift")
+            }
+            
+            @Step {
+                Jump to the arrow rendering method in `GameRenderer.swift`. After the initialization of `arrowDirection`, add a single-precision constant named `tipLength`, set to 0.06.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-5-7.swift", previousFile: "2-3-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                When creating `tipStart`, use `tipLength` instead of 0.1.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Replace the number again when checking the distance between the arrow's start and end.
+                
+                @Code(name: "GameRenderer.swift", file: "2-3-creating-code-5-9.swift")
+            }
+            
+            @Step {
+                Now, you have a nifty arrow that guides you toward the red cube.
+                
+                @Image(source: "2-3-image-5-1.jpg", alt: "A gray arrow pointing somewhere off the screen.")
             }
         }
-        
-        
-        
     }
-
-<!--  For the last section, to the drawArrow(to:) function last to show how messy code would be otherwise.   -->
 }
