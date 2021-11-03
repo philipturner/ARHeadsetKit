@@ -377,7 +377,7 @@
             }
             
             @Step {
-                Try the game now. Once you knock out a cube, a new one becomes inavailable for interaction.
+                Try the game now. Once you knock out a cube, a new one becomes available for interaction.
             }
         }
     }
