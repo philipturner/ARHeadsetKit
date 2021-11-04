@@ -1,6 +1,6 @@
 @Tutorial(time: 25, projectFiles: "Reconfiguring-ARHeadsetKit.zip") {
     @XcodeRequirement(
-            title: "Xcode 13.1",
+            title: "Xcode 13",
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Reconfiguring ARHeadsetKit") {

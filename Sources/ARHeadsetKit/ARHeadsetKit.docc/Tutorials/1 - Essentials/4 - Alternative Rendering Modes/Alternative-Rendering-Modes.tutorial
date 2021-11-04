@@ -1,6 +1,6 @@
 @Tutorial(time: 35, projectFiles: "Alternative-Rendering-Modes.zip") {
     @XcodeRequirement(
-            title: "Xcode 13.1", 
+            title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Alternative Rendering Modes") {

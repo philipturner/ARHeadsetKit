@@ -1,6 +1,6 @@
 @Tutorial(time: 40, projectFiles: "Using-Delegate-Renderers.zip") {
     @XcodeRequirement(
-            title: "Xcode 13.1", 
+            title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Using Delegate Renderers") {
