@@ -1,6 +1,6 @@
 @Tutorial {
     @XcodeRequirement(
-            title: "Xcode 13.1", 
+            title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "The Essence of GPGPU") {
