@@ -1,20 +1,342 @@
-@Tutorial {
+@Tutorial(time: 70) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Creating a User Interface") {
-        Coming soon!
+        Enhance your app with dynamic, interactive interface elements.
         
-<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but it is inconspicuous in source code   -->
-
-        
-<!--    Make a reset button using the interface, and a button to reset cubes' position when blocked out by 3D scene   -->
+        Download the project files to begin building this project, and follow the steps below.
     }
     
-    @Section(title: "n/a") {
+    @Section(title: "ARInterfaceElement") {
+        @ContentAndMedia {
+            In an AR headset, every form of interaction occurs with 3D objects. Sliders, buttons, and text boxes are reimagined, with striking depth contours and shadows. Virtual computer monitors surround you with content, all controlled through telekinesis.
+
+            Years ago, what you just read was science fiction. Now, it is reality. For the first time, any person can access interactive holograms from within their home.
+
+            ARHeadsetKit was designed from the ground up for Google Cardboard. Hand-object interaction with minimal touchscreen input creates awesome AR headset experiences. However, the vast majority of people do not have Google Cardboard, which most likely includes you.
+
+            To provide exceptional AR content with and without a headset, you will carefully define a user interface. Although designed for a handheld experience, your interface will translate to something amazing in headset mode.
+        }
+        
+        @ContentAndMedia {
+            To start, learn about the second data type you can render in AR. Previously, only AR objects could exist alongside the real world. Although they can form a variety of shapes, they can't represent everything. Now, you'll use interface elements.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new "Game Interface" folder under "Game", with two Swift files named `GameInterface` and `GameInterfaceExtensions`.
+                
+                @Image(source: "2-4-image-1-1.png", alt: "The new \"Game Interface\" folder selected in the project navigator with its files.")
+            }
+            
+            @Step {
+                In `GameInterface.swift`, create a `GameInterface` class that conforms to `DelegateGameRenderer`. 
+                
+                > Tip: On every new file, remember to replace the Foundation import with ARHeadsetKit.
+               
+               @Code(name: "GameInterface.swift", file: "2-4-creating-code-1-1.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                In `GameInterfaceExtensions.swift`, declare an extension to `GameInterface`. Add an `updateResources()` method.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-2.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                Go to `GameRenderer.swift`. Add an optional `GameInterface` property.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-3.swift", previousFile: "2-3-creating-code-5-9.swift")
+            }
+            
+            @Step {
+                In the initializer, create `gameInterface`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                Scroll down to the extension to `DelegateGameRenderer`. Give every delegate access to the ``ARHeadsetKit/InterfaceRenderer``.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Find the Game Renderer's `updateResources()` method. Comment out the existing code and update the Game Interface's resources.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-1-7.swift", previousFile: "2-4-creating-code-1-6.swift")
+            }
+            
+            @Step {
+                Create an array of string segments, each with the letter "m". These will combine into the word "mmm".
+                
+                The font ID identifies either the regular, semibold, or bold variation of Apple's SF font. These fonts correspond to the IDs 0, 1, and 2 respectively.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-8.swift", previousFile: "2-4-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Create a paragraph with a width of 0.15 meters and a font pixel size of 0.25 millimeters.
+                
+                ARHeadsetKit renders each variant of the SF font at 144 points. The letter "l" will be 144 \* 0.25 mm = 3.6 centimeters tall.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-9.swift")
+            }
+            
+            @Step {
+                Extract the paragraph's character groups and recommended height.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-10.swift")
+            }
+            
+            @Step {
+                Create an interface element with a thickness of 0.05 meters and a 0.02-meter corner radius. Position it 0.3 meters away from the camera.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-11.swift")
+            }
+            
+            @Step {
+                Render the interface element.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-12.swift")
+            }
+            
+            @Step {
+                Launch the app. A blue rounded rectangle will appear with the text "mmm".
+                
+                Going from left to right, each letter becomes bolder. Why might that be? (hint: look at step 8)
+                
+                @Image(source: "2-4-image-1-2.jpg", alt: "A blue interface element showing \"mmm\".")
+            }
+        }
+    }
+    
+    @Section(title: "Organize and Optimize") {
+        @ContentAndMedia {
+            The previous section showed most basic method of rendering interface elements. That method is very inefficient and repeats every frame. With just 10 elements, you can significantly impact your app's energy consumption.
+            
+            The proper way to render interface elements involves an ``ARHeadsetKit/ARParagraphContainer``. This protocol declares how to organize interface elements and initialize them only once.
+        }
+        
+        @Steps {
+            @Step {
+                In the "Game Interface" folder, create a new file called `GameInterfaceParagraphs.swift`.
+                
+                @Image(source: "2-4-image-2-1.png", alt: "GameInterfaceParagraphs.swift being selected in the project navigator.")
+            }
+            
+            @Step {
+                Create an extension to `GameInterface` that conforms it to `ARParagraphContainer`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-1.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                Declare `CachedParagraph`, an `Int` enumeration that conforms to `ARParagraphListElement`. Give it two cases: `resetButton` and `extendButton`.
+                
+                The process of converting AR text from a string to renderable character groups is costly. So, the ``ARHeadsetKit/InterfaceRenderer`` type object cached generated paragraphs. Hence, the name `CachedParagraph`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Below the closing brace of the extension, create a `GameInterfaceButton` protocol that inherits from ``ARHeadsetKit/ARParagraph``. Make an extension to it.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Create a short typealias of `GameInterface.CachedParagraph`. Add three static computed properties: `paragraphWidth`, `pixelSize`, and `radius`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Create a static `parameters` property, which returns all the information necessary for `InterfaceRenderer` to cache a paragraph.
+                
+                Which font variant has an ID of 2: regular, semibold, or bold?
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Add a type method called `generateInterfaceElement(type:)`, which returns an interface element. Fetch the cached paragraph and compute the element's dimensions.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                When the element is highlighted, set its color to an opaque light blue. Otherwise, make it transparent medium blue.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                In an extension to `GameInterface`, create two `GameInterfaceButton` enumerations: `ResetButton` and `ExtendButton`. Set their labels to their names, but with spaces between words.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-8.swift")
+            }
+        }
+          
+<!--   Future: "GameInterfaceButton" internally type-aliased to "Button"
+
+- Say the previous way was slow
+- Correct it with ARParagraphContainer
+- Make two elements - "ResetButton" and "ExtendButton"
+
+-->
+
+<!--   Make the traceable paragraph container in another section.-->
+
+    
+    @Section(title: "Element Container") {
+        @ContentAndMedia {
+            To access interface elements from source code, you must permanently store them somewhere. Create a container that handles the storage of elements.
+        }
+        
         @Steps {
             
         }
+    }
+    
+    @Section(title: "User-Centered Interface") {
+        @ContentAndMedia {
+            Up to this point, all interface elements had a fixed position in the real world. When the user looks away, an element will no longer be visible. However, some controls should always be accessible to the user.
+        }
+        
+        @Steps {
+            
+        }
+
+<!--
+
+- Position buttons using vector and angle math
+- Use setProperties(...) to adjust location/orientation
+- Fixed altitude, azimuth locked to user
+- Make surface color transparent
+
+-->
+    }
+    
+    @Section(title: "Bind Button Actions") {
+        @ContentAndMedia {
+            When the player finishes a game, they must reset it to play again. Connect the Reset Button to its action of resetting the game. Then, make the Extend Button lengthen the game by adding more cubes.
+        }
+        
+        @Steps {
+            
+        }
+
+<!--
+
+Let the cubes still materialize at the constant box in world space. The arrow helps with that.
+
+Don't worry about interactions hitting both buttons and cubes at the same time.
+
+Start by setting the location of what's about to removed to infinity.
+
+- Refactor initial positioning code into a function that makes only one new cube
+- Ray trace the button (ARTraceableParagraphContainer)
+- Fetching touchscreen input (reinforce previous knowledge)
+- Introduce highlighting interface elements
+- Bind touching it to an action
+- ExtendButton only resets what's necessary and saves the cube index
+- ExtendButton reorders array elements
+
+-->
+    }
+    
+    @Section(title: "Interface Depth") {
+        @ContentAndMedia {
+            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.
+        }
+        
+<!--    In a step:  Override the ``ARHeadsetKit/MainRenderer/interfaceDepth`` property of your subclass of `MainRenderer`. This will make the interface either closer or farther away from the user's head.   -->
+        
+        @Steps {
+            
+        }
+
+<!--
+
+- Override "interfaceDepth" in subclass of MainRenderer
+- Make the interface elements ridiculously close (screenshot)
+- Set it back to something moderate (last step)
+
+-->
+    }
+    
+    @Section(title: "Adapt Element Size") {
+        @ContentAndMedia {
+            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.
+        }
+        
+        @Steps {
+            
+        }
+
+<!--
+
+- Query interfaceScale
+- Refactor all sizing/angular position code
+- Make/use resetSize() methods
+- User changes interface size, watch all elements scale
+- Show how elements overlap when you don't adjust angle too
+- Fix angle sizing problem
+
+-->
+    }
+    
+    @Section(title: "Dynamic Reaction") {
+        @ContentAndMedia {
+            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
+            
+            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.
+            
+            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.
+        }
+        
+        @Steps {
+            
+        }
+
+<!--
+
+Add an enumeration case for this
+
+- State that this is dynamic text
+- Reaction messages, user can even add own - sneak yeet in there
+- Positioned with its center at the cube's center, has a growing animation
+- Orientation perfectly aligns with user
+- Appear randomly on only some
+- Use setProperties(...) to adjust dimensions (new text)
+- Immediately switch to new knocked out cube, or disappear after fixed duration
+
+-->
+    }
+    
+    @Section(title: "Congratulations!") {
+        @ContentAndMedia {
+            At the end of the game, give the player a congratulatory message.
+        }
+        
+        @Steps {
+            
+        }
+
+<!--
+
+Add an enumeration case for this
+
+- <u>State that this is static text</u>
+- Congratulation message for completing game
+- Record the volume's initial center (using camera transform) and place there
+- Rotate in the Y axis to meet user, introducing more vector math
+- Make surface color not transparent
+- <u>Make the help arrow direct player to congratulation text</u>
+
+-->
     }
 }

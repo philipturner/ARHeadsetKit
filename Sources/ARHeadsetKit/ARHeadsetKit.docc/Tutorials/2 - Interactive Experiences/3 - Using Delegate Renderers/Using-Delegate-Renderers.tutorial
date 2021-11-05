@@ -16,7 +16,7 @@
             ARHeadsetKit uses several thousand lines of code to bring AR experiences to life. To manage all of this complexity, it divides its code among a hierarchy of objects. Source code files' names and locations reflect this hierarchy's structure.
             
             To observe this design pattern in action, go to "Package Dependencies" under the project navigator. Locate ARHeadsetKit and navigate to "Sources" -> "ARHeadsetKit" -> "Scene Reconstruction". The following hierarchy appears:
-
+            
             - SceneRenderer
                 - Culling
                     - SceneCuller
@@ -29,11 +29,11 @@
                     - SceneMeshMatcher
                     - SceneTexelRasterizer
                     - SceneTexelManager
-
+            
             `SceneRenderer` is the most complex delegate to the Main Renderer&mdash;it took two months to create (bookmark [this web page](https://github.com/philipturner/scene-color-reconstruction) to learn more). Its own delegates conform to the `DelegateSceneRenderer` protocol, which lets the Scene Renderer expose several properties to them. This mirrors the Main Renderer's behavior with the ``ARHeadsetKit/DelegateRenderer`` protocol.
-
+            
             Examine the source code for a few minutes and search for other patterns. Every delegate holds an unowned reference to its parent (the object that creates and stores it). This prevents strong reference cycles, which cause memory leaks in Swift.
-
+            
             Folders are named after a specific object, whose code they contain. Files in the same directory level have similar names, separated only by a unique suffix. You have already used this convention, by placing two files starting with "GameRenderer" in a "Game" folder.
         }
         
