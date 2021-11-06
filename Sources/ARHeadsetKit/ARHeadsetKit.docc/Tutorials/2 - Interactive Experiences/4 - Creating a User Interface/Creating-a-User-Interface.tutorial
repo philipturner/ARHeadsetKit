@@ -1,4 +1,4 @@
-@Tutorial(time: 50) {
+@Tutorial(time: 70) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -488,44 +488,56 @@
         }
     }
     
-<!--    @Section(title: "Interface Depth") {-->
-<!--        @ContentAndMedia {-->
-<!--            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.-->
-<!--        }-->
+    @Section(title: "Interface Depth") {
+        @ContentAndMedia {
+            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.
+        }
         
-<!--    Don't forget to cast -->
-
-<!--    Show picture of the size slider going all the way to 200%   -->
-        
-<!--        @Steps {-->
-<!--            @Step {-->
-<!--                Open `ContentView.swift` in your project's top-level folder. Locate the declaration of your subclass of `MainRenderer`.-->
-<!--                -->
-<!--                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-1.swift")-->
-<!--            }-->
-<!--            -->
-<!--            @Step {-->
-<!--                -->
-<!--            }-->
-<!--        }-->
-
-<!--
-
-- Override "interfaceDepth" in subclass of MainRenderer
-- Make the interface elements ridiculously close (screenshot)
-- Set it back to something moderate (last step)
-
--->
+        @Steps {
+            @Step {
+                Open `ContentView.swift` in your project's top-level folder. Locate the declaration of your subclass of `MainRenderer`.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-1.swift")
+            }
+            
+            @Step {
+                Override the default value of `interfaceDepth` (0.7 meters) with 0.45 meters.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-2.swift")
+            }
+            
+            @Step {
+                Find the nested function in `GameInterface.adjustInterface()`. When computing position, use the interface depth instead of 0.7.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-6-3.swift", previousFile: "2-4-creating-code-5-13.swift")
+            }
+            
+            @Step {
+                In the app's settings panel, go to "Customize Appearance". Slide the control interface size up to 200%. Then, close the settings panel.
+                
+                The interface is extremely close to you!
+                
+                @Image(source: "2-4-image-6-1.jpg", alt: "The two buttons being up close and personal.")
+            }
+            
+            @Step {
+                Undo the change to the interface, setting its depth back to 0.7.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-4.swift", previousFile: "2-4-creating-code-6-2.swift")
+            }
+        }
     }
     
-<!--    @Section(title: "Adapt Element Size") {-->
-<!--        @ContentAndMedia {-->
-<!--            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            -->
-<!--        }-->
+    @Section(title: "Adapt Element Size") {
+        @ContentAndMedia {
+            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.
+        }
+        
+<!--    Just show one picture of the problem happening.    -->
+        
+        @Steps {
+            
+        }
 
 <!--
 
@@ -537,20 +549,20 @@
 - Fix angle sizing problem
 
 -->
-<!--    }-->
+    }
     
-<!--    @Section(title: "Dynamic Reactions") {-->
-<!--        @ContentAndMedia {-->
-<!--            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.-->
-<!--            -->
-<!--            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.-->
-<!--            -->
-<!--            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            -->
-<!--        }-->
+    @Section(title: "Dynamic Reactions") {
+        @ContentAndMedia {
+            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
+            
+            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.
+            
+            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.
+        }
+        
+        @Steps {
+            
+        }
 
 <!--
 
@@ -565,16 +577,16 @@ Add an enumeration case for this
 - Immediately switch to new knocked out cube, or disappear after fixed duration
 
 -->
-<!--    }-->
+    }
     
-<!--    @Section(title: "Congratulations!") {-->
-<!--        @ContentAndMedia {-->
-<!--            At the end of the game, give the player a congratulatory message.-->
-<!--        }-->
-<!--        -->
-<!--        @Steps {-->
-<!--            -->
-<!--        }-->
+    @Section(title: "Congratulations!") {
+        @ContentAndMedia {
+            At the end of the game, give the player a congratulatory message.
+        }
+        
+        @Steps {
+            
+        }
 
 <!--
 
@@ -588,5 +600,5 @@ Add an enumeration case for this
 - <u>Make the help arrow direct player to congratulation text</u>
 
 -->
-<!--    }-->
+    }
 }

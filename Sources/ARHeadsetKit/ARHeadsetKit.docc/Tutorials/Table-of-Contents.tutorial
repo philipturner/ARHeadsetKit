@@ -25,7 +25,6 @@
         @TutorialReference(tutorial: "doc:Physics-Based-Interaction")
         @TutorialReference(tutorial: "doc:Using-Delegate-Renderers")
         @TutorialReference(tutorial: "doc:Creating-a-User-Interface")
-<!--    Title for possible extra tutorial: More with Interface Elements    -->
     }
     
     @Chapter(name: "Unlocking Everything") {
