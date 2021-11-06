@@ -513,9 +513,7 @@
             }
             
             @Step {
-                In the app's settings panel, go to "Customize Appearance". Slide the control interface size up to 200%. Then, close the settings panel.
-                
-                The interface is extremely close to you!
+                Run the app. The interface is extremely close to you!
                 
                 @Image(source: "2-4-image-6-1.jpg", alt: "The two buttons being up close and personal.")
             }
@@ -536,41 +534,96 @@
 <!--    Just show one picture of the problem happening.    -->
         
         @Steps {
+            @Step {
+                Create a static stored property in `GameInterface` called `interfaceScale`. Initialize it to an invalid number.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-7-1.swift", previousFile: "2-4-creating-code-3-5.swift")
+            }
             
+            @Step {
+                At the start of the Game Interface's `updateResources()` method, update its type object's interface scale.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-2.swift", previousFile: "2-4-creating-code-6-3.swift")
+            }
+            
+            @Step {
+                Go to the Game Interaface Button extension in `GameInterfaceParagraphs.swift`. In the element generation method, change `paragraph` from `let` to `var`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-4.swift", previousFile: "2-4-creating-code-7-3.swift")
+            }
+            
+            @Step {
+                Retrieve the interface scale and change the paragraph's dimensions.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-6.swift", previousFile: "2-4-creating-code-7-5.swift")
+            }
+            
+            @Step {
+                In the `ARInterfaceElement` initializer, multiply `width`, `height`, `depth`, and `radius` by scale.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-7.swift")
+            }
+            
+            @Step {
+                Add a `resetSize()` method to `ElementContainer`, which updates its elements' sizes.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-8.swift")
+            }
+            
+            @Step {
+                Jump back to `updateResources()`. If the buttons exist and the interface's size changed, reset the buttons.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-9.swift", previousFile: "2-4-creating-code-7-2.swift")
+            }
+            
+            @Step {
+                In the app's settings panel, go to "Customize Appearance". Slide the control interface size up to 200%. Then, close the settings panel.
+                
+                Uh oh. The buttons overlap!
+            }
+            
+            @Step {
+                At the very bottom of `adjustInterface()`, create an angle that varies with interface scale.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-10.swift")
+            }
+            
+            @Step {
+                In the last call to `adjustButton(_:angleDegrees:)`, replace 145 with the new angle.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-11.swift")
+            }
+            
+            @Step {
+                Go back into the settings panel. Set the interface scale to something near 100%.
+            }
         }
-
-<!--
-
-- Query interfaceScale
-- Refactor all sizing/angular position code
-- Make/use resetSize() methods
-- User changes interface size, watch all elements scale
-- Show how elements overlap when you don't adjust angle too
-- Fix angle sizing problem
-
--->
     }
     
     @Section(title: "Dynamic Reactions") {
         @ContentAndMedia {
             Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
             
-            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.
-            
             When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.
         }
         
         @Steps {
-            
+            @Step {
+                In the declaration of `CachedParagraph`, add a new case for `reactionLabel`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-1.swift", previousFile: "2-4-creating-code-7-8.swift")
+            }
         }
 
 <!--
 
 Add an enumeration case for this
 
+No animation here because that takes too long
+
 - State that this is dynamic text
 - Reaction messages, user can even add own - sneak yeet in there
-- Positioned with its center at the cube's center, has a growing animation
+- Positioned with its center at the cube's center
 - Orientation perfectly aligns with user
 - Appear randomly on only some
 - Use setProperties(...) to adjust dimensions (new text)
