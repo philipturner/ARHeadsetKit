@@ -1,4 +1,4 @@
-@Tutorial(time: 70) {
+@Tutorial(time: 50) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -388,7 +388,6 @@
             When the player finishes a game, they must reset it to play again. Connect the Reset Button to its action of resetting the game. Then, make the Extend Button lengthen the game by adding more cubes.
         }
         
-<!--    Still keep the call to srand48()    -->
 <!--    Don't forget to use -14 instead of -13 when referring to spacing workaround   -->
 <!--    Don't need an image for this    -->
         
@@ -424,38 +423,91 @@
                 
                 @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-5.swift")
             }
+            
+            @Step {
+                Go to `GameRendererExtensions.swift`. Declare an instance method that carries out a button's action.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-6.swift", previousFile: "2-4-creating-code-4-14.swift")
+            }
+            
+            @Step {
+                Copy and paste the `cubes` property from `GameRenderer`, making a local computed variable.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-7.swift")
+            }
+            
+            @Step {
+                When resetting the game, invalidate the cube index and clear the `cubes` array.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Next, re-initialize each cube.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-9.swift")
+            }
+            
+            @Step {
+                When extending the game, iterate over every cube that has a velocity.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-10.swift")
+            }
+            
+            @Step {
+                Set the i-th cube's position to infinity. This prevents it from interfering with location searching.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-11.swift")
+            }
+            
+            @Step {
+                Randomly generate a new cube in the old one's place.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-12.swift")
+            }
+            
+            @Step {
+                When the user starts tapping the cube, call `executeAction(button:)` on the selected button.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-13.swift")
+            }
+            
+<!--    Don't forget to use -15 instead of -14 for spacing workaround in this file   -->
+            
+            @Step {
+                Open `GameRendererExtensions.swift`. Un-comment out the code that runs the cube game.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-5-14.swift", previousFile: "2-4-creating-code-1-7.swift")
+            }
+            
+            @Step {
+                Launch the app. Activate the "Reset" a few times and watch the cubes rearrange. 
+                
+                Knock out several cubes and activate "Extend". The red cube stays red, and new cubes appear.
+            }
         }
-
-<!--
-
-Let the cubes still materialize at the constant box in world space. The arrow helps with that.
-
-Don't worry about interactions hitting both buttons and cubes at the same time.
-
-Set the location of what's about to removed to infinity.
-
-- Refactor initial positioning code into a function that makes only one new cube
-- Fetching touchscreen input (reinforce previous knowledge) and ray tracing
-- Introduce highlighting interface elements
-- Bind touching it to an action
-- ExtendButton only resets what's necessary and saves the cube index
-- ExtendButton reorders array elements
-
--->
     }
     
-    @Section(title: "Interface Depth") {
-        @ContentAndMedia {
-            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.
-        }
+<!--    @Section(title: "Interface Depth") {-->
+<!--        @ContentAndMedia {-->
+<!--            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.-->
+<!--        }-->
         
-<!--    In a step:  Override the ``ARHeadsetKit/MainRenderer/interfaceDepth`` property of your subclass of `MainRenderer`. This will make the interface either closer or farther away from the user's head.   -->
+<!--    Don't forget to cast -->
 
 <!--    Show picture of the size slider going all the way to 200%   -->
         
-        @Steps {
-            
-        }
+<!--        @Steps {-->
+<!--            @Step {-->
+<!--                Open `ContentView.swift` in your project's top-level folder. Locate the declaration of your subclass of `MainRenderer`.-->
+<!--                -->
+<!--                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-1.swift")-->
+<!--            }-->
+<!--            -->
+<!--            @Step {-->
+<!--                -->
+<!--            }-->
+<!--        }-->
 
 <!--
 
@@ -466,14 +518,14 @@ Set the location of what's about to removed to infinity.
 -->
     }
     
-    @Section(title: "Adapt Element Size") {
-        @ContentAndMedia {
-            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.
-        }
-        
-        @Steps {
-            
-        }
+<!--    @Section(title: "Adapt Element Size") {-->
+<!--        @ContentAndMedia {-->
+<!--            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            -->
+<!--        }-->
 
 <!--
 
@@ -485,20 +537,20 @@ Set the location of what's about to removed to infinity.
 - Fix angle sizing problem
 
 -->
-    }
+<!--    }-->
     
-    @Section(title: "Dynamic Reactions") {
-        @ContentAndMedia {
-            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
-            
-            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.
-            
-            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.
-        }
-        
-        @Steps {
-            
-        }
+<!--    @Section(title: "Dynamic Reactions") {-->
+<!--        @ContentAndMedia {-->
+<!--            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.-->
+<!--            -->
+<!--            2D user interface libraries like SwiftUI automatically adjust elements' size based on the length of text. In contrast, ARHeadsetKit forces you to manually account for how many lines a paragraph spans.-->
+<!--            -->
+<!--            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            -->
+<!--        }-->
 
 <!--
 
@@ -513,16 +565,16 @@ Add an enumeration case for this
 - Immediately switch to new knocked out cube, or disappear after fixed duration
 
 -->
-    }
+<!--    }-->
     
-    @Section(title: "Congratulations!") {
-        @ContentAndMedia {
-            At the end of the game, give the player a congratulatory message.
-        }
-        
-        @Steps {
-            
-        }
+<!--    @Section(title: "Congratulations!") {-->
+<!--        @ContentAndMedia {-->
+<!--            At the end of the game, give the player a congratulatory message.-->
+<!--        }-->
+<!--        -->
+<!--        @Steps {-->
+<!--            -->
+<!--        }-->
 
 <!--
 
@@ -536,5 +588,5 @@ Add an enumeration case for this
 - <u>Make the help arrow direct player to congratulation text</u>
 
 -->
-    }
+<!--    }-->
 }
