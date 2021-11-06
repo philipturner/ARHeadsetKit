@@ -6,6 +6,8 @@ extension GameInterface {
         if buttons == nil {
             buttons = .init()
         }
+            
+        adjustInterface()
         
         
         
@@ -43,7 +45,24 @@ extension GameInterface {
         func adjustButton(_ button: CachedParagraph, angleDegrees: Float) {
             let angleRadians = degreesToRadians(angleDegrees)
             rotation = simd_quatf(angle: angleRadians, axis: axis)
+            
+            let backwardDirection = rotation.act([0, 1, 0])
+            let upDirection = cross(backwardDirection, axis)
+            
+            let orientation = ARInterfaceElement.createOrientation(
+                forwardDirection: -backwardDirection,
+                orthogonalUpDirection: upDirection
+            )
+            
+            var position = gameRenderer.interfaceCenter
+            position += backwardDirection * 0.7
+            
+            buttons[button].setProperties(position: position,
+                                          orientation: orientation)
         }
+        
+        adjustButton(.resetButton,  angleDegrees: 135)
+        adjustButton(.extendButton, angleDegrees: 145)
     }
     
 }

@@ -230,7 +230,7 @@
             @Step {
                 After all properties are initialized, call the `cacheParagraphs()` type method synthesized from `ARParagraphContainer` conformance.
                 
-                > Tip: Always call cache a paragraph container's paragraphs during initialization.
+                > Tip: Always cache a paragraph container's paragraphs during app initialization.
                 
                 @Code(name: "GameInterface.swift", file: "2-4-creating-code-3-5.swift")
             }
@@ -291,16 +291,96 @@
         }
         
         @Steps {
+            @Step {
+                Open `GameInterfaceParagraphs.swift` and locate the fileprivate extension to `GameInterface`. Remove "Button" from each enumeration's label.
+                
+                The two strings should now just say "Reset" and "Extend".
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-4-1.swift", previousFile: "2-4-creating-code-2-10.swift")
+            }
             
+            @Step {
+                Go back to `updateResources()`. Remove the code that sets each button's position.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-2.swift", previousFile: "2-4-creating-code-3-12.swift")
+            }
+            
+            @Step {
+                In a new instace method, extract the direction that your device's back camera points in.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Make a rotation going from directly vertical to the camera direction. Extract its axis.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Account for the scenario in which `axis` is undefined.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Declare a nested function that takes in a button type and its angular position.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Combined the angle (in radians) and axis to form a rotation.
+                
+                > Note: Quaternion functions only accept angles in radian form. Do not forget to convert between degrees and radians.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-7.swift")
+            }
+            
+            @Step {
+                Using the rotation, transform the Y axis to the element's direction relative to your head.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                Cross `backwardDirection` with `axis`, which is perpendicular to it. The output will always have a length of one, so don't normalize it.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                Create an orientation for the interface element.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-10.swift")
+                
+                > Note: Always use the function shown in the code listing to make orientations for interface elements.
+            }
+            
+            @Step {
+                Place the element 0.7 meters away from the user's head, then set its position and orientation.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-11.swift")
+            }
+            
+            @Step {
+                Call the repositioning function on the "Reset" and "Extend" buttons.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-12.swift")
+            }
+            
+            @Step {
+                In `updateResources()`, call `adjustInterface()` directly after ensuring the buttons exist.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-13.swift")
+            }
+            
+            @Step {
+                Try the app and look downward. When you turn your body left or right, the interface elements follow you.
+                
+                @Image(source: "2-4-image-4-1.jpg", alt: "A view of the two interface buttons while looking downward.")
+            }
         }
-
-<!--
-
-- Position buttons using vector and angle math
-- Use setProperties(...) to adjust location/orientation
-- Fixed altitude, azimuth locked to user
-
--->
     }
     
     @Section(title: "Bind Button Actions") {
@@ -308,8 +388,42 @@
             When the player finishes a game, they must reset it to play again. Connect the Reset Button to its action of resetting the game. Then, make the Extend Button lengthen the game by adding more cubes.
         }
         
+<!--    Still keep the call to srand48()    -->
+<!--    Don't forget to use -14 instead of -13 when referring to spacing workaround   -->
+<!--    Don't need an image for this    -->
+        
         @Steps {
+            @Step {
+                Locate the cube generation code in `CubeRenderer.swift`. Remove all `print(...)` statements.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-1.swift", previousFile: "2-3-creating-code-2-15.swift")
+            }
             
+            @Step {
+                Refactor the statement that appends each cube, by assigning it to a local variable first.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Cut and paste the code that generates `newCube` into an instance method.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-3.swift")
+            }
+            
+            @Step {
+                At the end of `makeNewCube()`, return the new cube.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-4.swift")
+            }
+            
+            @Step {
+                In the loop located inside `init(gameRenderer:)`, generate `newCube` using the method you just made.
+                
+                Replace `i` with `_` since the variable's name is no longer needed.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-5.swift")
+            }
         }
 
 <!--
@@ -318,7 +432,7 @@ Let the cubes still materialize at the constant box in world space. The arrow he
 
 Don't worry about interactions hitting both buttons and cubes at the same time.
 
-Start by setting the location of what's about to removed to infinity.
+Set the location of what's about to removed to infinity.
 
 - Refactor initial positioning code into a function that makes only one new cube
 - Fetching touchscreen input (reinforce previous knowledge) and ray tracing
@@ -336,6 +450,8 @@ Start by setting the location of what's about to removed to infinity.
         }
         
 <!--    In a step:  Override the ``ARHeadsetKit/MainRenderer/interfaceDepth`` property of your subclass of `MainRenderer`. This will make the interface either closer or farther away from the user's head.   -->
+
+<!--    Show picture of the size slider going all the way to 200%   -->
         
         @Steps {
             
@@ -371,7 +487,7 @@ Start by setting the location of what's about to removed to infinity.
 -->
     }
     
-    @Section(title: "Dynamic Reaction") {
+    @Section(title: "Dynamic Reactions") {
         @ContentAndMedia {
             Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
             
