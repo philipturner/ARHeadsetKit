@@ -6,7 +6,7 @@ extension GameInterface {
         if buttons == nil {
             buttons = .init()
         }
-        
+            
         adjustInterface()
         
         
@@ -27,20 +27,6 @@ extension GameInterface {
         
         if let selectedButton = selectedButton {
             buttons[selectedButton].isHighlighted = false
-        }
-    }
-    
-    func executeAction(for button: CachedParagraph) {
-        var cubes: [Cube] {
-            get { cubeRenderer.cubes }
-            set { cubeRenderer.cubes = newValue }
-        }
-        
-        switch button {
-        case .resetButton:
-            
-        case .extendButton:
-            
         }
     }
     

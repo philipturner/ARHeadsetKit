@@ -30,20 +30,6 @@ extension GameInterface {
         }
     }
     
-    func executeAction(for button: CachedParagraph) {
-        var cubes: [Cube] {
-            get { cubeRenderer.cubes }
-            set { cubeRenderer.cubes = newValue }
-        }
-        
-        switch button {
-        case .resetButton:
-            
-        case .extendButton:
-            
-        }
-    }
-    
     func adjustInterface() {
         let cameraTransform = gameRenderer.cameraToWorldTransform
         let cameraDirection4 = -cameraTransform.columns.2

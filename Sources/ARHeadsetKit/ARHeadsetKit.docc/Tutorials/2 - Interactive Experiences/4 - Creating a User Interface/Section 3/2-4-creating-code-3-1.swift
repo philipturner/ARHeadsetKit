@@ -22,7 +22,7 @@ extension GameInterface: ARParagraphContainer {
     }
     
     struct ElementContainer: ARTraceableParagraphContainer {
-        
+    
     }
     
 }

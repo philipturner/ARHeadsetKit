@@ -21,6 +21,10 @@ extension GameInterface {
         
         if let selectedButton = selectedButton {
             buttons[selectedButton].isHighlighted = true
+            
+            if renderer.shortTappingScreen {
+                executeAction(for: selectedButton)
+            }
         }
         
         interfaceRenderer.render(elements: buttons.elements)
@@ -38,9 +42,19 @@ extension GameInterface {
         
         switch button {
         case .resetButton:
+            cubePicker.cubeIndex = nil
+            cubes.removeAll(keepingCapacity: true)
             
+            for _ in 0..<10 {
+                cubes.append(cubeRenderer.makeNewCube())
+            }
         case .extendButton:
-            
+            for i in 0..<10 where cubes[i].velocity != nil {
+                let pos = simd_float3(repeating: .infinity)
+                cubes[i].location = pos
+                
+                cubes[i] = cubeRenderer.makeNewCube()
+            }
         }
     }
     
