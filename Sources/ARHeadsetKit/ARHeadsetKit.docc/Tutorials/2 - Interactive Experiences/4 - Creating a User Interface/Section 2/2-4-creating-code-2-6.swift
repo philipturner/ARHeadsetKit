@@ -5,12 +5,12 @@ See LICENSE folder for this sample’s licensing information.
 import ARHeadsetKit
 
 extension GameInterface: ARParagraphContainer {
-
+    
     enum CachedParagraph: Int, ARParagraphListElement {
         case resetButton
         case extendButton
     }
-
+    
 }
 
 
