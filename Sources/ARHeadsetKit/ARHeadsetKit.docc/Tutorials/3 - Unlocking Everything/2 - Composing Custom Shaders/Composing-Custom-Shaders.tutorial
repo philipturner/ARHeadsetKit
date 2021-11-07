@@ -14,11 +14,11 @@
     
 <!--    Use transform so it doesn’t have to be at center    -->
     
-    @Section(title: "Fix Xcode Bug") {
+    @Section(title: "Detour: Xcode Bug") {
         @ContentAndMedia {
-            There is the bug that breaks Metal syntax coloring, which Apple hasn't implemented yet. You will fix it by modifying the corrupted file in Xcode.
+            There is the bug that breaks Metal syntax coloring, which Apple hasn't fixed yet&mdash;despite being informed of its easy solution. 
             
-            Apple, if you're reading this, you know what to do :)       
+            You will the bug by modifying a corrupted file. Apple, if you're reading this, you know what to do :-)       
         }
         
         @Steps {
