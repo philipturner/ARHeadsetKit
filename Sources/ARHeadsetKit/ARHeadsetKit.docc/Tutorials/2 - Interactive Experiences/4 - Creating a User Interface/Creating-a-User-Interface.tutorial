@@ -1,10 +1,10 @@
-@Tutorial(time: 75) {
+@Tutorial(time: 75, projectFiles: "Creating-a-User-Interface.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Creating a User Interface") {
-        Enhance your app with dynamic, interactive interface elements.
+        Enhance your game with dynamic, interactive interface elements.
         
         Download the project files to begin building this project, and follow the steps below.
         
