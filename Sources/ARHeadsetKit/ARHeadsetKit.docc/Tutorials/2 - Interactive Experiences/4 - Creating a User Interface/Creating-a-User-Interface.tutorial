@@ -1,20 +1,789 @@
-@Tutorial {
+@Tutorial(time: 75, projectFiles: "Creating-a-User-Interface.zip") {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Creating a User Interface") {
-        Coming soon!
+        Enhance your game with dynamic, interactive interface elements.
         
-<!--    Make "Yeet!" an easter egg somewhere - one of many messages that appears when you hit a cube, but it is inconspicuous in source code   -->
-
+        Download the project files to begin building this project, and follow the steps below.
         
-<!--    Make a reset button using the interface, and a button to reset cubes' position when blocked out by 3D scene   -->
+        @Image(source: "2-4-image-3-1-intro.jpg", alt: "A user's hand highlighting an interface element.")
     }
     
-    @Section(title: "n/a") {
-        @Steps {
+    @Section(title: "ARInterfaceElement") {
+        @ContentAndMedia {
+            In an AR headset, every form of interaction occurs with 3D objects. Sliders, buttons, and text boxes are reimagined, with striking depth contours and shadows. Virtual computer monitors surround you with content, all controlled through telekinesis.
             
+            Years ago, what you just read was science fiction. Now, it is reality. For the first time, any person can access interactive holograms from within their home.
+            
+            ARHeadsetKit was designed from the ground up for Google Cardboard. Hand-object interaction with minimal touchscreen input creates awesome AR headset experiences. However, the vast majority of people do not have Google Cardboard, which most likely includes you.
+            
+            To provide exceptional AR content with and without a headset, you will carefully define a user interface. Although designed for a handheld experience, your interface will translate to something amazing in headset mode.
+        }
+        
+        @ContentAndMedia {
+            Until now, only AR objects could exist alongside the real world. Although they can form a variety of shapes, they can't represent everything. Now, you'll learn a new data type&mdash;interface elements.
+        }
+        
+        @Steps {
+            @Step {
+                Under "Game", create a "Game Interface" folder. Add two Swift files named `GameInterface` and `GameInterfaceExtensions`.
+                
+                @Image(source: "2-4-image-1-1.png", alt: "The new \"Game Interface\" folder selected in the project navigator with its files.")
+            }
+            
+            @Step {
+                In `GameInterface.swift`, create a `GameInterface` class that conforms to `DelegateGameRenderer`. 
+                
+                > Tip: On every new file, remember to replace the Foundation import with ARHeadsetKit.
+               
+               @Code(name: "GameInterface.swift", file: "2-4-creating-code-1-1.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                In `GameInterfaceExtensions.swift`, declare an extension to `GameInterface`. Add an `updateResources()` method.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-2.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                Go to `GameRenderer.swift`. Add an optional `GameInterface` property.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-3.swift", previousFile: "2-3-creating-code-5-9.swift")
+            }
+            
+            @Step {
+                In the initializer, create `gameInterface`.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-4.swift")
+            }
+            
+            @Step {
+                Scroll down to the extension to `DelegateGameRenderer`. Give every delegate access to the ``ARHeadsetKit/InterfaceRenderer``.
+                
+                @Code(name: "GameRenderer.swift", file: "2-4-creating-code-1-5.swift")
+            }
+            
+            @Step {
+                Find the Game Renderer's `updateResources()` method. Comment out the existing code and update the Game Interface's resources.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-1-7.swift", previousFile: "2-4-creating-code-1-6.swift")
+            }
+            
+            @Step {
+                Jump to the Game Interface's `updateResources()`. Create an array of string segments. Each has the letter "m", combining into "mmm".
+                
+                The font ID identifies either the regular, semibold, or bold variation of Apple's SF font. These fonts correspond to the IDs 0, 1, and 2 respectively.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-8.swift", previousFile: "2-4-creating-code-1-2.swift")
+            }
+            
+            @Step {
+                Create a paragraph with a width of 0.15 meters and a font pixel size of 0.25 millimeters.
+                
+                ARHeadsetKit renders each variant of the SF font at 144 points. The letter "l" will be 144 \* 0.25 mm = 3.6 centimeters tall.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-9.swift")
+            }
+            
+            @Step {
+                Extract the paragraph's character groups and recommended height.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-10.swift")
+            }
+            
+            @Step {
+                Create an interface element with a thickness of 0.05 meters and a 0.02-meter corner radius. Position it 0.3 meters away from the camera.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-11.swift")
+            }
+            
+            @Step {
+                Render the interface element.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-1-12.swift")
+            }
+            
+            @Step {
+                Launch the app. A blue rounded rectangle will appear with the text "mmm".
+                
+                Going from left to right, each letter becomes bolder. Why might that be? (hint: look at step 8)
+                
+                @Image(source: "2-4-image-1-2.jpg", alt: "A blue interface element showing \"mmm\".")
+            }
+        }
+    }
+    
+    @Section(title: "Organize and Optimize") {
+        @ContentAndMedia {
+            The previous section showed the easiest way to render interface elements. That method is very inefficient and repeats every frame. With just 10 elements, you can significantly impact your app's energy consumption.
+            
+            The proper way to render interface elements involves an ``ARHeadsetKit/ARParagraphContainer``. This protocol declares how to organize interface elements and initialize them only once.
+        }
+        
+        @Steps {
+            @Step {
+                In the "Game Interface" folder, create a new file called `GameInterfaceParagraphs.swift`.
+                
+                @Image(source: "2-4-image-2-1.png", alt: "GameInterfaceParagraphs.swift being selected in the project navigator.")
+            }
+            
+            @Step {
+                Create an extension to `GameInterface` that conforms it to `ARParagraphContainer`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-1.swift", previousFile: "creating-code-template.swift")
+            }
+            
+            @Step {
+                Declare ``ARHeadsetKit/ARParagraphContainer/CachedParagraph``, an `Int` enumeration that conforms to ``ARHeadsetKit/ARParagraphListElement``. Give it two cases: `resetButton` and `extendButton`.
+                
+                The process of converting AR text from a string to renderable character groups is costly. So, the ``ARHeadsetKit/InterfaceRenderer`` type object caches generated paragraphs. Hence, the name `CachedParagraph`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-2.swift")
+            }
+            
+            @Step {
+                Below the closing brace of the extension, create a `GameInterfaceButton` protocol that inherits from ``ARHeadsetKit/ARParagraph``. Make an extension to it.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-3.swift")
+            }
+            
+            @Step {
+                Create a short typealias of `GameInterface.CachedParagraph`. Add three static computed properties: `paragraphWidth`, `pixelSize`, and `radius`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-4.swift")
+            }
+            
+            @Step {
+                Create a static `parameters` property, which returns all the information necessary for `InterfaceRenderer` to cache a paragraph.
+                
+                Which font variant has an ID of 2: regular, semibold, or bold?
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-5.swift")
+            }
+            
+            @Step {
+                Add a type method called `generateInterfaceElement(type:)`, which returns an interface element. Fetch the cached paragraph and compute the element's dimensions.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-6.swift")
+            }
+            
+            @Step {
+                When the element is highlighted, set its color to an opaque light blue. Otherwise, make it transparent medium blue.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-7.swift")
+            }
+            
+            @Step {
+                In an extension to `GameInterface`, create two `GameInterfaceButton` enumerations: `ResetButton` and `ExtendButton`. Set their labels to "Reset Button" and "Extend Button", respectively.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-8.swift")
+            }
+            
+            @Step {
+                Go back to `CachedParagraph`. Create a `parameters` property, which maps each case to its matching type's parameters.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-9.swift")
+            }
+            
+            @Step {
+                Add `interfaceElement`, which returns the element generated by each button's `generateInterfaceElement(type:)` method.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-2-10.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Element Container") {
+        @ContentAndMedia {
+            To access interface elements from source code, you must permanently store them somewhere. Create a container that handles the storage of elements.
+        }
+        
+        @Steps {
+            @Step {
+                Declare a struct that conforms to ``ARHeadsetKit/ARTraceableParagraphContainer``.
+                
+                `ARTraceableParagraphContainer` adds a method to the container, which lets all of its elements be tested for intersection at once.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-3-1.swift", previousFile: "2-4-creating-code-2-10.swift")
+            }
+            
+            @Step {
+                Map `CachedParagraph` to an array of elements.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-3-2.swift")
+            }
+            
+            @Step {
+                Add a subscript operator that coordinates reads and writes to `elements`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                In the `GameInterface` declaration, add an `ElementContainer` property called `buttons`.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-3-4.swift", previousFile: "2-4-creating-code-1-1.swift")
+            }
+            
+            @Step {
+                After all properties are initialized, call the ``ARHeadsetKit/ARParagraphContainer/cacheParagraphs()`` type method synthesized from `ARParagraphContainer` conformance.
+                
+                > Tip: Always cache a paragraph container's paragraphs during app initialization.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                Navigate to `updateResources()`. Replace all of the code with a test for whether `buttons` is `nil`.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-6.swift", previousFile: "2-4-creating-code-1-12.swift")
+            }
+            
+            @Step {
+                Initialize the button container during the app's first frame.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-7.swift")
+            }
+            
+            @Step {
+                Declare where the buttons' centers are located. Both are 0.3 meters backward, and 0.12 meters either left or right.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-8.swift")
+            }
+            
+            @Step {
+                Access the individual buttons through the subscript operator, then set their positions.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-9.swift")
+            }
+            
+            @Step {
+                Determine whether the user's hand selects a button.
+                
+                Look at `buttons.trace(ray:)`. This is the method `ARTraceableParagraphContainer` automatically synthesized.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-10.swift")
+            }
+            
+            @Step {
+                If a button is selected, highlight it.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-11.swift")
+            }
+            
+            @Step {
+                Render the buttons and un-highlight the selected one.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-3-12.swift")
+            }
+            
+            @Step {
+                Launch the app and hold your hand in front of either button.
+                
+                @Image(source: "2-4-image-3-1.jpg", alt: "The user's hand selecting the Reset Button.")
+            }
+        }
+    }
+    
+    @Section(title: "User-Centered Interface") {
+        @ContentAndMedia {
+            Up to this point, all interface elements had a fixed position in the real world. When the user looks away, an element will no longer be visible. However, some controls should always be accessible to the user.
+        }
+        
+        @Steps {
+            @Step {
+                Open `GameInterfaceParagraphs.swift` and locate the fileprivate extension to `GameInterface`. Remove "Button" from each enumeration's label.
+                
+                The two strings should now just say "Reset" and "Extend".
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-4-1.swift", previousFile: "2-4-creating-code-3-3.swift")
+            }
+            
+            @Step {
+                Go back to `updateResources()`. Remove the code that sets each button's position.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-2.swift", previousFile: "2-4-creating-code-3-12.swift")
+            }
+            
+            @Step {
+                In a new instace method, extract the direction that your device's back camera points in.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-3.swift")
+            }
+            
+            @Step {
+                Make a rotation going from directly vertical to the camera direction. Extract its axis.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-4.swift")
+            }
+            
+            @Step {
+                Account for the scenario in which `axis` is undefined.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-5.swift")
+            }
+            
+            @Step {
+                Declare a nested function that takes in a button type and its angular position.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-6.swift")
+            }
+            
+            @Step {
+                Combine the angle (in radians) and the axis to form a rotation.
+                
+                > Note: Quaternion functions only accept angles in radian form. Do not forget to convert between degrees and radians.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-7.swift")
+            }
+            
+            @Step {
+                Using the rotation, transform the Y axis to the element's direction relative to your head.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-8.swift")
+            }
+            
+            @Step {
+                Cross `backwardDirection` with `axis`, which is perpendicular to it. The output will always have a length of one, so don't normalize it.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-9.swift")
+            }
+            
+            @Step {
+                Create an orientation for the interface element.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-10.swift")
+                
+                > Note: Always use the function shown in the code listing to make orientations for interface elements.
+            }
+            
+            @Step {
+                Place the element 0.7 meters away from the user's head, then set its position and orientation.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-11.swift")
+            }
+            
+            @Step {
+                Call the repositioning function on the "Reset" and "Extend" buttons.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-12.swift")
+            }
+            
+            @Step {
+                In `updateResources()`, call `adjustInterface()` directly after ensuring the buttons exist.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-4-13.swift")
+            }
+            
+            @Step {
+                Try the app and look downward. When you turn your body left or right, the interface elements follow you.
+                
+                @Image(source: "2-4-image-4-1.jpg", alt: "A view of the two interface buttons while looking downward.")
+            }
+        }
+    }
+    
+    @Section(title: "Bind Button Actions") {
+        @ContentAndMedia {
+            When the player finishes a game, they must reset it to play again. Connect the Reset Button to its action of resetting the game. Then, make the Extend Button lengthen the game by adding more cubes.
+        }
+        
+        @Steps {
+            @Step {
+                Locate the cube generation code in `CubeRenderer.swift`. Remove all `print(...)` statements.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-1.swift", previousFile: "2-3-creating-code-2-15.swift")
+            }
+            
+            @Step {
+                Refactor the statement that appends each cube, by assigning it to a local variable first.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-2.swift")
+            }
+            
+            @Step {
+                Cut and paste the code that generates `newCube` into an instance method.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-3.swift")
+            }
+            
+            @Step {
+                At the end of `makeNewCube()`, return the new cube.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-4.swift")
+            }
+            
+            @Step {
+                In the loop located inside `init(gameRenderer:)`, generate `newCube` using the method you just made.
+                
+                Replace `i` with `_` since the variable's name is no longer needed.
+                
+                @Code(name: "CubeRenderer.swift", file: "2-4-creating-code-5-5.swift")
+            }
+            
+            @Step {
+                Go to `GameInterfaceExtensions.swift`. Declare an instance method that carries out a button's action.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-6.swift", previousFile: "2-4-creating-code-4-14.swift")
+            }
+            
+            @Step {
+                Copy and paste the `cubes` property from `GameRenderer`, making a local computed variable.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-7.swift")
+            }
+            
+            @Step {
+                When resetting the game, invalidate the cube index and clear the `cubes` array.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-8.swift")
+            }
+            
+            @Step {
+                Next, re-initialize each cube.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-9.swift")
+            }
+            
+            @Step {
+                To extend the game's duration, first iterate over every cube that has a velocity.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-10.swift")
+            }
+            
+            @Step {
+                Set the i-th cube's position to infinity. This prevents it from interfering with location searching.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-11.swift")
+            }
+            
+            @Step {
+                Randomly generate a new cube in the old one's place.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-12.swift")
+            }
+            
+            @Step {
+                When the player starts tapping the cube, call `executeAction(button:)` on the selected button.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-13.swift")
+            }
+            
+            @Step {
+                Open `GameRendererExtensions.swift`. Un-comment out the code that runs the cube game.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-5-14.swift", previousFile: "2-4-creating-code-1-7.swift")
+            }
+            
+            @Step {
+                Launch the app. Activate the "Reset" a few times and watch the cubes rearrange. 
+                
+                Knock out several cubes and activate "Extend". The red cube stays red, and new cubes appear.
+            }
+        }
+    }
+    
+    @Section(title: "Interface Depth") {
+        @ContentAndMedia {
+            ARHeadsetKit lets you customize the behavior of interface elements that surround the user. By overriding the Main Renderer's interface depth, you can modify how a user-centered interface appears.
+        }
+        
+        @Steps {
+            @Step {
+                Open `ContentView.swift` in your project's top-level folder. Locate the declaration of your subclass of `MainRenderer`.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-1.swift")
+            }
+            
+            @Step {
+                Override the default value of `interfaceDepth` (0.7 meters) with 0.45 meters.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-2.swift")
+            }
+            
+            @Step {
+                Find the nested function in `GameInterface.adjustInterface()`. When computing position, use the interface depth instead of 0.7.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-6-3.swift", previousFile: "2-4-creating-code-5-13.swift")
+            }
+            
+            @Step {
+                Run the app. The interface is extremely close to you!
+                
+                @Image(source: "2-4-image-6-1.jpg", alt: "The two buttons being up close and personal.")
+            }
+            
+            @Step {
+                Undo the change to the interface, setting its depth back to 0.7.
+                
+                @Code(name: "ContentView.swift", file: "2-4-creating-code-6-4.swift", previousFile: "2-4-creating-code-6-2.swift")
+            }
+        }
+    }
+    
+    @Section(title: "Adapt Element Size") {
+        @ContentAndMedia {
+            Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.
+        }
+        
+        @Steps {
+            @Step {
+                Create a static stored property in `GameInterface` called `interfaceScale`. Initialize it to an invalid number.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-7-1.swift", previousFile: "2-4-creating-code-3-5.swift")
+            }
+            
+            @Step {
+                At the start of the Game Interface's `updateResources()`, update its type object's interface scale.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-2.swift", previousFile: "2-4-creating-code-6-3.swift")
+            }
+            
+            @Step {
+                Go to the Game Interface Button extension in `GameInterfaceParagraphs.swift`. In the element generation method, change `paragraph` from `let` to `var`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-3.swift", previousFile: "2-4-creating-code-4-1.swift")
+            }
+            
+            @Step {
+                Retrieve the interface scale and change the paragraph's dimensions.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-4.swift")
+            }
+            
+            @Step {
+                In the `ARInterfaceElement` initializer, multiply `width`, `height`, `depth`, and `radius` by scale.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-5.swift")
+            }
+            
+            @Step {
+                Add a `resetSize()` method to `ElementContainer`, which updates its elements' sizes.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-7-6.swift")
+            }
+            
+            @Step {
+                Jump back to `updateResources()`. If the buttons exist and the interface's size changed, reset the buttons.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-8.swift", previousFile: "2-4-creating-code-7-7.swift")
+            }
+            
+            @Step {
+                In the app's settings panel, go to "Customize Appearance". Slide the control interface size up to 200%. Then, close the settings panel.
+                
+                Uh oh. The buttons overlap!
+            }
+            
+            @Step {
+                At the very bottom of `adjustInterface()`, create an angle that varies with interface scale.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-9.swift")
+            }
+            
+            @Step {
+                In the last call to the nested function, replace 145 with the new angle.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-7-10.swift")
+            }
+            
+            @Step {
+                Go back into the settings panel. Set the interface scale to something near 100%.
+            }
+        }
+    }
+    
+    @Section(title: "Dynamic Reactions") {
+        @ContentAndMedia {
+            Interface elements can display two types of text: static and dynamic. Static text is hard-coded into source code, while dynamic text changes at runtime.
+            
+            When the player knocks out a cube, add an occasional reaction message. The message's content is randomly chosen, so it uses dynamic text.
+        }
+        
+        @Steps {
+            @Step {
+                In `GameInterfaceParagraphs.swift`, add `ReactionLabel` to the last extension. Set its text to a mutable empty string.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-1.swift", previousFile: "2-4-creating-code-7-6.swift")
+            }
+            
+            @Step {
+                In the declaration of `CachedParagraph`, add a new case for `reactionLabel`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-2.swift")
+            }
+            
+            @Step {
+                Map the parameters of `ReactionLabel` to the parameters of `CachedParagraph`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-3.swift")
+            }
+            
+            @Step {
+                Repeat step 3 with `interfaceElement`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-4.swift")
+            }
+            
+            @Step {
+                Find `executeAction(for:)`. Handle the new case by breaking out of the `switch` statement.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-8-5.swift", previousFile: "2-4-creating-code-7-10.swift")
+            }
+            
+            @Step {
+                Give the Game Interface an optional tuple property called `reactionParams`. It contains a `String` followed by a position vector.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-8-6.swift", previousFile: "2-4-creating-code-7-1.swift")
+            }
+            
+            @Step {
+                After the closing brace of `CachedParagraph`, declare a method that updates the Reaction Label with a new message.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-7.swift", previousFile: "2-4-creating-code-8-4.swift")
+            }
+            
+            @Step {
+                In `GameRendererExtensions.swift`, declare a new method that sets `reactionParams`. Fetch `location` from the selected cube.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-8.swift", previousFile: "2-4-creating-code-5-15.swift")
+            }
+            
+            @Step {
+                Half of the time, the message will not pop up.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-9.swift")
+            }
+            
+            @Step {
+                Create a list of possible messages. Feel free to add your own!
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-10.swift")
+            }
+            
+            @Step {
+                Randomly select a message. Set `reactionParams` and update the Reaction Label.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-11.swift")
+            }
+            
+            @Step {
+                Go to `updateResources()`, where the selected cube's velocity is checked. If some cubes are stationary, set the reaction text.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-12.swift")
+            }
+            
+            @Step {
+                Launch the app. A message appears after you strike down the first cube, but it acts glitchy and doesn't change location. You'll fix that in the next section.
+                
+                @Image(source: "2-4-image-8-1.jpg", alt: "The reaction label showing \"Yeet!\".")
+            }
+        }
+    }
+    
+    @Section(title: "Congratulations!") {
+        @ContentAndMedia {
+            At the end of the game, give the player a congratulatory message.
+        }
+        
+        @Steps {
+            @Step {
+                Open `GameInterfaceExtensions.swift`. When each button's action executes, clear the interaction message.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-1.swift", previousFile: "2-4-creating-code-8-5.swift")
+            }
+            
+            @Step {
+                At the very end of `adjustInterace()`, set the Reaction Label's visibility based on whether `reactionParams` exists.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-2.swift")
+            }
+            
+            @Step {
+                Set the forward direction to a vector pointing from the label to your head. If its length is zero, set it to positive Z.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-3.swift")
+            }
+            
+            @Step {
+                Extract the camera's negative X axis and use it as the up direction. In headset mode, use positive Y since your phone is in landscape orientation.
+                
+                > Note: ARKit's camera space is rotated 90 degrees clockwise when in portrait orientation. Negative X transforms into positive Y.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-4.swift")
+            }
+            
+            @Step {
+                Find the closest vector to `upDirection` that is orthogonal to `forwardDirection`. Assign it to `upDirection`.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-5.swift")
+            }
+            
+            @Step {
+                Create the Reaction Label's orientation and reposition its interface element.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-6.swift")
+            }
+            
+            @Step {
+                In `GameRendererExtensions.swift`, add a method named `setCongratulation()`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-7.swift", previousFile: "2-4-creating-code-8-12.swift")
+            }
+            
+            @Step {
+                Declare the bounding box of where cubes can appear. Use the minimum and maximum coordinates in each dimension.
+                
+                Go to `CubeRenderer.swift`. You can find the bounding coordinates inside `makeNewCube()`, when initializing `location`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-8.swift")
+            }
+            
+            @Step {
+                Compute the bounding box's center, then set the reaction message.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-9.swift")
+            }
+            
+            @Step {
+                Locate the place where `setReactionParams()` is called. If all cubes are knocked out, congratulate the player.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-11.swift", previousFile: "2-4-creating-code-9-10.swift")
+            }
+            
+            @Step {
+                Open the file that contains `GameInterfaceButton`. Change `paragraphWidth` so that it returns 0.30 for the congratulation.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-12.swift", previousFile: "2-4-creating-code-8-7.swift")
+            }
+            
+            @Step {
+                When generating the interface element, declare four colors: `lightBlue`, `mediumBlue`, `lightGray`, and `mediumGray`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-13.swift")
+            }
+            
+            @Step {
+                Based on whether the button is `ReactionLabel`, choose surface and highlight colors, as well as opacity.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-14.swift")
+            }
+            
+            @Step {
+                In the `ARInterfaceElement` initializer, replace the hard-coded colors and surface opacity with values from the previous step.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-15.swift")
+            }
+            
+            @Step {
+                Congrats to you for finishing the game and tutorial chapter two!
+                
+                If you have Google Cardboard, don't forget to try out your game in headset mode!
+                
+                @Image(source: "2-4-image-9-1.jpg", alt: "A gray interface element saying \"Congratulations!\".")
+            }
         }
     }
 }
