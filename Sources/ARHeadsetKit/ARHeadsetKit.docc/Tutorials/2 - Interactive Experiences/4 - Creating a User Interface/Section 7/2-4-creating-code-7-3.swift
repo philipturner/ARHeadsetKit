@@ -52,10 +52,11 @@ extension GameInterfaceButton {
     }
     
     static func generateInterfaceElement(type: CachedParagraph) -> ARInterfaceElement {
-        let paragraph = GameInterface.createParagraph(type)
+        var paragraph = GameInterface.createParagraph(type)
+        
         let width  = 2 * radius + paragraphWidth
         let height = 2 * radius + paragraph.suggestedHeight
-            
+        
         return ARInterfaceElement(
             position: .zero, forwardDirection: [0, 0, 1], orthogonalUpDirection: [0, 1, 0],
             width: width, height: height, depth: 0.05, radius: radius,

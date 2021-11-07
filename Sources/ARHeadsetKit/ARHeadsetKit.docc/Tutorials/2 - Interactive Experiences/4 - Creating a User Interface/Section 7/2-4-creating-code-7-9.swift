@@ -94,6 +94,9 @@ extension GameInterface {
                                           orientation: orientation)
         }
         
+        let separationDegrees = 10 * Self.interfaceScale
+        let extendAngleDegrees = 135 + separationDegrees
+        
         adjustButton(.resetButton,  angleDegrees: 135)
         adjustButton(.extendButton, angleDegrees: 145)
     }

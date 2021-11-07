@@ -30,6 +30,10 @@ extension GameInterface: ARParagraphContainer {
             get { elements[index.rawValue] }
             set { elements[index.rawValue] = newValue }
         }
+        
+        mutating func resetSize() {
+            elements = CachedParagraph.allCases.map{ $0.interfaceElement }
+        }
     }
     
 }
@@ -54,15 +58,16 @@ extension GameInterfaceButton {
     static func generateInterfaceElement(type: CachedParagraph) -> ARInterfaceElement {
         var paragraph = GameInterface.createParagraph(type)
         
-        var width  = 2 * radius + paragraphWidth
-        var height = 2 * radius + paragraph.suggestedHeight
+        let width  = 2 * radius + paragraphWidth
+        let height = 2 * radius + paragraph.suggestedHeight
         
         let scale = GameInterface.interfaceScale
         InterfaceRenderer.scaleParagraph(&paragraph, scale: scale)
         
         return ARInterfaceElement(
             position: .zero, forwardDirection: [0, 0, 1], orthogonalUpDirection: [0, 1, 0],
-            width: width, height: height, depth: 0.05, radius: radius,
+            width: width * scale, height: height * scale,
+            depth: 0.05  * scale, radius: radius * scale,
             
             highlightColor: [0.6, 0.8, 1.0], highlightOpacity: 1.0,
             surfaceColor:   [0.3, 0.5, 0.7], surfaceOpacity: 0.75,
