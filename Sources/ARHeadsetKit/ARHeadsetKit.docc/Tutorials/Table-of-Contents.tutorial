@@ -17,7 +17,7 @@
     }
     
     @Chapter(name: "Interactive Experiences") {
-        Bring hand-object interaction into your app and create holographic interfaces.
+        Bring hand-object interaction into a game and create holographic interfaces.
         
         @Image(source: "2-4-image-8-1-preview.jpg", alt: "The user throwing cubes while AR text says \"Yeet!\".")
         

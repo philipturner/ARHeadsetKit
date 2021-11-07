@@ -1,4 +1,4 @@
-@Tutorial(time: 70) {
+@Tutorial(time: 75) {
     @XcodeRequirement(
             title: "Xcode 13", 
             destination: "https://developer.apple.com/download/")
@@ -750,31 +750,31 @@
             @Step {
                 Locate the place where `setReactionParams()` is called. If all cubes are knocked out, congratulate the player.
                 
-                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-10.swift")
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-11.swift", previousFile: "2-4-creating-code-9-10.swift")
             }
             
             @Step {
                 Open the file that contains `GameInterfaceButton`. Change `paragraphWidth` so that it returns 0.30 for the congratulation.
                 
-                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-11.swift", previousFile: "2-4-creating-code-8-4.swift")
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-12.swift", previousFile: "2-4-creating-code-8-7.swift")
             }
             
             @Step {
                 When generating the interface element, declare four colors: `lightBlue`, `mediumBlue`, `lightGray`, and `mediumGray`.
                 
-                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-12.swift")
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-13.swift")
             }
             
             @Step {
                 Based on whether the button is `ReactionLabel`, choose surface and highlight colors, as well as opacity.
                 
-                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-13.swift")
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-14.swift")
             }
             
             @Step {
                 In the `ARInterfaceElement` initializer, replace the hard-coded colors and surface opacity with values from the previous step.
                 
-                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-14.swift")
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-15.swift")
             }
             
             @Step {

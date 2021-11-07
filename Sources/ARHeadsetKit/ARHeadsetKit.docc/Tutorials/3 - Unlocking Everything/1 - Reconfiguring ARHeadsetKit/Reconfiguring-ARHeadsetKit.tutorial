@@ -11,6 +11,8 @@
         Follow the steps to build this project, or download the finished project to explore on your own.
         
         _Thank you for choosing to experience ARHeadsetKit's final chapter. These last tutorials may be rough, but they will be more than worth it!_
+        
+        @Image(source: "3-1-image-4-2-intro.png", alt: "Screenshot of Metal shader code that imports ARHeadsetKit.")
     }
     
     @Section(title: "Set Up Git Submodules") {
