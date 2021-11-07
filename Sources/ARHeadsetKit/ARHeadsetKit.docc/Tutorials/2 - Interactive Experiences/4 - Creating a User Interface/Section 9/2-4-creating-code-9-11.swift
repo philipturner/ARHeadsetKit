@@ -1,111 +1,71 @@
 import ARHeadsetKit
 
-extension GameInterface: ARParagraphContainer {
+extension GameRenderer: CustomRenderer {
     
-    enum CachedParagraph: Int, ARParagraphListElement {
-        case resetButton
-        case extendButton
-            
-        case reactionLabel
+    func updateResources() {
+        cubePicker.updateResources()
         
-        var parameters: Parameters {
-            switch self {
-            case .resetButton:   return ResetButton.parameters
-            case .extendButton:  return ExtendButton.parameters
+        if let cubeIndex = cubePicker.cubeIndex {
+            cubes[cubeIndex].isRed = true
+        }
+        
+        cubeRenderer.updateResources()
+        
+        if let cubeIndex = cubePicker.cubeIndex {
+            cubes[cubeIndex].isRed = false
             
-            case .reactionLabel: return ReactionLabel.parameters
+            if cubes[cubeIndex].velocity != nil {
+                if cubes.contains(where: {
+                    $0.velocity == nil
+                }) {
+                    setReactionParams()
+                } else {
+                    setCongratulation()
+                }
+                
+                cubePicker.cubeIndex = nil
             }
         }
         
-        var interfaceElement: ARInterfaceElement {
-            switch self {
-            case .resetButton:   return ResetButton  .generateInterfaceElement(type: self)
-            case .extendButton:  return ExtendButton .generateInterfaceElement(type: self)
-            
-            case .reactionLabel: return ReactionLabel.generateInterfaceElement(type: self)
-            }
-        }
+        gameInterface.updateResources()
     }
     
-    func updateReactionMessage() {
-        if let message = reactionParams?.text,
-           ReactionLabel.label != message
-        {
-            ReactionLabel.label = message
-            
-            let label = CachedParagraph.reactionLabel
-            buttons[label] = label.interfaceElement
-        }
-    }
-    
-    struct ElementContainer: ARTraceableParagraphContainer {
-        typealias CachedParagraph = GameInterface.CachedParagraph
+    func setReactionParams() {
+        let cubeIndex = cubePicker.cubeIndex!
+        let location = cubes[cubeIndex].location
         
-        var elements = CachedParagraph.allCases.map{ $0.interfaceElement }
-        
-        subscript(index: CachedParagraph) -> ARInterfaceElement {
-            get { elements[index.rawValue] }
-            set { elements[index.rawValue] = newValue }
+        guard drand48() < 0.50 else {
+            gameInterface.reactionParams = nil
+            return
         }
         
-        mutating func resetSize() {
-            elements = CachedParagraph.allCases.map{ $0.interfaceElement }
-        }
+        let possibleMessages = [
+            "Score!",
+            "Rock On!",
+            "When Pigs Fly...",
+            "Yeet!",
+        ]
+        
+        let message = possibleMessages.randomElement()!
+        gameInterface.reactionParams = (message, location)
+        gameInterface.updateReactionMessage()
     }
     
-}
-
-
-
-fileprivate protocol GameInterfaceButton: ARParagraph { }
-
-extension GameInterfaceButton {
-    
-    typealias CachedParagraph = GameInterface.CachedParagraph
-    
-    static var paragraphWidth: Float {
-        if label == "Congratulations!" {
-            return 0.30
-        } else {
-            return 0.15
-        }
-    }
-    static var pixelSize: Float { 0.25e-3 }
-    static var radius: Float { 0.02 }
-    
-    static var parameters: Parameters {
-        (stringSegments: [ (string: label, fontID: 2) ],
-         width: paragraphWidth, pixelSize: pixelSize)
+    func setCongratulation() {
+        let cubeZone = simd_float2x3(
+            [-0.3, -0.3, -0.6],
+            [ 0.3,  0.3,  0.0]
+        )
+        
+        let location = (cubeZone[0] + cubeZone[1]) / 2
+        let message = "Congratulations!"
+        
+        gameInterface.reactionParams = (message, location)
+        gameInterface.updateReactionMessage()
     }
     
-    static func generateInterfaceElement(type: CachedParagraph) -> ARInterfaceElement {
-        var paragraph = GameInterface.createParagraph(type)
+    func drawGeometry(renderEncoder: ARMetalRenderCommandEncoder) {
         
-        let width  = 2 * radius + paragraphWidth
-        let height = 2 * radius + paragraph.suggestedHeight
-        
-        let scale = GameInterface.interfaceScale
-        InterfaceRenderer.scaleParagraph(&paragraph, scale: scale)
-        
-        return ARInterfaceElement(
-            position: .zero, forwardDirection: [0, 0, 1], orthogonalUpDirection: [0, 1, 0],
-            width: width * scale, height: height * scale,
-            depth: 0.05  * scale, radius: radius * scale,
-            
-            highlightColor: [0.6, 0.8, 1.0], highlightOpacity: 1.0,
-            surfaceColor:   [0.3, 0.5, 0.7], surfaceOpacity: 0.75,
-            characterGroups: paragraph.characterGroups)
     }
-    
-}
-
-fileprivate extension GameInterface {
-    
-    typealias Button = GameInterfaceButton
-    
-    enum ResetButton:   Button { static let label = "Reset" }
-    enum ExtendButton:  Button { static let label = "Extend" }
-        
-    enum ReactionLabel: Button { static var label = "" }
     
 }

@@ -19,9 +19,7 @@ extension GameRenderer: CustomRenderer {
                     $0.velocity == nil
                 }) {
                     setReactionParams()
-                } else {
-                    setCongratulation()
-                }
+                
                 
                 cubePicker.cubeIndex = nil
             }

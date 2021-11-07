@@ -10,6 +10,8 @@
 <!--   Introduce MTLLayeredBuffer here.   -->
 
 <!--   State that Metal Shading Language is a variation of C++. If you have used that before, this will be familiar.   -->
+
+<!--   Note the wierd way to have to configure project files (tutorial 9), say to use your existing code unless you lost it   -->
     }
     
 <!--    Use transform so it doesn’t have to be at center    -->
@@ -18,7 +20,7 @@
         @ContentAndMedia {
             There is the bug that breaks Metal syntax coloring, which Apple hasn't fixed yet&mdash;despite being informed of its easy solution. 
             
-            You will the bug by modifying a corrupted file. Apple, if you're reading this, you know what to do :-)       
+            You will correct the bug by modifying a corrupted file. Apple, if you're reading this, you know what to do :-)       
         }
         
         @Steps {

@@ -105,8 +105,8 @@ extension GameInterfaceButton {
             width: width * scale, height: height * scale,
             depth: 0.05  * scale, radius: radius * scale,
             
-            highlightColor: lightColor, highlightOpacity: 1.0,
-            surfaceColor:  mediumColor, surfaceOpacity: opacity,
+            highlightColor: [0.6, 0.8, 1.0], highlightOpacity: 1.0,
+            surfaceColor:   [0.3, 0.5, 0.7], surfaceOpacity: 0.75,
             characterGroups: paragraph.characterGroups)
     }
     
