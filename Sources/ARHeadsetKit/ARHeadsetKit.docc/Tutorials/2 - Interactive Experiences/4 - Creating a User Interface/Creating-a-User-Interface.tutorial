@@ -680,28 +680,7 @@
                 
                 @Image(source: "2-4-image-8-1.jpg", alt: "The reaction label showing \"Yeet!\".")
             }
-
-<!--    Don't do any rendering here. In the next step, set the label to "Congratulations!" and render for the first time. Even though it's at the origin, still show the reaction message. But say that it looks wierd right now - you'll fix that in the next section.    -->
-
-<!--       Do both position and orientation later, with a lot of new code for the orientation maybe inside a `do` block. Will also not render a message if `reactionParams` is `nil`, and will make the color look better.    -->
-
         }
-
-<!--
-
-Add an enumeration case for this
-
-No animation here because that takes too long
-
-- State that this is dynamic text
-- Reaction messages, user can even add own - sneak yeet in there
-- Positioned with its center at the cube's center
-- Orientation perfectly aligns with user
-- Appear randomly on only some
-- Use setProperties(...) to adjust dimensions (new text)
-- Immediately switch to new knocked out cube, or disappear after fixed duration
-
--->
     }
     
     @Section(title: "Congratulations!") {
@@ -710,20 +689,101 @@ No animation here because that takes too long
         }
         
         @Steps {
+            @Step {
+                Open `GameInterfaceExtensions.swift`. When the user interacts with any interface element, clear the interaction message.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-1.swift", previousFile: "2-4-creating-code-8-5.swift")
+            }
             
+            @Step {
+                At the very end of `adjustInterace()`, set the Reaction Label's visibility based on whether `reactionParams` exists.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-2.swift")
+            }
+            
+            @Step {
+                Set the forward direction to a vector pointing from the label to your head. If its length is zero, set it to positive Z.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-3.swift")
+            }
+            
+            @Step {
+                Extract the camera's negative X axis and use it as the up direction.
+                
+                > Note: ARKit's camera space is rotated 90 degrees clockwise from ARHeadsetKit. Negative X transforms into positive Y.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-4.swift")
+            }
+            
+            @Step {
+                Find the closest vector to `upDirection` that is orthogonal to `forwardDirection`.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-5.swift")
+            }
+            
+            @Step {
+                Create the Reaction Label's orientation and reposition it.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-6.swift")
+            }
+            
+            @Step {
+                In `GameRendererExtensions.swift`, add an method named `setCongratulation()`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-7.swift", previousFile: "2-4-creating-code-8-12.swift")
+            }
+            
+            @Step {
+                Declare the bounding box of where cubes can appear. Use the minimum and maximum coordinates in each dimension.
+                
+                Go to `CubeRenderer.swift`. You can find the bounding coordinates inside `makeNewCube()` when initializing `location`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-8.swift")
+            }
+            
+            @Step {
+                Compute the bounding box's center, then set the reaction message.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-9.swift")
+            }
+            
+            @Step {
+                Locate the place where `setReactionParams()` is called. If all cubes are knocked out, congratulate the player.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-9-10.swift")
+            }
+            
+            @Step {
+                Open the file that contains `GameInterfaceButton`. Change `paragraphWidth` so that it returns 0.30 for the congratulation.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-11.swift", previousFile: "2-4-creating-code-8-4.swift")
+            }
+            
+            @Step {
+                When generating the interface element, declare four colors: `lightBlue`, `mediumBlue`, `lightGray`, and `mediumGray`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-12.swift")
+            }
+            
+            @Step {
+                Based on whether the button is `ReactionLabel`, choose surface and highlight colors, as well as opacity.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-13.swift")
+            }
+            
+            @Step {
+                In the `ARInterfaceElement` initializer, replace the hard-coded colors and surface opacity with values from the previous step.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-9-14.swift")
+            }
+            
+            @Step {
+                Congrats to you for finishing the game and tutorial chapter two!
+                
+                If you have Google Cardboard, don't forget to try out your game in headset mode!
+                
+                @Image(source: "2-4-image-9-1.jpg", alt: "A gray interface element saying \"Congratulations!\".")
+            }
         }
-
-<!--
-
-
-
-- <u>State that this is static text</u>
-- Congratulation message for completing game
-- Record the volume's initial center (using camera transform) and place there
-- Rotate in the Y axis to meet user, introducing more vector math
-- Make surface color not transparent
-- <u>Make the help arrow direct player to congratulation text</u>
-
--->
     }
 }
