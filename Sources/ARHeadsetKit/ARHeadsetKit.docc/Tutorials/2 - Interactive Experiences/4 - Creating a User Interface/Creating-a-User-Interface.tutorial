@@ -388,9 +388,6 @@
             When the player finishes a game, they must reset it to play again. Connect the Reset Button to its action of resetting the game. Then, make the Extend Button lengthen the game by adding more cubes.
         }
         
-<!--    Don't forget to use -14 instead of -13 when referring to spacing workaround   -->
-<!--    Don't need an image for this    -->
-        
         @Steps {
             @Step {
                 Locate the cube generation code in `CubeRenderer.swift`. Remove all `print(...)` statements.
@@ -472,8 +469,6 @@
                 @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-5-13.swift")
             }
             
-<!--    Don't forget to use -15 instead of -14 for spacing workaround in this file   -->
-            
             @Step {
                 Open `GameRendererExtensions.swift`. Un-comment out the code that runs the cube game.
                 
@@ -530,8 +525,6 @@
         @ContentAndMedia {
             Since iPhones and iPads vary in screen size, holographic interfaces may appear larger or smaller than you designed them. Allow users to change the size and spacing of interface elements.
         }
-        
-<!--    Just show one picture of the problem happening.    -->
         
         @Steps {
             @Step {
@@ -609,10 +602,89 @@
         
         @Steps {
             @Step {
-                In the declaration of `CachedParagraph`, add a new case for `reactionLabel`.
+                In `GameInterfaceParagraphs.swift`, add `ReactionLabel` to the last extension. Set its text to a mutable empty string.
                 
                 @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-1.swift", previousFile: "2-4-creating-code-7-8.swift")
             }
+            
+            @Step {
+                In the declaration of `CachedParagraph`, add a new case for `reactionLabel`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-2.swift")
+            }
+            
+            @Step {
+                Map the parameters of `ReactionLabel` to the parameters of `CachedParagraph`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-3.swift")
+            }
+            
+            @Step {
+                Repeat step 3 with `interfaceElement`.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-4.swift")
+            }
+            
+            @Step {
+                Find `executeAction(for:)`. Handle the new button (and future ones) by breaking out of the `switch` statement.
+                
+                @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-8-5.swift", previousFile: "2-4-creating-code-7-11.swift")
+            }
+            
+            @Step {
+                Give the Game Interface an optional tuple property called `reactionParams`. It contains a `String` followed by a position vector.
+                
+                @Code(name: "GameInterface.swift", file: "2-4-creating-code-8-6.swift", previousFile: "2-4-creating-code-7-1.swift")
+            }
+            
+            @Step {
+                After the closing brace of `CachedParagraph`, declare a method that updates the Reaction Label with a new message.
+                
+                @Code(name: "GameInterfaceParagraphs.swift", file: "2-4-creating-code-8-7.swift", previousFile: "2-4-creating-code-8-4.swift")
+            }
+            
+            @Step {
+                In `GameRendererExtensions.swift`, declare a new method that sets `reactionParams`. Fetch `location` from the selected cube.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-8.swift", previousFile: "2-4-creating-code-5-15.swift")
+            }
+            
+            @Step {
+                Half of the time, the message will not pop up.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-9.swift")
+            }
+            
+            @Step {
+                Create a list of possible messages. Feel free to add your own!
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-10.swift")
+            }
+            
+            @Step {
+                Randomly select a message. Set `reactionParams` and update the Reaction Label.
+                
+                > Tip: Calling `arc4random()` generates integers more easily than `drand48()`.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-11.swift")
+            }
+            
+            @Step {
+                Go to `updateResources()`, where the selected cube's velocity is checked. If some cubes are stationary, set the reaction text.
+                
+                @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-12.swift")
+            }
+            
+            @Step {
+                Launch the app. A message appears after you strike down the first cube, but it acts glitchy and doesn't change location. You'll fix that in the next section.
+                
+                @Image(source: "2-4-image-8-1.jpg", alt: "The reaction label showing \"Yeet!\".")
+            }
+
+<!--    Don't do any rendering here. In the next step, set the label to "Congratulations!" and render for the first time. Even though it's at the origin, still show the reaction message. But say that it looks wierd right now - you'll fix that in the next section.    -->
+
+<!--       Do both position and orientation later, with a lot of new code for the orientation maybe inside a `do` block. Will also not render a message if `reactionParams` is `nil`, and will make the color look better.    -->
+
         }
 
 <!--
@@ -643,7 +715,7 @@ No animation here because that takes too long
 
 <!--
 
-Add an enumeration case for this
+
 
 - <u>State that this is static text</u>
 - Congratulation message for completing game

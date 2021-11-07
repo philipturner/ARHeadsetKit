@@ -19,7 +19,7 @@
     @Chapter(name: "Interactive Experiences") {
         Bring hand-object interaction into your app and create holographic interfaces.
         
-        @Image(source: "2-3-image-3-1-preview.jpg", alt: "A red cube appearing in the middle of blue cubes.")
+        @Image(source: "2-4-image-8-1-preview.jpg", alt: "The user throwing cubes while AR text says \"Yeet!\".")
         
         @TutorialReference(tutorial: "doc:Selecting-Objects")
         @TutorialReference(tutorial: "doc:Physics-Based-Interaction")
