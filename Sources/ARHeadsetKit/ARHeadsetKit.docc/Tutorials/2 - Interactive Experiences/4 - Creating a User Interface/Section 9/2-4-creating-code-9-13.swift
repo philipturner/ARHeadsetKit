@@ -87,6 +87,19 @@ extension GameInterfaceButton {
         let scale = GameInterface.interfaceScale
         InterfaceRenderer.scaleParagraph(&paragraph, scale: scale)
         
+        
+        
+        let lightBlue  = simd_float3(0.6, 0.8, 1.0)
+        let mediumBlue = simd_float3(0.3, 0.5, 0.7)
+        let lightGray  = simd_float3(0.8, 0.8, 0.8)
+        let mediumGray = simd_float3(0.5, 0.5, 0.5)
+        
+        let isLabel = (self == GameInterface.ReactionLabel.self)
+        
+        let lightColor  = isLabel ? lightGray  : lightBlue
+        let mediumColor = isLabel ? mediumGray : mediumBlue
+        let opacity     = isLabel ? Float(1)   : 0.75
+        
         return ARInterfaceElement(
             position: .zero, forwardDirection: [0, 0, 1], orthogonalUpDirection: [0, 1, 0],
             width: width * scale, height: height * scale,

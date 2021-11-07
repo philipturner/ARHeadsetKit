@@ -1,86 +1,101 @@
 import ARHeadsetKit
 
-extension GameInterface: ARParagraphContainer {
+extension GameInterface {
     
-    enum CachedParagraph: Int, ARParagraphListElement {
-        case resetButton
-        case extendButton
+    func updateResources() {
+        Self.interfaceScale = gameRenderer.interfaceScale
         
-        var parameters: Parameters {
-            switch self {
-            case .resetButton:  return ResetButton.parameters
-            case .extendButton: return ExtendButton.parameters
-            }
+        if buttons == nil {
+            buttons = .init()
+        } else if gameRenderer.interfaceScaleChanged {
+            buttons.resetSize()
         }
         
-        var interfaceElement: ARInterfaceElement {
-            switch self {
-            case .resetButton:  return ResetButton .generateInterfaceElement(type: self)
-            case .extendButton: return ExtendButton.generateInterfaceElement(type: self)
-            }
-        }
-    }
-    
-    struct ElementContainer: ARTraceableParagraphContainer {
-        typealias CachedParagraph = GameInterface.CachedParagraph
+        adjustInterface()
         
-        var elements = CachedParagraph.allCases.map{ $0.interfaceElement }
         
-        subscript(index: CachedParagraph) -> ARInterfaceElement {
-            get { elements[index.rawValue] }
-            set { elements[index.rawValue] = newValue }
+        
+        var selectedButton: CachedParagraph?
+        let renderer = gameRenderer.renderer
+        
+        if let interactionRay = renderer.interactionRay,
+           let traceResult = buttons.trace(ray: interactionRay) {
+            selectedButton = traceResult.elementID
         }
         
-        mutating func resetSize() {
-            elements = CachedParagraph.allCases.map{ $0.interfaceElement }
-        }
-    }
-    
-}
-
-
-
-fileprivate protocol GameInterfaceButton: ARParagraph { }
-
-extension GameInterfaceButton {
-    
-    typealias CachedParagraph = GameInterface.CachedParagraph
-    
-    static var paragraphWidth: Float { 0.15 }
-    static var pixelSize: Float { 0.25e-3 }
-    static var radius: Float { 0.02 }
-    
-    static var parameters: Parameters {
-        (stringSegments: [ (string: label, fontID: 2) ],
-         width: paragraphWidth, pixelSize: pixelSize)
-    }
-    
-    static func generateInterfaceElement(type: CachedParagraph) -> ARInterfaceElement {
-        var paragraph = GameInterface.createParagraph(type)
-        
-        let width  = 2 * radius + paragraphWidth
-        let height = 2 * radius + paragraph.suggestedHeight
-        
-        let scale = GameInterface.interfaceScale
-        InterfaceRenderer.scaleParagraph(&paragraph, scale: scale)
-        
-        return ARInterfaceElement(
-            position: .zero, forwardDirection: [0, 0, 1], orthogonalUpDirection: [0, 1, 0],
-            width: width * scale, height: height * scale,
-            depth: 0.05  * scale, radius: radius * scale,
+        if let selectedButton = selectedButton {
+            buttons[selectedButton].isHighlighted = true
             
-            highlightColor: [0.6, 0.8, 1.0], highlightOpacity: 1.0,
-            surfaceColor:   [0.3, 0.5, 0.7], surfaceOpacity: 0.75,
-            characterGroups: paragraph.characterGroups)
+            if renderer.shortTappingScreen {
+                executeAction(for: selectedButton)
+            }
+        }
+        
+        interfaceRenderer.render(elements: buttons.elements)
+        
+        if let selectedButton = selectedButton {
+            buttons[selectedButton].isHighlighted = false
+        }
     }
     
-}
-
-fileprivate extension GameInterface {
+    func executeAction(for button: CachedParagraph) {
+        var cubes: [Cube] {
+            get { cubeRenderer.cubes }
+            set { cubeRenderer.cubes = newValue }
+        }
+        
+        switch button {
+        case .resetButton:
+            cubePicker.cubeIndex = nil
+            cubes.removeAll(keepingCapacity: true)
+            
+            for _ in 0..<10 {
+                cubes.append(cubeRenderer.makeNewCube())
+            }
+        case .extendButton:
+            for i in 0..<10 where cubes[i].velocity != nil {
+                let pos = simd_float3(repeating: .infinity)
+                cubes[i].location = pos
+                
+                cubes[i] = cubeRenderer.makeNewCube()
+            }
+        }
+    }
     
-    typealias Button = GameInterfaceButton
-    
-    enum ResetButton:  Button { static let label = "Reset" }
-    enum ExtendButton: Button { static let label = "Extend" }
+    func adjustInterface() {
+        let cameraTransform = gameRenderer.cameraToWorldTransform
+        let cameraDirection4 = -cameraTransform.columns.2
+        let cameraDirection = simd_make_float3(cameraDirection4)
+        
+        var rotation = simd_quatf(from: [0, 1, 0], to: cameraDirection)
+        var axis = rotation.axis
+        
+        if rotation.angle == 0 {
+            axis = [0, 1, 0]
+        }
+        
+        func adjustButton(_ button: CachedParagraph, angleDegrees: Float) {
+            let angleRadians = degreesToRadians(angleDegrees)
+            rotation = simd_quatf(angle: angleRadians, axis: axis)
+            
+            let backwardDirection = rotation.act([0, 1, 0])
+            let upDirection = cross(backwardDirection, axis)
+            
+            let orientation = ARInterfaceElement.createOrientation(
+                forwardDirection: -backwardDirection,
+                orthogonalUpDirection: upDirection
+            )
+            
+            var position = gameRenderer.interfaceCenter
+            let depth = type(of: renderer).interfaceDepth
+            position += backwardDirection * depth
+            
+            buttons[button].setProperties(position: position,
+                                          orientation: orientation)
+        }
+        
+        adjustButton(.resetButton,  angleDegrees: 135)
+        adjustButton(.extendButton, angleDegrees: 145)
+    }
     
 }
