@@ -118,7 +118,9 @@ extension GameInterface {
                 forwardDirection = normalize(forwardDirection)
             }
             
-            let cameraX4 = -cameraTransform.columns.0
+            let cameraX4 = renderer.usingHeadsetMode
+            /*   +Y   */ ?  cameraTransform.columns.1
+            /*   -X   */ : -cameraTransform.columns.0
             var upDirection = simd_make_float3(cameraX4)
         } else {
             buttons[.reactionLabel].hidden = true

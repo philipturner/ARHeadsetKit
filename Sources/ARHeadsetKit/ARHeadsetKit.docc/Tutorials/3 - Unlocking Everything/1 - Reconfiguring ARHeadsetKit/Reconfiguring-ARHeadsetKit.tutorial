@@ -4,7 +4,7 @@
             destination: "https://developer.apple.com/download/")
     
     @Intro(title: "Reconfiguring ARHeadsetKit") {
-        To unlock ARHeadsetKit's full potential, you must configure it as an Xcode framework instead of a Swift package.
+        To unlock ARHeadsetKit's full potential, configure it as an Xcode framework instead of a Swift package.
         
         _Thank you for choosing to experience ARHeadsetKit's final chapter. These last tutorials may be rough, but they will be more than worth it!_
         

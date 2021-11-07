@@ -44,10 +44,7 @@ extension GameRenderer: CustomRenderer {
             "Yeet!",
         ]
         
-        var messageID = Int(arc4random())
-        messageID %= possibleMessages.count
-        
-        let message = possibleMessages[messageID]
+        let message = possibleMessages.randomElement()!
         gameInterface.reactionParams = (message, location)
         gameInterface.updateReactionMessage()
     }

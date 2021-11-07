@@ -664,8 +664,6 @@
             @Step {
                 Randomly select a message. Set `reactionParams` and update the Reaction Label.
                 
-                > Tip: Calling `arc4random()` generates integers more easily than `drand48()`.
-                
                 @Code(name: "GameRendererExtensions.swift", file: "2-4-creating-code-8-11.swift")
             }
             
@@ -708,9 +706,9 @@
             }
             
             @Step {
-                Extract the camera's negative X axis and use it as the up direction.
+                Extract the camera's negative X axis and use it as the up direction. In headset mode, use positive Y since your phone is in the landscape orientation.
                 
-                > Note: ARKit's camera space is rotated 90 degrees clockwise from ARHeadsetKit. Negative X transforms into positive Y.
+                > Note: ARKit's camera space is rotated 90 degrees clockwise when in portrait orientation. Negative X transforms into positive Y.
                 
                 @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-4.swift")
             }
