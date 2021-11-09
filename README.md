@@ -8,6 +8,8 @@ Using a $5 Google Cardboard, the average person can now replicate Microsoft Holo
 
 ARHeadsetKit brings more than just AR experiences. It overhauls multiple iOS [and macOS](docs/mac-compatibility.md) frameworks with high-level [wrappers](docs/extensions-to-apple-frameworks.md) that maximize performance. [MTLLayeredBuffer](docs/articles/layered-buffer.md) lowers the barrier to learning Metal and managing GPGPU workflows. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. To learn more, check out [these articles](docs/article-list.md).
 
+For the story behind how ARHeadsetKit was created, check out [creating the first affordable AR headset](https://philipturner.github.io/first-affordable-ar-headset).
+
 ## Quick Start
 
 Xcode 13 or higher is required for working with ARHeadsetKit, and an iOS device running at least iOS 14. You DO NOT need Google Cardboard. To get started, follow [this guide](docs/building-documentation.md) on how to use ARHeadsetKit's tutorials.
