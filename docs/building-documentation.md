@@ -21,6 +21,7 @@ If this is your first time using Xcode, perform the following steps to ensure th
 
 1. In the menu bar, go to File -> Add Packages. A window for searching Swift packages will pop up.
 1. In the search bar on the top right, paste this link: https://github.com/philipturner/ARHeadsetKit
+1. Set "Dependency Rule" to "Branch". Ensure "main" is in the text box to the right of that.
 1. Click "Add Package" on the bottom right. Click "Add Package" again in the window that pops up.
 
 ### Building documentation
