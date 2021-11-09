@@ -20,4 +20,4 @@ simd:
 Core Text and Core Video:
 - High-level wrappers over C-style reference types, replacing verbose functions with properties and methods
 
-Although these enhancements may seem more appropriate as part of an separate framework, they are bundled with ARHeadsetKit. Using them does not require configuring an Xcode project's `Info.plist` for AR.
+While these enhancements are bundled with ARHeadsetKit, they are also available as an independent cross-platform Swift package, [ARHeadsetUtil](https://github.com/philipturner/ARHeadsetUtil). Using them does not require configuring an Xcode project's `Info.plist` for AR.
