@@ -17,7 +17,6 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-//        .package(name: "ExportDeviceKit", url: "./Packages/ExportDeviceKit", branch: "master"),
         .package(name: "DeviceKit", url: "https://github.com/devicekit/DeviceKit", branch: "master"),
         .package(name: "ZippyJSON", url: "https://github.com/michaeleisel/ZippyJSON", branch: "master"),
     ],
