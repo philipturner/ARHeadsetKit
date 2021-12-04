@@ -334,7 +334,7 @@ extension InterfaceRenderer: GeometryRenderer {
                                                   index: 0, bound: true)
                 }
                 
-                if stencilReferenceValue < groupCount || lastBoundFontID != -1 {
+                if stencilReferenceValue < endStencilReferenceValue || lastBoundFontID != -1 {
                     renderEncoder.encoder.setStencilReferenceValue(stencilReferenceValue)
                     
                     renderEncoder.setFragmentBuffer(uniformBuffer, layer: .fragmentUniform, offset: fragmentUniformOffset,
