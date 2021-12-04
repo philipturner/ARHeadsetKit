@@ -261,7 +261,7 @@ extension InterfaceRenderer: GeometryRenderer {
                 
                 renderEncoder.encoder.setStencilReferenceValue(0)
                 renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
-            } else {
+            } else if startStencilReferenceValue == 0 {
                 startStencilReferenceValue = 1
             }
             
@@ -334,7 +334,7 @@ extension InterfaceRenderer: GeometryRenderer {
                                                   index: 0, bound: true)
                 }
                 
-                if stencilReferenceValue < groupCount || lastBoundFontID != -1 {
+                if stencilReferenceValue < endStencilReferenceValue || lastBoundFontID != -1 {
                     renderEncoder.encoder.setStencilReferenceValue(stencilReferenceValue)
                     
                     renderEncoder.setFragmentBuffer(uniformBuffer, layer: .fragmentUniform, offset: fragmentUniformOffset,
