@@ -690,7 +690,7 @@
         
         @Steps {
             @Step {
-                Open `GameInterfaceExtensions.swift`. When each button's action executes, clear the interaction message.
+                Open `GameInterfaceExtensions.swift`. When the reset button's action executes, clear the interaction message.
                 
                 @Code(name: "GameInterfaceExtensions.swift", file: "2-4-creating-code-9-1.swift", previousFile: "2-4-creating-code-8-5.swift")
             }
