@@ -39,8 +39,6 @@ extension GameInterface {
     }
     
     func executeAction(for button: CachedParagraph) {
-        reactionParams = nil
-        
         var cubes: [Cube] {
             get { cubeRenderer.cubes }
             set { cubeRenderer.cubes = newValue }
@@ -48,6 +46,7 @@ extension GameInterface {
         
         switch button {
         case .resetButton:
+            reactionParams = nil
             cubePicker.cubeIndex = nil
             cubes.removeAll(keepingCapacity: true)
             
