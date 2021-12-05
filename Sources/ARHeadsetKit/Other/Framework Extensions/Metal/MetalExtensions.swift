@@ -162,8 +162,26 @@ public extension MTLRasterizationRateMapDescriptor {
 
 public extension MTLLibrary {
     @inlinable @inline(__always)
+    func makeComputePipeline(name: String) -> MTLComputePipelineState {
+        makeComputePipeline(name: name, function: makeFunction(name: name)!)
+    }
+    
+    @inlinable @inline(__always)
     func makeComputePipeline<T>(_ type: T.Type, name: String) -> MTLComputePipelineState {
         makeComputePipeline(type, name: name, function: makeFunction(name: name)!)
+    }
+    
+    @inlinable
+    func makeComputePipeline(name: String, function computeFunction: MTLFunction) -> MTLComputePipelineState {
+        debugLabelConditionalReturn({
+            let computePipelineDescriptor = MTLComputePipelineDescriptor()
+            computePipelineDescriptor.computeFunction = computeFunction
+            computePipelineDescriptor.label = name + " Pipeline"
+            
+            return device.makeComputePipelineState(descriptor: computePipelineDescriptor)
+        }, else: {
+            return try! device.makeComputePipelineState(function: computeFunction)
+        })
     }
     
     @inlinable
