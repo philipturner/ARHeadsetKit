@@ -7,6 +7,7 @@ Miscellaneous math functions used within ARHeadsetKit.
 ### Miscellaneous
 
 - ``roundUpToPowerOf2(_:)``
+- ``roundDownToPowerOf2(_:)``
 - ``kelvinToRGB(_:)``
 - ``simd_slerp(from:to:t:)-44knj``
 - ``simd_slerp(from:to:t:)-21yxa``
