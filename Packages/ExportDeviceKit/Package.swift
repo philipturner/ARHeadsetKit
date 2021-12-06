@@ -3,8 +3,6 @@
 
 import PackageDescription
 
-import PackageDescription
-
 let package = Package(
     name: "ExportDeviceKit",
     platforms: [
@@ -36,4 +34,3 @@ let package = Package(
             dependencies: ["ExportDeviceKit"]),
     ]
 )
-
