@@ -26,7 +26,7 @@ There are still some cases where a `MTLBuffer` is more appropriate, because ther
 
 ## How to use (and how not to)
 
-To create a `MTLLayeredBuffer`, first create an enumeration that conforms to the `MTLBufferLayer` protocol. Each case corresponds to a separate layer. Upon calling `getSize(capacity:)`, each case will calculate the size of its layer. In some cases, such as shader uniforms for rendering, the capacity parameter will be ignored and the layer's size will never change.
+To create a `MTLLayeredBuffer`, first create an enumeration that conforms to the `MTLBufferLayer` protocol. Each case corresponds to a separate layer. Upon calling `getSize(capacity:)`, each case will calculate the size of its layer. In some cases, such as shader uniforms for rendering, the capacity parameter will be ignored and the layer's size will never change. Check out the [`MTLLayeredBuffer` standalone package](https://github.com/philipturner/MTLLayeredBuffer) for a code sample.
 
 With the exception of very small constant data structures, every layer should be related in some way. For example, the following four layers are needed to render the 3D scene mesh on LiDAR-enabled devices:
 
