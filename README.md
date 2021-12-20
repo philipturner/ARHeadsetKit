@@ -18,25 +18,20 @@ If you are just starting out, ignore the sections below that deal with configuri
 
 ## Tutorial Series
 
-Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). Some of the 12 tutorials are not finished yet. The status of each one is listed below:
+Learning ARHeadsetKit involves following tutorials hosted in Xcode, similar to Apple's [SwiftUI tutorials](https://developer.apple.com/tutorials/swiftui). Please leave a star if you enjoy ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
 
-- [x] Ch. 1 - Essentials
-  - [x] Tutorial 1 - Setting Up ARHeadsetKit
-  - [x] Tutorial 2 - Adding Custom Settings
-  - [x] Tutorial 3 - Working with AR Objects
-  - [x] Tutorial 4 - Alternative Rendering Modes
-- [x] Ch. 2 - Interactive Experiences
-  - [x] Tutorial 5 - Selecting Objects
-  - [x] Tutorial 6 - Physics-Based Interaction
-  - [x] Tutorial 7 - Using Delegate Renderers
-  - [x] Tutorial 8 - Creating a User Interface
-- [ ] Ch. 3 - Unlocking Everything
-  - [x] Tutorial 9 - Reconfiguring ARHeadsetKit
-  - [ ] Tutorial 10 - Composing Custom Shaders
-  - [ ] Tutorial 11 - Ray Tracing Functions
-  - [ ] Tutorial 12 - The Essence of GPGPU
-
-To learn when new tutorials are added, "watch" this GitHub repository or check it periodically. Also, please leave a star if you enjoy ARHeadsetKit's tutorials or [article series](docs/article-list.md) :-)
+- Ch. 1 - Essentials
+  - Tutorial 1 - Setting Up ARHeadsetKit
+  - Tutorial 2 - Adding Custom Settings
+  - Tutorial 3 - Working with AR Objects
+  - Tutorial 4 - Alternative Rendering Modes
+- Ch. 2 - Interactive Experiences
+  - Tutorial 5 - Selecting Objects
+  - Tutorial 6 - Physics-Based Interaction
+  - Tutorial 7 - Using Delegate Renderers
+  - Tutorial 8 - Creating a User Interface
+- Ch. 3 - Unlocking Everything
+  - Tutorial 9 - Reconfiguring ARHeadsetKit
 
 ## How to Configure ARHeadsetKit from Scratch
 
