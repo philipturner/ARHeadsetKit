@@ -33,9 +33,9 @@
         @Image(source: "blank.png", alt: "")
         
         @TutorialReference(tutorial: "doc:Reconfiguring-ARHeadsetKit")
-        @TutorialReference(tutorial: "doc:Composing-Custom-Shaders")
-        @TutorialReference(tutorial: "doc:Ray-Tracing-Functions")
-        @TutorialReference(tutorial: "doc:The-Essence-of-GPGPU")
+<!--        @TutorialReference(tutorial: "doc:Composing-Custom-Shaders") -->
+<!--        @TutorialReference(tutorial: "doc:Ray-Tracing-Functions") -->
+<!--        @TutorialReference(tutorial: "doc:The-Essence-of-GPGPU") -->
         
 <!--    Encourage use of Google Cardboard at the very end to experience the final product.    -->
     }
