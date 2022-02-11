@@ -6,7 +6,7 @@
 
 Using a $5 Google Cardboard, the average person can now replicate Microsoft Hololens. Apps built with ARHeadsetKit are immersive AR headset experiences, simultaneously providing handheld AR alternatives. In just 30 lines of code, even someone without a background in Swift can work with AR.
 
-ARHeadsetKit brings more than just AR experiences. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. Its tutorial series simultaneously serve as an introduction to headset AR and iOS, using AR to make the learning process interactive. It can even be used for creating VR apps using a high-level programming language.
+ARHeadsetKit brings more than just AR experiences. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. Its tutorial series simultaneously serve as an introduction to headset AR and iOS, using AR to make the learning process interactive. It can even be used for creating VR apps, when virtual objects cover someone's entire field of view.
 
 For the story behind how ARHeadsetKit was created, check out [creating the first affordable AR headset](https://philipturner.github.io/first-affordable-ar-headset).
 
