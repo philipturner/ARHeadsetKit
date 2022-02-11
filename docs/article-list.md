@@ -1,18 +1,10 @@
 # Articles About ARHeadsetKit
 
-## Utilities
+[Scene Color Reconstruction](https://github.com/philipturner/scene-color-reconstruction) - Real-time 3D scene color reconstruction on a mobile device.
 
 [MTLLayeredBuffer](articles/layered-buffer.md) - Lowers the barrier to learning Metal and managing GPGPU workflows.
 
-### Not released yet:
-
-Metal Utility Functions - Solutions for low-level data races not documented by Apple, and a Blinn-Phong shader that uses out-of-order execution.
-
-CPU Ray Tracing - Lets someone touch virtual objects without a LiDAR scanner.
-
-## How it Works
-
-### Not released yet:
+# Components of ARHeadsetKit
 
 Central Renderer - A general-purpose renderer ridiculously optimized for half-precision arithmetic.
 
