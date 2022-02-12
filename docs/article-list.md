@@ -8,6 +8,8 @@
 
 [MTLLayeredBuffer](articles/layered-buffer.md) - Lowers the barrier to learning Metal and managing GPGPU workflows.
 
+[ARHeadsetUtil](https://github.com/philipturner/ARHeadsetUtil) - A standalone package that wraps ARHeadsetKit's [extensions](./extensions-to-apple-frameworks.md) to Apple frameworks.
+
 # Components of ARHeadsetKit
 
 Central Renderer - A general-purpose renderer ridiculously optimized for half-precision arithmetic.
@@ -19,5 +21,3 @@ Interface Renderer - The painful process of rendering everyday 2D text in 3D.
 Lens Distortion Corrector - The fastest reverse VR lens distortion in existence.
 
 Scene Renderer - Everything covered in [scene color reconstruction](https://github.com/philipturner/scene-color-reconstruction).
-
-[Extensions to Apple Frameworks](https://github.com/philipturner/ARHeadsetKit/blob/main/docs/extensions-to-apple-frameworks.md) - Also available as a [standalone package](https://github.com/philipturner/ARHeadsetUtil).
