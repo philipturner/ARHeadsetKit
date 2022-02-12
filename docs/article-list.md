@@ -19,3 +19,5 @@ Interface Renderer - The painful process of rendering everyday 2D text in 3D.
 Lens Distortion Corrector - The fastest reverse VR lens distortion in existence.
 
 Scene Renderer - Everything covered in [scene color reconstruction](https://github.com/philipturner/scene-color-reconstruction).
+
+[Extensions to Apple Frameworks](https://github.com/philipturner/ARHeadsetKit/blob/main/docs/extensions-to-apple-frameworks.md) - Also available as a [standalone package](https://github.com/philipturner/ARHeadsetUtil).
