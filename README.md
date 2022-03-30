@@ -8,7 +8,7 @@ Using a $5 Google Cardboard, the average person can now replicate Microsoft Holo
 
 ARHeadsetKit brings more than just AR experiences. With easy-to-render AR objects and a CPU ray tracing API, ARHeadsetKit provides a unique environment for experimenting with 3D graphics. Its tutorial series simultaneously serve as an introduction to headset AR and iOS, using AR to make the learning process interactive. It can even be used for creating VR apps, when virtual objects cover someone's entire field of view.
 
-For the story behind how ARHeadsetKit was created, check out [creating the first affordable AR headset](https://philipturner.github.io/first-affordable-ar-headset). Or, read the official [research paper](https://github.com/philipturner/arheadsetkit-research-paper).
+For the story behind how ARHeadsetKit was created, check out [creating the first affordable AR headset](https://philipturner.github.io/first-affordable-ar-headset). This framework also has a [YouTube video](https://youtu.be/iBITDQyy0rw) and an official [research paper](https://github.com/philipturner/arheadsetkit-research-paper).
 
 ## Quick Start
 
