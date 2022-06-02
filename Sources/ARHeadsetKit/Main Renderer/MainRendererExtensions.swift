@@ -79,7 +79,7 @@ extension MainRenderer {
             if allowingHandReconstruction {
                 waitingOnSegmentationTexture = false
             } else {
-                waitingOnSegmentationTexture = false//true
+                waitingOnSegmentationTexture = true
             }
             sceneRenderer2D.asyncUpdateResources(
                 waitingOnSegmentationTexture: waitingOnSegmentationTexture)
