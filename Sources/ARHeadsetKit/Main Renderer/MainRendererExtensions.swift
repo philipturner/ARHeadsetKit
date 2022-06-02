@@ -79,7 +79,7 @@ extension MainRenderer {
             if allowingHandReconstruction {
                 waitingOnSegmentationTexture = false
             } else {
-                waitingOnSegmentationTexture = true
+                waitingOnSegmentationTexture = false//true
             }
             sceneRenderer2D.asyncUpdateResources(
                 waitingOnSegmentationTexture: waitingOnSegmentationTexture)
@@ -155,8 +155,8 @@ extension MainRenderer {
                     sceneRenderer.segmentationTextureSemaphore.signal()
                 }
             } else {
-                bind(frame.segmentationBuffer, to: &segmentationTexture, "Segmentation Texture", .r8Unorm, 256, 192)
-                sceneRenderer2D.segmentationTextureSemaphore.signal()
+//                bind(frame.segmentationBuffer, to: &segmentationTexture, "Segmentation Texture", .r8Unorm, 256, 192)
+//                sceneRenderer2D.segmentationTextureSemaphore.signal()
             }
             
             let width  = Int(cameraMeasurements.imageResolution.width)
