@@ -37,9 +37,9 @@ extension SceneRenderer2D: GeometryRenderer {
         DispatchQueue.global(qos: .userInitiated).async { [self] in
             if waitingOnSegmentationTexture {
                 segmentationTextureSemaphore.wait()
-                print("Signalled segmentation texture semaphore for 2D")
+//                print("Signalled segmentation texture semaphore for 2D")
             } else {
-                print("Did not signal segmentation texture semaphore for 2D")
+//                print("Did not signal segmentation texture semaphore for 2D")
             }
             colorTextureSemaphore.wait()
             updateResourcesSemaphore.signal()
