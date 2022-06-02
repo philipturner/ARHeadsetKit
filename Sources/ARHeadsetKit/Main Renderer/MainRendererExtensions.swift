@@ -75,7 +75,14 @@ extension MainRenderer {
         if usingLiDAR, allowingSceneReconstruction {
             sceneRenderer.asyncUpdateResources(frame: frame)
         } else {
-            sceneRenderer2D.asyncUpdateResources()
+            var waitingOnSegmentationTexture: Bool
+            if allowingHandReconstruction {
+                waitingOnSegmentationTexture = false
+            } else {
+                waitingOnSegmentationTexture = true
+            }
+            sceneRenderer2D.asyncUpdateResources(
+                waitingOnSegmentationTexture: waitingOnSegmentationTexture)
         }
         
         userSettings.lensDistortionCorrector.updateResources()

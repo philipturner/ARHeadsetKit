@@ -33,13 +33,16 @@ final class SceneRenderer2D: DelegateRenderer {
 
 extension SceneRenderer2D: GeometryRenderer {
     
-    func asyncUpdateResources() {
+    func asyncUpdateResources(waitingOnSegmentationTexture: Bool) {
         DispatchQueue.global(qos: .userInitiated).async { [self] in
-            segmentationTextureSemaphore.wait()
+            if waitingOnSegmentationTexture {
+                segmentationTextureSemaphore.wait()
+                print("Signalled segmentation texture semaphore for 2D")
+            } else {
+                print("Did not signal segmentation texture semaphore for 2D")
+            }
             colorTextureSemaphore.wait()
             updateResourcesSemaphore.signal()
-            
-            print("Signalled segmentation texture semaphore for 2D")
             
             if usingHeadsetMode, !usingVertexAmplification, shouldRenderToDisplay {
                 updateResourcesSemaphore.signal()
