@@ -79,6 +79,9 @@ open class AppCoordinator: NSObject, ObservableObject {
                     disablingLiDAR = true
                 }
             }
+            
+            // Simulate having a device without LiDAR.
+            disablingLiDAR = true
         } else {
             if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentation) {
                 configuration.frameSemantics.insert(.personSegmentation)

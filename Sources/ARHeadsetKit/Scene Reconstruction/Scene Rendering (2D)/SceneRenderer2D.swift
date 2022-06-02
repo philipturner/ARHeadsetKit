@@ -77,7 +77,6 @@ extension SceneRenderer2D: GeometryRenderer {
         }
         let pipelineState = usingSegmentationTexture ? renderPipelineState2 : renderPipelineState
         renderEncoder.setRenderPipelineState(pipelineState)
-        print(usingSegmentationTexture ? "Option 2" : "Option 1")
         
         var projectionTransforms = [simd_float4x4](unsafeUninitializedCount: 2)
         var projectionTransformsNumBytes: Int
