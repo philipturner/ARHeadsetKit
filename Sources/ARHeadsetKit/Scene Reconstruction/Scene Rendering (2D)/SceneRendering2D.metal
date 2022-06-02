@@ -113,13 +113,30 @@ fragment FragmentOut scene2DFragmentShader2(VertexInOut in [[ stage_in ]],
                                             texture2d<half, access::sample> colorTextureCbCr    [[ texture(1) ]],
                                             texture2d<half, access::sample> segmentationTexture [[ texture(2) ]])
 {
-//    constexpr sampler colorSampler(filter::linear);
-//
-//    half2 chroma = colorTextureCbCr.sample(colorSampler, in.videoFrameCoords).rg;
-//    half  luma   = colorTextureY   .sample(colorSampler, in.videoFrameCoords).r;
-//
-//    return { ColorUtilities::convertYCbCr_toRGB(chroma, luma), FLT_MIN };
+    constexpr sampler segmentationSampler(filter::nearest);
+    constexpr sampler colorSampler(filter::linear);
     
-    return { half3(1, 0, 0), FLT_MIN };
+    // Coordinate conventions:
+    // (0, 0) is the image's top left
+    // (1, 1) is the images's bottom right
+    
+    float2 videoFrameCoords = in.videoFrameCoords;
+    if (segmentationTexture.sample(segmentationSampler, videoFrameCoords).r == 1.00) {
+        // Sampled part of a human body. Use original coordinates.
+    } else {
+        // Reflect across the vertical centerline, then re-sample
+        float2 newVideoFrameCoords = { 1 - videoFrameCoords.x, videoFrameCoords.y };
+        if (segmentationTexture.sample(segmentationSampler, newVideoFrameCoords).r == 1.00) {
+            // Sampled part of a human body. This is part of the reflection.
+            videoFrameCoords = newVideoFrameCoords;
+        }
+    }
+    
+    half2 chroma = colorTextureCbCr.sample(colorSampler, videoFrameCoords).rg;
+    half  luma   = colorTextureY   .sample(colorSampler, videoFrameCoords).r;
+    
+    return { ColorUtilities::convertYCbCr_toRGB(chroma, luma), FLT_MIN };
+    
+//    return { half3(1, 0, 0), FLT_MIN };
 }
 #endif
