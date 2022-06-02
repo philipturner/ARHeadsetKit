@@ -26,7 +26,7 @@ If this is your first time using Xcode, perform the following steps to ensure th
 
 ### Building documentation
 
-1. Press `Cmd + Ctrl + Shift + D`. The documentation viewer will pop up.
+1. Press `Ctrl + Cmd + Shift + D`. The documentation viewer will pop up.
 1. In the navigator on the left, there is a section titled "Workspace Documentation". "ARHeadsetKit Documentation" will appear underneath it, with a blue Xcode logo next to it.
 1. Unravel the contents of "ARHeadsetKit Documentation" and click "Welcome to ARHeadsetKit".
 1. Go to Chapter 1: Essentials. Click on "Setting Up ARHeadsetKit".
