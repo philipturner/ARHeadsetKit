@@ -62,7 +62,7 @@ extension UserSettings {
         var showingHandPosition: Bool
         
         var allowingSceneReconstruction: Bool
-        var allowingHandReconstruction: Bool
+//        var allowingHandReconstruction: Bool
         var handheldHandedness: LiDAREnabledSettings.Handedness
         var headsetHandedness: LiDAREnabledSettings.Handedness
         
@@ -80,7 +80,7 @@ extension UserSettings {
             showingHandPosition: false,
             
             allowingSceneReconstruction: true,
-            allowingHandReconstruction: true,
+//            allowingHandReconstruction: true,
             handheldHandedness: .none,
             headsetHandedness: .left,
             
@@ -101,7 +101,7 @@ extension UserSettings {
         
         mutating func transferData(from settings: LiDAREnabledSettings) {
             allowingSceneReconstruction = settings.allowingSceneReconstruction
-            allowingHandReconstruction  = settings.allowingHandReconstruction
+//            allowingHandReconstruction  = settings.allowingHandReconstruction
             handheldHandedness          = settings.handheldHandedness
             headsetHandedness           = settings.headsetHandedness
         }

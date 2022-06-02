@@ -74,7 +74,7 @@ open class MainRenderer {
     var flyingDirectionIsForward = true
     
     var allowingSceneReconstruction = true
-    var allowingHandReconstruction = true
+//    var allowingHandReconstruction = true
     
     /// The color converted from color temperature, then multiplied by ambient intensity.
     public internal(set) var ambientLightColor: simd_half3!

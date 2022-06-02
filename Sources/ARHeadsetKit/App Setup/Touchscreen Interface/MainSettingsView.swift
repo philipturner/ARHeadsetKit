@@ -36,7 +36,8 @@ struct MainSettingsView<CustomSettingsView: CustomRenderingSettingsView>: View {
                         
                         if coordinator.interactionSettings.usingHandForSelection,
                            !coordinator.renderer.usingLiDAR ||
-                           !coordinator.lidarEnabledSettings.allowingHandReconstruction
+                           /*!coordinator.lidarEnabledSettings.allowingHandReconstruction*/
+                           !coordinator.lidarEnabledSettings.allowingSceneReconstruction
                         {
                             Toggle(isOn: $coordinator.interactionSettings.showingHandPosition) {
                                 Text("Show Hand Position")

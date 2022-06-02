@@ -67,7 +67,7 @@ extension MainRenderer {
         
         var storedSettings: UserSettings.StoredSettings { userSettings.storedSettings }
         allowingSceneReconstruction = storedSettings.allowingSceneReconstruction
-        allowingHandReconstruction = storedSettings.allowingHandReconstruction
+//        allowingHandReconstruction = storedSettings.allowingHandReconstruction
         
         asyncUpdateTextures(frame: frame)
         updateUniforms(frame: frame)
@@ -76,11 +76,11 @@ extension MainRenderer {
             sceneRenderer.asyncUpdateResources(frame: frame)
         } else {
             var waitingOnSegmentationTexture: Bool
-            if allowingHandReconstruction {
-                waitingOnSegmentationTexture = false
-            } else {
+//            if allowingHandReconstruction {
+//                waitingOnSegmentationTexture = false
+//            } else {
                 waitingOnSegmentationTexture = true
-            }
+//            }
             sceneRenderer2D.asyncUpdateResources(
                 waitingOnSegmentationTexture: waitingOnSegmentationTexture)
         }
@@ -143,16 +143,18 @@ extension MainRenderer {
                 reference.optLabel = label
             }
             
-            if usingLiDAR, allowingHandReconstruction || allowingSceneReconstruction {
+            if usingLiDAR, /*allowingHandReconstruction ||*/ allowingSceneReconstruction {
                 bind(frame.segmentationBuffer, to: &segmentationTexture, "Segmentation Texture", .r8Unorm, 256, 192)
                 bind(frame.sceneDepth?.depthMap, to: &sceneDepthTexture, "Scene Depth Texture", .r32Float, 256, 192)
                 
-                if allowingHandReconstruction {
+//                if allowingHandReconstruction {
                     handRenderer.segmentationTextureSemaphore.signal()
-                }
+//                }
                 
                 if allowingSceneReconstruction {
                     sceneRenderer.segmentationTextureSemaphore.signal()
+                } else {
+                    fatalError("This should never happen")
                 }
             } else {
                 bind(frame.segmentationBuffer, to: &segmentationTexture, "Segmentation Texture", .r8Unorm, 256, 192)
@@ -166,7 +168,8 @@ extension MainRenderer {
             bind(frame.capturedImage, to: &colorTextureCbCr, "Color Texture (CbCr)", .rg8Unorm, width >> 1, height >> 1, 1)
             
             if usingLiDAR {
-                if allowingHandReconstruction {
+//                if allowingHandReconstruction {
+                if allowingSceneReconstruction {
                     handRenderer.colorTextureSemaphore.signal()
                 }
                 
@@ -233,7 +236,7 @@ extension MainRenderer {
     
     private func updateInteractionRay(frame: ARFrame) {
         if userSettings.storedSettings.usingHandForSelection {
-            if usingLiDAR, allowingHandReconstruction {
+            if usingLiDAR, /*allowingHandReconstruction*/allowingSceneReconstruction {
                 handRenderer.updateResources(frame: frame)
                 interactionRay = handRenderer.handRay
             } else {
@@ -253,7 +256,7 @@ extension MainRenderer {
                 }
             }
         } else {
-            if usingLiDAR, allowingHandReconstruction {
+            if usingLiDAR, /*allowingHandReconstruction*/allowingSceneReconstruction {
                 handRenderer.updateResources(frame: frame)
             }
             

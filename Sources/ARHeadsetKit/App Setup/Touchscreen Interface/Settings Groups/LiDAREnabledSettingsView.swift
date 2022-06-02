@@ -16,14 +16,14 @@ struct LiDAREnabledSettings {
     }
     
     var allowingSceneReconstruction: Bool
-    var allowingHandReconstruction: Bool
+//    var allowingHandReconstruction: Bool
     
     var handheldHandedness: Handedness
     var headsetHandedness: Handedness
     
     init(_ storedSettings: UserSettings.StoredSettings) {
         allowingSceneReconstruction = storedSettings.allowingSceneReconstruction
-        allowingHandReconstruction  = storedSettings.allowingHandReconstruction
+//        allowingHandReconstruction  = storedSettings.allowingHandReconstruction
         handheldHandedness          = storedSettings.handheldHandedness
         headsetHandedness           = storedSettings.headsetHandedness
     }
@@ -37,14 +37,16 @@ struct LiDAREnabledSettingsView<Coordinator: AppCoordinator>: View {
     var body: some View {
         VStack(alignment: .leading) {
             Toggle(isOn: $coordinator.lidarEnabledSettings.allowingSceneReconstruction) {
-                Text("Scene Reconstruction")
+//                Text("Scene Reconstruction")
+                Text("Immersive 3D Mode")
             }
             
-            Toggle(isOn: $coordinator.lidarEnabledSettings.allowingHandReconstruction) {
-                Text("Hand Reconstruction")
-            }
+//            Toggle(isOn: $coordinator.lidarEnabledSettings.allowingHandReconstruction) {
+//                Text("Hand Reconstruction")
+//            }
             
-            if coordinator.lidarEnabledSettings.allowingHandReconstruction {
+//            if coordinator.lidarEnabledSettings.allowingHandReconstruction {
+            if coordinator.lidarEnabledSettings.allowingSceneReconstruction {
                 VStack {
                     Text("Choose On-Screen Hand")
                 }
