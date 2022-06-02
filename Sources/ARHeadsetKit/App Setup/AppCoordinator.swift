@@ -80,9 +80,7 @@ open class AppCoordinator: NSObject, ObservableObject {
                 }
             }
         } else {
-            if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
-                configuration.frameSemantics.insert(.personSegmentationWithDepth)
-            } else if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentation) {
+            if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentation) {
                 configuration.frameSemantics.insert(.personSegmentation)
             } else {
                 // Likely using an A11 chip or older.

@@ -106,4 +106,20 @@ fragment FragmentOut scene2DFragmentShader(VertexInOut in [[ stage_in ]],
     
     return { ColorUtilities::convertYCbCr_toRGB(chroma, luma), FLT_MIN };
 }
+
+fragment FragmentOut scene2DFragmentShader2(VertexInOut in [[ stage_in ]],
+                                            
+                                            texture2d<half, access::sample> colorTextureY       [[ texture(0) ]],
+                                            texture2d<half, access::sample> colorTextureCbCr    [[ texture(1) ]],
+                                            texture2d<half, access::sample> segmentationTexture [[ texture(2) ]])
+{
+//    constexpr sampler colorSampler(filter::linear);
+//
+//    half2 chroma = colorTextureCbCr.sample(colorSampler, in.videoFrameCoords).rg;
+//    half  luma   = colorTextureY   .sample(colorSampler, in.videoFrameCoords).r;
+//
+//    return { ColorUtilities::convertYCbCr_toRGB(chroma, luma), FLT_MIN };
+    
+    return { half3(1, 0, 0), FLT_MIN };
+}
 #endif

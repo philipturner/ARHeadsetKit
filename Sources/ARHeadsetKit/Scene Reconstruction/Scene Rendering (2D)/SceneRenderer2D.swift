@@ -13,11 +13,14 @@ final class SceneRenderer2D: DelegateRenderer {
     unowned let renderer: MainRenderer
     
     var cameraPlaneDepth: Float = 2
-    var segmentationTextureSemaphore = DispatchSemaphore(value: 0)
     var colorTextureSemaphore = DispatchSemaphore(value: 0)
     var updateResourcesSemaphore = DispatchSemaphore(value: 0)
     
+    var segmentationTextureSemaphore = DispatchSemaphore(value: 0)
+    var usingSegmentationTexture: Bool?
+    
     var renderPipelineState: ARMetalRenderPipelineState
+    var renderPipelineState2: ARMetalRenderPipelineState // for mirroring hand
     
     init(renderer: MainRenderer, library: MTLLibrary) {
         self.renderer = renderer
@@ -28,15 +31,27 @@ final class SceneRenderer2D: DelegateRenderer {
         descriptor.optLabel = "Scene 2D Render Pipeline"
         
         renderPipelineState = try! descriptor.makeRenderPipelineState()
+        
+        do {
+            let fragmentMTLFunction = library.makeFunction(name: "scene2DFragmentShader2")!
+            descriptor.fragmentFunction = .init(fragmentMTLFunction)
+        }
+        descriptor.optLabel = "Scene 2D Render Pipeline 2"
+        renderPipelineState2 = try! descriptor.makeRenderPipelineState()
     }
 }
 
 extension SceneRenderer2D: GeometryRenderer {
     
     func asyncUpdateResources(waitingOnSegmentationTexture: Bool) {
+        usingSegmentationTexture = nil
+        
         DispatchQueue.global(qos: .userInitiated).async { [self] in
             if waitingOnSegmentationTexture {
                 segmentationTextureSemaphore.wait()
+                usingSegmentationTexture = true
+            } else {
+                usingSegmentationTexture = false
             }
             colorTextureSemaphore.wait()
             updateResourcesSemaphore.signal()
@@ -55,9 +70,14 @@ extension SceneRenderer2D: GeometryRenderer {
         assert(shouldRenderToDisplay)
         
         renderEncoder.pushOptDebugGroup("Render Scene (2D)")
-        
         renderEncoder.setCullMode(usingFlyingMode ? .none : .back)
-        renderEncoder.setRenderPipelineState(renderPipelineState)
+        
+        guard let usingSegmentationTexture = usingSegmentationTexture else {
+            fatalError("Did not set `sceneRenderer2D.usingSegmentationTexture`.")
+        }
+        let pipelineState = usingSegmentationTexture ? renderPipelineState2 : renderPipelineState
+        renderEncoder.setRenderPipelineState(pipelineState)
+        print(usingSegmentationTexture ? "Option 2" : "Option 1")
         
         var projectionTransforms = [simd_float4x4](unsafeUninitializedCount: 2)
         var projectionTransformsNumBytes: Int
@@ -93,6 +113,9 @@ extension SceneRenderer2D: GeometryRenderer {
         
         renderEncoder.setFragmentTexture(colorTextureY,    index: 0)
         renderEncoder.setFragmentTexture(colorTextureCbCr, index: 1)
+        if usingSegmentationTexture {
+            renderEncoder.setFragmentTexture(segmentationTexture, index: 2)
+        }
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
         
         renderEncoder.popOptDebugGroup()
