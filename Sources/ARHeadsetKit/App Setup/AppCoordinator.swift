@@ -80,6 +80,7 @@ open class AppCoordinator: NSObject, ObservableObject {
                 }
             }
         } else {
+            fatalError("This should not be triggering")
             if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
                 configuration.frameSemantics.insert(.personSegmentationWithDepth)
             } else if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentation) {
