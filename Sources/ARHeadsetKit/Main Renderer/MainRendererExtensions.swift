@@ -147,6 +147,9 @@ extension MainRenderer {
                 if allowingSceneReconstruction {
                     sceneRenderer.segmentationTextureSemaphore.signal()
                 }
+            } else {
+                bind(frame.segmentationBuffer, to: &segmentationTexture, "Segmentation Texture", .r8Unorm, 256, 192)
+                sceneRenderer2D.segmentationTextureSemaphore.signal()
             }
             
             let width  = Int(cameraMeasurements.imageResolution.width)

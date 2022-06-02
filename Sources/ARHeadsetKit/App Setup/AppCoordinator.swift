@@ -79,6 +79,19 @@ open class AppCoordinator: NSObject, ObservableObject {
                     disablingLiDAR = true
                 }
             }
+        } else {
+            if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {
+                configuration.frameSemantics.insert(.personSegmentationWithDepth)
+            } else if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentation) {
+                configuration.frameSemantics.insert(.personSegmentation)
+            } else {
+                // Likely using an A11 chip or older.
+                fatalError("""
+                    Need to account for this situation with some kind of warning. Tell the user \
+                    their device is too old or incompatible.
+                    """)
+                // Option 2 (better): In "Info.plist", add the requirement of "Minimum A12 Performance"
+            }
         }
         
         session.run(configuration)

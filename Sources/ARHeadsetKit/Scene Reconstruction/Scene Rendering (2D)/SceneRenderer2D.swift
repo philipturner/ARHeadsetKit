@@ -13,6 +13,7 @@ final class SceneRenderer2D: DelegateRenderer {
     unowned let renderer: MainRenderer
     
     var cameraPlaneDepth: Float = 2
+    var segmentationTextureSemaphore = DispatchSemaphore(value: 0)
     var colorTextureSemaphore = DispatchSemaphore(value: 0)
     var updateResourcesSemaphore = DispatchSemaphore(value: 0)
     
@@ -34,8 +35,11 @@ extension SceneRenderer2D: GeometryRenderer {
     
     func asyncUpdateResources() {
         DispatchQueue.global(qos: .userInitiated).async { [self] in
+            segmentationTextureSemaphore.wait()
             colorTextureSemaphore.wait()
             updateResourcesSemaphore.signal()
+            
+            print("Signalled segmentation texture semaphore for 2D")
             
             if usingHeadsetMode, !usingVertexAmplification, shouldRenderToDisplay {
                 updateResourcesSemaphore.signal()
