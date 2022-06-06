@@ -52,7 +52,7 @@ struct Hand {
         let transform1 = handRenderer.worldToCameraTransform
         let transform2 = handRenderer.cameraToWorldTransform
         
-        func mirror(point: inout simd_float3) -> simd_float3 {
+        func mirror(point: inout simd_float3) {
             var cameraSpacePoint = transform1 * simd_float4(point, 1)
             cameraSpacePoint.x = -cameraSpacePoint.x
             point = simd_make_float3(transform2 * cameraSpacePoint)
