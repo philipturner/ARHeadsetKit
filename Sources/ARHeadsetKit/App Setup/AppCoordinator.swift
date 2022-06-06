@@ -91,7 +91,8 @@ open class AppCoordinator: NSObject, ObservableObject {
                     Need to account for this situation with some kind of warning. Tell the user \
                     their device is too old or incompatible.
                     """)
-                // Option 2 (better): In "Info.plist", add the requirement of "Minimum A12 Performance"
+                // Option 2 (better): In "Info.plist", add the device capability requirement of
+                // "Minimum A12 Performance" alongside "ARKit", "arm64", and "Metal".
             }
         }
         

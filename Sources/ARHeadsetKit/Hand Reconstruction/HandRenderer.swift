@@ -44,6 +44,8 @@ final class HandRenderer: DelegateRenderer {
     
     var handObjectGroup = ARObjectGroup(objects: [])
     var hand: Hand!
+    var lastHandColor: simd_float3!
+    var lastHand: Hand!
     var completedHand: Hand! {
         get { hand }
         set { hand = newValue }

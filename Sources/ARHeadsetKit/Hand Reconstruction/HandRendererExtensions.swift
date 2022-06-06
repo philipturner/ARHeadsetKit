@@ -83,6 +83,13 @@ extension HandRenderer {
         }
         
         centralRenderer.render(objectGroup: handObjectGroup, desiredLOD: 45)
+        
+        if let handColor = lastHandColor, var hand = lastHand {
+            hand.mirrorSelf(handRenderer: self)
+            let mirroredHandObjectGroup =
+                ARObjectGroup(objects: hand.getWireframeObjects(color: handColor))
+            centralRenderer.render(objectGroup: mirroredHandObjectGroup, desiredLOD: 45)
+        }
     }
     
     func registerDetection() {
@@ -164,6 +171,9 @@ extension HandRenderer {
             let handColor = handColorTracker.color
             
             handObjectGroup = ARObjectGroup(objects: hand.getWireframeObjects(color: handColor))
+            
+            lastHandColor = handColor
+            lastHand = hand
         }
     }
     

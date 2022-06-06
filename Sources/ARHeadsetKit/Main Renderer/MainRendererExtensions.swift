@@ -71,12 +71,9 @@ extension MainRenderer {
         
         asyncUpdateTextures(frame: frame)
         updateUniforms(frame: frame)
-        precondition(usingLiDAR)
         if usingLiDAR, allowingSceneReconstruction {
-            print("path 1")
             sceneRenderer.asyncUpdateResources(frame: frame)
         } else {
-            print("path 2")
             var waitingOnSegmentationTexture: Bool
 //            if allowingHandReconstruction {
 //                waitingOnSegmentationTexture = false

@@ -48,6 +48,33 @@ struct Hand {
     
     var center: simd_float3
     
+    mutating func mirrorSelf(handRenderer: HandRenderer) {
+        let transform1 = handRenderer.worldToCameraTransform
+        let transform2 = handRenderer.cameraToWorldTransform
+        
+        func mirror(point: inout simd_float3) -> simd_float3 {
+            var cameraSpacePoint = transform1 * simd_float4(point, 1)
+            cameraSpacePoint.x = -cameraSpacePoint.x
+            point = simd_make_float3(transform2 * cameraSpacePoint)
+        }
+        
+        for i in 0..<components.count {
+            for j in 0..<components[i].count {
+                mirror(point: &&components[i][j])
+            }
+        }
+        
+        for i in 0..<finglerAngles.count {
+            mirror(point: &fingerAngles[i])
+        }
+        
+        mirror(point: &palmTangent)
+        mirror(point: &upDirection)
+        mirror(point: &palmTangent)
+        mirror(point: &center)
+        
+    }
+    
     func getWireframeObjects(color: simd_float3 = ProcessInfo.processInfo.thermalStateColor) -> [ARObject] {
         var objects = [ARObject](capacity: 43)
         objects += (0..<6).flatMap{ getComponentObjects(componentID: $0, color: color) }
