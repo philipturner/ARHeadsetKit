@@ -60,11 +60,11 @@ struct Hand {
         
         for i in 0..<components.count {
             for j in 0..<components[i].count {
-                mirror(point: &&components[i][j])
+                mirror(point: &components[i][j])
             }
         }
         
-        for i in 0..<finglerAngles.count {
+        for i in 0..<fingerAngles.count {
             mirror(point: &fingerAngles[i])
         }
         
