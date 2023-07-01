@@ -123,4 +123,86 @@ extension SceneOcclusionTester {
     }
     
 }
+
+//===----------------------------------------------------------------------===//
+// WARNING: Experimental
+//===----------------------------------------------------------------------===//
+
+// Since this declaration is `public`, it is callable from any code that imports
+// ARHeadsetKit as a Swift package. Only call it from the main thread.
+public class ARDataExporter {
+  private var renderer: MainRenderer
+  
+  public init(renderer: MainRenderer) {
+    self.renderer = renderer
+  }
+  
+  public func exportMesh(includeColor: Bool) -> Data {
+    guard includeColor else {
+      fatalError("You must include color in an exported mesh.")
+    }
+    let manager = renderer.sceneRenderer.sceneTexelManager!
+    let queue = SceneTexelManager.numTrianglesQueue
+    let (numSmallTriangles, numLargeTriangles) = queue.sync {
+      (manager.numNewSmallTriangles, manager.numNewLargeTriangles)
+    }
+    
+    let occlusionTester = renderer.sceneRenderer.sceneOcclusionTester!
+    return occlusionTester.exportData(
+      numSmallTriangles: numSmallTriangles, numLargeTriangles: numLargeTriangles)
+  }
+}
+
+extension SceneTexelManager {
+  static let numTrianglesQueue = DispatchQueue(
+    label: "com.philipturner.ARHeadsetKit.SceneTexelManager.numTriangles")
+}
+
+extension SceneOcclusionTester {
+  func exportData(numSmallTriangles: Int, numLargeTriangles: Int) -> Data {
+    let bufferSize = numSmallTriangles * 320 + numLargeTriangles * 1280;
+    let serializedBlocks = renderer.device.makeBuffer(length: bufferSize)!
+    
+    let commandBuffer = renderer.commandQueue.makeDebugCommandBuffer()
+    let computeEncoder = commandBuffer.makeComputeCommandEncoder()!
+    
+    computeEncoder.setComputePipelineState(executeColorExportPipelineState)
+    computeEncoder.setBuffer(vertexBuffer,             layer: .occlusionVertex,  index: 0)
+    computeEncoder.setBuffer(vertexDataBuffer,         layer: .occlusionOffset,  index: 1)
+    computeEncoder.setBuffer(reducedIndexBuffer,                      offset: 0, index: 2)
+    
+    computeEncoder.setBuffer(reducedColorBuffer,                      offset: 0, index: 4)
+    computeEncoder.setBuffer(rasterizationComponentBuffer,            offset: 0, index: 5)
+    computeEncoder.setBuffer(triangleMarkBuffer,       layer: .textureOffset,    index: 6)
+    
+    computeEncoder.setBuffer(triangleDataBuffer,       layer: .columnCount,      index: 7)
+    computeEncoder.setBuffer(triangleDataBuffer,       layer: .columnOffset,     index: 8)
+    computeEncoder.setBuffer(triangleDataBuffer,       layer: .columnOffsets256, index: 9)
+    computeEncoder.setBuffer(expandedColumnOffsetBuffer,              offset: 0, index: 10)
+    
+    computeEncoder.setBuffer(smallTriangleColorBuffer, layer: .luma,             index: 11)
+    computeEncoder.setBuffer(largeTriangleColorBuffer, layer: .luma,             index: 12)
+    computeEncoder.setBuffer(smallTriangleColorBuffer, layer: .chroma,           index: 13)
+    computeEncoder.setBuffer(largeTriangleColorBuffer, layer: .chroma,           index: 14)
+    
+    computeEncoder.setBuffer(serializedBlocks, offset: 0, index: 15)
+    
+    var _numSmallTriangles = UInt32(numSmallTriangles)
+    computeEncoder.setBytes(&_numSmallTriangles, length: 4, index: 16)
+    
+    let numTriangles = numSmallTriangles + numLargeTriangles
+    computeEncoder.dispatchThreads([ numTriangles, 1, 1 ], threadsPerThreadgroup: [ 128, 1, 1 ])
+    
+    computeEncoder.endEncoding()
+    commandBuffer.commit()
+    commandBuffer.waitUntilCompleted()
+    
+    var headerArray: [UInt32] = Array(repeating: 0, count: 16)
+    headerArray[0] = UInt32(numSmallTriangles)
+    headerArray[1] = UInt32(numLargeTriangles)
+    let header = Data(bytes: &headerArray, count: 64)
+    let body = Data(bytes: serializedBlocks.contents(), count: bufferSize)
+    return header + body
+  }
+}
 #endif

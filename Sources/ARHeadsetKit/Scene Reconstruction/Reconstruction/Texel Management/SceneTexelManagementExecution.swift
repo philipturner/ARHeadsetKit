@@ -105,10 +105,12 @@ extension SceneTexelManager {
             triangleOffsets &+= simd_uint4(truncatingIfNeeded: counts4096Pointer[i])
         }
         
-        numOldSmallTriangles = numNewSmallTriangles
-        numOldLargeTriangles = numNewLargeTriangles
-        numNewSmallTriangles = Int(triangleOffsets[0])
-        numNewLargeTriangles = Int(triangleOffsets[1])
+        SceneTexelManager.numTrianglesQueue.sync {
+          numOldSmallTriangles = numNewSmallTriangles
+          numOldLargeTriangles = numNewLargeTriangles
+          numNewSmallTriangles = Int(triangleOffsets[0])
+          numNewLargeTriangles = Int(triangleOffsets[1])
+        }
         
         maxSmallTriangleTextureSlotID = ~31 & max(maxSmallTriangleTextureSlotID, numNewSmallTriangles + 31)
         maxLargeTriangleTextureSlotID = ~31 & max(maxLargeTriangleTextureSlotID, numNewLargeTriangles + 31)

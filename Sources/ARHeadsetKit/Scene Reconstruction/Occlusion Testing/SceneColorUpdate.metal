@@ -423,4 +423,224 @@ if (comparisonID == triangleID)                                                 
         w_outer_loop += w_delta_horizontal;
     }
 }
+
+//===----------------------------------------------------------------------===//
+// WARNING: Experimental
+//===----------------------------------------------------------------------===//
+
+// Create a serialization format exporting two buffers. The first buffer
+// contains tiles of 6x6 luma/12x12 chroma pixels; the second contains an array
+// of 14x14 luma/28x28 chroma pixels. These are then concatenated into one
+// massive buffer, with a header stating where each zone starts. This is a
+// lossless format, but requires the user to manually convert YCbCr -> RGB
+// afterward. It should ZIP compress quite nicely.
+
+struct __attribute__((aligned(64))) tile_12x12 {
+  float4 vertexPositions[3]; // 48 bytes; W component unused
+  float2 textureCoordinates[3]; // 24 bytes; UV indices within the tile
+  // 32 bytes padding
+  uchar2 chroma[6 * 6]; // 72 bytes
+  uchar luma[12 * 12]; // 144 bytes
+  // 320 bytes total
+};
+
+struct __attribute__((aligned(64))) tile_28x28 {
+  float4 vertexPositions[3]; // 48 bytes; W component unused
+  float2 textureCoordinates[3]; // 24 bytes; UV indices within the tile
+  // 32 bytes padding
+  uchar2 chroma[14 * 14]; // 392 bytes
+  uchar luma[28 * 28]; // 784 bytes
+  // 1280 bytes total
+};
+
+kernel void executeColorExport(device   float4  *vertices                [[ buffer(0) ]],
+                               device   uint    *vertexOffsets           [[ buffer(1) ]],
+                               device   uint3   *reducedIndices          [[ buffer(2) ]],
+                               
+                               device   uint4   *reducedColors           [[ buffer(4) ]],
+                               device   float4  *rasterizationComponents [[ buffer(5) ]],
+                               device   ushort2 *textureOffsets          [[ buffer(6) ]],
+                               
+                               device   uchar   *columnCounts            [[ buffer(7) ]],
+                               device   ushort  *columnOffsets           [[ buffer(8) ]],
+                               constant uint    *columnOffsets256        [[ buffer(9) ]],
+                               device   uchar   *expandedColumnOffsets   [[ buffer(10) ]],
+                               
+                               device   uchar   *smallTriangleLumaRows   [[ buffer(11) ]],
+                               device   uchar   *largeTriangleLumaRows   [[ buffer(12) ]],
+                               device   uchar   *smallTriangleChromaRows [[ buffer(13) ]],
+                               device   uchar   *largeTriangleChromaRows [[ buffer(14) ]],
+                               
+                               device   void    *serializedBlocks        [[ buffer(15) ]],
+                               constant uint    &numSmallTriangles       [[ buffer(16) ]],
+                               
+                               uint triangleID [[ thread_position_in_grid ]])
+{
+  uint3 indices    = reducedIndices[triangleID];
+  
+  float4 rawPositions[3] = {
+    vertices[vertexOffsets[indices[0]]],
+    vertices[vertexOffsets[indices[1]]],
+    vertices[vertexOffsets[indices[2]]]
+  };
+  
+  ushort winding = as_type<uchar4>(rasterizationComponents[triangleID].w).x;
+  
+  float4 vertexPositions[3];
+  if (winding == 0)
+  {
+    vertexPositions[0].xyz = rawPositions[0].xyz;
+    vertexPositions[1].xyz = rawPositions[1].xyz;
+    vertexPositions[2].xyz = rawPositions[2].xyz;
+  }
+  else if (winding == 1)
+  {
+    vertexPositions[0].xyz = rawPositions[1].xyz;
+    vertexPositions[1].xyz = rawPositions[2].xyz;
+    vertexPositions[2].xyz = rawPositions[0].xyz;
+  }
+  else
+  {
+    vertexPositions[0].xyz = rawPositions[2].xyz;
+    vertexPositions[1].xyz = rawPositions[0].xyz;
+    vertexPositions[2].xyz = rawPositions[1].xyz;
+  }
+  vertexPositions[0].w = 0;
+  vertexPositions[1].w = 0;
+  vertexPositions[2].w = 0;
+  
+  float3 components = rasterizationComponents[triangleID].xyz;
+  float longestSideLength   = components.x;
+  float parallelComponent   = components.y;
+  float orthogonalComponent = components.z;
+  
+  float2 texCoords[3];
+  texCoords[0] = float2(0, 0);
+  texCoords[1] = float2(longestSideLength, 0);
+  texCoords[2] = float2(parallelComponent, orthogonalComponent);
+  
+  ushort2 textureStart = textureOffsets[triangleID];
+  
+  bool isLarge = textureStart.y & 0x8000;
+  uint indexInZone;
+  ulong absoluteOffsetInBytes;
+  
+  if (isLarge) {
+    textureStart.y &= 0x7FFF;
+    constexpr ushort TILES_PER_ROW = 16384 / 32; // by chroma
+    ushort2 tileIndexInTexture = textureStart / 16; // by luma
+    indexInZone = uint(tileIndexInTexture.y * TILES_PER_ROW) + tileIndexInTexture.x;
+    absoluteOffsetInBytes = ulong(320 * indexInZone);
+  } else {
+    constexpr ushort TILES_PER_ROW = 16384 / 16; // by chroma
+    ushort2 tileIndexInTexture = textureStart / 8; // by luma
+    indexInZone = uint(tileIndexInTexture.y * TILES_PER_ROW) + tileIndexInTexture.x;
+    absoluteOffsetInBytes = ulong(320 * numSmallTriangles) + ulong(1280 * indexInZone);
+  }
+  
+  auto baseAddress = ((device uchar*)serializedBlocks) + absoluteOffsetInBytes;
+#pragma clang loop unroll(full)
+  for (int i = 0; i < 3; ++i) {
+    auto vertexPositionsAddress = (device float4*)baseAddress;
+    vertexPositionsAddress[i] = vertexPositions[i];
+  }
+  baseAddress += 48;
+#pragma clang loop unroll(full)
+  for (int i = 0; i < 3; ++i) {
+    auto textureCoordinatesAddress = (device float2*)baseAddress;
+    textureCoordinatesAddress[i] = texCoords[i];
+  }
+  baseAddress += 56;
+  
+  device uchar *lumaRows;
+  device uchar *chromaRows;
+  if (isLarge)
+  {
+    lumaRows   = largeTriangleLumaRows;
+    chromaRows = largeTriangleChromaRows;
+  }
+  else
+  {
+    lumaRows   = smallTriangleLumaRows;
+    chromaRows = smallTriangleChromaRows;
+  }
+  
+  textureStart.y += 1;
+  uint index = uint(textureStart.y * 16384) + textureStart.x;
+  lumaRows += index * 2;
+  chromaRows += index;
+  
+  if (isLarge) {
+    // 28 bytes/row for either plane, 2 bytes padding on both sides
+    // input:   8 uints/16 ushorts
+    // outpput: 7 uints/14 ushorts
+    for (ushort i = 0; i < 14; ++i) {
+      uint4 chromaTemp[2];
+      auto chromaSrc = (device uint4*)chromaRows;
+      chromaTemp[0] = chromaSrc[0];
+      chromaTemp[1] = chromaSrc[1];
+      chromaRows += 8192;
+      
+      // 16 elements; skip 0 and 15
+      thread ushort* chroma = (thread ushort*)chromaTemp; // 32 elements
+      auto chromaDst = (device ushort2*)baseAddress;
+#pragma clang loop unroll(full)
+      for (int j = 0; j < 7; ++j) {
+        chromaDst[j] = ushort2(chroma[1 + j * 2], chroma[2 + j * 2]);
+      }
+      baseAddress += 28;
+    }
+    for (ushort i = 0; i < 28; ++i) {
+      uint4 lumaTemp[2];
+      auto lumaSrc = (device uint4*)lumaRows;
+      lumaTemp[0] = lumaSrc[0];
+      lumaTemp[1] = lumaSrc[1];
+      lumaRows += 16384;
+      
+      // 16 elements; skip 0 and 15
+      thread ushort* luma = (thread ushort*)lumaTemp; // 32 elements
+      auto lumaDst = (device ushort2*)baseAddress;
+#pragma clang loop unroll(full)
+      for (int j = 0; j < 7; ++j) {
+        lumaDst[j] = ushort2(luma[1 + j * 2], luma[2 + j * 2]);
+      }
+      baseAddress += 28;
+    }
+  } else {
+    // 12 bytes/row for either plane, 2 bytes padding on both sides
+    // input:   4 uints/8 ushorts
+    // outpput: 3 uints/6 ushorts
+    for (ushort i = 0; i < 6; ++i) {
+      uint4 chromaTemp[1];
+      auto chromaSrc = (device uint4*)chromaRows;
+      chromaTemp[0] = chromaSrc[0];
+      chromaRows += 8192;
+      
+      // 16 elements; skip 0 and 15
+      thread ushort* chroma = (thread ushort*)chromaTemp; // 32 elements
+      auto chromaDst = (device ushort2*)baseAddress;
+#pragma clang loop unroll(full)
+      for (int j = 0; j < 3; ++j) {
+        chromaDst[j] = ushort2(chroma[1 + j * 2], chroma[2 + j * 2]);
+      }
+      baseAddress += 12;
+    }
+    for (ushort i = 0; i < 12; ++i) {
+      uint4 lumaTemp[1];
+      auto lumaSrc = (device uint4*)lumaRows;
+      lumaTemp[0] = lumaSrc[0];
+      lumaRows += 16384;
+      
+      // 16 elements; skip 0 and 15
+      thread ushort* luma = (thread ushort*)lumaTemp; // 32 elements
+      auto lumaDst = (device ushort2*)baseAddress;
+#pragma clang loop unroll(full)
+      for (int j = 0; j < 3; ++j) {
+        lumaDst[j] = ushort2(luma[1 + j * 2], luma[2 + j * 2]);
+      }
+      baseAddress += 12;
+    }
+  }
+}
+
 #endif
