@@ -124,19 +124,38 @@ extension SceneOcclusionTester {
     
 }
 
-// Since this declaration is `public`, it should be callable from any code that
-// imports ARHeadsetKit as a Swift package. You could try calling it from the
-// code in one of the tutorials (it will crash the tutorial though).
-public func ARHK_InspectOcclusionTester() -> Data {
-  // TODO: Fetch the framework's internal occlusion tester, and do it in a
-  // thread-safe way. Then call `exportData`.
-  let occlusionTester = 2 as Any as! SceneOcclusionTester
+//===----------------------------------------------------------------------===//
+// WARNING: Experimental
+//===----------------------------------------------------------------------===//
+
+// Since this declaration is `public`, it is callable from any code that imports
+// ARHeadsetKit as a Swift package. Only call it from the main thread.
+public class ARDataExporter {
+  private var renderer: MainRenderer
   
-  // TODO: Find how many of the triangles are 'small', how many are 'large'.
-  let numSmallTriangles = 1
-  let numLargeTriangles = 1
-  return occlusionTester.exportData(
-    numSmallTriangles: numSmallTriangles, numLargeTriangles: numLargeTriangles)
+  public init(renderer: MainRenderer) {
+    self.renderer = renderer
+  }
+  
+  public func exportMesh(includeColor: Bool) -> Data {
+    guard includeColor else {
+      fatalError("You must include color in an exported mesh.")
+    }
+    let manager = renderer.sceneRenderer.sceneTexelManager!
+    let queue = SceneTexelManager.numTrianglesQueue
+    let (numSmallTriangles, numLargeTriangles) = queue.sync {
+      (manager.numNewSmallTriangles, manager.numNewLargeTriangles)
+    }
+    
+    let occlusionTester = renderer.sceneRenderer.sceneOcclusionTester!
+    return occlusionTester.exportData(
+      numSmallTriangles: numSmallTriangles, numLargeTriangles: numLargeTriangles)
+  }
+}
+
+extension SceneTexelManager {
+  static let numTrianglesQueue = DispatchQueue(
+    label: "com.philipturner.ARHeadsetKit.SceneTexelManager.numTriangles")
 }
 
 extension SceneOcclusionTester {
@@ -178,7 +197,12 @@ extension SceneOcclusionTester {
     commandBuffer.commit()
     commandBuffer.waitUntilCompleted()
     
-    return Data(bytes: serializedBlocks.contents(), count: bufferSize)
+    var headerArray: [UInt32] = Array(repeating: 0, count: 16)
+    headerArray[0] = UInt32(numSmallTriangles)
+    headerArray[1] = UInt32(numLargeTriangles)
+    let header = Data(bytes: &headerArray, count: 64)
+    let body = Data(bytes: serializedBlocks.contents(), count: bufferSize)
+    return header + body
   }
 }
 #endif
