@@ -60,6 +60,7 @@ final class SceneOcclusionTester: DelegateSceneRenderer {
     
     var checkSegmentationTexturePipelineState: MTLComputePipelineState
     var executeColorUpdatePipelineState: MTLComputePipelineState
+    var executeColorExportPipelineState: MTLComputePipelineState
     var resampleColorTexturesPipelineState: MTLComputePipelineState
     
     init(sceneRenderer: SceneRenderer, library: MTLLibrary) {
@@ -140,6 +141,7 @@ final class SceneOcclusionTester: DelegateSceneRenderer {
         
         checkSegmentationTexturePipelineState = library.makeComputePipeline(Self.self, name: "checkSegmentationTexture")
         executeColorUpdatePipelineState       = library.makeComputePipeline(Self.self, name: "executeColorUpdate")
+        executeColorExportPipelineState       = library.makeComputePipeline(Self.self, name: "executeColorExport")
         
         let computePipelineDescriptor = MTLComputePipelineDescriptor()
         computePipelineDescriptor.threadGroupSizeIsMultipleOfThreadExecutionWidth = true
